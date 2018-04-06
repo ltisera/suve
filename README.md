@@ -16,3 +16,9 @@ Documentacion:
 
 src:
 	-Carpeta en cual se encuentra el codigo fuente del proyecto
+
+///////////////////////////////////////////////////////////////////////////////
+
+Caso.... Subimos en estacion intermedia, salimos sin pagar... cobra el maximo?
+SI! 
+fuente de informacion.... EL PICABOLETO DE ESCALADA
