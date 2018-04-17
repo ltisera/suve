@@ -1,14 +1,21 @@
-<?xml version = "1.0" encoding = "UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
-<hibernate-mapping >
-
-<class name = "datos.Usuario" table = "Usuario" >
-		<id column = "idUsuario" name = "idUsuario">
-			<generator class = "identity" />
-		</id >
-		<property column = "apellido" name = "apellido" type = "string" />
-		<property column = "nombre" name = "nombre" type = "string" />
-		<property column = "dni" name = "dni" type = "int" />
-	</class >
-</hibernate-mapping >
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="datos.Usuario" table="Usuario">
+		<id column="idUsuario" name="idCliente">
+			<generator class="identity"/>
+		</id>
+		<property column="nombre" name="nombre" type="string"/>
+		<property column="apellido" name="apellido" type="string"/>
+		<property column="dni" name="dni" type="int"/>
+		<property column="mail" name="mail" type="string"/>
+		<property column="password" name="password" type="string"/>
+		<property column="permisoAdmin" name="permisoAdmin" type="boolean"/>
+		
+		<set name="Tarjeta" table="Tarjeta" order-by="idTarjeta asc" inverse="true" lazy="true" fetch="select">
+			<key column="idUsuario" not-null="true"/>
+			<one-to-many class="datos.Tarjeta"/>
+		</set>
+	</class>
+</hibernate-mapping>
