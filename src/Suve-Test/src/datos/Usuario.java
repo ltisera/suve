@@ -2,35 +2,31 @@ package datos;
 
 public class Usuario {
 	protected long idUsuario;
-	private String apellido;
 	private String nombre;
+	private String apellido;
 	private int dni;
-	private String email;
+	private String mail;
 	private String password;
-	protected boolean permisosAdmin;
+	protected boolean permisoAdmin;
+	
 	public Usuario() {
 		super();
 	}
-	public Usuario(String apellido, String nombre, int dni, String email, String password, boolean permisosAdmin) {
+	
+	public Usuario(String nombre, String apellido, int dni, String mail, String password, boolean permisoAdmin) {
 		super();
-		this.apellido = apellido;
 		this.nombre = nombre;
+		this.apellido = apellido;
 		this.dni = dni;
-		this.email = email;
+		this.mail = mail;
 		this.password = password;
-		this.permisosAdmin = permisosAdmin;
+		this.permisoAdmin = permisoAdmin;
 	}
 	public long getIdUsuario() {
 		return idUsuario;
 	}
-	protected void setIdUsuario(long idUsuario) {
+	public void setIdUsuario(long idUsuario) {
 		this.idUsuario = idUsuario;
-	}
-	public String getApellido() {
-		return apellido;
-	}
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
 	}
 	public String getNombre() {
 		return nombre;
@@ -38,17 +34,23 @@ public class Usuario {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	public String getApellido() {
+		return apellido;
+	}
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
 	public int getDni() {
 		return dni;
 	}
 	public void setDni(int dni) {
 		this.dni = dni;
 	}
-	public String getEmail() {
-		return email;
+	public String getMail() {
+		return mail;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 	public String getPassword() {
 		return password;
@@ -56,15 +58,16 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public boolean isPermisosAdmin() {
-		return permisosAdmin;
+	public boolean isPermisoAdmin() {
+		return permisoAdmin;
 	}
-	public void setPermisosAdmin(boolean permisosAdmin) {
-		this.permisosAdmin = permisosAdmin;
+	public void setPermisoAdmin(boolean permisoAdmin) {
+		this.permisoAdmin = permisoAdmin;
 	}
 	@Override
 	public String toString() {
-		return "Usuario [idUsuario=" + idUsuario + ", apellido=" + apellido + ", nombre=" + nombre + ", dni=" + dni
-				+ ", email=" + email + ", password=" + password + ", permisosAdmin=" + permisosAdmin + "]";
+		return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni
+				+ ", mail=" + mail + ", password=" + password + ", permisoAdmin=" + permisoAdmin + "]";
 	}
+	
 }

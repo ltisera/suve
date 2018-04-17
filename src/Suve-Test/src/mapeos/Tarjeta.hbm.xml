@@ -10,6 +10,6 @@
 		<property column="tarifaSocial" name="tarifaSocial" type="boolean"/>
 		<property column="boletoEstudiantil" name="boletoEstudiantil" type="boolean"/>
 		
-		<many-to-one name="Usuario" class="datos.Usuario" column="idUsuario" not-null="true"/>
+		<many-to-one name="usuario" class="datos.Usuario" column="idUsuario" not-null="true"/>
 	</class>
 </hibernate-mapping>
