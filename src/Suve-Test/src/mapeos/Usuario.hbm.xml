@@ -11,6 +11,13 @@
 		<property column="dni" name="dni" type="int"/>
 		<property column="mail" name="mail" type="string"/>
 		<property column="password" name="password" type="string"/>
-		<property column="permisoAdmin" name="permisoAdmin" type="boolean"/>
+		<set name = "tarjetas" table = "Tarjeta" order-by = "idTarjeta asc" inverse = "true" lazy = "true" fetch = "select">
+			<key column = "idUsuario" not-null = "true"/>
+			<one-to-many class = "datos.Tarjeta"/>
+		</set>
+		<set table="UsuarioXBeneficio" name="beneficios" outer-join="true">
+			<key column="idUsuario"/>
+			<many-to-many column="idBeneficio" class="datos.Beneficio"/>
+		</set>
 	</class>
 </hibernate-mapping>

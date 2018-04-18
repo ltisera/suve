@@ -1,27 +1,29 @@
 package datos;
 
+import java.util.Set;
+
 public class Usuario {
-	protected long idUsuario;
+	private long idUsuario;
 	private String nombre;
 	private String apellido;
 	private int dni;
 	private String mail;
 	private String password;
-	protected boolean permisoAdmin;
+	private Set<Tarjeta> tarjetas;
+	private Set<Beneficio> beneficios;
 	
-	public Usuario() {
-		super();
-	}
 	
-	public Usuario(String nombre, String apellido, int dni, String mail, String password, boolean permisoAdmin) {
+	public Usuario() {}
+	public Usuario(String nombre, String apellido, int dni, String mail, String password) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
 		this.mail = mail;
 		this.password = password;
-		this.permisoAdmin = permisoAdmin;
 	}
+	
+	
 	public long getIdUsuario() {
 		return idUsuario;
 	}
@@ -58,16 +60,23 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public boolean isPermisoAdmin() {
-		return permisoAdmin;
+	public Set<Tarjeta> getTarjetas() {
+		return tarjetas;
 	}
-	public void setPermisoAdmin(boolean permisoAdmin) {
-		this.permisoAdmin = permisoAdmin;
+	public void setTarjetas(Set<Tarjeta> tarjetas) {
+		this.tarjetas = tarjetas;
 	}
+	public Set<Beneficio> getBeneficios() {
+		return beneficios;
+	}
+	public void setBeneficios(Set<Beneficio> beneficios) {
+		this.beneficios = beneficios;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni
-				+ ", mail=" + mail + ", password=" + password + ", permisoAdmin=" + permisoAdmin + "]";
+				+ ", mail=" + mail + ", password=" + password + "]";
 	}
-	
 }

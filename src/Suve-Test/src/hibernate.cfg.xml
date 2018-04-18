@@ -13,5 +13,6 @@
 		<!-- Mapeo Entidades -->
 			<mapping resource = "mapeos/Usuario.hbm.xml" />
 			<mapping resource = "mapeos/Tarjeta.hbm.xml" />
+			<mapping resource = "mapeos/Beneficio.hbm.xml" />
 		</session-factory >
 </hibernate-configuration >

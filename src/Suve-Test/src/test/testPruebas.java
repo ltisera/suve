@@ -11,16 +11,16 @@ public class testPruebas {
 		// TODO Auto-generated method stub
 		
 		UsuarioDao udao = new UsuarioDao();
-		/*
+		
 		TarjetaDao tdao = new TarjetaDao();
 		
-		Usuario user = new Usuario("Camila","Mathov",40946043,"cmathov@gmail.com","1234",false);
-		Tarjeta tarj = new Tarjeta(0,false,false,user);
+		Usuario user = new Usuario("Camila","Mathov",40946043,"cmathov@gmail.com","1234");
+		Tarjeta tarj = new Tarjeta(0,user);
 		
 		udao.agregar(user);
 		tdao.agregar(tarj);
-		*/
-		System.out.println(udao.traerUsuario((long)2).toString());
+	
+		//System.out.println(udao.traerUsuario((long)2).toString());
 	}
 
 }

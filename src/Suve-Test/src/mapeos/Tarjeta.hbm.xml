@@ -7,9 +7,9 @@
 		<generator class="identity"/>
 	</id>
 		<property column="saldo" name="saldo" type="float"/>
-		<property column="tarifaSocial" name="tarifaSocial" type="boolean"/>
-		<property column="boletoEstudiantil" name="boletoEstudiantil" type="boolean"/>
-		
+		<property column="baja" name="baja" type="boolean"/>
 		<many-to-one name="usuario" class="datos.Usuario" column="idUsuario" not-null="true"/>
+		
+		
 	</class>
 </hibernate-mapping>
