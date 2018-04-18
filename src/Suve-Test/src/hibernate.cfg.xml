@@ -12,6 +12,6 @@
 		<property name = "show_sql" > true </property > <!-- en true muestra hql en consola -->
 		<!-- Mapeo Entidades -->
 			<mapping resource = "mapeos/Usuario.hbm.xml" />
-			<mapping resource = "mapeos/Tarjeta.hbm.xml" />
+			<mapping resource = "mapeos/Tarjeta.hbm.xml" />asd
 		</session-factory >
 </hibernate-configuration >
