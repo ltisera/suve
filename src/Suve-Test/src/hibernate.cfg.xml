@@ -4,14 +4,14 @@
 <hibernate-configuration >
 	<session-factory >
 		<property name = "connection.driver_class" > com.mysql.jdbc.Driver </property >
-		<property name = "connection.url" > jdbc:mysql://localhost:3310/BaseDatosSuve </property >
-		<property name = "connection.username" > root </property >
-		<property name = "connection.password" > root </property >
+		<property name = "connection.url" > jdbc:mysql://localhost:3306/BaseDatosSuve </property >
+		<property name = "connection.username" > adminsuve </property >
+		<property name = "connection.password" > 1234suve </property >
 		<property name = "connection.pool_size" > 1 </property >
 		<property name = "dialect" > org.hibernate.dialect.MySQLDialect </property >
 		<property name = "show_sql" > true </property > <!-- en true muestra hql en consola -->
 		<!-- Mapeo Entidades -->
 			<mapping resource = "mapeos/Usuario.hbm.xml" />
-			<mapping resource = "mapeos/Tarjeta.hbm.xml" />asd
+			<mapping resource = "mapeos/Tarjeta.hbm.xml" />
 		</session-factory >
 </hibernate-configuration >
