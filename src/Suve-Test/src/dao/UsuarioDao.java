@@ -1,7 +1,9 @@
 package dao;
 
 	import java.util.List;
-	import org.hibernate.HibernateException;
+
+import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
 	import org.hibernate.Session;
 	import org.hibernate.Transaction;
 	import datos.Usuario;
@@ -82,7 +84,18 @@ public class UsuarioDao {
 		}
 		return objeto;
 	}
-			
+	
+	public Usuario traerUsuarioYTarjeta(long idUsuario) throws HibernateException{
+		Usuario objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Usuario) session.createQuery("from Usuario u where u.idUsuario =" + idUsuario).uniqueResult();
+			Hibernate.initialize(objeto.getTarjetas());
+		}finally{
+			session.close();
+		}
+		return objeto;
+	}
 	@SuppressWarnings ( "unchecked" )
 	public List<Usuario> traerUsuario() throws HibernateException {
 		List<Usuario> lista= null ;

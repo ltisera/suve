@@ -59,6 +59,9 @@ public class Tarjeta {
 	
 	@Override
 	public String toString() {
-		return "Tarjeta [idTarjeta=" + idTarjeta + ", saldo=" + saldo + ", usuario=" + usuario + "]";
+		String estado = "Inactiva";
+		if (baja == false)
+			estado = "Activa";
+		return "Tarjeta [" + idTarjeta + ", $" + saldo + ", " + estado + "]";
 	}
 }

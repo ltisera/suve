@@ -19,7 +19,7 @@ public class testPruebas {
 		
 		udao.agregar(user);
 		tdao.agregar(tarj);
-	
+		System.out.println("Agregamo piola!");
 		System.out.println(udao.traerUsuario((long)1).toString());
 	}
 
