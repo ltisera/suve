@@ -3,13 +3,11 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="datos.Tarjeta" table="Tarjeta">
-	<id column="idTarjeta" name="idTarjeta">
-		<generator class="identity"/>
-	</id>
+		<id column="idTarjeta" name="idTarjeta">
+			<generator class="identity"/>
+		</id>
 		<property column="saldo" name="saldo" type="float"/>
 		<property column="baja" name="baja" type="boolean"/>
-		<many-to-one name="usuario" class="datos.Usuario" column="idUsuario" not-null="true"/>
-		
-		
+		<many-to-one column="idUsuario" name="usuario" class="datos.Usuario" not-null="false"/>
 	</class>
 </hibernate-mapping>

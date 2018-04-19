@@ -9,9 +9,10 @@ public class Boleto {
 	private boolean cerrado;
 	private Transporte transporte;
 	private Tarjeta tarjeta;
-	public Boleto() {
-		super();
-	}
+	private Estacion estacionSubida;
+	private Estacion estacionBajada;
+	
+	public Boleto() {}
 	public Boleto(GregorianCalendar fecha, float precio, boolean cerrado, Transporte transporte, Tarjeta tarjeta) {
 		super();
 		this.fecha = fecha;
@@ -20,6 +21,8 @@ public class Boleto {
 		this.transporte = transporte;
 		this.tarjeta = tarjeta;
 	}
+	
+	
 	public long getIdBoleto() {
 		return idBoleto;
 	}
@@ -56,9 +59,23 @@ public class Boleto {
 	public void setTarjeta(Tarjeta tarjeta) {
 		this.tarjeta = tarjeta;
 	}
+	public Estacion getEstacionSubida() {
+		return estacionSubida;
+	}
+	public void setEstacionSubida(Estacion estacionSubida) {
+		this.estacionSubida = estacionSubida;
+	}
+	public Estacion getEstacionBajada() {
+		return estacionBajada;
+	}
+	public void setEstacionBajada(Estacion estacionBajada) {
+		this.estacionBajada = estacionBajada;
+	}
+	
 	@Override
 	public String toString() {
-		return "Boleto [idBoleto=" + idBoleto + ", fechaHora=" + fecha + ", precio=" + precio + ", cerrado="
-				+ cerrado + ", transporte=" + transporte + ", tarjeta=" + tarjeta + "]";
+		return "Boleto [idBoleto=" + idBoleto + ", fecha=" + fecha + ", precio=" + precio + ", cerrado=" + cerrado
+				+ ", transporte=" + transporte + ", tarjeta=" + tarjeta + ", estacionSubida=" + estacionSubida
+				+ ", estacionBajada=" + estacionBajada + "]";
 	}
 }

@@ -14,5 +14,8 @@
 			<mapping resource = "mapeos/Usuario.hbm.xml" />
 			<mapping resource = "mapeos/Tarjeta.hbm.xml" />
 			<mapping resource = "mapeos/Beneficio.hbm.xml" />
+			<mapping resource = "mapeos/Transporte.hbm.xml" />
+			<mapping resource = "mapeos/Estacion.hbm.xml" />
+			<mapping resource = "mapeos/Boleto.hbm.xml" />
 		</session-factory >
 </hibernate-configuration >

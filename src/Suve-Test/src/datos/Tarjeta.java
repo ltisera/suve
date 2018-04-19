@@ -5,8 +5,8 @@ import java.util.Set;
 public class Tarjeta {
 	private long idTarjeta;
 	private float saldo;
+	private boolean baja;
 	private Usuario usuario;
-	private Set<Beneficio> beneficios;
 	private Set<Boleto> boletos;
 	
 	
@@ -14,6 +14,7 @@ public class Tarjeta {
 	public Tarjeta(float saldo, Usuario usuario) {
 		super();
 		this.saldo = saldo;
+		this.baja = false;
 		this.usuario = usuario;
 	}
 	
@@ -30,6 +31,12 @@ public class Tarjeta {
 	public void setSaldo(float saldo) {
 		this.saldo = saldo;
 	}
+	public boolean isBaja() {
+		return baja;
+	}
+	public void setBaja(boolean baja) {
+		this.baja = baja;
+	}
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -37,10 +44,10 @@ public class Tarjeta {
 		this.usuario = usuario;
 	}
 	public Set<Beneficio> getBeneficios() {
-		return beneficios;
+		return usuario.getBeneficios();
 	}
 	public void setBeneficios(Set<Beneficio> beneficios) {
-		this.beneficios = beneficios;
+		this.usuario.setBeneficios(beneficios);
 	}
 	public Set<Boleto> getBoletos() {
 		return boletos;

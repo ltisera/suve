@@ -4,9 +4,9 @@ package dao;
 	import org.hibernate.HibernateException;
 	import org.hibernate.Session;
 	import org.hibernate.Transaction;
-	import datos.Usuario;
+	import datos.Transporte;
 	
-public class UsuarioDao {
+public class TransporteDao {
 	private static Session session;
 	private Transaction tx;
 	
@@ -20,7 +20,7 @@ public class UsuarioDao {
 		throw new HibernateException( "ERROR en la capa de acceso a datos" , he);
 	}
 		
-	public int agregar(Usuario objeto) {
+	public int agregar(Transporte objeto) {
 		int id = 0;
 		try {
 			iniciaOperacion();
@@ -35,7 +35,7 @@ public class UsuarioDao {
 		return id;
 	}
 	
-	public void actualizar(Usuario objeto) throws HibernateException {
+	public void actualizar(Transporte objeto) throws HibernateException {
 		try {
 			iniciaOperacion();
 			session.update(objeto);
@@ -48,7 +48,7 @@ public class UsuarioDao {
 		}	
 	}
 
-	public void eliminar(Usuario objeto) throws HibernateException {
+	public void eliminar(Transporte objeto) throws HibernateException {
 		try {
 			iniciaOperacion();
 			session.delete(objeto);
@@ -61,22 +61,11 @@ public class UsuarioDao {
 		}
 	}
 	
-	public Usuario traerUsuario(long idUsuario) throws HibernateException {
-		Usuario objeto = null;
+	public Transporte traerTransporte(long idTransporte) throws HibernateException {
+		Transporte objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Usuario) session.get(Usuario.class , idUsuario);
-		} finally {
-			session.close();
-		}
-		return objeto;
-	}
-	
-	public Usuario traerUsuario(int dni) throws HibernateException {
-		Usuario objeto = null ;
-		try {
-			iniciaOperacion();
-			objeto = (Usuario) session.createQuery( "from Usuario u where u.dni=" +dni).uniqueResult();
+			objeto = (Transporte) session.get(Transporte.class , idTransporte);
 		} finally {
 			session.close();
 		}
@@ -84,11 +73,11 @@ public class UsuarioDao {
 	}
 			
 	@SuppressWarnings ( "unchecked" )
-	public List<Usuario> traerUsuario() throws HibernateException {
-		List<Usuario> lista= null ;
+	public List<Transporte> traerTransporte() throws HibernateException {
+		List<Transporte> lista= null ;
 		try {
 			iniciaOperacion();
-			lista= session.createQuery( "from Usuario u order by u.apellido asc u.nombreasc" ).list();
+			lista= session.createQuery( "from Transporte t order by t.idTransporte asc" ).list();
 		} finally {
 			session.close();
 		}

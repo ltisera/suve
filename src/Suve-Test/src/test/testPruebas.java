@@ -20,7 +20,7 @@ public class testPruebas {
 		udao.agregar(user);
 		tdao.agregar(tarj);
 	
-		//System.out.println(udao.traerUsuario((long)2).toString());
+		System.out.println(udao.traerUsuario((long)1).toString());
 	}
 
 }
