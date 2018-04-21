@@ -42,8 +42,7 @@ public class Administrador {
 		TarjetaDao tdao = new TarjetaDao();
 		UsuarioDao udao = new UsuarioDao();
 		
-		if(u == null || t == null || 
-			((t.getUsuario() != null ) && t.getUsuario().getIdUsuario() != u.getIdUsuario())) {
+		if(u == null || t == null || ((t.getUsuario() != null ) && t.getUsuario().getIdUsuario() != u.getIdUsuario())) {
 			//TODO ERRROR
 			
 			System.out.println("ERR");
@@ -72,6 +71,25 @@ public class Administrador {
 			}
 		}
 		
+		
+		
 	}
+	
+	public static void agregarTarjeta()//Agrega una tarjeta inactiva y sin asignarle un usuario.
+	{
+		TarjetaDao tdao = new TarjetaDao();
+		tdao.agregar(new Tarjeta(0f));
+	}
+	
+	public static void bajaTarjeta(long idTarjeta) throws Exception
+	{
+		TarjetaDao tdao = new TarjetaDao();
+		Tarjeta tarjetaBaja = tdao.traerTarjeta(idTarjeta);
+		if(tarjetaBaja==null) throw new Exception("ERROR: La tarjeta a dar de baja no existe en la base de datos."); 
+		tarjetaBaja.setActiva(false);
+		tdao.actualizar(tarjetaBaja);
+	}
+	
+	
 
 }
