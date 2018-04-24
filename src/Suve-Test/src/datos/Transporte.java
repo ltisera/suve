@@ -3,6 +3,7 @@ package datos;
 public class Transporte {
 	private long idTransporte;
 	private String linea;
+	private TipoTransporte tipoTransporte;
 	
 	
 	public Transporte() {}
@@ -26,8 +27,14 @@ public class Transporte {
 	}
 	
 	
+	public TipoTransporte getTipoTransporte() {
+		return tipoTransporte;
+	}
+	public void setTipoTransporte(TipoTransporte tipoTransporte) {
+		this.tipoTransporte = tipoTransporte;
+	}
 	@Override
 	public String toString() {
-		return "Transporte [idTransporte=" + idTransporte + ", linea=" + linea + "]";
+		return "Transporte [idTransporte=" + idTransporte + ", linea=" + linea +" tipo=" + tipoTransporte +"]";
 	}
 }

@@ -7,5 +7,12 @@
 			<generator class="identity"/>
 		</id>
 		<property column="linea" name="linea" type="string"/>
+		<property name="tipoTransporte" >
+			<type name="org.hibernate.type.EnumType">
+                <param name="enumClass">datos.TipoTransporte</param>
+				<param name="type">4</param> <!-- 12 significa que es 
+				un varchar esta miercoles -->
+			</type>
+		</property>
 	</class>
 </hibernate-mapping>

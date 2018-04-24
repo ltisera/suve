@@ -1,5 +1,5 @@
 -- Transportes
-INSERT INTO `basedatossuve`.`transporte` (`linea`, `tipo`) VALUES ('Roca', 'Tren');
+INSERT INTO `basedatossuve`.`transporte` (`linea`, `tipoTransporte`) VALUES ('Roca', 0);
 
 -- Estaciones
 INSERT INTO `basedatossuve`.`estacion` (`idTransporte`, `nombre`) VALUES ('1', 'Glew');					-- 1

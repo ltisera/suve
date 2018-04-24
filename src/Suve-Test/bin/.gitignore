@@ -1,3 +1,4 @@
+/TestModificaDatos/
 /antlr-2.7.7.jar
 /dao/
 /datos/
@@ -12,7 +13,5 @@
 /jboss-transaction-api_1.1_spec-1.0.0.Final.jar
 /mapeos/
 /mysql-connector-java-5.1.46-bin.jar
-/test/
 /negocio/
-/admin/
-/TestModificaDatos/
+/test/

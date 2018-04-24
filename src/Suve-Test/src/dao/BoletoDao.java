@@ -71,7 +71,19 @@ public class BoletoDao {
 		}
 		return objeto;
 	}
-			
+	public List<Boleto> traerBoletoIdTarjeta(long idTarjeta){
+		List<Boleto> lista= null ;
+		try {
+			iniciaOperacion();
+			lista= session.createQuery( "from Boleto b where b.idTarjeta =" + idTarjeta +  " order by b.fecha asc" ).list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	public Boleto traerUltimoBoletaDeTarjeta(long idTarjeta) {
+		return traerBoletoIdTarjeta(idTarjeta).get(traerBoletoIdTarjeta(idTarjeta).size()-1);
+	}
 	@SuppressWarnings ( "unchecked" )
 	public List<Boleto> traerBoleto() throws HibernateException {
 		List<Boleto> lista= null ;
