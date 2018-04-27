@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="datos.Movimiento" table="movimiento">
+		<id column="idMovimiento" name="idMovimiento">
+			<generator class="identity" />
+		</id>
+		<property name="monto" column="monto" type="float" />
+		<property name="fecha" column="fecha" type="calendar"></property>
+		<many-to-one column="idTarjeta" name="tarjeta" class="datos.Tarjeta" not-null="true"/>
+
+		<joined-subclass name="datos.Boleto"
+			table="boleto">
+			<key column="idMovimiento" />
+			<property column="cerrado" name="cerrado" type="boolean" />
+			<property column="intRedSube" name="intRedSube" type="int" />
+			<!-- 
+			<many-to-one column="idTramo" name="tramo" class="datos.Tramo"/>
+			 -->
+			<many-to-one column="idTransporte" name="transporte" class="datos.Transporte"/>
+		</joined-subclass>
+		
+		<joined-subclass name="datos.Recarga"
+			table="recarga">
+			<key column="idMovimiento" />
+			<property column="saldoPendiente" name="saldoPendiente" type="boolean" />
+		</joined-subclass>
+	</class>
+</hibernate-mapping>

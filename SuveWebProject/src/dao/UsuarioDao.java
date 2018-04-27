@@ -25,7 +25,9 @@ public class UsuarioDao {
 	public int agregar(Usuario objeto) {
 		int id = 0;
 		try {
+			System.out.println("LLEGA");
 			iniciaOperacion();
+			System.out.println("OPERO");
 			id = Integer.parseInt(session.save(objeto).toString());
 			tx.commit();
 		} catch (HibernateException he) {

@@ -6,7 +6,7 @@
 		<id column="idTarjeta" name="idTarjeta">
 			<generator class="identity"/>
 		</id>
-		<property column="saldo" name="saldo" type="float"/>
+		<property column="monto" name="monto" type="float"/>
 		<property column="activa" name="activa" type="boolean"/>
 		<many-to-one column="idUsuario" name="usuario" class="datos.Usuario" not-null="false"/>
 	</class>

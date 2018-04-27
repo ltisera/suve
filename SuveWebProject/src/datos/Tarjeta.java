@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class Tarjeta {
 	private long idTarjeta;
-	private float saldo;
+	private float monto;
 	private boolean activa;
 	private Usuario usuario;
 	private Set<Boleto> boletos;
@@ -20,14 +20,14 @@ public class Tarjeta {
 	
 	public Tarjeta(float saldo) {
 		super();
-		this.saldo = saldo;
+		this.monto = saldo;
 		this.activa = false;
 		
 	}
 	
 	public Tarjeta(float saldo, Usuario usuario) {
 		super();
-		this.saldo = saldo;
+		this.monto = saldo;
 		this.activa = false;
 		this.usuario = usuario;
 	}
@@ -38,10 +38,10 @@ public class Tarjeta {
 		this.idTarjeta = idTarjeta;
 	}
 	public float getSaldo() {
-		return saldo;
+		return monto;
 	}
 	public void setSaldo(float saldo) {
-		this.saldo = saldo;
+		this.monto = saldo;
 	}
 	public boolean isActiva() {
 		return activa;
@@ -74,6 +74,6 @@ public class Tarjeta {
 		String estado = "Inactiva";
 		if (activa == true)
 			estado = "Activa";
-		return "Tarjeta [" + idTarjeta + ", $" + saldo + ", " + estado + "]";
+		return "Tarjeta [" + idTarjeta + ", $" + monto + ", " + estado + "]";
 	}
 }

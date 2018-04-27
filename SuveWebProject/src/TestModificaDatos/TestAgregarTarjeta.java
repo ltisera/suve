@@ -9,6 +9,7 @@ public class TestAgregarTarjeta {
 	public static void main(String[] args) {
 		
 		TarjetaDao tdao = new TarjetaDao();
+		System.out.println("PArece que si");
 		tdao.agregar(new Tarjeta(78.5f,new Usuario("Lucas", "TOMAAA", 33, "wesa@gmail.com", "Chupala")));
 	}
 }
