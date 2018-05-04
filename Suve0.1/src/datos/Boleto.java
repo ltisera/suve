@@ -13,9 +13,9 @@ public class Boleto extends Movimiento{
 	public Boleto() {
 		super();
 	}
-	public Boleto(long idMovimiento, GregorianCalendar fecha, float monto, Tarjeta tarjeta, boolean cerrado,
+	public Boleto(GregorianCalendar fecha, Lectora lectora, float monto, Tarjeta tarjeta, boolean cerrado,
 			int intRedSube, Transporte transporte) {
-		super(fecha, monto, tarjeta);
+		super(fecha, lectora, monto, tarjeta);
 		this.cerrado = cerrado;
 		this.intRedSube = intRedSube;
 		this.transporte = transporte;

@@ -10,9 +10,10 @@
 		<property column="monto" name="monto" type="float"/>
 		
 		<many-to-one column="idTarjeta" name="tarjeta" class="datos.Tarjeta" not-null="false"/>
-		<!--
+		
 		<many-to-one column="idLectora" name="lectora" class="datos.Lectora" not-null="false"/>
 		
+	
 		<joined-subclass name="datos.Boleto" table="Boleto">
 			<key column="idMovimiento" />
 			<property column="cerrado" name="cerrado" type="boolean" />
@@ -25,7 +26,6 @@
 			<key column="idMovimiento" />
 			<property column="saldoPendiente" name="saldoPendiente" type="boolean" />
 		</joined-subclass>
-		-->
 	
 	
 	</class>

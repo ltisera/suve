@@ -2,28 +2,28 @@ package dao;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import datos.Boleto;
-import datos.Movimiento;
+import datos.Transporte;
 
-public class MovimientoDao {
+public class TransporteDao {
 	private static Session session;
 	private Transaction tx;
-
+	
 	private void iniciaOperacion() throws HibernateException {
 		session = HibernateUtil.getSessionFactory().openSession();
 		tx = session.beginTransaction();
 	}
-
+	
 	private void manejaExcepcion(HibernateException he) throws HibernateException {
 		tx.rollback();
 		throw new HibernateException( "ERROR en la capa de acceso a datos" , he);
 	}
-
-	public int agregar(Movimiento objeto) {
+		
+	public int agregar(Transporte objeto) {
 		int id = 0;
 		try {
 			iniciaOperacion();
@@ -37,8 +37,8 @@ public class MovimientoDao {
 		}
 		return id;
 	}
-
-	public void actualizar(Movimiento objeto) throws HibernateException {
+	
+	public void actualizar(Transporte objeto) throws HibernateException {
 		try {
 			iniciaOperacion();
 			session.update(objeto);
@@ -51,7 +51,7 @@ public class MovimientoDao {
 		}	
 	}
 
-	public void eliminar(Movimiento objeto) throws HibernateException {
+	public void eliminar(Transporte objeto) throws HibernateException {
 		try {
 			iniciaOperacion();
 			session.delete(objeto);
@@ -64,37 +64,38 @@ public class MovimientoDao {
 		}
 	}
 	
-	public Boleto traerBoleto(long idMovimiento) {
-		Boleto objeto = null;
+	public Transporte traerTransporte(long idTransporte) throws HibernateException {
+		Transporte objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Boleto) session.get(Boleto.class, idMovimiento);
-		}  finally {
-			session.close();
-		}
-		return objeto;
-	}
-/*
-	public Tarjeta traerTarjeta(long idTarjeta) throws HibernateException {
-		Tarjeta objeto = null;
-		try {
-			iniciaOperacion();
-			objeto = (Tarjeta) session.get(Tarjeta.class , idTarjeta);
+			objeto = (Transporte) session.get(Transporte.class , idTransporte);
 		} finally {
 			session.close();
 		}
 		return objeto;
 	}
-
-	@SuppressWarnings ( "unchecked" )
-	public List<Tarjeta> traerTarjeta() throws HibernateException {
-		List<Tarjeta> lista= null ;
+	
+	public Transporte traerTransporte(int dni) throws HibernateException {
+		Transporte objeto = null ;
 		try {
 			iniciaOperacion();
-			lista= session.createQuery( "from Tarjeta t order by t.idTarjeta asc" ).list();
+			objeto = (Transporte) session.createQuery( "from Transporte u where u.dni=" +dni).uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
+	
+	
+	@SuppressWarnings ( "unchecked" )
+	public List<Transporte> traerTransporte() throws HibernateException {
+		List<Transporte> lista= null ;
+		try {
+			iniciaOperacion();
+			lista= session.createQuery( "from Transporte u order by u.linea asc u.linea asc" ).list();
 		} finally {
 			session.close();
 		}
 		return lista;
-	}*/
+	}
 }

@@ -6,24 +6,23 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import datos.Boleto;
-import datos.Movimiento;
+import datos.Lectora;
 
-public class MovimientoDao {
+public class LectoraDao {
 	private static Session session;
 	private Transaction tx;
-
+	
 	private void iniciaOperacion() throws HibernateException {
 		session = HibernateUtil.getSessionFactory().openSession();
 		tx = session.beginTransaction();
 	}
-
+	
 	private void manejaExcepcion(HibernateException he) throws HibernateException {
 		tx.rollback();
 		throw new HibernateException( "ERROR en la capa de acceso a datos" , he);
 	}
-
-	public int agregar(Movimiento objeto) {
+		
+	public int agregar(Lectora objeto) {
 		int id = 0;
 		try {
 			iniciaOperacion();
@@ -37,8 +36,8 @@ public class MovimientoDao {
 		}
 		return id;
 	}
-
-	public void actualizar(Movimiento objeto) throws HibernateException {
+	
+	public void actualizar(Lectora objeto) throws HibernateException {
 		try {
 			iniciaOperacion();
 			session.update(objeto);
@@ -51,7 +50,7 @@ public class MovimientoDao {
 		}	
 	}
 
-	public void eliminar(Movimiento objeto) throws HibernateException {
+	public void eliminar(Lectora objeto) throws HibernateException {
 		try {
 			iniciaOperacion();
 			session.delete(objeto);
@@ -64,37 +63,16 @@ public class MovimientoDao {
 		}
 	}
 	
-	public Boleto traerBoleto(long idMovimiento) {
-		Boleto objeto = null;
+	public Lectora traerLectora(long idTransporte) throws HibernateException {
+		Lectora objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Boleto) session.get(Boleto.class, idMovimiento);
-		}  finally {
-			session.close();
-		}
-		return objeto;
-	}
-/*
-	public Tarjeta traerTarjeta(long idTarjeta) throws HibernateException {
-		Tarjeta objeto = null;
-		try {
-			iniciaOperacion();
-			objeto = (Tarjeta) session.get(Tarjeta.class , idTarjeta);
+			objeto = (Lectora) session.get(Lectora.class , idTransporte);
 		} finally {
 			session.close();
 		}
 		return objeto;
 	}
-
-	@SuppressWarnings ( "unchecked" )
-	public List<Tarjeta> traerTarjeta() throws HibernateException {
-		List<Tarjeta> lista= null ;
-		try {
-			iniciaOperacion();
-			lista= session.createQuery( "from Tarjeta t order by t.idTarjeta asc" ).list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}*/
+	
+	
 }

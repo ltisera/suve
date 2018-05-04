@@ -10,8 +10,9 @@ public class Movimiento {
 	private Lectora lectora;
 	
 	public Movimiento() {}
-	public Movimiento(GregorianCalendar fecha, float monto, Tarjeta tarjeta) {
+	public Movimiento(GregorianCalendar fecha, Lectora lectora, float monto, Tarjeta tarjeta) {
 		super();
+		this.lectora = lectora;
 		this.fecha = fecha;
 		this.monto = monto;
 		this.tarjeta = tarjeta;
