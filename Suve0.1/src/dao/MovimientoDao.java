@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 
 import datos.Boleto;
 import datos.Movimiento;
+import datos.Recarga;
 
 public class MovimientoDao {
 	private static Session session;
@@ -69,6 +70,28 @@ public class MovimientoDao {
 		try {
 			iniciaOperacion();
 			objeto = (Boleto) session.get(Boleto.class, idMovimiento);
+		}  finally {
+			session.close();
+		}
+		return objeto;
+	}
+	
+	public Recarga traerRecarga(long idMovimiento) {
+		Recarga objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Recarga) session.get(Recarga.class, idMovimiento);
+		}  finally {
+			session.close();
+		}
+		return objeto;
+	}
+	
+	public Movimiento traerMovimiento(long idMovimiento) {
+		Movimiento objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Movimiento) session.get(Movimiento.class, idMovimiento);
 		}  finally {
 			session.close();
 		}

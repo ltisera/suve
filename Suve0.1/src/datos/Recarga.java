@@ -6,9 +6,9 @@ public class Recarga extends Movimiento{
 	
 	private boolean saldoPendiente;
 
-	
-	
-	
+		
+	public Recarga() {}
+
 	public Recarga(GregorianCalendar fecha, Lectora lectora, float monto, Tarjeta tarjeta, boolean saldoPendiente) {
 		super(fecha, lectora, monto, tarjeta);
 		this.saldoPendiente = saldoPendiente;

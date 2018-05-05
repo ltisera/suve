@@ -2,17 +2,14 @@ package testModificaDatos;
 
 import dao.*;
 import datos.*;
-public class testTraerBoleto {
+public class testTraerRecarga {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		MovimientoDao mdao = new MovimientoDao();
-		Boleto b = mdao.traerBoleto(2);
+		Recarga b = mdao.traerRecarga(1);
 		if (b != null)
-		{
-			System.out.println("Traje el Boleto: " + b.getIdMovimiento() + " y me costo: " + b.getMonto() + " Viaje en: " );
-			System.out.println("Fuaaa ta caro loco!!!");
-		}
+			System.out.println("Traje la Recarga: " + b.getIdMovimiento() + " y cargue: " + b.getMonto());
 		else
 			System.out.println(b);
 	}
