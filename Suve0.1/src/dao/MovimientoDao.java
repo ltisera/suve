@@ -97,27 +97,27 @@ public class MovimientoDao {
 		}
 		return objeto;
 	}
-/*
-	public Tarjeta traerTarjeta(long idTarjeta) throws HibernateException {
-		Tarjeta objeto = null;
-		try {
-			iniciaOperacion();
-			objeto = (Tarjeta) session.get(Tarjeta.class , idTarjeta);
-		} finally {
-			session.close();
-		}
-		return objeto;
-	}
 
-	@SuppressWarnings ( "unchecked" )
-	public List<Tarjeta> traerTarjeta() throws HibernateException {
-		List<Tarjeta> lista= null ;
+	public List<Movimiento> traerMovimientos(){
+		List<Movimiento> lista = null;
 		try {
 			iniciaOperacion();
-			lista= session.createQuery( "from Tarjeta t order by t.idTarjeta asc" ).list();
+			lista = session.createQuery("from Movimiento m").list();
 		} finally {
 			session.close();
 		}
 		return lista;
-	}*/
+	}
+	
+	public List<Boleto> traerBoleto(){
+		List<Boleto> lista = null;
+		try {
+			iniciaOperacion();
+			//from Usuario u order by u.apellido asc u.nombreasc
+			lista = session.createQuery("from Boleto b order by b.idMovimiento asc ").list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
 }

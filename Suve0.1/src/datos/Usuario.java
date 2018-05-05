@@ -15,13 +15,14 @@ public class Usuario {
 	
 	
 	public Usuario() {}
-	public Usuario(String nombre, String apellido, int dni, String mail, String password) {
+	public Usuario(String nombre, String apellido, int dni, String mail, String password, TipoUsuario tipoUsuario) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
 		this.mail = mail;
 		this.password = password;
+		this.tipoUsuario = tipoUsuario;
 	}
 	
 	

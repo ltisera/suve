@@ -37,6 +37,12 @@ public class Transporte {
 	public void setTipoTransporte(TipoTransporte tipoTransporte) {
 		this.tipoTransporte = tipoTransporte;
 	}
+
+	@Override
+	public String toString() {
+		return "Transporte [idTransporte=" + idTransporte + ", linea=" + linea + ", tipoTransporte=" + tipoTransporte
+				+ "]";
+	}
 	
 	
 }

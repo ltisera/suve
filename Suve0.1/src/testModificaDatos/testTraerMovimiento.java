@@ -7,8 +7,9 @@ public class testTraerMovimiento {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		MovimientoDao mdao = new MovimientoDao();
-		Movimiento b = mdao.traerMovimiento(2);
+		Movimiento b = mdao.traerMovimiento(3);
 		System.out.println("Traje el Movimiento: " + b.getIdMovimiento() + " y me costo: " + b.getMonto());
+		
 	}
 
 }

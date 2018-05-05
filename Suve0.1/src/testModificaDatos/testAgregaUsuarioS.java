@@ -8,7 +8,7 @@ public class testAgregaUsuarioS {
 		// TODO Auto-generated method stub
 		System.out.println("Que onda");
 		UsuarioDao udao = new UsuarioDao();
-		Usuario u = new Usuario("La cami", "Viajera", 1213, "noTegnoMail", "puto");
+		Usuario u = new Usuario("La cami", "Viajera", 1213, "noTegnoMail", "puto", TipoUsuario.Administrador);
 		u.setTipoUsuario(TipoUsuario.Pasajero);
 		udao.agregar(u);
 		System.out.println("Que onda");

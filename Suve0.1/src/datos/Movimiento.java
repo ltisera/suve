@@ -47,6 +47,11 @@ public class Movimiento {
 	public void setLectora(Lectora lectora) {
 		this.lectora = lectora;
 	}
+	@Override
+	public String toString() {
+		return "Movimiento [idMovimiento=" + idMovimiento + ", fecha=" + fecha + ", monto=" + monto + ", tarjeta="
+				+ tarjeta + ", lectora=" + lectora + "]";
+	}
 	
 	
 	

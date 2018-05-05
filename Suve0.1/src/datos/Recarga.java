@@ -22,5 +22,10 @@ public class Recarga extends Movimiento{
 		this.saldoPendiente = saldoPendiente;
 	}
 
+	@Override
+	public String toString() {
+		return "Recarga [saldoPendiente=" + saldoPendiente + "]";
+	}
+
 	
 }

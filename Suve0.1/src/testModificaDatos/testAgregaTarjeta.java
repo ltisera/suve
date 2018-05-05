@@ -9,7 +9,7 @@ public class testAgregaTarjeta {
 		// TODO Auto-generated method stub
 		TarjetaDao tardao = new TarjetaDao();
 		UsuarioDao udao = new UsuarioDao();
-		Usuario u = new Usuario("La camseri", "Vfeiajera", 1215, "YOnoTegnoMail", "puto");
+		Usuario u = new Usuario("La camseri", "Vfeiajera", 1215, "YOnoTegnoMail", "puto", TipoUsuario.Administrador);
 		u.setTipoUsuario(TipoUsuario.Pasajero);
 		udao.agregar(u);
 		tardao.agregar(new Tarjeta(10,u));

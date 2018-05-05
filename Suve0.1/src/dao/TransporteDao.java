@@ -75,17 +75,6 @@ public class TransporteDao {
 		return objeto;
 	}
 	
-	public Transporte traerTransporte(int dni) throws HibernateException {
-		Transporte objeto = null ;
-		try {
-			iniciaOperacion();
-			objeto = (Transporte) session.createQuery( "from Transporte u where u.dni=" +dni).uniqueResult();
-		} finally {
-			session.close();
-		}
-		return objeto;
-	}
-	
 	
 	@SuppressWarnings ( "unchecked" )
 	public List<Transporte> traerTransporte() throws HibernateException {

@@ -29,6 +29,10 @@ public class Lectora {
 	public void setTransporte(Transporte transporte) {
 		this.transporte = transporte;
 	}
+	@Override
+	public String toString() {
+		return "Lectora [idLectora=" + idLectora + ", estacion=" + estacion + ", transporte=" + transporte + "]";
+	}
 	
 	
 	

@@ -38,6 +38,14 @@ public class Boleto extends Movimiento{
 	public void setTransporte(Transporte transporte) {
 		this.transporte = transporte;
 	}
+	@Override
+	public String toString() {
+		return "Boleto [cerrado=" + cerrado + ", intRedSube=" + intRedSube + "]";
+	}
+	
+	public String toStringCompleto() {
+		return "Boleto [cerrado=" + cerrado + ", intRedSube=" + intRedSube + ", transporte=" + transporte + "]";
+	}
 	
 	
 }

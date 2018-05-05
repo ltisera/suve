@@ -46,6 +46,12 @@ public class Estacion {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Estacion [idEstacion=" + idEstacion + ", transporte=" + transporte + ", nombre=" + nombre + "]";
+	}
 	
 	
 }

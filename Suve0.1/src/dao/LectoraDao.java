@@ -63,11 +63,11 @@ public class LectoraDao {
 		}
 	}
 	
-	public Lectora traerLectora(long idTransporte) throws HibernateException {
+	public Lectora traerLectora(long idLectora) throws HibernateException {
 		Lectora objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Lectora) session.get(Lectora.class , idTransporte);
+			objeto = (Lectora) session.get(Lectora.class , idLectora);
 		} finally {
 			session.close();
 		}
