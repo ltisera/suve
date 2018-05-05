@@ -114,7 +114,7 @@ public class MovimientoDao {
 		try {
 			iniciaOperacion();
 			//from Usuario u order by u.apellido asc u.nombreasc
-			lista = session.createQuery("from Boleto b order by b.idMovimiento asc ").list();
+			lista = session.createQuery("from Boleto b where b.monto > 30 and b.monto < 32 order by b.idMovimiento asc ").list();
 		} finally {
 			session.close();
 		}

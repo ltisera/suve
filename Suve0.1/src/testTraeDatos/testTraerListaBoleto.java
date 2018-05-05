@@ -11,14 +11,13 @@ public class testTraerListaBoleto {
 		// TODO Auto-generated method stub
 		MovimientoDao mdao = new MovimientoDao();
 		List<Boleto> lb = mdao.traerBoleto(); 
-		System.out.println("PUTO");
 		for(Boleto b:lb) {
 			System.out.println("Boleto: " + b.getIdMovimiento() + " Monto: " + b.getMonto());
 		}
-		System.out.println("CONTOSTRING");
+		/*System.out.println("CONTOSTRING");
 		for(Boleto b:lb) {
 			System.out.println(b.toString());
-		}
+		}*/
 		
 	}
 
