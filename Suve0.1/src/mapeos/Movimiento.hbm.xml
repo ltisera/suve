@@ -19,7 +19,6 @@
 			<property column="cerrado" name="cerrado" type="boolean" />
 			<property column="intRedSube" name="intRedSube" type="int" />
 			
-			<many-to-one column="idTransporte" name="transporte" class ="datos.Transporte" not-null="false"/>
 		</joined-subclass>
 		
 		<joined-subclass name="datos.Recarga" table="Recarga">

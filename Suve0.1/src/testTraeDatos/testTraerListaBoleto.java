@@ -12,7 +12,7 @@ public class testTraerListaBoleto {
 		MovimientoDao mdao = new MovimientoDao();
 		List<Boleto> lb = mdao.traerBoleto(); 
 		for(Boleto b:lb) {
-			System.out.println("Boleto: " + b.getIdMovimiento() + " Monto: " + b.getMonto());
+			System.out.println("Boleto: " + b.getIdMovimiento() + " Monto: " + b.getMonto() );
 		}
 		/*System.out.println("CONTOSTRING");
 		for(Boleto b:lb) {

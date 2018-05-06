@@ -109,6 +109,18 @@ public class MovimientoDao {
 		return lista;
 	}
 	
+	public List<Movimiento> traerMovimientosYLectora(){
+		List<Movimiento> lista = null;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Movimiento m inner join fetch m.lectora").list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	
+	
 	public List<Boleto> traerBoleto(){
 		List<Boleto> lista = null;
 		try {

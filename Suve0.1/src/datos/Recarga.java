@@ -6,7 +6,7 @@ public class Recarga extends Movimiento{
 	
 	private boolean saldoPendiente;
 
-		
+	
 	public Recarga() {}
 
 	public Recarga(GregorianCalendar fecha, Lectora lectora, float monto, Tarjeta tarjeta, boolean saldoPendiente) {
@@ -24,8 +24,13 @@ public class Recarga extends Movimiento{
 
 	@Override
 	public String toString() {
-		return "Recarga [saldoPendiente=" + saldoPendiente + "]";
+		return "Recarga ["+  super.toString() + " saldoPendiente=" + saldoPendiente + "]";
 	}
+	public String toStringCompleto() {
+		return "Recarga ["+ super.toString() + " saldoPendiente=" + saldoPendiente + "]";
+	}
+	
+	
 
 	
 }

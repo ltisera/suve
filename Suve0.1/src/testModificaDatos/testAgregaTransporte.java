@@ -10,7 +10,7 @@ public class testAgregaTransporte {
 		// TODO Auto-generated method stub
 		TransporteDao transdao = new TransporteDao(); 
 		
-		transdao.agregar(new Transporte("La chanchita", TipoTransporte.Colectivo));
+		transdao.agregar(new Transporte("Vamo el Roca", TipoTransporte.Tren));
 		
 	}
 

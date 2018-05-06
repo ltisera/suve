@@ -2,6 +2,8 @@ package datos;
 
 import java.util.GregorianCalendar;
 
+import funciones.Funciones;
+
 public class Movimiento {
 	private long idMovimiento;
 	private GregorianCalendar fecha;
@@ -49,8 +51,7 @@ public class Movimiento {
 	}
 	@Override
 	public String toString() {
-		return "Movimiento [idMovimiento=" + idMovimiento + ", fecha=" + fecha + ", monto=" + monto + ", tarjeta="
-				+ tarjeta + ", lectora=" + lectora + "]";
+		return "Movimiento [idMovimiento=" + idMovimiento + ", fecha=" + Funciones.TraeFechaYHora(fecha)+ ", monto=" + monto + "]";
 	}
 	
 	

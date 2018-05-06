@@ -16,13 +16,13 @@ public class testCargarMovimientosEnBaseDeDatos {
 		
 		Lectora lalectora = lecdao.traerLectora(1l);
 		Transporte eltransporte = transdao.traerTransporte(1l);
-		for(long ntar = 1; ntar <= 38; ntar++)
+		for(long ntar = 1; ntar <= 22; ntar++)
 		{
 			Tarjeta latarjet = tardao.traerTarjeta(ntar);
 			for(long i =0;i < 40;i++) {
 				int monto = (int) (Math.random() * 100) + 1;
 				if((int) (Math.random() * 2) == 0){
-					Boleto b = new Boleto(new GregorianCalendar(), lalectora, monto, latarjet, false, 0, eltransporte);
+					Boleto b = new Boleto(new GregorianCalendar(), lalectora, monto, latarjet, false, 0);
 					movdao.agregar(b);
 					System.out.println("boleto");
 				}
