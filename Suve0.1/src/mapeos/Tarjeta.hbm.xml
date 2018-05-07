@@ -9,5 +9,11 @@
 		<property column="monto" name="monto" type="float"/>
 		<property column="activa" name="activa" type="boolean"/>
 		<many-to-one column="idUsuario" name="usuario" class="datos.Usuario" not-null="false"/>
+		
+		<set table="tarjetaxbeneficio" name="beneficios" outer-join="true">
+			<key column="idTarjeta"/>
+			<many-to-many column="idBeneficio" class="datos.Beneficio"/>
+		</set>
+		
 	</class>
 </hibernate-mapping>

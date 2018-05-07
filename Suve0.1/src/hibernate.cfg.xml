@@ -11,12 +11,14 @@
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="show_sql">true</property> <!-- en true muestra hql en consola -->
 		<!--Mapeo Entidades -->
+		<mapping resource="mapeos/Beneficio.hbm.xml"/>
 		<mapping resource="mapeos/Usuario.hbm.xml" />
 		<mapping resource="mapeos/Tarjeta.hbm.xml" />
 		<mapping resource="mapeos/Movimiento.hbm.xml" />
 		<mapping resource="mapeos/Transporte.hbm.xml"/>
 		<mapping resource="mapeos/Lectora.hbm.xml"/>
 		<mapping resource="mapeos/Estacion.hbm.xml"/>
+		
 		
 	</session-factory>
 </hibernate-configuration>

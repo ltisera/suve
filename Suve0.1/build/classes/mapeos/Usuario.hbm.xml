@@ -17,6 +17,11 @@
 				<param name="type">4</param>
 			</type>
 		</property>
-		 
+		
+		<set table="usuarioxbeneficio" name="beneficios" outer-join="true">
+			<key column="idUsuario"/>
+			<many-to-many column="idBeneficio" class="datos.Beneficio"/>
+		</set>
+		
 	</class>
 </hibernate-mapping>
