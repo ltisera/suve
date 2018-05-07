@@ -10,9 +10,9 @@ import datos.Lectora;
 public class testTraerMovYLec {
 	public static void main(String[] args) {
 		MovimientoDao mdao = new MovimientoDao();
-		List<Movimiento> lm = mdao.traerMovimientosYLectora();
+		List<Movimiento> lm = mdao.traerMovimientoCompleto();
 		for(Movimiento m:lm) {
-			System.out.println(m.toString());
+			System.out.println(m);
 		}
 	}
 	

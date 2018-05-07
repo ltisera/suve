@@ -1,6 +1,8 @@
 package datos;
 
 import java.util.Set;
+
+import funciones.Funciones;
 /**
  * 
  * @author Equipo 1
@@ -79,6 +81,19 @@ public class Tarjeta {
 		String estado = "Inactiva";
 		if (activa == true)
 			estado = "Activa";
-		return "Tarjeta [" + idTarjeta + ", $" + monto + ", " + estado + "]";
+		String string = "Tarjeta [id=" + idTarjeta + ", $" + monto + ", " + estado;
+		if (Funciones.isObjetoInicializado(this.getUsuario()))
+			string += ", " + usuario;
+		return string + "]";
+	}
+	
+	public boolean equals(Tarjeta tarjeta) {
+		boolean equals = false;
+		if(idTarjeta == tarjeta.getIdTarjeta() && monto == tarjeta.getMonto() && activa == tarjeta.isActiva()) {
+			equals = true;
+			if (Funciones.isObjetoInicializado(this.getUsuario()) && Funciones.isObjetoInicializado(tarjeta.getUsuario()))
+				equals = usuario.equals(tarjeta.getUsuario());
+		}
+		return equals;
 	}
 }

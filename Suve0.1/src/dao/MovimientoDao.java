@@ -1,7 +1,6 @@
 package dao;
 
 import java.util.List;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -97,6 +96,17 @@ public class MovimientoDao {
 		}
 		return objeto;
 	}
+	
+	public Movimiento traerMovimientoCompleto(long idMovimiento){
+		Movimiento objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Movimiento) session.createQuery("from Movimiento m inner join fetch m.lectora inner join fetch m.tarjeta where m.idMovimiento="+idMovimiento).uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
 
 	public List<Movimiento> traerMovimientos(){
 		List<Movimiento> lista = null;
@@ -109,7 +119,19 @@ public class MovimientoDao {
 		return lista;
 	}
 	
-	public List<Movimiento> traerMovimientosYLectora(){
+	public List<Movimiento> traerMovimientoCompleto(){
+		List<Movimiento> lista = null;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Movimiento m inner join fetch m.lectora inner join fetch m.tarjeta").list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	
+	/*
+	public List<Movimiento> traerMovimientoYLectora(){
 		List<Movimiento> lista = null;
 		try {
 			iniciaOperacion();
@@ -120,13 +142,23 @@ public class MovimientoDao {
 		return lista;
 	}
 	
-	
+	public List<Movimiento> traerMovimientoYTarjeta(){
+		List<Movimiento> lista = null;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Movimiento m inner join fetch m.tarjeta").list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	*/
 	public List<Boleto> traerBoleto(){
 		List<Boleto> lista = null;
 		try {
 			iniciaOperacion();
-			//from Usuario u order by u.apellido asc u.nombreasc
-			lista = session.createQuery("from Boleto b where b.monto > 30 and b.monto < 32 order by b.idMovimiento asc ").list();
+			//lista = session.createQuery("from Boleto b where b.monto > 30 and b.monto < 32 order by b.idMovimiento asc").list();
+			lista = session.createQuery("from Boleto").list();
 		} finally {
 			session.close();
 		}

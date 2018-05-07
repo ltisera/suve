@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -70,6 +71,17 @@ public class EstacionDao {
 			session.close();
 		}
 		return objeto;
+	}
+	
+	public List<Estacion> traerEstacion() throws HibernateException {
+		List<Estacion> lista = null ;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Estacion").list();
+		} finally {
+			session.close();
+		}
+		return lista;
 	}
 	
 }

@@ -6,12 +6,7 @@ public class Boleto extends Movimiento{
 	private boolean cerrado;
 	private int intRedSube;
 	
-	
-	
-	
-	public Boleto() {
-		super();
-	}
+	public Boleto() {}
 	public Boleto(GregorianCalendar fecha, Lectora lectora, float monto, Tarjeta tarjeta, boolean cerrado,
 			int intRedSube) {
 		super(fecha, lectora, monto, tarjeta);
@@ -32,8 +27,10 @@ public class Boleto extends Movimiento{
 	}
 	@Override
 	public String toString() {
-		return "Boleto [cerrado=" + cerrado + ", intRedSube=" + intRedSube + "]";
+		return "Boleto [" + super.toString() + " cerrado=" + cerrado + " red sube=" + intRedSube + "]";
 	}
-
 	
+	public boolean equals(Boleto boleto) {
+		return super.equals(boleto) && cerrado == boleto.isCerrado() && intRedSube == boleto.getIntRedSube();
+	}
 }

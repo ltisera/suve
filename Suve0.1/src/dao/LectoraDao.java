@@ -1,7 +1,6 @@
 package dao;
 
 import java.util.List;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -74,5 +73,36 @@ public class LectoraDao {
 		return objeto;
 	}
 	
+	public Lectora traerLectoraCompleta(long idLectora) throws HibernateException {
+		Lectora objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Lectora) session.createQuery("from Lectora l inner join fetch l.estacion inner join fetch l.transporte where m.idLectora="+idLectora).uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
 	
+	public List<Lectora> traerLectora() throws HibernateException {
+		List<Lectora> lista = null ;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Lectora").list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	
+	public List<Lectora> traerLectoraCompleta() throws HibernateException {
+		List<Lectora> lista = null ;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Lectora l inner join fetch l.estacion inner join fetch l.transporte").list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
 }

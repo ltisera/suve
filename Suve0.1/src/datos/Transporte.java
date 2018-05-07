@@ -40,9 +40,11 @@ public class Transporte {
 
 	@Override
 	public String toString() {
-		return "Transporte [idTransporte=" + idTransporte + ", linea=" + linea + ", tipoTransporte=" + tipoTransporte
-				+ "]";
+		return "Transporte [id=" + idTransporte + ", linea=" + linea + ", tipoTransporte=" + tipoTransporte + "]";
 	}
 	
+	public boolean equals(Transporte transporte) {
+		return idTransporte == transporte.getIdTransporte() && linea.equals(transporte.getLinea()) && tipoTransporte == transporte.getTipoTransporte();
+	}
 	
 }

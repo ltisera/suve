@@ -1,16 +1,13 @@
 package datos;
 
+import funciones.Funciones;
+
 public class Estacion {
 	private long idEstacion;
 	private Transporte transporte;
 	private String nombre;
 	
-	
-	public Estacion() {
-		super();
-	}
-
-
+	public Estacion() {}
 	public Estacion(Transporte transporte, String nombre) {
 		super();
 		this.transporte = transporte;
@@ -50,8 +47,20 @@ public class Estacion {
 
 	@Override
 	public String toString() {
-		return "Estacion [idEstacion=" + idEstacion + ", transporte=" + transporte + ", nombre=" + nombre + "]";
+		String string = "Estacion [id=" + idEstacion + ", nombre=" + nombre ;
+		if (Funciones.isObjetoInicializado(this.getTransporte()))
+			string += ", " + transporte;
+		return string + "]";
 	}
 	
+	public boolean equals(Estacion estacion) {
+		boolean equals = false;
+		if (idEstacion == estacion.getIdEstacion() && nombre.equals(estacion.getNombre())) {
+			equals = true;
+			if(Funciones.isObjetoInicializado(this.getTransporte()) && Funciones.isObjetoInicializado(estacion.getTransporte()))
+				equals = transporte.equals(estacion.getTransporte());
+		}
+		return equals;
+	}
 	
 }

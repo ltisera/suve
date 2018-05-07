@@ -51,9 +51,23 @@ public class Movimiento {
 	}
 	@Override
 	public String toString() {
-		return "Movimiento [idMovimiento=" + idMovimiento + ", fecha=" + Funciones.TraeFechaYHora(fecha)+ ", monto=" + monto + "]";
+		String string = "id=" + idMovimiento + " " + Funciones.TraeFechaYHora(fecha) + " $" + monto;
+		if (Funciones.isObjetoInicializado(this.getTarjeta()))
+			string = string + " " + tarjeta;
+		if (Funciones.isObjetoInicializado(this.getLectora()))
+			string = string + " " + lectora;
+		return string;
 	}
 	
-	
-	
+	public boolean equals(Movimiento movimiento) {
+		boolean equals = false;
+		if (idMovimiento == movimiento.getIdMovimiento() && fecha.compareTo(movimiento.getFecha()) == 0 && monto == movimiento.getMonto()) {
+			equals = true;
+			if(Funciones.isObjetoInicializado(this.getTarjeta()) && Funciones.isObjetoInicializado(movimiento.getTarjeta()))
+				equals = tarjeta.equals(movimiento.getTarjeta());
+			if(equals && Funciones.isObjetoInicializado(this.getLectora()) && Funciones.isObjetoInicializado(movimiento.getLectora()))
+				equals = lectora.equals(movimiento.getLectora());
+		}
+		return equals;
+	}
 }

@@ -83,7 +83,10 @@ public class Usuario {
 	}
 	@Override
 	public String toString() {
-		return "Usuario [idUsuario=" + idUsuario + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni
-				+ ", mail=" + mail + ", password=" + password + "]";
+		return "Usuario [id=" + idUsuario + ", dni=" + dni + " " + apellido + ", " + nombre + ", mail=" + mail + ", password=" + password + ", " + tipoUsuario + "]";
+	}
+	
+	public boolean equals(Usuario usuario) {
+		return idUsuario == usuario.getIdUsuario() && dni == usuario.getDni() && mail.equals(usuario.getMail()) && nombre.equals(usuario.getNombre()) && apellido.equals(usuario.getApellido()) && password.equals(usuario.getPassword()) && tipoUsuario == usuario.getTipoUsuario();
 	}
 }
