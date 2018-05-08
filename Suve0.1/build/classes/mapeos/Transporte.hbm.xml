@@ -7,13 +7,13 @@
 			<generator class="identity" />
 		</id>
 		<property column="linea" name="linea" type="string" />
-		
-		<property name="tipoTransporte" >
+
+		<property name="tipoTransporte">
 			<type name="org.hibernate.type.EnumType">
-                <param name="enumClass">datos.TipoTransporte</param>
+				<param name="enumClass">datos.TipoTransporte</param>
 				<param name="type">4</param>
 			</type>
 		</property>
-		 
+
 	</class>
 </hibernate-mapping>

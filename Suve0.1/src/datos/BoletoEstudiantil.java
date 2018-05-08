@@ -6,10 +6,7 @@ public class BoletoEstudiantil extends Beneficio{
 	private GregorianCalendar intervalo;
 	private float monto;
 	
-	
-	public BoletoEstudiantil() {
-		super();
-	}
+	public BoletoEstudiantil() {}
 	public BoletoEstudiantil(String nombre, GregorianCalendar intervalo, float monto) {
 		super(nombre);
 		this.intervalo = intervalo;

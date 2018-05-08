@@ -19,7 +19,7 @@ public class testCargarMovimientosEnBaseDeDatos {
 			for(long i =0;i < 40;i++) {
 				int monto = (int) (Math.random() * 100) + 1;
 				if((int) (Math.random() * 2) == 0){
-					movdao.agregar(new Boleto(new GregorianCalendar(), lalectora, monto, latarjet, false, 0));
+					movdao.agregar(new Boleto(new GregorianCalendar(), lalectora, monto, latarjet, 0, null));
 					//System.out.println("boleto");
 				}
 				else {

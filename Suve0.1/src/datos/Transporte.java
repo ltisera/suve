@@ -18,7 +18,7 @@ public class Transporte {
 		return idTransporte;
 	}
 
-	public void setIdTransporte(long idTransporte) {
+	protected void setIdTransporte(long idTransporte) {
 		this.idTransporte = idTransporte;
 	}
 

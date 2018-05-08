@@ -18,7 +18,9 @@
 		<mapping resource="mapeos/Transporte.hbm.xml"/>
 		<mapping resource="mapeos/Lectora.hbm.xml"/>
 		<mapping resource="mapeos/Estacion.hbm.xml"/>
-		
+		<mapping resource="mapeos/TramoColectivo.hbm.xml"/>
+		<mapping resource="mapeos/TramoTrenYSubte.hbm.xml"/>
+		<mapping resource="mapeos/SeccionViaje.hbm.xml"/>
 		
 	</session-factory>
 </hibernate-configuration>

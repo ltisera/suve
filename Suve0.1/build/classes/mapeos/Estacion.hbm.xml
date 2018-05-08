@@ -4,11 +4,9 @@
 <hibernate-mapping>
 	<class name="datos.Estacion" table="estacion">
 		<id column="idEstacion" name="idEstacion">
-			<generator class="identity"/>
+			<generator class="identity" />
 		</id>
-		<property column="nombre" name="nombre" type="string"></property>
-		<many-to-one name="transporte">
-			<column name="idTransporte"></column>
-		</many-to-one>
+		<property column="nombre" name="nombre" type="string" />
+		<many-to-one column="idTransporte" name="transporte" />
 	</class>
 </hibernate-mapping>

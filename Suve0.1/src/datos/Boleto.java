@@ -3,21 +3,15 @@ package datos;
 import java.util.GregorianCalendar;
 
 public class Boleto extends Movimiento{
-	private boolean cerrado;
 	private int intRedSube;
+	private TramoTrenYSubte tramoTrenYSubte;
+	private TramoColectivo tramoColectivo;
 	
 	public Boleto() {}
-	public Boleto(GregorianCalendar fecha, Lectora lectora, float monto, Tarjeta tarjeta, boolean cerrado,
-			int intRedSube) {
+	public Boleto(GregorianCalendar fecha, Lectora lectora, float monto, Tarjeta tarjeta, int intRedSube, TramoColectivo tramoColectivo) {
 		super(fecha, lectora, monto, tarjeta);
-		this.cerrado = cerrado;
 		this.intRedSube = intRedSube;
-	}
-	public boolean isCerrado() {
-		return cerrado;
-	}
-	public void setCerrado(boolean cerrado) {
-		this.cerrado = cerrado;
+		this.tramoColectivo = tramoColectivo;
 	}
 	public int getIntRedSube() {
 		return intRedSube;
@@ -25,12 +19,24 @@ public class Boleto extends Movimiento{
 	public void setIntRedSube(int intRedSube) {
 		this.intRedSube = intRedSube;
 	}
+	public TramoTrenYSubte getTramoTrenYSubte() {
+		return tramoTrenYSubte;
+	}
+	public void setTramoTrenYSubte(TramoTrenYSubte tramoTrenYSubte) {
+		this.tramoTrenYSubte = tramoTrenYSubte;
+	}
+	public TramoColectivo getTramoColectivo() {
+		return tramoColectivo;
+	}
+	public void setTramoColectivo(TramoColectivo tramoColectivo) {
+		this.tramoColectivo = tramoColectivo;
+	}
 	@Override
 	public String toString() {
-		return "Boleto [" + super.toString() + " cerrado=" + cerrado + " red sube=" + intRedSube + "]";
+		return "Boleto [" + super.toString() + " red sube=" + intRedSube + "]";
 	}
 	
 	public boolean equals(Boleto boleto) {
-		return super.equals(boleto) && cerrado == boleto.isCerrado() && intRedSube == boleto.getIntRedSube();
+		return super.equals(boleto) && intRedSube == boleto.getIntRedSube();
 	}
 }

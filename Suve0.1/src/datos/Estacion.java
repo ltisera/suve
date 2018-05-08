@@ -20,7 +20,7 @@ public class Estacion {
 	}
 
 
-	public void setIdEstacion(long idEstacion) {
+	protected void setIdEstacion(long idEstacion) {
 		this.idEstacion = idEstacion;
 	}
 

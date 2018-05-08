@@ -4,14 +4,16 @@
 <hibernate-mapping>
 	<class name="datos.Lectora" table="lectora">
 		<id column="idLectora" name="idLectora">
-			<generator class="identity"/>
+			<generator class="identity" />
 		</id>
-		<many-to-one name="estacion">
-			<column name="idEstacion"></column>
-		</many-to-one>
-		<many-to-one name="transporte">
-			<column name="idTransporte"></column>
-		</many-to-one>
-		
+		<joined-subclass name="datos.LectoraTrenYSubte" table="LectoraTrenYSubte">
+			<key column="idLectora" />
+			<property column="realizaCarga" name="realizaCarga" type="boolean" />
+			<many-to-one column="idEstacion" name="estacion" class="datos.Estacion" not-null="true" />
+		</joined-subclass>
+		<joined-subclass name="datos.LectoraColectivo" table="LectoraColectivo">
+			<key column="idLectora" />
+			<many-to-one column="idTransporte" name="transporte" class="datos.Transporte" not-null="true" />
+		</joined-subclass>
 	</class>
 </hibernate-mapping>
