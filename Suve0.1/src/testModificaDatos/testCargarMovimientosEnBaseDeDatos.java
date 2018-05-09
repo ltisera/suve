@@ -12,7 +12,9 @@ public class testCargarMovimientosEnBaseDeDatos {
 		MovimientoDao movdao = new MovimientoDao();
 		LectoraDao lecdao = new LectoraDao();
 		TarjetaDao tardao = new TarjetaDao();
+		TramoColectivoDao tramodao = new TramoColectivoDao();
 		Lectora lalectora = lecdao.traerLectora(1l);
+		TramoColectivo tramo = tramodao.traerTramoColectivo(1l);
 		for(long ntar = 1; ntar <= 19; ntar++)
 		{
 			Tarjeta latarjet = tardao.traerTarjeta(ntar);

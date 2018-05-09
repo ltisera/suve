@@ -4,9 +4,9 @@ package dao;
 	import org.hibernate.HibernateException;
 	import org.hibernate.Session;
 	import org.hibernate.Transaction;
-	import datos.Tarjeta;
+	import datos.TramoColectivo;
 	
-public class TarjetaDao {
+public class TramoColectivoDao {
 	private static Session session;
 	private Transaction tx;
 	
@@ -20,7 +20,7 @@ public class TarjetaDao {
 		throw new HibernateException( "ERROR en la capa de acceso a datos" , he);
 	}
 		
-	public int agregar(Tarjeta objeto) {
+	public int agregar(TramoColectivo objeto) {
 		int id = 0;
 		try {
 			iniciaOperacion();
@@ -35,7 +35,7 @@ public class TarjetaDao {
 		return id;
 	}
 	
-	public void actualizar(Tarjeta objeto) throws HibernateException {
+	public void actualizar(TramoColectivo objeto) throws HibernateException {
 		try {
 			iniciaOperacion();
 			session.update(objeto);
@@ -48,7 +48,7 @@ public class TarjetaDao {
 		}	
 	}
 
-	public void eliminar(Tarjeta objeto) throws HibernateException {
+	public void eliminar(TramoColectivo objeto) throws HibernateException {
 		try {
 			iniciaOperacion();
 			session.delete(objeto);
@@ -61,11 +61,11 @@ public class TarjetaDao {
 		}
 	}
 	
-	public Tarjeta traerTarjeta(long idTarjeta) throws HibernateException {
-		Tarjeta objeto = null;
+	public TramoColectivo traerTramoColectivo(long idTramoColectivo) throws HibernateException {
+		TramoColectivo objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Tarjeta) session.get(Tarjeta.class , idTarjeta);
+			objeto = (TramoColectivo) session.get(TramoColectivo.class , idTramoColectivo);
 		} finally {
 			session.close();
 		}
@@ -73,21 +73,11 @@ public class TarjetaDao {
 	}
 			
 	@SuppressWarnings ( "unchecked" )
-	public List<Tarjeta> traerTarjeta() throws HibernateException {
-		List<Tarjeta> lista= null ;
+	public List<TramoColectivo> traerTramoColectivo() throws HibernateException {
+		List<TramoColectivo> lista= null ;
 		try {
 			iniciaOperacion();
-			lista= session.createQuery( "from Tarjeta t order by t.idTarjeta asc" ).list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
-	public List<Tarjeta> traerTarjetaCompleta() throws HibernateException {
-		List<Tarjeta> lista= null ;
-		try {
-			iniciaOperacion();
-			lista= session.createQuery( "from Tarjeta t join fetch t.usuario order by t.idTarjeta asc" ).list();
+			lista= session.createQuery( "from TramoColectivo t order by t.idTramoColectivo asc" ).list();
 		} finally {
 			session.close();
 		}

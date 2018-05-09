@@ -153,12 +153,34 @@ public class MovimientoDao {
 		return lista;
 	}
 	*/
+	public List<Boleto> traerBoletoCompleto(){
+		List<Boleto> lista = null;
+		try {
+			iniciaOperacion();
+			//lista = session.createQuery("from Movimiento m inner join fetch m.lectora inner join fetch m.tarjeta").list();
+			lista = session.createQuery("from Boleto b inner join fetch b.tramoColectivo").list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
 	public List<Boleto> traerBoleto(){
 		List<Boleto> lista = null;
 		try {
 			iniciaOperacion();
-			//lista = session.createQuery("from Boleto b where b.monto > 30 and b.monto < 32 order by b.idMovimiento asc").list();
 			lista = session.createQuery("from Boleto").list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	
+	public List<Recarga> traerRecarga(){
+		List<Recarga> lista = null;
+		try {
+			iniciaOperacion();
+			//lista = session.createQuery("from Movimiento m inner join fetch m.lectora inner join fetch m.tarjeta").list();
+			lista = session.createQuery("from Recarga r where saldoPendiente = false").list();
 		} finally {
 			session.close();
 		}
