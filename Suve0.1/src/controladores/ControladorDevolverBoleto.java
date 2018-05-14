@@ -81,7 +81,7 @@ public class ControladorDevolverBoleto extends HttpServlet {
 			*/
 			
 		} catch (Exception e){
-			response.sendError(500, "El DNI Ingresado no existe en la base de datos." );
+			response.sendError(500, "El ID del boleto no fue encontrado" );
 		}
 		
 	}

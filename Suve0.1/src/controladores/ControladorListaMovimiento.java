@@ -1,11 +1,17 @@
 package controladores;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.*;
+import datos.*;
+import java.util.List;
 
 /**
  * Servlet implementation class ControladorListaMovimiento
@@ -27,7 +33,7 @@ public class ControladorListaMovimiento extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/DevolverListaMovimiento.jsp").forward(request, response);
+		doPost(request, response);
 		
 	}
 
@@ -36,7 +42,33 @@ public class ControladorListaMovimiento extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		BuscarMovimientos(request, response);
+	}
+	
+	private void BuscarMovimientos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		try {
+			MovimientoDao mdao = new MovimientoDao();
+			List<Movimiento> listmov = mdao.traerMovimientos();
+			response.setStatus(200);
+			PrintWriter salida = response.getWriter();
+			salida.println( "<!DOCTYPE 4.01 Transitional//EN\">" );
+			salida.println( "<HTML>" );
+			salida.println( " <HEAD>" );
+			salida.println( " <TITLE>Sistema Francés</TITLE>" );
+			salida.println( " </HEAD>" );
+			salida.println( " <BODY>" );
+			for(Movimiento m: listmov) {
+				salida.println( " Movimiento: " +m.toString()+ "<BR>" );
+			}
+			
+			salida.println( " </BODY>" );
+			salida.println( "</HTML>" );
+		} catch (Exception e) {
+			response.sendError(500, "Las Lista no cargo por que es jodida");
+		}
+
+		
 	}
 
 }

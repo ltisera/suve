@@ -12,26 +12,40 @@
     <script src="js/jquery-3.3.1.js"></script>
     <script>
     $(document).ready(function(){
-    	 $("#consultar").click(function() {
-    		 console.log("Generomensaje");
+    	 $("#consultarBoleto").click(function() {
 			var boleto = $("#boleto").val();
-			console.log("Debuguealo");
 			$.ajax({
 				data: {"boleto":boleto},
 				url: "MostrarBoleto",
 				type:"POST",
 				beforeSend: function () {
-                    $("#responseboleto").html("Procesando, espere por favor...");
+                    $("#divMostrarBoleto").html("Procesando, espere por favor...");
 	            },
 	            success:  function (response) {
-	                    $("#responseboleto").html(response);
+	                    $("#divMostrarBoleto").html(response);
 	            },
-	            error:	function () {
-	                    alert("DAAA PUTO");
+	            error:	function (response) {
+	                    alert(response);
 	            }
 			});
-			
     	});
+    	 $("#consultarMovimientos").click(function(){
+    		 $.ajax({
+    			 url: "ListarMovimientos",
+    			 type: "POST",
+    			 beforeSend: function () {
+                     $("#divMostrarMovimientos").html("Procesando, espere por favor...");
+ 	            },
+ 	            success:  function (response) {
+ 	                    $("#divMostrarMovimientos").html(response);
+ 	            },
+ 	            error:	function () {
+ 	                    alert("DAAA MISHI");
+ 	            }
+    		 });
+    	 
+   			 
+		});
     });
     </script>
 
@@ -51,16 +65,19 @@
 					<label for="boleto">Este es DIOS:</label> 
 					<INPUT id="boleto" name="boleto">
 				</div>
-				<INPUT id="consultar" type="button" class="btn btn-success" value="Consultar"/>
+				<INPUT id="consultarBoleto" type="button" class="btn btn-success" value="Consultar"/>
 			</form>
 		</div>
 		<div class="container">
-			<div id="responseboleto">
-			<br>
+			<div id="divMostrarBoleto">
+			</div> 
 			
+			
+		</div>
+		<div class="container">
+			<input id = "consultarMovimientos" type="button" class ="btn btn-succes" value = "Lista los movimientos pa!"/>
+			<div id="divMostrarMovimientos">
 			</div>
-			
-			<div id="divlistarPrestamos"></div>
 		</div>
 	</div>
 
