@@ -24,7 +24,7 @@
   	</servlet>
   <servlet-mapping>
     <servlet-name>ControladorListaMovimiento</servlet-name>
-    <url-pattern>/ListarMovimiento</url-pattern>
+    <url-pattern>/ListarMovimientos</url-pattern>
   </servlet-mapping>
   
 </web-app>

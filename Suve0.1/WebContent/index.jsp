@@ -37,6 +37,7 @@
                      $("#divMostrarMovimientos").html("Procesando, espere por favor...");
  	            },
  	            success:  function (response) {
+ 	            		$("#divMostrarBoleto").html("");
  	                    $("#divMostrarMovimientos").html(response);
  	            },
  	            error:	function () {

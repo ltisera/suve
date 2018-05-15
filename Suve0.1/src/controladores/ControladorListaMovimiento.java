@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.*;
 import datos.*;
+import funciones.Funciones;
+import javassist.expr.Instanceof;
+import sun.security.jca.GetInstance.Instance;
+
 import java.util.List;
 
 /**
@@ -58,8 +62,24 @@ public class ControladorListaMovimiento extends HttpServlet {
 			salida.println( " <TITLE>Sistema Francés</TITLE>" );
 			salida.println( " </HEAD>" );
 			salida.println( " <BODY>" );
+			salida.println( " <table border=\"1\" style=\"width:75%\">" );
+			salida.println( " <tr>" );
+			salida.println( " <th>Tipo de movimiento</th>" );
+			salida.println( " <th>IDMovimiento</th> " );
+			salida.println( " <th>Fecha y Hora</th> ");
+			salida.println( " <th>Monto</th> ");
+			salida.println( " </tr> ");
+			
 			for(Movimiento m: listmov) {
-				salida.println( " Movimiento: " +m.toString()+ "<BR>" );
+				salida.println( " <tr>" );
+				if(m instanceof Recarga)
+					salida.println( " <th>Recarga</th>" );
+				else
+					salida.println("<th>Movimiento</th>");
+				salida.println( " <th>"+m.getIdMovimiento()+"</th> " );
+				salida.println( " <th>"+Funciones.TraeFechaYHora(m.getFecha())+"</th> ");
+				salida.println( " <th>"+m.getMonto()+"</th> ");
+				salida.println( " </tr> ");
 			}
 			
 			salida.println( " </BODY>" );
