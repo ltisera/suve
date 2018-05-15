@@ -12,6 +12,7 @@ import funciones.Funciones;
  */
 public class Tarjeta {
 	private long idTarjeta;
+	private int numeroSerieTarjeta;
 	private float monto;
 	private boolean activa;
 	private Usuario usuario;
@@ -27,6 +28,15 @@ public class Tarjeta {
 		
 	}
 	
+	
+	public int getNumeroSerieTarjeta() {
+		return numeroSerieTarjeta;
+	}
+
+	public void setNumeroSerieTarjeta(int numeroSerieTarjeta) {
+		this.numeroSerieTarjeta = numeroSerieTarjeta;
+	}
+
 	public Tarjeta(float monto, Usuario usuario) {
 		super();
 		this.monto = monto;

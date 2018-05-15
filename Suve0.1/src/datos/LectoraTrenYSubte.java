@@ -1,20 +1,13 @@
 package datos;
 
 public class LectoraTrenYSubte extends Lectora{
-	private boolean realizaCarga;
 	private Estacion estacion;
 	
 	public LectoraTrenYSubte() {}
-	public LectoraTrenYSubte(boolean realizaCarga, Estacion estacion) {
-		super();
-		this.realizaCarga = realizaCarga;
+	public LectoraTrenYSubte(Estacion estacion, int numeroSerieLectora) {
+		super(numeroSerieLectora);
 		this.estacion = estacion;
-	}
-	public boolean isRealizaCarga() {
-		return realizaCarga;
-	}
-	public void setRealizaCarga(boolean realizaCarga) {
-		this.realizaCarga = realizaCarga;
+
 	}
 	public Estacion getEstacion() {
 		return estacion;
