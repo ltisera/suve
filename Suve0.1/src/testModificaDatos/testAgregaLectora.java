@@ -9,7 +9,7 @@ public class testAgregaLectora {
 		// TODO Auto-generated method stub
 		LectoraDao ldao = new LectoraDao();
 		EstacionDao edao = new EstacionDao();
-		ldao.agregar(new LectoraTrenYSubte(edao.traerEstacion(1l),4441234));
+		ldao.agregar(new LectoraTrenYSubte(edao.traerEstacion(1l),3331234));
 	}
 
 }

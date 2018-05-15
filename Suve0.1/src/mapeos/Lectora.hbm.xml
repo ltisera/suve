@@ -6,29 +6,22 @@
 		<id column="idLectora" name="idLectora">
 			<generator class="identity" />
 		</id>
-		<joined-subclass name="datos.LectoraTrenYSubte"
-			table="LectoraTrenYSubte">
+		<property column="numeroSerieLectora" name="numeroSerieLectora" type="int"/>
+		<joined-subclass name="datos.LectoraTrenYSubte" table="LectoraTrenYSubte">
 			<key column="idLectora" />
-			<many-to-one column="idEstacion" name="estacion"
-				class="datos.Estacion" not-null="true" />
+			<many-to-one column="idEstacion" name="estacion" class="datos.Estacion" not-null="true" />
 		</joined-subclass>
-		<joined-subclass name="datos.LectoraColectivo"
-			table="LectoraColectivo">
+		<joined-subclass name="datos.LectoraColectivo" table="LectoraColectivo">
 			<key column="idLectora" />
-			<many-to-one column="idTransporte" name="transporte"
-				class="datos.Transporte" not-null="true" />
+			<many-to-one column="idTransporte" name="transporte" class="datos.Transporte" not-null="true" />
 		</joined-subclass>
-		<joined-subclass name="datos.LectoraCarga"
-			table="LectoraCarga">
+		<joined-subclass name="datos.LectoraCarga" table="LectoraCarga">
 			<key column="idLectora" />
-			<many-to-one column="idEstacion" name="estacion"
-				class="datos.Estacion" not-null="true" />
+			<many-to-one column="idEstacion" name="estacion" class="datos.Estacion" not-null="true" />
 		</joined-subclass>
-		<joined-subclass name="datos.LectoraAutonoma"
-			table="LectoraAutonoma">
+		<joined-subclass name="datos.LectoraAutonoma" table="LectoraAutonoma">
 			<key column="idLectora" />
-			<many-to-one column="idEstacion" name="estacion"
-				class="datos.Estacion" not-null="true" />
+			<many-to-one column="idEstacion" name="estacion" class="datos.Estacion" not-null="true" />
 			<property column="ubicacion" name="ubicacion" type="string"></property>
 		</joined-subclass>
 	</class>

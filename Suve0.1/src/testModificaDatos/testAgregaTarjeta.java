@@ -12,7 +12,7 @@ public class testAgregaTarjeta {
 		Usuario u = new Usuario("La camseri", "Vfeiajera", 1215, "YOnoTegnoMail", "puto", TipoUsuario.Administrador);
 		u.setTipoUsuario(TipoUsuario.Pasajero);
 		udao.agregar(u);
-		tardao.agregar(new Tarjeta(10,u));
+		tardao.agregar(new Tarjeta(10,u,1001));
 		System.out.println("Kabloom");
 	}
 

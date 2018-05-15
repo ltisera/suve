@@ -37,11 +37,12 @@ public class Tarjeta {
 		this.numeroSerieTarjeta = numeroSerieTarjeta;
 	}
 
-	public Tarjeta(float monto, Usuario usuario) {
+	public Tarjeta(float monto, Usuario usuario, int numeroSerieTarjeta) {
 		super();
 		this.monto = monto;
 		this.activa = false;
 		this.usuario = usuario;
+		this.numeroSerieTarjeta = numeroSerieTarjeta;
 	}
 	public long getIdTarjeta() {
 		return idTarjeta;
