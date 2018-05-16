@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import datos.Boleto;
 import datos.Beneficio;
 import datos.Recarga;
+import datos.TarifaSocial;
 
 public class BeneficioDao {
 	private static Session session;
@@ -164,5 +165,17 @@ public class BeneficioDao {
 			session.close();
 		}
 		return lista;
+	}
+	
+	public TarifaSocial traerTarifaSocial()
+	{
+		TarifaSocial objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (TarifaSocial) session.createQuery("from Beneficio inner join TarifaSocial on Beneficio.idBeneficio = TarifaSocial.idBeneficio").uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
 	}
 }

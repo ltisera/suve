@@ -2,6 +2,7 @@ package testTraeDatos;
 
 import java.util.GregorianCalendar;
 import funciones.*;
+import negocio.Funciones;
 public class TestGregorio {
 
 	public static void main(String[] args) {

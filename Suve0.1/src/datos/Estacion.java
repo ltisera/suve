@@ -1,6 +1,6 @@
 package datos;
 
-import funciones.Funciones;
+import negocio.Funciones;
 
 public class Estacion {
 	private long idEstacion;

@@ -2,7 +2,7 @@ package testModificaDatos;
 
 import dao.*;
 import datos.*;
-import funciones.Funciones;
+import negocio.Funciones;
 public class testTraerMovimiento {
 
 	public static void main(String[] args) {

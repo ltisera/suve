@@ -186,4 +186,16 @@ public class MovimientoDao {
 		}
 		return lista;
 	}
+
+	public List<Boleto> trerBoletosRedSube(long idTarjeta) 
+	{
+		List<Boleto> lista = null;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Movimiento inner join Boleto on Movimiento.idMovimiento == Boleto.idMovimiento where Movimiento.fecha > SUBDATE(now(), INTERVAL 2 HOUR)").list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
 }

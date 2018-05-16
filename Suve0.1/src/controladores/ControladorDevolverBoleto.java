@@ -62,7 +62,7 @@ public class ControladorDevolverBoleto extends HttpServlet {
 			salida.println( " <BODY>" );
 			salida.println( " idBoleto: " +b.getIdMovimiento()+ "<BR>" );
 			salida.println( " monto: " +b.getMonto()+ "<BR>" );
-			salida.println( " fecha : " +funciones.Funciones.TraeFechaYHora(b.getFecha())+ "<BR>" );
+			salida.println( " fecha : " +negocio.Funciones.TraeFechaYHora(b.getFecha())+ "<BR>" );
 			salida.println( " </BODY>" );
 			salida.println( "</HTML>" );
 			/* CODIGO QUE BUSCA LA LISTA DE Boletines

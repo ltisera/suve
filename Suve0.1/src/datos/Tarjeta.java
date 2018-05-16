@@ -2,7 +2,7 @@ package datos;
 
 import java.util.Set;
 
-import funciones.Funciones;
+import negocio.Funciones;
 /**
  * 
  * @author Equipo 1

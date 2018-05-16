@@ -2,7 +2,7 @@ package datos;
 
 import java.util.GregorianCalendar;
 
-import funciones.Funciones;
+import negocio.Funciones;
 
 public class Movimiento {
 	private long idMovimiento;

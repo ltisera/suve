@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 
 import datos.Lectora;
 //import negocio.LectoraColectivo;
+import datos.LectoraColectivo;
 
 public class LectoraDao {
 	private static Session session;
@@ -106,17 +107,17 @@ public class LectoraDao {
 		}
 		return lista;
 	}
-/*
+
 	public LectoraColectivo traerLectoraColectivo(int numeroSerieLectora) 
 	{
 		LectoraColectivo objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (LectoraColectivo) session.createQuery("from Lectora l inner join fetch l.estacion inner join fetch l.transporte where m.idLectora="+idLectora).uniqueResult();
+			objeto = (LectoraColectivo) session.createQuery("from Lectora as l inner join LectoraColectivo as lc  on l.idLectora on lc.idLectora where l.numeroSerieLectora ="+numeroSerieLectora).uniqueResult();
 		} finally {
 			session.close();
 		}
 		return objeto;
 	}
-	*/
+	
 }
