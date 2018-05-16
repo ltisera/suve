@@ -65,7 +65,7 @@ public class TramoColectivoDao {
 		TramoColectivo objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (TramoColectivo) session.get(TramoColectivo.class , idTramoColectivo);
+			objeto = (TramoColectivo) session.createQuery("from TramoColectivo t inner join fetch t.seccionViaje where t.idTramoColectivo = "+idTramoColectivo).uniqueResult();
 		} finally {
 			session.close();
 		}

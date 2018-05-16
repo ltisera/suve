@@ -8,6 +8,11 @@ public class LectoraColectivo extends Lectora{
 		super();
 		this.transporte = transporte;
 	}
+	
+	public LectoraColectivo(Transporte transporte, int numeroSerieLectora) {
+		super(numeroSerieLectora);
+		this.transporte = transporte;
+	}
 
 	public Transporte getTransporte() {
 		return transporte;

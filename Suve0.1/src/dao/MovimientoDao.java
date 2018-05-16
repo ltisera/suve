@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -8,6 +11,7 @@ import org.hibernate.Transaction;
 import datos.Boleto;
 import datos.Movimiento;
 import datos.Recarga;
+import negocio.Funciones;
 
 public class MovimientoDao {
 	private static Session session;
@@ -187,12 +191,17 @@ public class MovimientoDao {
 		return lista;
 	}
 
-	public List<Boleto> trerBoletosRedSube(long idTarjeta) 
+	public List<Boleto> trerBoletosRedSube(long idTarjeta, GregorianCalendar fechaA) 
 	{
-		List<Boleto> lista = null;
+		List<Boleto> lista = new ArrayList<Boleto>();
+		GregorianCalendar fechaB = (GregorianCalendar) fechaA.clone();
+		fechaB.add(Calendar.HOUR, -2);
 		try {
 			iniciaOperacion();
-			lista = session.createQuery("from Movimiento inner join Boleto on Movimiento.idMovimiento == Boleto.idMovimiento where Movimiento.fecha > SUBDATE(now(), INTERVAL 2 HOUR)").list();
+			lista = session.createQuery("from Boleto b where b.fecha < :fechaA and b.fecha > :fechaB ")
+					.setParameter("fechaA", fechaA)
+					.setParameter("fechaB", fechaB)
+					.list();
 		} finally {
 			session.close();
 		}

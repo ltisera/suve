@@ -93,4 +93,28 @@ public class TarjetaDao {
 		}
 		return lista;
 	}
+
+	public Tarjeta traerTarjeta(int numeroSerieTarjeta) throws HibernateException {
+		Tarjeta objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Tarjeta) session.createQuery( "from Tarjeta t where t.numeroSerieTarjeta="+numeroSerieTarjeta).uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
+
+	public Tarjeta traerTarjetaConBeneficios(int numeroSerieTarjeta) 
+	{
+		Tarjeta objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Tarjeta) session.createQuery("from Tarjeta t inner join t.beneficios where t.numeroSerieTarjeta="+numeroSerieTarjeta).uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
+	
 }

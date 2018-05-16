@@ -19,4 +19,14 @@ public class TarjetaABM
 	{
 		return beneficioDao.traerTarifaSocial();
 	}
+	
+	public Tarjeta traerTarjeta(int numeroSerieTarjeta)
+	{
+		return tarjetaDao.traerTarjeta(numeroSerieTarjeta);
+	}
+
+	public Tarjeta traerTarjetaConBeneficios(int numeroSerieTarjeta) 
+	{
+		return tarjetaDao.traerTarjetaConBeneficios(numeroSerieTarjeta);
+	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import dao.LectoraDao;
 import datos.Boleto;
+import datos.Lectora;
 import datos.LectoraColectivo;
 import datos.Tarjeta;
 import datos.TramoColectivo;
@@ -20,11 +21,11 @@ public class AdminDeLectoras
 	{
 		if(!tarjeta.isActiva()) throw new Exception("ERROR: tarjeta inactiva.");
 		LectoraColectivo lectora = traerLectoraColectivo(numeroSerieLectora);
-		Boleto nuevoBoleto = new Boleto(fechaHora,lectora,tramo.getSeccionViaje().getMonto(),tarjeta,tramo);
-		
-		Funciones.calcularRedSube(movimientoAlta.traerBoletosRedSube(tarjeta), nuevoBoleto);
-		if(tarjeta.getBeneficios().contains(tarjetaAbm.traerTarifaSocial()))
+		Boleto nuevoBoleto = new Boleto(fechaHora,(Lectora)lectora,tramo.getSeccionViaje().getMonto(),tarjeta,tramo);
+		Funciones.calcularRedSube(movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora), nuevoBoleto);
+		if(tarjeta.getBeneficios().contains(tarjetaAbm.traerTarifaSocial())) {
 			Funciones.calcularTarifaSocial(nuevoBoleto, tarjetaAbm.traerTarifaSocial());
+		}
 		if(tarjeta.getMonto() - nuevoBoleto.getMonto() > -25) throw new Exception("ERROR: saldo insuficiente");
 		movimientoAlta.agregarBoleto(nuevoBoleto);
 		tarjeta.setMonto(tarjeta.getMonto()-nuevoBoleto.getMonto());

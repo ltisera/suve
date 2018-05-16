@@ -1,5 +1,6 @@
 package negocio;
 
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import dao.MovimientoDao;
@@ -14,8 +15,8 @@ public class MovimientoAlta
 		dao.agregar(boleto);
 	}
 	
-	public List<Boleto> traerBoletosRedSube(Tarjeta tarjeta)
+	public List<Boleto> traerBoletosRedSube(Tarjeta tarjeta, GregorianCalendar fecha2)
 	{
-		return dao.trerBoletosRedSube(tarjeta.getIdTarjeta());
+		return dao.trerBoletosRedSube(tarjeta.getIdTarjeta(), fecha2);
 	}
 }

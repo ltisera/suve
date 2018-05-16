@@ -113,7 +113,7 @@ public class LectoraDao {
 		LectoraColectivo objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (LectoraColectivo) session.createQuery("from Lectora as l inner join LectoraColectivo as lc  on l.idLectora on lc.idLectora where l.numeroSerieLectora ="+numeroSerieLectora).uniqueResult();
+			objeto = (LectoraColectivo) session.createQuery("from LectoraColectivo l where l.numeroSerieLectora ="+numeroSerieLectora).uniqueResult();
 		} finally {
 			session.close();
 		}
