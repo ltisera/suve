@@ -9,78 +9,88 @@
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <TITLE>SuViajes</TITLE>
 
-    <script src="js/jquery-3.3.1.js"></script>
-    <script>
-    $(document).ready(function(){
-    	 $("#consultarBoleto").click(function() {
-			var boleto = $("#boleto").val();
-			$.ajax({
-				data: {"boleto":boleto},
-				url: "MostrarBoleto",
-				type:"POST",
-				beforeSend: function () {
-                    $("#divMostrarBoleto").html("Procesando, espere por favor...");
-	            },
-	            success:  function (response) {
-	                    $("#divMostrarBoleto").html(response);
-	            },
-	            error:	function (response) {
-	                    alert(response);
-	            }
-			});
-    	});
-    	 $("#consultarMovimientos").click(function(){
-    		 $.ajax({
-    			 url: "ListarMovimientos",
-    			 type: "POST",
-    			 beforeSend: function () {
-                     $("#divMostrarMovimientos").html("Procesando, espere por favor...");
- 	            },
- 	            success:  function (response) {
- 	            		$("#divMostrarBoleto").html("");
- 	                    $("#divMostrarMovimientos").html(response);
- 	            },
- 	            error:	function () {
- 	                    alert("DAAA MISHI");
- 	            }
-    		 });
-    	 
-   			 
+
+<script src="js/jquery-3.3.1.js" type="text/javascript"></script>
+<script>
+	$(document).ready(function(){
+		$("#divAgregarViaje").hide();
+		$("#divManejaFecha").hide();
+		$("#divConsultarMovimientos").hide();
+		
+		$("#btnInicio").click(function() {
+			$("#divInicio").show();
+			$("#divManejaFecha").hide();
+			$("#divAgregarViaje").hide();
+			$("#divConsultarMovimientos").hide();
 		});
-    });
-    </script>
+		
+		$("#btnAgregarViaje").click(function() {
+			$("#divInicio").hide();
+			$("#divManejaFecha").show("fast");
+			$("#divAgregarViaje").show("slow");
+			$("#divConsultarMovimientos").hide();
+			
+		});
+		
+		$("#btnConsultarMovimientos").click(function() {
+			$("#divInicio").hide();
+			$("#divManejaFecha").hide();
+			$("#divAgregarViaje").hide();
+			$("#divConsultarMovimientos").show("slow");
+		});
+		
+	});
+</script>
+
+<script>
+	
+</script>
 
 
 </HEAD>
 
 <body style="background-color:#108CCC; color:#ffffff"  >
-	<%@ include file="/cabecera.jsp" %>
-	<br>
-	<br>
-	<br>
-	<div class="jumbotron">
-		<div class="container">
-			<h1>Busqueda de 1 boletito</h1>
-			<form class="navbar-form navbar-right">
-				<div class="form-group">
-					<label for="boleto">Este es DIOS:</label> 
-					<INPUT id="boleto" name="boleto">
-				</div>
-				<INPUT id="consultarBoleto" type="button" class="btn btn-success" value="Consultar"/>
-			</form>
-		</div>
-		<div class="container">
-			<div id="divMostrarBoleto">
-			</div> 
-			
-			
-		</div>
-		<div class="container">
-			<input id = "consultarMovimientos" type="button" class ="btn btn-succes" value = "Lista los movimientos pa!"/>
-			<div id="divMostrarMovimientos">
-			</div>
-		</div>
-	</div>
 
+	<table width="100%">
+		<tr>
+			<th align="left">
+				<%@ include file="/cabecera.jsp" %>
+			</th>
+			<th id="divManejaFecha" align="left">
+				<%@ include file="/manejaFecha.jsp" %>
+			</th>
+		</tr>
+	</table>
+	<table width="100%">
+		<tr>
+			<th width="20%" valign="top" align="left">
+				<!-- Contenedor del menu -->
+				<input id="btnInicio" type="button" value="Inicio" style="width:150px"/>
+				<br>
+				<input id="btnAgregarViaje" type="button" value="Agregar Viaje" style="width:150px"/>
+				<br>
+				<input id="btnConsultarMovimientos" type="button" value="Consultar Movimientos" style="width:150px"/>
+			
+				
+			</th>
+			<th width="80%" align = "left">
+				<!-- Contenedor del contenido OMG -->
+				<div id="divInicio" class="container">
+					<h1>Bienvenidos al sistema de gestion SUVE</h1>
+				</div>
+				<div id="divAgregarViaje" class="container">
+					<%@ include file="/AgregarViaje.jsp" %>
+				</div>
+				<div id="divConsultarMovimientos" class="container">
+					<%@ include file="/ConsultarMovimientos.jsp" %>
+				</div>
+			</th>
+		</tr>
+	</table>
+			
+	
+	
+	
+	
 </body>
 </html>
