@@ -16,7 +16,7 @@ public class TestTraerBoletosRedSube {
 		MovimientoAlta movA = new MovimientoAlta();
 		GregorianCalendar fecha = new GregorianCalendar();
 		//fecha.add(Calendar.HOUR, -1);
-		List<Boleto> lstb = movA.traerBoletosRedSube(tabm.traerTarjeta(101), fecha);
+		List<Boleto> lstb = movA.traerBoletosRedSube(tabm.traerTarjeta(102), fecha);
 		System.out.println(lstb.size());
 		for(Boleto b: lstb){
 			System.out.println(b.toString());

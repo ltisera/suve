@@ -5,9 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<link rel="stylesheet" type="text/css" href="css/estilos.css">
 
-<title>ManejaFecha</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	
+	<title>ManejaFecha</title>
 
 <script src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript"></script>
@@ -18,16 +20,27 @@
 		$("#quefecha").html(lafecha);
 		var f = sumarAvance(lafecha, avance);
 		$("#quefecha").html(f.getDate()+"/"+f.getMonth()+"/"+f.getFullYear() + " Y la Hora: " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds());
+		setInterval(function(){calcularFecha(avance); }, 1000);
+		
 		
 		$("#avanzar").click(function() {
 			avance = avance + sumarSegundos();
 			lafecha=new Date();
-			var f = sumarAvance(lafecha, avance);
-			$("#quefecha").html(f.getDate()+"/"+f.getMonth()+"/"+f.getFullYear() + " Y la Hora: " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds());
+			f = sumarAvance(lafecha, avance);
+			$("#quefecha").html(f.getDate()+"/"+f.getMonth()+"/"+f.getFullYear() + "<br>    " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds());
 		});
 		
 	});
-	
+
+//Pruebas con la fecha
+function calcularFecha(avance){
+	//avance = avance + sumarSegundos();
+	lafecha=new Date();
+	f = sumarAvance(lafecha, avance);
+	$("#quefecha").html(f.getDate()+"/"+f.getMonth()+"/"+f.getFullYear() + "<br>    " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds());
+}
+//Pruebas con la fecha
+
 function sumarAvance(fecha, avanzate){
 	console.log("Avanzate:" + avanzate);
 	fecha.setSeconds(fecha.getSeconds()+avanzate);

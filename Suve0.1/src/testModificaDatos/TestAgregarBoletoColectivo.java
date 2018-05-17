@@ -42,9 +42,9 @@ public class TestAgregarBoletoColectivo {
 			System.out.println(e);
 		}
 		
-		System.out.println("Agregar boleto de colectivo con la tarjeta 101 (activa pero sin beneficios): \n");
+		System.out.println("Agregar boleto de colectivo con la tarjeta 102 (activa pero sin beneficios): \n");
 		
-		Tarjeta tarjeta101 = tabm.traerTarjetaConBeneficios(101);
+		Tarjeta tarjeta101 = tabm.traerTarjetaConBeneficios(103);
 		System.out.println(tarjeta101);
 		tarjeta101.setActiva(true);//activo la tarjeta 101
 		tabm.modificarTarjeta(tarjeta101);
@@ -56,6 +56,8 @@ public class TestAgregarBoletoColectivo {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		
+		System.out.println(tarjeta101);
 		
 		
 

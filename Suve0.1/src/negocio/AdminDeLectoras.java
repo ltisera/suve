@@ -19,14 +19,17 @@ public class AdminDeLectoras
 	//agrega un boleto de colectivo
 	public void agregarBoleto(int numeroSerieLectora, Tarjeta tarjeta, GregorianCalendar fechaHora, TramoColectivo tramo) throws Exception
 	{
-		if(!tarjeta.isActiva()) throw new Exception("ERROR: tarjeta inactiva.");
+		if(!tarjeta.isActiva()) 
+			throw new Exception("ERROR: tarjeta inactiva.");
 		LectoraColectivo lectora = traerLectoraColectivo(numeroSerieLectora);
 		Boleto nuevoBoleto = new Boleto(fechaHora,(Lectora)lectora,tramo.getSeccionViaje().getMonto(),tarjeta,tramo);
 		Funciones.calcularRedSube(movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora), nuevoBoleto);
 		if(tarjeta.getBeneficios().contains(tarjetaAbm.traerTarifaSocial())) {
 			Funciones.calcularTarifaSocial(nuevoBoleto, tarjetaAbm.traerTarifaSocial());
 		}
-		if(tarjeta.getMonto() - nuevoBoleto.getMonto() > -25) throw new Exception("ERROR: saldo insuficiente");
+		System.out.println("Saldo de tarjeta: "+tarjeta.getMonto()+" Monto a cobrar: "+nuevoBoleto.getMonto());
+		if(tarjeta.getMonto() - nuevoBoleto.getMonto() < -25) 
+			throw new Exception("ERROR: saldo insuficiente");
 		movimientoAlta.agregarBoleto(nuevoBoleto);
 		tarjeta.setMonto(tarjeta.getMonto()-nuevoBoleto.getMonto());
 		tarjetaAbm.modificarTarjeta(tarjeta);

@@ -8,7 +8,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <TITLE>SuViajes</TITLE>
-
+<link rel="stylesheet" type="text/css" href="css/estilos.css">
 
 <script src="js/jquery-3.3.1.js" type="text/javascript"></script>
 <script>
@@ -49,7 +49,7 @@
 
 </HEAD>
 
-<body style="background-color:#108CCC; color:#ffffff"  >
+<body>
 
 	<table width="100%">
 		<tr>
@@ -62,7 +62,7 @@
 		</tr>
 	</table>
 	<table width="100%">
-		<tr>
+		<tr id="columnita">
 			<th width="20%" valign="top" align="left">
 				<!-- Contenedor del menu -->
 				<input id="btnInicio" type="button" value="Inicio" style="width:150px"/>

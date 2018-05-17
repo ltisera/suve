@@ -198,7 +198,7 @@ public class MovimientoDao {
 		fechaB.add(Calendar.HOUR, -2);
 		try {
 			iniciaOperacion();
-			lista = session.createQuery("from Boleto b where b.fecha < :fechaA and b.fecha > :fechaB ")
+			lista = session.createQuery("from Boleto b where b.fecha < :fechaA and b.fecha > :fechaB and b.tarjeta=" + idTarjeta)
 					.setParameter("fechaA", fechaA)
 					.setParameter("fechaB", fechaB)
 					.list();

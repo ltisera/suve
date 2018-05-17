@@ -1,7 +1,9 @@
 package dao;
 
 	import java.util.List;
-	import org.hibernate.HibernateException;
+
+import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
 	import org.hibernate.Session;
 	import org.hibernate.Transaction;
 	import datos.Tarjeta;
@@ -110,7 +112,8 @@ public class TarjetaDao {
 		Tarjeta objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Tarjeta) session.createQuery("from Tarjeta t inner join t.beneficios where t.numeroSerieTarjeta="+numeroSerieTarjeta).uniqueResult();
+			objeto = (Tarjeta) session.createQuery("from Tarjeta t where t.numeroSerieTarjeta="+numeroSerieTarjeta).uniqueResult();
+			Hibernate.initialize(objeto.getBeneficios());
 		} finally {
 			session.close();
 		}

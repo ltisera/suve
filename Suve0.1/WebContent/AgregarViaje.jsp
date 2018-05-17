@@ -13,7 +13,7 @@
     
 </HEAD>
 
-<body style="background-color:#108CCC; color:#ffffff"  >
+<body>
 	<div class="jumbotron">
 		<div class="container">
 		

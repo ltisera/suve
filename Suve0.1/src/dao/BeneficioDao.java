@@ -172,7 +172,7 @@ public class BeneficioDao {
 		TarifaSocial objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (TarifaSocial) session.createQuery("from Beneficio inner join TarifaSocial on Beneficio.idBeneficio = TarifaSocial.idBeneficio").uniqueResult();
+			objeto = (TarifaSocial) session.createQuery("from TarifaSocial").uniqueResult();
 		} finally {
 			session.close();
 		}
