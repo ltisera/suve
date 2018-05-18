@@ -13,75 +13,160 @@
 <script>
 	$(document).ready(function() {
 		/*Ocultamos los elementos al inicio*/
-		$("#lblTipoTransporte").hide();
-		$("#inpTipoTransporte").hide();
-		$("#lblLinea").hide();
-		$("#inpLinea").hide();
-		$("#lblLectora").hide();
-		$("#inpLectora").hide();
-		
-		$("#lblEstacion").hide();
-		$("#inpEstacion").hide();
-		$("#btnAgregar").hide();
-		
+		ocultarElementos();
 		$("#colBolMue").hide();
 		
-		
-		/*Cambios en los inputs*/
-		$("#idNumTarjeta").change(cambiaNumTarjeta);
-		$("#inpTipoTransporte").change(cambiaTipoTransporte);
-		$("#inpLinea").change(cambiaLinea);
-		$("#btnAgregar").click(function() {
-			var numTarjeta = parseInt($("#idNumTarjeta").val());
-			if (isNaN(numTarjeta)) {
-				alert("No estas mandando numeros");
-			} else {
-				$.ajax({
-					data : {
-						"numTarjeta" : numTarjeta
-					},
-					url : "AgregarBoleto",
-					type : "POST",
-					beforeSend : function() {
-
-					},
-					succes : function(response) {
-					},
-					error : function(response) {
-						alert("Mal alla")
-					}
-				});
+		/*Seccion de pruebas
+		var x = document.getElementById("mySelect");
+	    var option = document.createElement("option");
+	    option.text = "Kiwi";
+	    x.add(option);
+		*/
+		var para = "da"
+		var valor = "nulo";
+		$.ajax({
+			data:{
+				"pedirLista": para,
+				"valor": valor
+				},
+			url:"AgregarBoleto",
+			type:"POST",
+			success:function(response){
+				/*
+				var opcion = document.createElement("option");
+				opcion.text = "Kiwi";
+			    $("#inpTipoTransporte").append("Kiwo");
+			    opcion.text = "naranja";
+			    $("#inpTipoTransporte").append(opcion);
+			    opcion.text = "pepino";
+			    $("#inpTipoTransporte").append(opcion);
+			    /*/
+				
+			    
+			},
+			error:function(response){
+				alert("LA PUTA QUE TE PARIIOO");
 			}
 		});
+
+		/*Cambios en los inputs*/
+		$("#inpTarjeta").change(cambiaTarjeta);
+		$("#inpTipoTransporte").change(cambiaTipoTransporte);
+		$("#inpLinea").change(cambiaLinea);
+		$("#inpEstacion").change(cambiaEstacion);
+		$("#inpLectora").change(cambiaLectora);
+		
+		
+		$("#btnAgregar").click(agregarViaje);
 	});
 
-function cambiaNumTarjeta(){
-	if($("#numTarjeta").val() != ""){
-		$("#inpTipoTransporte").show();
-		$("#lblTipoTransporte").show();
+function agregarViaje(){
+
+	var numTarjeta = parseInt($("#inpTarjeta").val());
+	var tipoTransporte = $("#inpTipoTransporte").val();
+	var linea = $("#inpLinea")
+	
+	if (isNaN(numTarjeta)) {
+		alert("No estas mandando numeros");
+	} else {
+		$.ajax({
+			data : {
+				"pedirLista" : "nahh",
+				"numTarjeta" : numTarjeta,
+				"tipoTransporte":tipoTransporte
+			},
+			url : "AgregarBoleto",
+			type : "POST",
+			beforeSend : function() {
+
+			},
+			success : function(response) {
+			},
+			error : function(response) {
+				alert("Mal alla")
+			}
+		});
+	}
+
+}
+
+
+function cambiaTarjeta(){
+	if($("#inpTarjeta").val() != ""){
+		$("#colTrans").show();
+		
+	}
+	else{
+		ocultarElementos();
+		$("#inpTipoTransporte").val("");
+		cambiaTipoTransporte();
 	}
 }
 	
 function cambiaTipoTransporte(){
-	console.log($("#inpTipoTransporte").val());
 	if ($("#inpTipoTransporte").val() != "") {
-		$("#inpLinea").show();
-		$("#lblLinea").show();
+		$("#colLinea").show();
+	}
+	else{
+		$("#colLinea").hide();
+		$("#inpLinea").val("");
+		cambiaLinea();
+	}
+
+	if ($("#inpTipoTransporte").val() == "Colectivo") {
+		$("#lblEstacion").html("Ingrese la Seccion:");		
+	}
+	if ($("#inpTipoTransporte").val() != "Colectivo") {
+		$("#lblEstacion").html("Ingrese la Estacion:");		
 	}
 	
-	if ($("#inpTipoTransporte").val() == "Colectivo") {
-		$("#lblEstacion").val("Putito");
-		$("#lblEstacion").show();
-		$("#inpEstacion").show();
-		
-		
-	}
+	
 }
 function cambiaLinea() {
-	alert("ksdkf");
-	if($("#inpLinea")!=""){
-		$("#btnAgregar").show();
+	if($("#inpLinea").val()!=""){
+		$("#colEstacion").show();
+		
 	}
+	else{
+		$("#colEstacion").hide();
+		$("#inpEstacion").val("");
+		cambiaEstacion();
+	}
+}
+
+function cambiaEstacion() {
+	if($("#inpEstacion").val()!=""){
+		$("#colLectora").show();
+	}
+	else{
+		$("#colLectora").hide();
+		$("#inpLectora").val("");
+		cambiaLectora();
+	}
+}
+
+function cambiaLectora() {
+	if($("#inpLectora").val()!=""){
+		$("#btnAgregar").show();
+		
+	}
+	else{
+		$("#btnAgregar").hide();
+	}
+}
+
+function ocultarElementos(){
+	/*
+	$("#lblTipoTransporte").hide();
+	$("#inpTipoTransporte").hide();
+	*/
+	$("#colTrans").hide();
+	
+	$("#colLinea").hide();
+	$("#colLectora").hide();
+	
+	$("#colEstacion").hide();
+	$("#btnAgregar").hide();
 }
 </script>
 
@@ -93,27 +178,30 @@ function cambiaLinea() {
 		<div>
 			<h1>Agregado de 1 Boleto</h1>
 			<form>
-				<div>
-					<div id="wA" style="width: 100%">
-						<div id="colNumTar" style="width: 25%; float: left;">
-							<label>Ingrese el numero de tarjeta:</label> <br> <input
-								id="idNumTarjeta" name="numTarjeta" list="lstTarjetas">
+		
+				<div id="wA" style="width: 100%">
+					<div id="colNumTar" style="width: 25%; float: left;">
+						<label>Ingrese el numero de tarjeta:</label>
+						<br>
+						<input id="inpTarjeta" name="numTarjeta" list="lstTarjetas"></input>
 
-						</div>
-						<div id="colBolMue" style="width: 60% S; background-color: coral;">
-							<label style="color: white;"> ACA VA LO OTRO</label>
-						</div>
 					</div>
-					<div id="colTrans" style="clear: both; float: left;">
-						<label id="lblTipoTransporte">Seleccione Tipo de Transporte:</label> <br>
-						<input id="inpTipoTransporte" list="lstTransporte"></input>
-						<datalist id="lstTransporte">
-							<option value="Tren">
-							<option value="Subte">
-							<option value="Colectivo">
-						</datalist>
+					
+					<div id="colBolMue" style="width: 60% S; background-color: coral;">
+						<label style="color: white;"> ACA VA LO OTRO</label>
 					</div>
-					<div id="tblListaLinea">
+					
+				</div>
+				<div id="colTrans" style="clear: both; float: left;">
+					<label id="lblTipoTransporte">Seleccione Tipo de Transporte:</label> <br>
+					<select id="inpTipoTransporte" >
+						<option value="Tren">Tren</option>
+						<option value="Subte">Subte</option>
+						<option value="Colectivo">Colectivo</option>
+					</select>
+				</div>
+				<div id="tblListaLinea">
+					<div id="colLinea">
 						<label id="lblLinea">Seleccione la Linea:</label> <br> 
 						<input	id="inpLinea" list="lstLinea"></input>
 						<datalist id="lstLinea">
@@ -121,31 +209,31 @@ function cambiaLinea() {
 							<option value="adsfa">
 							<option value="blah blah blah">
 						</datalist>
-						
-						<div style="clear: both;">
-							<div id="colEestacion">
-								<label id="lblEstacion">Seleccione la Estacion:</label> <br>
-								<input id="inpEstacion" list="lstEstaciones"></input>
-								<datalist id="lstEstaciones">
-									<option value="Construir Lista de linea">
-									<option value="glew">
-									<option value="Longchamps">
-								</datalist>
-							</div>
-						</div>
-						<div style="clear: both;">
-							<div id="colLectora">
-								<label id="lblLectora">Seleccione la Estacion:</label> <br>
-								<input id="inpLectora" list="lstLectora"></input>
-								<datalist id="lstLectora">
-									<option value="Construir Lista de linea">
-									<option value="Carga: lectora 2">
-									<option value="Viaje: Lectora 18">
-								</datalist>
-							</div>
-						</div>
-						<INPUT id="btnAgregar" type="button" class="btn btn-success" value="Agregar"></input>
 					</div>
+					<div style="clear: both;">
+						<div id="colEstacion">
+							<label id="lblEstacion">Seleccione la Estacion:</label> <br>
+							<input id="inpEstacion" list="lstEstaciones"></input>
+							<datalist id="lstEstaciones">
+								<option value="Construir Lista de linea">
+								<option value="glew">
+								<option value="Longchamps">
+							</datalist>
+						</div>
+					</div>
+					<div style="clear: both;">
+						<div id="colLectora">
+							<label id="lblLectora">Seleccione la Lectora:</label> <br>
+							<input id="inpLectora" list="lstLectora"></input>
+							<datalist id="lstLectora">
+								<option value="Construir Lista de linea">
+								<option value="Carga: lectora 2">
+								<option value="Viaje: Lectora 18">
+							</datalist>
+						</div>
+					</div>
+					<INPUT id="btnAgregar" type="button" class="btn btn-success" value="Agregar"></input>
+					
 				</div>
 			</form>
 		</div>
