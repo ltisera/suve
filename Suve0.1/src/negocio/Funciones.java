@@ -7,7 +7,6 @@ import java.util.List;
 import org.hibernate.proxy.HibernateProxy;
 
 import datos.TarifaSocial;
-import datos.Tarjeta;
 import datos.Boleto;
 
 public class Funciones {

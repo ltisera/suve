@@ -63,7 +63,7 @@
 	</table>
 	<table width="100%">
 		<tr id="columnita">
-			<th width="20%" valign="top" align="left">
+			<th width="20%" valign="top" align="left"class="pepe">
 				<!-- Contenedor del menu -->
 				<input id="btnInicio" type="button" value="Inicio" style="width:150px"/>
 				<br>
@@ -73,7 +73,7 @@
 			
 				
 			</th>
-			<th width="80%" align = "left">
+			<th width="80%" align = "left" class="pepe">
 				<!-- Contenedor del contenido OMG -->
 				<div id="divInicio" class="container">
 					<h1>Bienvenidos al sistema de gestion SUVE</h1>

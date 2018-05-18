@@ -14,6 +14,7 @@
     $(document).ready(function(){
     	 $("#consultarBoleto").click(function() {
 			var boleto = $("#boleto").val();
+			console.log("Entro a aj");
 			$.ajax({
 				data: {"boleto":boleto},
 				url: "MostrarBoleto",
