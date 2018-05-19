@@ -8,12 +8,14 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <TITLE>Agregar viajes</TITLE>
-
 <script src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="js/ManejaLista.js"></script>
+
 <script>
 	$(document).ready(function() {
 		/*Ocultamos los elementos al inicio*/
 		ocultarElementos();
+		traerListaTarjetas();
 		$("#colBolMue").hide();
 		
 		/*Seccion de pruebas
@@ -22,48 +24,7 @@
 	    option.text = "Kiwi";
 	    x.add(option);
 		*/
-		var para = "da"
-		var valor = "nulo";
-		$.ajax({
-			data:{
-				"pedirLista": para,
-				"valor": valor
-				},
-			url:"AgregarBoleto",
-			type:"POST",
-			success:function(response){
-				/*
-				var opcion = document.createElement("option");
-				opcion.text = "Kiwi";
-			    $("#inpTipoTransporte").append("Kiwo");
-			    opcion.text = "naranja";
-			    $("#inpTipoTransporte").append(opcion);
-			    opcion.text = "pepino";
-			    $("#inpTipoTransporte").append(opcion);
-			    /*/
-				console.log(response);
-			    console.log(response.item1);
-			    
-				for(i in response){
-					var opcion = document.createElement("option");
-					opcion.text = response[i];
-				    $("#lstTarjetas").append(opcion);
-				    
-				}
-				
-				/*
-			    var opcion2 = document.createElement("option");
-				opcion2.text = response[1];
-			    $("#inpTipoTransporte").append(opcion2);
-			    var opcion3 = document.createElement("option");
-				opcion3.text = response[2];
-			    $("#inpTipoTransporte").append(opcion3);
-			    */
-			},
-			error:function(response){
-				alert("LA PUTA QUE TE PARIIOO");
-			}
-		});
+		
 
 		/*Cambios en los inputs*/
 		$("#inpTarjeta").change(cambiaTarjeta);
@@ -124,6 +85,8 @@ function cambiaTarjeta(){
 	
 function cambiaTipoTransporte(){
 	if ($("#inpTipoTransporte").val() != "") {
+		traerListaLineas();
+		
 		$("#colLinea").show();
 	}
 	else{
@@ -187,6 +150,9 @@ function ocultarElementos(){
 	$("#colEstacion").hide();
 	$("#btnAgregar").hide();
 }
+
+
+
 </script>
 
 </HEAD>

@@ -9,7 +9,6 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
   <servlet>
     <servlet-name>ControladorDevolverBoleto</servlet-name>
     <servlet-class>controladores.ControladorDevolverBoleto</servlet-class>
@@ -18,7 +17,6 @@
     <servlet-name>ControladorDevolverBoleto</servlet-name>
     <url-pattern>/MostrarBoleto</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ControladorListaMovimiento</servlet-name>
     <servlet-class>controladores.ControladorListaMovimiento</servlet-class>
@@ -27,7 +25,6 @@
     <servlet-name>ControladorListaMovimiento</servlet-name>
     <url-pattern>/ListarMovimientos</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ControladorAgregarBoleto</servlet-name>
     <servlet-class>controladores.ControladorAgregarBoleto</servlet-class>
@@ -36,6 +33,12 @@
     <servlet-name>ControladorAgregarBoleto</servlet-name>
     <url-pattern>/AgregarBoleto</url-pattern>
   </servlet-mapping>
-  
-  
+<servlet>
+    <servlet-name>ControladorTraerListas</servlet-name>
+    <servlet-class>controladores.ControladorTraerListas</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControladorTraerListas</servlet-name>
+    <url-pattern>/TraerListas</url-pattern>
+  </servlet-mapping>
 </web-app>
