@@ -23,7 +23,7 @@
                     $("#divMostrarBoleto").html("Procesando, espere por favor...");
 	            },
 	            success:  function (response) {
-	                    $("#divMostrarBoleto").html(response);
+		            	$("#divMostrarBoleto").html(response);
 	            },
 	            error:	function (response) {
 	                    alert(response);

@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.*;
+import datos.*;
+
+
 /**
  * Servlet implementation class ControladorAgregarBoleto
  */
@@ -47,18 +51,32 @@ public class ControladorAgregarBoleto extends HttpServlet {
 		}
 		else {
 			response.setStatus(200);
+			response.setContentType("application/json");
 			PrintWriter salida = response.getWriter();
-			List<String> lalista = new ArrayList<>();
-			lalista.add("Roca");
-			lalista.add("LineaC");
-			lalista.add("506");
+			//Esto es un obj Jason?
+			List<String> asd = new ArrayList();
+			asd.add("fruta");
+			asd.add("verdua");
+			asd.add("fvsvd");
+			asd.add("23d");
+			asd.add("PAYASOd");
+			TarjetaDao tardao = new TarjetaDao();
+			List<Tarjeta> lt= tardao.traerTarjeta();
 			
+			String miResponse ="";
+			miResponse ="[";
 			
-			salida.println("var opcion = document.createElement(\"option\");\r\n" + 
-					"				opcion.text = \"Banana\";\r\n" + 
-					"			    $(\"#inpTipoTransporte\").append(opcion);");
+			for(Tarjeta s:lt) {
+				miResponse += "\"" + s.getNumeroSerieTarjeta() + "\",";
+			}
+			miResponse = miResponse.substring(0, miResponse.length()-1);
+			miResponse += "]";
 			
-			System.out.println("Ahora Falta mandar la lista");
+			//salida.println( "[\"manzaa\",\"pera\",\"frutilsda\"]" );
+			System.out.println(miResponse);
+			salida.println( miResponse);
+			//Esto No es jason?
+			
 		}
 	}
 	protected void procesaSolicitud(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

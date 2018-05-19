@@ -41,8 +41,24 @@
 			    opcion.text = "pepino";
 			    $("#inpTipoTransporte").append(opcion);
 			    /*/
-				
+				console.log(response);
+			    console.log(response.item1);
 			    
+				for(i in response){
+					var opcion = document.createElement("option");
+					opcion.text = response[i];
+				    $("#lstTarjetas").append(opcion);
+				    
+				}
+				
+				/*
+			    var opcion2 = document.createElement("option");
+				opcion2.text = response[1];
+			    $("#inpTipoTransporte").append(opcion2);
+			    var opcion3 = document.createElement("option");
+				opcion3.text = response[2];
+			    $("#inpTipoTransporte").append(opcion3);
+			    */
 			},
 			error:function(response){
 				alert("LA PUTA QUE TE PARIIOO");
@@ -81,6 +97,9 @@ function agregarViaje(){
 
 			},
 			success : function(response) {
+				console.log("Esta es la response");
+				console.log(response);
+				$("#divMostrarBoleto").html(response);
 			},
 			error : function(response) {
 				alert("Mal alla")
@@ -184,7 +203,7 @@ function ocultarElementos(){
 						<label>Ingrese el numero de tarjeta:</label>
 						<br>
 						<input id="inpTarjeta" name="numTarjeta" list="lstTarjetas"></input>
-
+						<datalist id="lstTarjetas"></datalist>
 					</div>
 					
 					<div id="colBolMue" style="width: 60% S; background-color: coral;">
@@ -241,12 +260,6 @@ function ocultarElementos(){
 	</div>
 
 
-	<datalist id="lstTarjetas">
-		<option value="Construir Lista de tarjeta">
-		<option value="21x">
-		<option value="Ch21ome">
-		<option value="O21ra">
-		<option value="Safari">
-	</datalist>
+	
 </body>
 </html>
