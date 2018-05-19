@@ -56,5 +56,9 @@ public class Beneficio {
 		this.tarjetas = tarjetas;
 	}
 	
+	public boolean equals(Beneficio beneficio)
+	{
+		return idBeneficio == beneficio.getIdBeneficio();
+	}
 	
 }

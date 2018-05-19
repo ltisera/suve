@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.proxy.HibernateProxy;
 
 import datos.TarifaSocial;
+import datos.Tarjeta;
 import datos.Boleto;
 
 public class Funciones {
@@ -38,7 +39,7 @@ public class Funciones {
 	{
 		float porcentajeDescuento = 0;
 		int intRedSube = 1;
-		if(boletosRedSube.size()>0 && boletosRedSube.get(0).getIntRedSube() == 1)
+		if(boletosRedSube.size()>0 && boletosRedSube.get(boletosRedSube.size()-1).getIntRedSube() <= boletosRedSube.size() && boletosRedSube.get(boletosRedSube.size()-1).getIntRedSube() < 6)
 		{
 			if(boletosRedSube.get(boletosRedSube.size()-1).getIntRedSube()==1) porcentajeDescuento = 0.5f;//50%
 			if(boletosRedSube.get(boletosRedSube.size()-1).getIntRedSube()>=2) porcentajeDescuento = 0.75f;//75%
@@ -47,6 +48,16 @@ public class Funciones {
 		
 		nuevoBoleto.setMonto(nuevoBoleto.getMonto()-(nuevoBoleto.getMonto()*porcentajeDescuento));
 		nuevoBoleto.setIntRedSube(intRedSube);
+		
+		
+	}
+
+	public static boolean tarjetaContieneTarifaSocial(Object[] array, TarifaSocial tarifa) 
+	{
+		boolean contieneTarifa = false;
+		for(Object o: array)
+			if(o instanceof TarifaSocial) contieneTarifa = true;
+		return contieneTarifa;
 		
 		
 	}

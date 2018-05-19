@@ -83,4 +83,17 @@ public class TramoColectivoDao {
 		}
 		return lista;
 	}
+
+	public TramoColectivo traerTramoColectivo(float kMin, float kMax) 
+	{
+		TramoColectivo objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (TramoColectivo) session.createQuery("from TramoColectivo t inner join fetch t.seccionViaje where t.kMin = "+kMin+" and t.kMax ="+kMax).uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+		
+	}
 }

@@ -50,6 +50,7 @@ public class TestAgregarBoletoColectivo {
 		tabm.modificarTarjeta(tarjeta101);
 		
 		
+		
 		try 
 		{
 			admLectora.agregarBoleto(100101, tarjeta101, new GregorianCalendar(), tcdao.traerTramoColectivo(1l));

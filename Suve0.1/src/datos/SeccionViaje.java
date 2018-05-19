@@ -29,6 +29,10 @@ public class SeccionViaje {
 	public void setMonto(float monto) {
 		this.monto = monto;
 	}
+	@Override
+	public String toString() {
+		return "SeccionViaje [idSeccionViaje=" + idSeccionViaje + ", nombre=" + nombre + ", monto=" + monto + "]";
+	}
 	
 	
 }

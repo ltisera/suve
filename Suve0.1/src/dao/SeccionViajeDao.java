@@ -47,4 +47,29 @@ public class SeccionViajeDao
 		}
 		return objeto;
 	}
+/*
+	public SeccionViaje traerSeccionSubte() 
+	{
+		SeccionViaje objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (SeccionViaje) session.createQuery("from SeccionViaje sv where sv.seccion = 'Seccion Subte'").uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
+
+	public SeccionViaje traerSeccionMaximaTren() 
+	{
+		SeccionViaje objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (SeccionViaje) session.createQuery("from SeccionViaje sv where sv.seccion = 'Seccion Maxima Tren'").uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
+	*/
 }

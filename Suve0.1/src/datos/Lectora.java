@@ -31,11 +31,13 @@ public class Lectora {
 	public void setMovimientos(Set<Movimiento> movimientos) {
 		this.movimientos = movimientos;
 	}
+
+	
 	@Override
 	public String toString() {
-		return "Lectora [id=" + idLectora + "]";
+		return "Lectora [idLectora=" + idLectora + ", numeroSerieLectora=" + numeroSerieLectora + ", movimientos="
+				+ movimientos + "]";
 	}
-	
 	public boolean equals(Lectora lectora) {
 		return idLectora == lectora.getIdLectora();
 	}

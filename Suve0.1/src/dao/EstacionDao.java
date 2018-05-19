@@ -62,11 +62,11 @@ public class EstacionDao {
 		}
 	}
 	
-	public Estacion traerEstacion(long idTransporte) throws HibernateException {
+	public Estacion traerEstacion(long idEstacion) throws HibernateException {
 		Estacion objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Estacion) session.get(Estacion.class , idTransporte);
+			objeto = (Estacion) session.get(Estacion.class , idEstacion);
 		} finally {
 			session.close();
 		}

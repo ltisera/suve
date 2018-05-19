@@ -19,4 +19,9 @@ public class MovimientoAlta
 	{
 		return dao.trerBoletosRedSube(tarjeta.getIdTarjeta(), fecha2);
 	}
+
+	public Boleto traerUltimoBoleto(long idTarjeta) 
+	{
+		return dao.traerUltimoBoleto(idTarjeta);
+	}
 }

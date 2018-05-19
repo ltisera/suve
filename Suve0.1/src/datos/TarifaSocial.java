@@ -20,6 +20,16 @@ public class TarifaSocial extends Beneficio{
 	public void setPorcentajeDescuento(float porcentajeDescuento) {
 		this.porcentajeDescuento = porcentajeDescuento;
 	}
+
+	@Override
+	public String toString() {
+		return "TarifaSocial [porcentajeDescuento=" + porcentajeDescuento + "]";
+	}
+	
+	public boolean equals(TarifaSocial tarifa)
+	{
+		return porcentajeDescuento == tarifa.getPorcentajeDescuento();
+	}
 	
 	
 }

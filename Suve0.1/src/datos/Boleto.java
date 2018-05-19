@@ -18,6 +18,11 @@ public class Boleto extends Movimiento{
 		super(fecha, lectora, monto, tarjeta);
 		this.tramoColectivo = tramoColectivo;
 	}
+
+	public Boleto(GregorianCalendar fecha, Lectora lectora, float monto, Tarjeta tarjeta, TramoTrenYSubte tramoTrenYSubte) {
+		super(fecha, lectora, monto, tarjeta);
+		this.tramoTrenYSubte = tramoTrenYSubte;
+	}
 	
 	public int getIntRedSube() {
 		return intRedSube;

@@ -207,4 +207,16 @@ public class MovimientoDao {
 		}
 		return lista;
 	}
+
+	public Boleto traerUltimoBoleto(long idTarjeta) 
+	{
+		Boleto objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Boleto) session.createQuery("from Boleto b inner join fetch b.tramoTrenYSubte where b.tarjeta="+idTarjeta+" and b.idMovimiento = max(idMovimiento)").uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
 }

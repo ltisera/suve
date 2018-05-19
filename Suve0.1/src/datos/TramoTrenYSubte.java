@@ -37,6 +37,12 @@ public class TramoTrenYSubte {
 	public void setSeccionViaje(SeccionViaje seccionViaje) {
 		this.seccionViaje = seccionViaje;
 	}
+	@Override
+	public String toString() {
+		return "TramoTrenYSubte [idTramoTrenYSubte=" + idTramoTrenYSubte + ", estacionA=" + estacionA + ", estacionB="
+				+ estacionB + ", seccionViaje=" + seccionViaje + "]";
+	}
+	
 	
 	
 }
