@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import datos.TipoTransporte;
 import datos.Transporte;
 
 public class TransporteDao {
@@ -82,6 +83,18 @@ public class TransporteDao {
 		try {
 			iniciaOperacion();
 			lista= session.createQuery( "from Transporte u order by u.linea asc u.linea asc" ).list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+
+	public List<Transporte> traerLineasPorTransporte(TipoTransporte tipoTransporte) 
+	{
+		List<Transporte> lista= null ;
+		try {
+			iniciaOperacion();
+			lista= session.createQuery("from Transporte t where tipoTransporte = "+tipoTransporte.ordinal()).list();
 		} finally {
 			session.close();
 		}
