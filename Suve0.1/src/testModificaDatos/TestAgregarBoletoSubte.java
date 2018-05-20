@@ -43,27 +43,25 @@ public class TestAgregarBoletoSubte {
 		sdao.agregar(new SeccionViaje("Seccion Subte",11));
 		tcdao.agregar(new TramoTrenYSubte(dao.traerLectoraTrenYSubte(101202).getEstacion(), null, sdao.traerSeccionViaje(2l)));
 		*/
+		/*
+		Tarjeta tarjeta = tabm.traerTarjetaConBeneficios(109);
+		tarjeta.setActiva(true);
+		tarjeta.getBeneficios().add(tabm.traerTarifaSocial());
+		tabm.modificarTarjeta(tarjeta);
+		*/
+		System.out.println("\n\nSaldo = "+tabm.traerTarjetaConBeneficios(109).getMonto()+"\n");
 		
-		//Tarjeta tarjeta = tabm.traerTarjetaConBeneficios(118);
-		//tarjeta.setActiva(true);
-		//Beneficio tarifaSocial = tabm.traerTarifaSocial();
-		
-		//tarjeta.getBeneficios().add(tarifaSocial);
-		//tabm.modificarTarjeta(tarjeta);
-		
-		System.out.println("\n\nSaldo = "+tabm.traerTarjetaConBeneficios(118).getMonto()+"\n");
-		
-		System.out.println("\nAgregar boleto de Subte con la tarjeta 118\n");
+		System.out.println("\nAgregar boleto de Subte con la tarjeta 109\n");
 		
 		try 
 		{
-			admLectora.agregarBoleto(101202, tabm.traerTarjetaConBeneficios(118), new GregorianCalendar());
+			admLectora.agregarBoleto(101202, tabm.traerTarjetaConBeneficios(109), new GregorianCalendar());
 		} catch (Exception e) 
 		{
 			System.out.println(e);
 		}
 		
-		System.out.println("\n\nSaldo = "+tabm.traerTarjetaConBeneficios(118).getMonto()+"\n");
+		System.out.println("\n\nSaldo = "+tabm.traerTarjetaConBeneficios(109).getMonto()+"\n");
 		
 	}
 

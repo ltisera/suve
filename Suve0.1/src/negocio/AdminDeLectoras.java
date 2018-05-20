@@ -53,19 +53,23 @@ public class AdminDeLectoras
 		if(!tarjeta.isActiva()) 
 			throw new Exception("ERROR: tarjeta inactiva.");
 		LectoraTrenYSubte lectora = traerLectoraTrenYSubte(numeroSerieLectora);
-		TramoTrenYSubte tramo = tramosConsultas.traerTramoUnaEstacion(lectora.getEstacion());
+		TramoTrenYSubte tramo = tramosConsultas.traerTramoUnaEstacion(lectora.getEstacion().getIdEstacion());
+		System.out.println("\n------"+tramo+"-----\n");
+		Boleto nuevoBoleto = new Boleto(fechaHora,(Lectora)lectora,tramo.getSeccionViaje().getMonto(),tarjeta,tramo);
 		if(lectora.getEstacion().getTransporte().getTipoTransporte() == TipoTransporte.Tren)
 		{
 			Boleto boletoAnterior = movimientoAlta.traerUltimoBoleto(tarjeta.getIdTarjeta());
-			if((boletoAnterior.getTramoTrenYSubte()!=null 
+			if((boletoAnterior!=null 
 				&& boletoAnterior.getTramoTrenYSubte().getEstacionA().getTransporte().equals(lectora.getEstacion().getTransporte()) 
-				&& boletoAnterior.getTramoTrenYSubte().getEstacionB()==null))//y diferencia horaria menor a 2 horas(falta implementar)
-					tramo = tramosConsultas.traerTramoTrenYSubte(boletoAnterior.getTramoTrenYSubte().getEstacionA(),lectora.getEstacion());
+				&& boletoAnterior.getTramoTrenYSubte().getEstacionB()==null))
+			{
+					tramo = tramosConsultas.traerTramoTrenYSubte(boletoAnterior.getTramoTrenYSubte().getEstacionA().getIdEstacion(),lectora.getEstacion().getIdEstacion());
+					nuevoBoleto.setMonto(-(boletoAnterior.getMonto()-tramo.getSeccionViaje().getMonto()));
+			}
 		}
-		Boleto nuevoBoleto = new Boleto(fechaHora,(Lectora)lectora,tramo.getSeccionViaje().getMonto(),tarjeta,tramo);
-		System.out.println("\n\nMonto sin descuentos = "+nuevoBoleto.getMonto()+"\n");
+		System.out.println("\n\nMonto sin descuentos = "+nuevoBoleto.getMonto()+"   Red Sube = "+nuevoBoleto.getIntRedSube()+"\n");
 		Funciones.calcularRedSube(movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora), nuevoBoleto);
-		System.out.println("\n\nMonto red sube = "+nuevoBoleto.getMonto()+"\n");
+		System.out.println("\n\nMonto red sube = "+nuevoBoleto.getMonto()+"   Red Sube = "+nuevoBoleto.getIntRedSube()+"\n");
 		TarifaSocial tarifa = tarjetaAbm.traerTarifaSocial();
 		if(Funciones.tarjetaContieneTarifaSocial(tarjeta.getBeneficios().toArray(), tarifa))
 			Funciones.calcularTarifaSocial(nuevoBoleto, tarifa);
@@ -74,7 +78,7 @@ public class AdminDeLectoras
 		movimientoAlta.agregarBoleto(nuevoBoleto);
 		tarjeta.setMonto(tarjeta.getMonto()-nuevoBoleto.getMonto());
 		tarjetaAbm.modificarTarjeta(tarjeta);
-		System.out.println("\n\nMonto Final = "+nuevoBoleto.getMonto()+"\n");
+		System.out.println("\n\nMonto Final = "+nuevoBoleto.getMonto()+"   Red Sube = "+nuevoBoleto.getIntRedSube()+"\n");
 		
 	}
 

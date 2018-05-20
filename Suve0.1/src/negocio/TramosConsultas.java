@@ -19,14 +19,14 @@ public class TramosConsultas
 		return daoColectivo.traerTramoColectivo(kMin,kMax);
 	}
 	
-	public TramoTrenYSubte traerTramoTrenYSubte(Estacion estacionA, Estacion estacionB)
+	public TramoTrenYSubte traerTramoTrenYSubte(long idEstacionA, long idEstacionB)
 	{
-		return daoTrenYSubte.traerTramoTrenYSubte(estacionA,estacionB);
+		return daoTrenYSubte.traerTramoTrenYSubte(idEstacionA, idEstacionB);
 	}
 	
-	public TramoTrenYSubte traerTramoUnaEstacion(Estacion estacionA)
+	public TramoTrenYSubte traerTramoUnaEstacion(long idEstacionA)
 	{
-		return daoTrenYSubte.traerTramoUnaEstacion(estacionA);
+		return daoTrenYSubte.traerTramoUnaEstacion(idEstacionA);
 	}
 	
 /*

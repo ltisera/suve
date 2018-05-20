@@ -86,24 +86,24 @@ public class TramoTrenYSubteDao {
 		return lista;
 	}
 
-	public TramoTrenYSubte traerTramoTrenYSubte(Estacion estacionA, Estacion estacionB) 
+	public TramoTrenYSubte traerTramoTrenYSubte(long idEstacionA, long idEstacionB) 
 	{
 		TramoTrenYSubte objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (TramoTrenYSubte) session.createQuery("from TramoTrenYSubte t inner join fetch t.seccionViaje where (t.estacionA = "+estacionA.getIdEstacion()+" and t.estacionB="+estacionB.getIdEstacion()+") or (t.estacionA ="+estacionB.getIdEstacion()+" and t.estacionB="+estacionA.getIdEstacion()).uniqueResult();
+			objeto = (TramoTrenYSubte) session.createQuery("from TramoTrenYSubte t inner join fetch t.seccionViaje where (t.estacionA = "+idEstacionA+" and t.estacionB="+idEstacionB+") or (t.estacionA ="+idEstacionB+" and t.estacionB="+idEstacionA).uniqueResult();
 		} finally {
 			session.close();
 		}
 		return objeto;
 	}
 	
-	public TramoTrenYSubte traerTramoUnaEstacion(Estacion estacionA)
+	public TramoTrenYSubte traerTramoUnaEstacion(long idEstacionA)
 	{
 		TramoTrenYSubte objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (TramoTrenYSubte) session.createQuery("from TramoTrenYSubte t inner join fetch t.seccionViaje inner join fetch t.estacionA where t.estacionA = "+estacionA.getIdEstacion()+" and t.estacionB is null").uniqueResult();
+			objeto = (TramoTrenYSubte) session.createQuery("from TramoTrenYSubte t inner join fetch t.seccionViaje inner join fetch t.estacionA inner join fetch t.estacionB where t.estacionA = "+idEstacionA+" and t.estacionB is null").uniqueResult();
 		} finally {
 			session.close();
 		}

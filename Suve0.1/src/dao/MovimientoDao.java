@@ -211,9 +211,10 @@ public class MovimientoDao {
 	public Boleto traerUltimoBoleto(long idTarjeta) 
 	{
 		Boleto objeto = null;
-		try {
+		try 
+		{
 			iniciaOperacion();
-			objeto = (Boleto) session.createQuery("from Boleto b inner join fetch b.tramoTrenYSubte where b.tarjeta="+idTarjeta+" and b.idMovimiento = max(idMovimiento)").uniqueResult();
+			objeto = (Boleto) session.createQuery("from Boleto b inner join fetch b.tramoTrenYSubte inner join fetch b.tarjeta where b.fecha in (select max(bb.fecha) from Boleto bb where bb.tarjeta ="+idTarjeta+")").uniqueResult();
 		} finally {
 			session.close();
 		}
