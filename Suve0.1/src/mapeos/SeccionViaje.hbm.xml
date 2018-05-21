@@ -6,6 +6,14 @@
 		<id column="idSeccionViaje" name="idSeccionViaje">
 			<generator class="identity" />
 		</id>
+		
+		<property name="tipoTransporte">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">datos.TipoTransporte</param>
+				<param name="type">4</param>
+			</type>
+		</property>
+		
 		<property column="nombre" name="nombre" type="string" />
 		<property column="monto" name="monto" type="float" />
 	</class>

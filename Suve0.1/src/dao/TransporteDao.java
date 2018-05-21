@@ -80,7 +80,7 @@ public class TransporteDao {
 		Transporte objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Transporte) session.createQuery("from Transporte t where t.linea=" + linea).uniqueResult();
+			objeto = (Transporte) session.createQuery("from Transporte t where t.linea = :quelinea").setParameter("quelinea",linea).uniqueResult();
 		} finally {
 			session.close();
 		}

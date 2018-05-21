@@ -181,7 +181,7 @@ public class iniciaBaseDeDatos {
 		List<Estacion> lista = edao.traerEstacionPorTransporte(tdao.traerTransporte("Sarmiento").getIdTransporte());
 		Estacion estacionA = null;
 		Estacion estacionB = null;
-		for (int i = 0; i< lista.size()+1 ; i++) {
+		for (int i = 0; i< lista.size() ; i++) {
 			estacionA = lista.get(i);
 			for (int j = i+1; j< lista.size() ; j++) {
 				estacionB = lista.get(j);
@@ -203,47 +203,60 @@ public class iniciaBaseDeDatos {
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Longchamps"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Burzaco"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Adrogue"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lomas"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Bandfield"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Escalada"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lanus"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Gerli"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("D.Santillan y M.Kosteki"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Hipolito Yrigoyen"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Pza. Constitucion"),s1));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Temperley"),s1));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lomas"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Bandfield"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Escalada"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lanus"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Gerli"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("D.Santillan y M.Kosteki"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Hipolito Yrigoyen"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Pza. Constitucion"),s3));
 
 		estacionA = edao.traerEstacion("Longchamps");
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Burzaco"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Adrogue"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lomas"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Bandfield"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Escalada"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lanus"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Gerli"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("D.Santillan y M.Kosteki"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Hipolito Yrigoyen"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Pza. Constitucion"),s1));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Temperley"),s1));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Bandfield"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Escalada"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lanus"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Gerli"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("D.Santillan y M.Kosteki"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Hipolito Yrigoyen"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Pza. Constitucion"),s2));
 		
 		estacionA = edao.traerEstacion("Burzaco");
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Adrogue"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lomas"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Bandfield"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Escalada"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lanus"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Gerli"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("D.Santillan y M.Kosteki"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Hipolito Yrigoyen"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Pza. Constitucion"),s1));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lanus"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Gerli"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("D.Santillan y M.Kosteki"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Hipolito Yrigoyen"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Pza. Constitucion"),s2));
 
 		estacionA = edao.traerEstacion("Adrogue");
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Temperley"),s1));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lomas"),s1));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Bandfield"),s1));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Escalada"),s1));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lanus"),s1));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Gerli"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("D.Santillan y M.Kosteki"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Hipolito Yrigoyen"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Pza. Constitucion"),s2));
+
+		estacionA = edao.traerEstacion("Temperley");
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lomas"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Bandfield"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Escalada"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lanus"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Gerli"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("D.Santillan y M.Kosteki"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Hipolito Yrigoyen"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Pza. Constitucion"),s1));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("D.Santillan y M.Kosteki"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Hipolito Yrigoyen"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Pza. Constitucion"),s2));
 
 		estacionA = edao.traerEstacion("Lomas");
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Bandfield"),s1));
@@ -252,7 +265,7 @@ public class iniciaBaseDeDatos {
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Gerli"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("D.Santillan y M.Kosteki"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Hipolito Yrigoyen"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Pza. Constitucion"),s1));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Pza. Constitucion"),s2));
 
 		estacionA = edao.traerEstacion("Bandfield");
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Escalada"),s1));
@@ -260,7 +273,7 @@ public class iniciaBaseDeDatos {
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Gerli"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("D.Santillan y M.Kosteki"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Hipolito Yrigoyen"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Pza. Constitucion"),s1));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Pza. Constitucion"),s2));
 
 		estacionA = edao.traerEstacion("Escalada");
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lanus"),s1));

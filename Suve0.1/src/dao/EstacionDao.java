@@ -77,7 +77,7 @@ public class EstacionDao {
 		Estacion objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Estacion) session.createQuery("from Estacion e where e.nombre=" + nombre).uniqueResult();
+			objeto = (Estacion) session.createQuery("from Estacion e where e.nombre = :nombreEstacion").setParameter("nombreEstacion", nombre).uniqueResult();
 			} finally {
 			session.close();
 		}
@@ -98,7 +98,7 @@ public class EstacionDao {
 		List<Estacion> lista = null ;
 		try {
 			iniciaOperacion();
-			lista = session.createQuery("from Estacion e where e.idTrasporte="+idTransporte).list();
+			lista = session.createQuery("from Estacion e where e.transporte="+idTransporte).list();
 		} finally {
 			session.close();
 		}
