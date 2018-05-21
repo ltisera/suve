@@ -63,7 +63,7 @@ public class AdminDeLectoras
 				&& boletoAnterior.getTramoTrenYSubte().getEstacionA().getTransporte().equals(lectora.getEstacion().getTransporte()) 
 				&& boletoAnterior.getTramoTrenYSubte().getEstacionB()==null))
 			{
-					tramo = tramosConsultas.traerTramoTrenYSubte(boletoAnterior.getTramoTrenYSubte().getEstacionA().getIdEstacion(),lectora.getEstacion().getIdEstacion());
+					tramo = tramosConsultas.traerTramoTrenYSubte(boletoAnterior.getTramoTrenYSubte().getEstacionA(),lectora.getEstacion());
 					nuevoBoleto.setMonto(-(boletoAnterior.getMonto()-tramo.getSeccionViaje().getMonto()));
 			}
 		}

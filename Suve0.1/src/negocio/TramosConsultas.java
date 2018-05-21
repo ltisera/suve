@@ -19,9 +19,9 @@ public class TramosConsultas
 		return daoColectivo.traerTramoColectivo(kMin,kMax);
 	}
 	
-	public TramoTrenYSubte traerTramoTrenYSubte(long idEstacionA, long idEstacionB)
+	public TramoTrenYSubte traerTramoTrenYSubte(Estacion estacionA, Estacion estacionB)
 	{
-		return daoTrenYSubte.traerTramoTrenYSubte(idEstacionA, idEstacionB);
+		return daoTrenYSubte.traerTramoTrenYSubte(estacionA, estacionB);
 	}
 	
 	public TramoTrenYSubte traerTramoUnaEstacion(long idEstacionA)

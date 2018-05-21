@@ -19,16 +19,17 @@ public class TesTraerTramoUnaEstacion {
 		SeccionViajeDao sdao = new SeccionViajeDao();
 		
 		Estacion estacionA = estDao.traerEstacion(1l);
-		Estacion estacionB = estDao.traerEstacion(2l);
+		Estacion estacionB = estDao.traerEstacion(3l);
+		
+		//tcdao.agregar(new TramoTrenYSubte(estacionA,null,sdao.traerSeccionViaje(3l)));
 		
 		
-		
-		
+		//TramoTrenYSubte tramo = tc.traerTramoTrenYSubte(estacionB, estacionA);
 		TramoTrenYSubte tramo = tc.traerTramoUnaEstacion(estacionA.getIdEstacion());
 		System.out.println(estacionA);
 		System.out.println(estacionB);
 		System.out.println(tramo);
-		tramo = tc.traerTramoTrenYSubte(estacionA.getIdEstacion(), estacionB.getIdEstacion());
+		//tramo = tc.traerTramoTrenYSubte(estacionA.getIdEstacion(), estacionB.getIdEstacion());
 	}
 
 }
