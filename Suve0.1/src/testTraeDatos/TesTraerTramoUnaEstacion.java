@@ -18,7 +18,7 @@ public class TesTraerTramoUnaEstacion {
 		LectoraDao dao = new LectoraDao();
 		SeccionViajeDao sdao = new SeccionViajeDao();
 		
-		Estacion estacionA = estDao.traerEstacion(1l);
+		Estacion estacionA = estDao.traerEstacion(3l);
 		Estacion estacionB = estDao.traerEstacion(3l);
 		
 		//tcdao.agregar(new TramoTrenYSubte(estacionA,null,sdao.traerSeccionViaje(3l)));
@@ -26,9 +26,9 @@ public class TesTraerTramoUnaEstacion {
 		
 		//TramoTrenYSubte tramo = tc.traerTramoTrenYSubte(estacionB, estacionA);
 		TramoTrenYSubte tramo = tc.traerTramoUnaEstacion(estacionA.getIdEstacion());
-		System.out.println(estacionA);
-		System.out.println(estacionB);
-		System.out.println(tramo);
+		System.out.println("BIEN");
+		//System.out.println(tramo);
+		System.out.println("Esto te sale el tobole: " + tramo);
 		//tramo = tc.traerTramoTrenYSubte(estacionA.getIdEstacion(), estacionB.getIdEstacion());
 	}
 

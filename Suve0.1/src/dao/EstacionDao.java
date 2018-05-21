@@ -83,5 +83,15 @@ public class EstacionDao {
 		}
 		return lista;
 	}
+	public List<Estacion> traerListaEstaciones(long idTransporte) throws HibernateException {
+		List<Estacion> lista = null ;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Estacion e where e.idTrasporte="+idTransporte).list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
 	
 }

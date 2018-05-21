@@ -9,7 +9,7 @@
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <TITLE>Agregar viajes</TITLE>
 <script src="js/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="js/ManejaLista.js"></script>
+<script type="text/javascript" src="js/TraemeLasListas.js"></script>
 
 <script>
 	$(document).ready(function() {
@@ -85,8 +85,8 @@ function cambiaTarjeta(){
 	
 function cambiaTipoTransporte(){
 	if ($("#inpTipoTransporte").val() != "") {
-		traerListaLineas();
 		
+		traerListaLineas();
 		$("#colLinea").show();
 	}
 	else{
@@ -106,6 +106,7 @@ function cambiaTipoTransporte(){
 }
 function cambiaLinea() {
 	if($("#inpLinea").val()!=""){
+		traerListaEstaciones();
 		$("#colEstacion").show();
 		
 	}
@@ -150,6 +151,9 @@ function ocultarElementos(){
 	$("#colEstacion").hide();
 	$("#btnAgregar").hide();
 }
+
+
+
 
 
 
