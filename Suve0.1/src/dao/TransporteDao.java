@@ -76,13 +76,23 @@ public class TransporteDao {
 		return objeto;
 	}
 	
+	public Transporte traerTransporte(String linea) throws HibernateException {
+		Transporte objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Transporte) session.createQuery("from Transporte t where t.linea=" + linea).uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
 	
 	@SuppressWarnings ( "unchecked" )
 	public List<Transporte> traerTransporte() throws HibernateException {
 		List<Transporte> lista= null ;
 		try {
 			iniciaOperacion();
-			lista= session.createQuery( "from Transporte u order by u.linea asc u.linea asc" ).list();
+			lista= session.createQuery( "from Transporte t order by t.linea asc" ).list();
 		} finally {
 			session.close();
 		}

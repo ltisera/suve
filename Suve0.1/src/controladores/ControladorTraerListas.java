@@ -51,7 +51,12 @@ public class ControladorTraerListas extends HttpServlet {
 			traerListaLinea(request, response);
 		}
 		if(request.getParameter("lista").equals("Estaciones")) {
-			traerListaEstaciones(request, response);
+			if(request.getParameter("transporte").equals("Colectivo")) {
+				traerListaTramos(request, response);
+			}
+			else {
+				traerListaEstaciones(request, response);
+			}
 		}
 		
 		
@@ -65,7 +70,7 @@ public class ControladorTraerListas extends HttpServlet {
 			PrintWriter salida = response.getWriter();
 			
 			TransporteDao tdao = new TransporteDao();
-			TipoTransporte tipo = TipoTransporte.Tren;
+			TipoTransporte tipo = null;
 			if(request.getParameter("transporte").equals("Colectivo")) {
 				tipo = TipoTransporte.Colectivo;
 			}
@@ -101,11 +106,8 @@ public class ControladorTraerListas extends HttpServlet {
 			PrintWriter salida = response.getWriter();
 			
 			EstacionDao edao = new EstacionDao();
-			List<Estacion> le = edao.traerEstacion();
-			if(request.getParameter("transporte").equals("Colectivo")) {
-				//le = edao.traerListaSecciones();
-			}
-			
+			TransporteDao tdao = new TransporteDao();
+			List<Estacion> le = edao.traerEstacionPorTransporte(tdao.traerTransporte(request.getParameter("linea")).getIdTransporte());
 			
 			String objetoJ = "[";
 			for (Estacion e:le) {
@@ -117,6 +119,32 @@ public class ControladorTraerListas extends HttpServlet {
 			salida.println(objetoJ);
 			System.out.println(objetoJ);
 			System.out.println("Linea:" + request.getParameter("linea") + "\nLista: " + le);
+		
+		} catch (Exception e){
+			response.sendError(500, "El ID del boleto no fue encontrado" );
+		}
+		
+	}
+	protected void traerListaTramos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			
+			response.setStatus(200);
+			response.setContentType("application/json");
+			PrintWriter salida = response.getWriter();
+			
+			TramoColectivoDao tdao = new TramoColectivoDao();
+			List<TramoColectivo> list = tdao.traerTramoColectivo();
+			
+			String objetoJ = "[";
+			for (TramoColectivo t:list) {
+				objetoJ += "\""+t+"\",";
+			}
+			
+			objetoJ = objetoJ.substring(0, objetoJ.length()-1);
+			objetoJ +="]";
+			salida.println(objetoJ);
+			System.out.println(objetoJ);
+			System.out.println("Linea:" + request.getParameter("linea") + "\nLista: " + list);
 		
 		} catch (Exception e){
 			response.sendError(500, "El ID del boleto no fue encontrado" );

@@ -73,6 +73,17 @@ public class EstacionDao {
 		return objeto;
 	}
 	
+	public Estacion traerEstacion(String nombre) throws HibernateException {
+		Estacion objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Estacion) session.createQuery("from Estacion e where e.nombre=" + nombre).uniqueResult();
+			} finally {
+			session.close();
+		}
+		return objeto;
+	}
+	
 	public List<Estacion> traerEstacion() throws HibernateException {
 		List<Estacion> lista = null ;
 		try {
@@ -83,7 +94,7 @@ public class EstacionDao {
 		}
 		return lista;
 	}
-	public List<Estacion> traerListaEstaciones(long idTransporte) throws HibernateException {
+	public List<Estacion> traerEstacionPorTransporte(long idTransporte) throws HibernateException {
 		List<Estacion> lista = null ;
 		try {
 			iniciaOperacion();

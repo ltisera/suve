@@ -37,7 +37,11 @@ public class TramoColectivo {
 	public void setSeccionViaje(SeccionViaje seccionViaje) {
 		this.seccionViaje = seccionViaje;
 	}
-	
-	
-
+	@Override
+	public String toString() {
+		String string = kMin + "km - " + kMax + "km";
+		if (kMax <= 0)
+			string = "+"+ kMin + "km";
+		return string;
+	}
 }
