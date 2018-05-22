@@ -14,7 +14,7 @@ import java.util.List;
 
 import dao.*;
 import datos.*;
-
+import negocio.*;
 
 /**
  * Servlet implementation class ControladorAgregarBoleto
@@ -46,45 +46,20 @@ public class ControladorAgregarBoleto extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println(request.getParameter("pedirLista"));
-		if(!request.getParameter("pedirLista").equals("da")){
-			procesaSolicitud(request, response);
-		}
-		else {
-			response.setStatus(200);
-			response.setContentType("application/json");
-			PrintWriter salida = response.getWriter();
-			//Esto es un obj Jason?
-			List<String> asd = new ArrayList();
-			asd.add("fruta");
-			asd.add("verdua");
-			asd.add("fvsvd");
-			asd.add("23d");
-			asd.add("PAYASOd");
-			TarjetaDao tardao = new TarjetaDao();
-			List<Tarjeta> lt= tardao.traerTarjeta();
-			
-			String miResponse ="";
-			miResponse ="[";
-			
-			for(Tarjeta s:lt) {
-				miResponse += "\"" + s.getNumeroSerieTarjeta() + "\",";
-			}
-			miResponse = miResponse.substring(0, miResponse.length()-1);
-			miResponse += "]";
-			
-			//salida.println( "[\"manzaa\",\"pera\",\"frutilsda\"]" );
-			System.out.println(miResponse);
-			salida.println( miResponse);
-			//Esto No es jason?
-			
-		}
+		procesaSolicitud(request, response);
 	}
+	
+	
+	
 	protected void procesaSolicitud(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int numTarjeta = Integer.parseInt(request.getParameter("numTarjeta"));
-		System.out.println(numTarjeta);
+		int numSerieTarjeta = Integer.parseInt(request.getParameter("numSerieTarjeta"));
+		int numSerieLectora =Integer.parseInt(request.getParameter("numSerieLectora"));
 		
+		TarjetaDao tardao = new TarjetaDao();
 		
+		AdminDeLectoras manejador = new AdminDeLectoras();
+		//manejador.agregarBoleto(numSerieLectora,tardao.traerTarjeta(numSerieTarjeta), fechaHora, tramo);
 		System.out.println((request.getParameter("tipoTransporte")));
 		
 	}

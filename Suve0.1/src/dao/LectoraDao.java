@@ -98,6 +98,26 @@ public class LectoraDao {
 		}
 		return lista;
 	}
+	public List<Lectora> traerLectorasPorLinea(long idTransporte) throws HibernateException {
+		List<Lectora> lista = null ;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Lectora l where l.transporte="+idTransporte).list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	public List<Lectora> traerLectorasPorEstacion(long idEstacion) throws HibernateException {
+		List<Lectora> lista = null ;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Lectora l where l.estacion="+idEstacion).list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
 	
 	public List<Lectora> traerLectoraCompleta() throws HibernateException {
 		List<Lectora> lista = null ;

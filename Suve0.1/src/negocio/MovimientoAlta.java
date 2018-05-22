@@ -9,19 +9,19 @@ import datos.Tarjeta;
 
 public class MovimientoAlta 
 {
-	MovimientoDao dao = new MovimientoDao();
+	MovimientoDao movdao = new MovimientoDao();
 	public void agregarBoleto(Boleto boleto)
 	{
-		dao.agregar(boleto);
+		movdao.agregar(boleto);
 	}
 	
 	public List<Boleto> traerBoletosRedSube(Tarjeta tarjeta, GregorianCalendar fecha2)
 	{
-		return dao.trerBoletosRedSube(tarjeta.getIdTarjeta(), fecha2);
+		return movdao.trerBoletosRedSube(tarjeta.getIdTarjeta(), fecha2);
 	}
 
 	public Boleto traerUltimoBoleto(long idTarjeta) 
 	{
-		return dao.traerUltimoBoleto(idTarjeta);
+		return movdao.traerUltimoBoleto(idTarjeta);
 	}
 }

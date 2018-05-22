@@ -6,14 +6,11 @@ function cargo() {
 }
 
 function traerListaTarjetas(){
-	var para = "da"
-		var valor = "nulo";
 		$.ajax({
 			data:{
-				"pedirLista": "da",
-				"valor": "nulo"
+				"lista": "Tarjetas",
 				},
-			url:"AgregarBoleto",
+			url:"TraerListas",
 			type:"POST",
 			success:function(response){
 				/*
@@ -93,6 +90,34 @@ function traerListaEstaciones(){
 		},
 		error:function(){
 			alert("LA sdfsdIOO");
+		}
+		
+	});
+}
+
+function traerListaLectoras(){
+	$.ajax({
+		data:{
+			"lista":"Lectoras",
+			"transporte":$("#inpTipoTransporte").val(),
+			"linea":$("#inpLinea").val(),
+			"estacion":$("#inpEstacion").val()
+		},
+		url:"TraerListas",
+		type:"POST",
+		success:function(response){
+			console.log(response);
+			$("#lstLectora").empty();
+			for(i in response){
+				var opcion = document.createElement("option");
+				opcion.text = response[i];
+			    $("#lstLectora").append(opcion);
+			    
+			}
+
+		},
+		error:function(){
+			alert("Error en carga de lista de lectoras");
 		}
 		
 	});

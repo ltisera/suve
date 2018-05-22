@@ -30,7 +30,11 @@ public class AdminDeLectoras
 			throw new Exception("ERROR: tarjeta inactiva.");
 		LectoraColectivo lectora = traerLectoraColectivo(numeroSerieLectora);
 		Boleto nuevoBoleto = new Boleto(fechaHora,(Lectora)lectora,tramo.getSeccionViaje().getMonto(),tarjeta,tramo);
-		Funciones.calcularRedSube(movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora), nuevoBoleto);
+		
+		List<Boleto> lbu2h = movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora);
+		System.out.println(lbu2h);
+		
+		Funciones.calcularRedSube(lbu2h, nuevoBoleto);
 		if(tarjeta.getBeneficios().contains(tarjetaAbm.traerTarifaSocial()))
 			Funciones.calcularTarifaSocial(nuevoBoleto, tarjetaAbm.traerTarifaSocial());
 		if(tarjeta.getMonto() - nuevoBoleto.getMonto() < -25) 
@@ -38,7 +42,7 @@ public class AdminDeLectoras
 		movimientoAlta.agregarBoleto(nuevoBoleto);
 		tarjeta.setMonto(tarjeta.getMonto()-nuevoBoleto.getMonto());
 		tarjetaAbm.modificarTarjeta(tarjeta);
-				
+		System.out.println("NICO MIRA LA RED: " + nuevoBoleto.getIntRedSube() + "TOMA EL MONTO: " + nuevoBoleto.getMonto());
 	}
 	
 	public LectoraColectivo traerLectoraColectivo(int numeroSerieLectora)
@@ -60,10 +64,12 @@ public class AdminDeLectoras
 		if(lectora.getEstacion().getTransporte().getTipoTransporte() == TipoTransporte.Tren)
 		{
 			Boleto boletoAnterior = movimientoAlta.traerUltimoBoleto(tarjeta.getIdTarjeta());
-			calcularDescuentos = boletoAnterior!=null && boletoAnterior.getTramoTrenYSubte().getEstacionA().getTransporte().equals(lectora.getEstacion().getTransporte()) &&
-					Funciones.tiempoDeViajeValido(boletoAnterior.getFecha(), fechaHora) && !lectora.getEstacion().equals(boletoAnterior.getTramoTrenYSubte().getEstacionA());
+			calcularDescuentos = boletoAnterior!=null && // 
+					boletoAnterior.getTramoTrenYSubte().getEstacionA().getTransporte().equals(lectora.getEstacion().getTransporte()) &&
+					Funciones.tiempoDeViajeValido(boletoAnterior.getFecha(), fechaHora) && 
+					!(lectora.getEstacion().equals(boletoAnterior.getTramoTrenYSubte().getEstacionA()));
 			if(calcularDescuentos)
-			{			
+			{	//Aca entra cuando es un boleto de BAJADA (Cierre o como lo llames)			
 				System.out.println("\n-------calculo descuentos\n");
 				tramo = tramosConsultas.traerTramoTrenYSubte(boletoAnterior.getTramoTrenYSubte().getEstacionA(),lectora.getEstacion());
 				nuevoBoleto.setMonto(-(boletoAnterior.getMonto()-tramo.getSeccionViaje().getMonto()));

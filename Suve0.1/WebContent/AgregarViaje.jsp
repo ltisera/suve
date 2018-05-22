@@ -119,6 +119,7 @@ function cambiaLinea() {
 
 function cambiaEstacion() {
 	if($("#inpEstacion").val()!=""){
+		traerListaLectoras();
 		$("#colLectora").show();
 	}
 	else{

@@ -14,6 +14,7 @@ import org.hibernate.TransientPropertyValueException;
 import dao.*;
 import datos.*;
 
+import java.util.ArrayList;
 import java.util.List;
 /**
  * Servlet implementation class ControladorTraerListas
@@ -58,7 +59,12 @@ public class ControladorTraerListas extends HttpServlet {
 				traerListaEstaciones(request, response);
 			}
 		}
-		
+		if(request.getParameter("lista").equals("Lectoras")) {
+			traerListaLectoras(request, response);
+		}
+		if(request.getParameter("lista").equals("Tarjetas")) {
+			traerListaTarjetas(request, response);
+		}
 		
 	}
 
@@ -125,6 +131,35 @@ public class ControladorTraerListas extends HttpServlet {
 		}
 		
 	}
+	protected void traerListaTarjetas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			
+			response.setStatus(200);
+			response.setContentType("application/json");
+			PrintWriter salida = response.getWriter();
+			//Esto es un obj Jason?
+			TarjetaDao tardao = new TarjetaDao();
+			List<Tarjeta> lt= tardao.traerTarjeta();
+			
+			String miResponse ="";
+			miResponse ="[";
+			
+			for(Tarjeta s:lt) {
+				miResponse += "\"" + s.getNumeroSerieTarjeta() + "\",";
+			}
+			miResponse = miResponse.substring(0, miResponse.length()-1);
+			miResponse += "]";
+			
+			//salida.println( "[\"manzaa\",\"pera\",\"frutilsda\"]" );
+			System.out.println(miResponse);
+			salida.println( miResponse);
+			//Esto No es jason?
+		
+		} catch (Exception e){
+			response.sendError(500, "Error Traer Lista Tarjeta" );
+		}
+		
+	}
 	protected void traerListaTramos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			
@@ -148,6 +183,44 @@ public class ControladorTraerListas extends HttpServlet {
 		
 		} catch (Exception e){
 			response.sendError(500, "El ID del boleto no fue encontrado" );
+		}
+		
+	}
+	protected void traerListaLectoras(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			
+			response.setStatus(200);
+			response.setContentType("application/json");
+			PrintWriter salida = response.getWriter();
+			
+			LectoraDao lecdao = new LectoraDao();
+			List<Lectora> list = null;
+			if(request.getParameter("transporte").equals("Colectivo")) {
+				TransporteDao tdao = new TransporteDao();
+				System.out.println("VAMO A IMPRIMI");
+				Transporte t = tdao.traerTransporte(request.getParameter("linea"));
+				list = lecdao.traerLectorasPorLinea(t.getIdTransporte());
+				System.out.println("La lista:" + list);
+			}
+			else {
+				EstacionDao edao = new EstacionDao();
+				Estacion e = edao.traerEstacion(request.getParameter("estacion"));
+				list = lecdao.traerLectorasPorEstacion(e.getIdEstacion());
+			}
+			
+			String objetoJ = "[";
+			for (Lectora t:list) {
+				objetoJ += "\""+t.getNumeroSerieLectora()+"\",";
+			}
+			
+			objetoJ = objetoJ.substring(0, objetoJ.length()-1);
+			objetoJ +="]";
+			salida.println(objetoJ);
+			System.out.println(objetoJ);
+			System.out.println("Estacion:" + request.getParameter("estacion") + "\nLista: " + list);
+		
+		} catch (Exception e){
+			response.sendError(500, "Algo paso no se que" );
 		}
 		
 	}

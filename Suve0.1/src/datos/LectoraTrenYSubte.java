@@ -15,9 +15,5 @@ public class LectoraTrenYSubte extends Lectora{
 	public void setEstacion(Estacion estacion) {
 		this.estacion = estacion;
 	}
-	@Override
-	public String toString() {
-		return "LectoraTrenYSubte [estacion=" + estacion + "]";
-	}
-	
+
 }

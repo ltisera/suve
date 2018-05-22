@@ -35,17 +35,27 @@ public class Funciones {
 	}
 	
 	
-	public static  void calcularRedSube(List<Boleto> boletosRedSube, Boleto nuevoBoleto)
+	public static  void calcularRedSube(List<Boleto> lstBoletosRedSube, Boleto nuevoBoleto)
 	{
 		float porcentajeDescuento = 0;
 		int intRedSube = 1;
-		if(boletosRedSube.size()>0 && boletosRedSube.get(boletosRedSube.size()-1).getIntRedSube() != 0 && boletosRedSube.get(boletosRedSube.size()-1).getIntRedSube() <= boletosRedSube.size() && boletosRedSube.get(boletosRedSube.size()-1).getIntRedSube() < 6)
-		{
-			if(boletosRedSube.get(boletosRedSube.size()-1).getIntRedSube()==1) porcentajeDescuento = 0.5f;//50%
-			if(boletosRedSube.get(boletosRedSube.size()-1).getIntRedSube()>=2) porcentajeDescuento = 0.75f;//75%
-			intRedSube = boletosRedSube.get(boletosRedSube.size()-1).getIntRedSube() +1;		
+		System.out.println("***Size de la lista: " + lstBoletosRedSube.size());
+		if (lstBoletosRedSube.size()!=0) {
+			int intRedSubeAnterior = lstBoletosRedSube.get(lstBoletosRedSube.size()-1).getIntRedSube() ;
+			if(lstBoletosRedSube.size()>0 && 
+				intRedSubeAnterior != 0 && 
+				intRedSubeAnterior <= lstBoletosRedSube.size() && 
+				intRedSubeAnterior < 6)
+			{
+				if(intRedSubeAnterior==1) { 
+					porcentajeDescuento = 0.5f;//50%
+				}
+				if(intRedSubeAnterior>=2) {
+					porcentajeDescuento = 0.75f;//75%
+				}
+				intRedSube = intRedSubeAnterior + 1;		
+			}
 		}
-		
 		nuevoBoleto.setMonto(nuevoBoleto.getMonto()-(nuevoBoleto.getMonto()*porcentajeDescuento));
 		nuevoBoleto.setIntRedSube(intRedSube);
 		
@@ -61,9 +71,11 @@ public class Funciones {
 		
 		
 	}
-
+	
+	
 	public static boolean tiempoDeViajeValido(GregorianCalendar fechaAnterior, GregorianCalendar fechaActual) 
 	{
+		//Hacer segundos(Fecha Actual) - segundos(Fecha anterior) <=  7200 segundos
 		return sonFechasIguales(fechaAnterior, fechaActual) && fechaAnterior.get(Calendar.HOUR) > (fechaActual.get(Calendar.HOUR)-2) && fechaAnterior.get(Calendar.HOUR) <= fechaActual.get(Calendar.HOUR);
 	}
 	
