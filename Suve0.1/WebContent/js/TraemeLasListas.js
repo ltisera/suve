@@ -86,8 +86,6 @@ function traerListaLectoras(){
 		},
 		url:"TraerListas",
 		type:"POST",
-		success:crearOpciones(response,"\"#inpLectora\""),
-		/*
 		success:function(response){
 			console.log(response);
 			$("#lstLectora").empty();
@@ -97,7 +95,6 @@ function traerListaLectoras(){
 			    $("#lstLectora").append(opcion);
 			}
 		},
-		*/
 		error:function(){
 			alert("Error en carga de lista de lectoras");
 		}
