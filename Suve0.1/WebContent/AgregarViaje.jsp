@@ -88,7 +88,9 @@ function cambiaTarjeta(){
 	
 function cambiaTipoTransporte(){
 	if ($("#inpTipoTransporte").val() != "Vacio") {
+		console.log("VA");
 		traerListaLineas();
+		console.log("Viene");
 		$("#colLinea").show();
 	}
 	else{
@@ -119,6 +121,7 @@ function cambiaLinea() {
 }
 
 function cambiaEstacion() {
+	
 	if($("#inpEstacion").val()!=""){
 		traerListaLectoras();
 		$("#colLectora").show();
@@ -147,6 +150,9 @@ function ocultarElementos(){
 	$("#colEstacion").hide();
 	$("#btnAgregar").hide();
 }
+
+
+
 
 </script>
 
@@ -185,13 +191,13 @@ function ocultarElementos(){
 					<div id="colLinea">
 						<label id="lblLinea">Seleccione la Linea:</label> <br>
 						<select id="inpLinea">
-							<option value="Construir Lista de linea">
+
 						</select>
 					</div>
 					<div style="clear: both;">
 						<div id="colEstacion">
 							<label id="lblEstacion">Seleccione la Estacion:</label> <br>
-							<select id="inpEstaciones">
+							<select id="inpEstacion">
 								<option value="Construir Lista de Estaciones">
 							</select>
 						</div>

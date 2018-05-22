@@ -26,28 +26,6 @@ function traerListaTarjetas(){
 		});
 }
 
-function traerListaLineas(){
-	$.ajax({
-		data:{
-			"lista":"Linea",
-			"transporte":$("#inpTipoTransporte").val()
-		},
-		url:"TraerListas",
-		type:"POST",
-		success:function(response){
-			console.log(response);
-			$("#inpLinea").empty();
-			for(i in response){
-				var opcion = document.createElement("option");
-				opcion.text = response[i];
-			    $("#inpLinea").append(opcion);
-			}
-		},
-		error:function(){
-			alert("No se ha podido cargar la lista de Lineas");
-		}
-	});
-}
 
 function traerListaEstaciones(){
 	$.ajax({
@@ -60,11 +38,15 @@ function traerListaEstaciones(){
 		type:"POST",
 		success:function(response){
 			console.log(response);
-			$("#inpEstaciones").empty();
+			$("#inpEstacion").empty();
+			var opcion = document.createElement("option");
+			opcion.text = "Seleccione una Estacion";
+		    $("#inpEstacion").append(opcion);
+			
 			for(i in response){
 				var opcion = document.createElement("option");
 				opcion.text = response[i];
-			    $("#inpEstaciones").append(opcion);
+			    $("#inpEstacion").append(opcion);
 			    
 			}
 
@@ -88,11 +70,14 @@ function traerListaLectoras(){
 		type:"POST",
 		success:function(response){
 			console.log(response);
-			$("#lstLectora").empty();
+			$("#inpLectora").empty();
+			var opcion = document.createElement("option");
+			opcion.text = "Seleccione una Lectora";
+		    $("#inpLectora").append(opcion);
 			for(i in response){
 				var opcion = document.createElement("option");
 				opcion.text = response[i];
-			    $("#lstLectora").append(opcion);
+			    $("#inpLectora").append(opcion);
 			}
 		},
 		error:function(){
@@ -101,6 +86,36 @@ function traerListaLectoras(){
 		
 	});
 }
+
+
+function traerListaLineas(){
+	$.ajax({
+		data:{
+			"lista":"Linea",
+			"transporte":$("#inpTipoTransporte").val()
+		},
+		url:"TraerListas",
+		type:"POST",
+		success:function(response){
+			console.log(response);
+			$("#inpLinea").empty();
+			var opcion = document.createElement("option");
+			opcion.text = "Seleccione una Linea";
+		    $("#inpLinea").append(opcion);
+			
+			for(i in response){
+				var opcion = document.createElement("option");
+				opcion.text = response[i];
+			    $("#inpLinea").append(opcion);
+			}
+		},
+		error:function(){
+			alert("No se ha podido cargar la lista de Lineas");
+		}
+	});
+}
+
+
 
 function crearOpciones(response,idLista){
 	alert("Entre");
