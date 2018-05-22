@@ -38,12 +38,10 @@
 	});
 
 function agregarViaje(){
-	console.log("Mi fecha");
-	console.log(f);
+
+	var unafecha = "" + f.getDate()+"/"+f.getMonth()+"/"+f.getFullYear() + " * " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds()
 	var numTarjeta = parseInt($("#inpTarjeta").val());
-	var tipoTransporte = $("#inpTipoTransporte").val();
-	var linea = $("#inpLinea")
-	
+
 	if (isNaN(numTarjeta)) {
 		alert("No estas mandando numeros");
 	} else {
@@ -52,9 +50,16 @@ function agregarViaje(){
 				"numSerieTarjeta" : $("#inpTarjeta").val(),
 				"numSerieLectora": $("#inpLectora").val(),
 				"linea": $("#inpLinea").val(),
-				"estacion": $("#inpEstacion"),
-				"tipoTransporte":tipoTransporte,
-				"fechaHora": f
+				"estacion": $("#inpEstacion").val(),
+				"tipoTransporte":$("#inpTipoTransporte").val(),
+				"fdia": f.getDate(),
+				"fmes": f.getMonth(),
+				"fanio": f.getFullYear(),
+				"fhora": f.getHours(),
+				"fminuto": f.getMinutes(),
+				"fsegundo": f.getSeconds()
+
+				
 			},
 			url : "AgregarBoleto",
 			type : "POST",

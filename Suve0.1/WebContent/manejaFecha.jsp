@@ -19,15 +19,14 @@
 		var avance = 0;
 		$("#quefecha").html(lafecha);
 		var f = sumarAvance(lafecha, avance);
-		$("#quefecha").html(f.getDate()+"/"+f.getMonth()+"/"+f.getFullYear() + " Y la Hora: " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds());
+		$("#quefecha").html(f.getDate()+"/"+(f.getMonth()+1)+"/"+f.getFullYear() + " Y la Hora: " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds());
 		setInterval(function(){calcularFecha(avance); }, 1000);
-		
 		
 		$("#avanzar").click(function() {
 			avance = avance + sumarSegundos();
 			lafecha=new Date();
 			f = sumarAvance(lafecha, avance);
-			$("#quefecha").html(f.getDate()+"/"+f.getMonth()+"/"+f.getFullYear() + "<br>    " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds());
+			$("#quefecha").html(f.getDate()+"/"+(f.getMonth()+1)+"/"+f.getFullYear() + "<br>    " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds());
 		});
 		
 	});
@@ -37,7 +36,7 @@ function calcularFecha(avance){
 	//avance = avance + sumarSegundos();
 	lafecha=new Date();
 	f = sumarAvance(lafecha, avance);
-	$("#quefecha").html(f.getDate()+"/"+f.getMonth()+"/"+f.getFullYear() + "<br>    " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds());
+	$("#quefecha").html(f.getDate()+"/"+(f.getMonth()+1)+"/"+f.getFullYear() + "<br>    " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds());
 }
 //Pruebas con la fecha
 

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import dao.*;
@@ -45,7 +46,6 @@ public class ControladorAgregarBoleto extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println(request.getParameter("pedirLista"));
 		procesaSolicitud(request, response);
 	}
 	
@@ -55,13 +55,51 @@ public class ControladorAgregarBoleto extends HttpServlet {
 		// TODO Auto-generated method stub
 		int numSerieTarjeta = Integer.parseInt(request.getParameter("numSerieTarjeta"));
 		int numSerieLectora =Integer.parseInt(request.getParameter("numSerieLectora"));
-		
 		TarjetaDao tardao = new TarjetaDao();
 		
 		AdminDeLectoras manejador = new AdminDeLectoras();
-		//manejador.agregarBoleto(numSerieLectora,tardao.traerTarjeta(numSerieTarjeta), fechaHora, tramo);
-		System.out.println((request.getParameter("tipoTransporte")));
 		
+		GregorianCalendar fechaHora = new GregorianCalendar(Integer.parseInt(request.getParameter("fanio")), 
+															Integer.parseInt(request.getParameter("fmes")), 
+															Integer.parseInt(request.getParameter("fdia")), 
+															Integer.parseInt(request.getParameter("fhora")), 
+															Integer.parseInt(request.getParameter("fminuto")), 
+															Integer.parseInt(request.getParameter("fsegundo")));
+		
+		if(request.getParameter("tipoTransporte").equals("Colectivo")) {
+			//En estacion voy a tener el tramo
+			TramoColectivoDao tdao = new TramoColectivoDao();
+			List<TramoColectivo> list = tdao.traerTramoColectivo();
+			TramoColectivo tramo = null;
+			for(TramoColectivo ttemp:list) {
+				System.out.println(ttemp.toString());
+				if( request.getParameter("estacion").equals(ttemp.toString())){
+					tramo = ttemp;
+				}
+			}
+			if(tramo==null) {
+				System.out.println("Taradooo EHhh");
+			}
+			else {
+				try {
+					System.out.println("Agrego un boleto de colectivo");
+					manejador.agregarBoleto(numSerieLectora,tardao.traerTarjeta(numSerieTarjeta), fechaHora, tramo);
+				} catch (Exception e) {
+					System.out.println("Puto " + e);
+				}
+			}
+		}
+		else {
+			try {
+				System.out.println("Agrego unboleto de TS");
+				manejador.agregarBoleto(numSerieLectora,tardao.traerTarjeta(numSerieTarjeta), fechaHora);
+			} catch (Exception e){
+				System.out.println(e);
+			}
+		}
+		
+		
+		System.out.println(Funciones.TraeFechaYHora(fechaHora));
 	}
 	
 	

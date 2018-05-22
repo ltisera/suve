@@ -41,7 +41,7 @@ public class TramoColectivo {
 	public String toString() {
 		String string = kMin + "km - " + kMax + "km";
 		if (kMax <= 0)
-			string = "+"+ kMin + "km";
+			string = kMin + "km+" ;
 		return string;
 	}
 }

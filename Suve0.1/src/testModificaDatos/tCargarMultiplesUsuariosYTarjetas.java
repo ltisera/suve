@@ -15,7 +15,9 @@ public class tCargarMultiplesUsuariosYTarjetas {
 			udao.agregar(u);
 			float monto = (float) Math.random() * 100;
 			Tarjeta t = new Tarjeta(monto, u,100+i);
+			t.setActiva(true);
 			tardao.agregar(t);
+			
 		}
 	}
 

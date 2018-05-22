@@ -73,7 +73,7 @@ public class ControladorListaMovimiento extends HttpServlet {
 				if(m instanceof Recarga)
 					salida.println( " <th>Recarga</th>" );
 				else
-					salida.println("<th>Movimiento</th>");
+					salida.println("<th>Boleto</th>");
 				salida.println( " <th>"+m.getIdMovimiento()+"</th> " );
 				salida.println( " <th>"+Funciones.TraeFechaYHora(m.getFecha())+"</th> ");
 				salida.println( " <th>"+m.getMonto()+"</th> ");
