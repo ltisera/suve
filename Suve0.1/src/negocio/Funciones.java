@@ -35,31 +35,16 @@ public class Funciones {
 	}
 	
 	
-	public static  void calcularRedSube(List<Boleto> lstBoletosRedSube, Boleto nuevoBoleto)
+	public static  float calcularRedSube(List<Boleto> lstBoletosRedSube, int intRedSubeNuevoBoleto)
 	{
 		float porcentajeDescuento = 0;
-		int intRedSube = 1;
-		System.out.println("***Size de la lista: " + lstBoletosRedSube.size());
-		if (lstBoletosRedSube.size()!=0) {
-			int intRedSubeAnterior = lstBoletosRedSube.get(lstBoletosRedSube.size()-1).getIntRedSube() ;
-			if(lstBoletosRedSube.size()>0 && 
-				intRedSubeAnterior != 0 && 
-				intRedSubeAnterior <= lstBoletosRedSube.size() && 
-				intRedSubeAnterior < 6)
-			{
-				if(intRedSubeAnterior==1) { 
-					porcentajeDescuento = 0.5f;//50%
-				}
-				if(intRedSubeAnterior>=2) {
-					porcentajeDescuento = 0.75f;//75%
-				}
-				intRedSube = intRedSubeAnterior + 1;		
-			}
-		}
-		nuevoBoleto.setMonto(nuevoBoleto.getMonto()-(nuevoBoleto.getMonto()*porcentajeDescuento));
-		nuevoBoleto.setIntRedSube(intRedSube);
+		if(intRedSubeNuevoBoleto==1) 
+			porcentajeDescuento = 0.5f;//50%
+				
+		if(intRedSubeNuevoBoleto>=2) 
+			porcentajeDescuento = 0.75f;//75%	
 		
-		
+		return porcentajeDescuento;		
 	}
 
 	public static boolean tarjetaContieneTarifaSocial(Object[] array, TarifaSocial tarifa) 
