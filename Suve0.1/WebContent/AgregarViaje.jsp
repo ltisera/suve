@@ -38,7 +38,8 @@
 	});
 
 function agregarViaje(){
-
+	console.log("Mi fecha");
+	console.log(f);
 	var numTarjeta = parseInt($("#inpTarjeta").val());
 	var tipoTransporte = $("#inpTipoTransporte").val();
 	var linea = $("#inpLinea")
@@ -48,9 +49,12 @@ function agregarViaje(){
 	} else {
 		$.ajax({
 			data : {
-				"pedirLista" : "nahh",
-				"numTarjeta" : numTarjeta,
-				"tipoTransporte":tipoTransporte
+				"numSerieTarjeta" : $("#inpTarjeta").val(),
+				"numSerieLectora": $("#inpLectora").val(),
+				"linea": $("#inpLinea").val(),
+				"estacion": $("#inpEstacion"),
+				"tipoTransporte":tipoTransporte,
+				"fechaHora": f
 			},
 			url : "AgregarBoleto",
 			type : "POST",
