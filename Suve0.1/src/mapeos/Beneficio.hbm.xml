@@ -10,12 +10,12 @@
 
 		<set table="usuarioxbeneficio" name="usuarios" outer-join="true">
 			<key column="idBeneficio" />
-			<many-to-many column="idUsuario" class="datos.Usuario" />
+			<many-to-many column="idUsuario" class="datos.Usuario" fetch="join"/>
 		</set>
 
 		<set table="tarjetaxbeneficio" name="tarjetas" outer-join="true">
 			<key column="idBeneficio" />
-			<many-to-many column="idTarjeta" class="datos.Tarjeta" />
+			<many-to-many column="idTarjeta" class="datos.Tarjeta" fetch="join" />
 		</set>
 		<joined-subclass name="datos.TarifaSocial" table="tarifasocial">
 			<key column="idBeneficio" />

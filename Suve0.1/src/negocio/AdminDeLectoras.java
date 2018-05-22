@@ -14,7 +14,7 @@ import datos.TipoTransporte;
 import datos.TramoColectivo;
 import datos.TramoTrenYSubte;
 
-public class AdminDeLectoras 
+public class AdminDeLectoras
 {
 	LectoraDao lectoraDao = new LectoraDao();
 	TarjetaABM tarjetaAbm = new TarjetaABM();
@@ -65,6 +65,7 @@ public class AdminDeLectoras
 		List<Boleto> lstBoletosUltimas2horas = movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora);
 		Boleto boletoAnterior = movimientoAlta.traerUltimoBoleto(tarjeta.getIdTarjeta());
 		LectoraTrenYSubte lectora = traerLectoraTrenYSubte(numeroSerieLectora);
+		//Tramo Estacion - Null
 		TramoTrenYSubte tramo = tramosConsultas.traerTramoUnaEstacion(lectora.getEstacion().getIdEstacion());
 		Boleto nuevoBoleto = new Boleto(fechaHora,(Lectora)lectora,tramo.getSeccionViaje().getMonto(),tarjeta,tramo);
 		if(lectora.getEstacion().getTransporte().getTipoTransporte() == TipoTransporte.Tren)
@@ -78,18 +79,27 @@ public class AdminDeLectoras
 				tramo = tramosConsultas.traerTramoTrenYSubte(boletoAnterior.getTramoTrenYSubte().getEstacionA(),lectora.getEstacion());
 				nuevoBoleto.setTramoTrenYSubte(tramo);
 				nuevoBoleto.setMonto(-(boletoAnterior.getMonto()-tramo.getSeccionViaje().getMonto()));
+				System.out.println("El boleto con devolucion sin descuento: " + nuevoBoleto.getMonto());
 				nuevoBoleto.setIntRedSube(boletoAnterior.getIntRedSube());
-			} else
-				if(lstBoletosUltimas2horas.size()>0 && lstBoletosUltimas2horas.get(lstBoletosUltimas2horas.size()-1).getIntRedSube() < 6 &&
-				!(boletoAnterior != null && boletoAnterior.getTramoTrenYSubte().getEstacionA().getTransporte().getTipoTransporte()==TipoTransporte.Tren && boletoAnterior.getMonto()>0))
+			} else {
+				if(lstBoletosUltimas2horas.size()>0 && 
+					lstBoletosUltimas2horas.get(lstBoletosUltimas2horas.size()-1).getIntRedSube() < 6 &&
+					!(boletoAnterior != null && boletoAnterior.getTramoTrenYSubte().getEstacionA().getTransporte().getTipoTransporte()==TipoTransporte.Tren && boletoAnterior.getMonto()>0)
+					)
 					nuevoBoleto.setIntRedSube(lstBoletosUltimas2horas.get(lstBoletosUltimas2horas.size()-1).getIntRedSube()+1);
+			}
 		}
 		else 
 			if(lstBoletosUltimas2horas.size()>0 && lstBoletosUltimas2horas.get(lstBoletosUltimas2horas.size()-1).getIntRedSube() < 6 && (boletoAnterior == null || !(boletoAnterior.getTramoTrenYSubte().getEstacionA().getTransporte().getTipoTransporte()==TipoTransporte.Tren && boletoAnterior.getMonto()>0)))
 				nuevoBoleto.setIntRedSube(lstBoletosUltimas2horas.get(lstBoletosUltimas2horas.size()-1).getIntRedSube()+1);
 		if(calcularDescuentos)
 		{
-			nuevoBoleto.setMonto(nuevoBoleto.getMonto()-(nuevoBoleto.getMonto()*Funciones.calcularRedSube(lstBoletosUltimas2horas, nuevoBoleto.getIntRedSube())));
+			if(nuevoBoleto.getMonto()>0) {
+				nuevoBoleto.setMonto(nuevoBoleto.getMonto()-(nuevoBoleto.getMonto()*Funciones.calcularRedSube(lstBoletosUltimas2horas, nuevoBoleto.getIntRedSube())));
+			}
+			else {
+				nuevoBoleto.setMonto(nuevoBoleto.getMonto()+(nuevoBoleto.getMonto()*Funciones.calcularRedSube(lstBoletosUltimas2horas, nuevoBoleto.getIntRedSube())));
+			}
 			System.out.println("\n\nMonto red sube = "+nuevoBoleto.getMonto()+"   Red Sube = "+nuevoBoleto.getIntRedSube()+"\n");
 			TarifaSocial tarifa = tarjetaAbm.traerTarifaSocial();
 			if(Funciones.tarjetaContieneTarifaSocial(tarjeta.getBeneficios().toArray(), tarifa))

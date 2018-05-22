@@ -18,19 +18,16 @@ public class TestDETEST {
 		TransporteDao transdao = new TransporteDao();
 		TramoColectivoDao tramdao = new TramoColectivoDao();
 		
+		Tarjeta t = tdao.traerTarjeta(12l);
 		
-		Tarjeta t = tdao.traerTarjeta(3l);
-		t.setActiva(true);
-		tdao.actualizar(t);
 		System.out.println("Monto de t: " + t.getMonto());
 		/*
-		//Colectivo1
 		try {
-			adm.agregarBoleto(lecdao.traerLectorasPorLinea(transdao.traerTransporte("800").getIdTransporte()).get(1).getNumeroSerieLectora()  , t, new GregorianCalendar(), tramdao.traerTramoColectivo(2l));
+			adm.agregarBoleto(lecdao.traerLectorasPorLinea(transdao.traerTransporte("271").getIdTransporte()).get(1).getNumeroSerieLectora()  , t, new GregorianCalendar(), tramdao.traerTramoColectivo(2l));
 		}catch (Exception e){
 			System.out.println(e);
 		}
-		/*
+		
 		System.out.println("ACA SE BAJO DEL BONDY");
 		/*
 		//Colectivo2
@@ -50,16 +47,17 @@ public class TestDETEST {
 			System.out.println(e);
 		}
 		*/
+		
 		//Tren Bajada
 		
-		Estacion edebajada = edao.traerEstacion("Adrogue");
+		Estacion edebajada = edao.traerEstacion("Once");
 		try {
 			adm.agregarBoleto(lecdao.traerLectorasPorEstacion(edebajada.getIdEstacion()).get(1).getNumeroSerieLectora(), t, new GregorianCalendar());
 		}catch (Exception e){
 			System.out.println(e);
 		}
-		
 		System.out.println("Monto de t: " + t.getMonto());
+		
 	}
 		
 

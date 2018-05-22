@@ -9,17 +9,19 @@ public class Boleto extends Movimiento{
 	
 	public Boleto() {}
 	
+	//Constructor De colectivo (con red suce con parametro)
 	public Boleto(GregorianCalendar fecha, Lectora lectora, float monto, Tarjeta tarjeta, int intRedSube, TramoColectivo tramoColectivo) {
 		super(fecha, lectora, monto, tarjeta);
 		this.intRedSube = intRedSube;
 		this.tramoColectivo = tramoColectivo;
 	}
-	
+	//Constructor De colectivo (sin red suce con parametro)
 	public Boleto(GregorianCalendar fecha, Lectora lectora, float monto, Tarjeta tarjeta, TramoColectivo tramoColectivo) {
 		super(fecha, lectora, monto, tarjeta);
+		this.intRedSube=1;
 		this.tramoColectivo = tramoColectivo;
 	}
-
+	//Constructor de Tren
 	public Boleto(GregorianCalendar fecha, Lectora lectora, float monto, Tarjeta tarjeta, TramoTrenYSubte tramoTrenYSubte) {
 		super(fecha, lectora, monto, tarjeta);
 		this.intRedSube = 1;

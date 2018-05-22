@@ -13,7 +13,7 @@
 
 		<set table="tarjetaxbeneficio" name="beneficios" outer-join="true">
 			<key column="idTarjeta" />
-			<many-to-many column="idBeneficio" class="datos.Beneficio" />
+			<many-to-many column="idBeneficio" class="datos.Beneficio" fetch="join"/>
 		</set>
 
 	</class>

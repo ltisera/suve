@@ -38,10 +38,10 @@ public class Funciones {
 	public static  float calcularRedSube(List<Boleto> lstBoletosRedSube, int intRedSubeNuevoBoleto)
 	{
 		float porcentajeDescuento = 0;
-		if(intRedSubeNuevoBoleto==1) 
+		if(intRedSubeNuevoBoleto==2) 
 			porcentajeDescuento = 0.5f;//50%
 				
-		if(intRedSubeNuevoBoleto>=2) 
+		if(intRedSubeNuevoBoleto>=3) 
 			porcentajeDescuento = 0.75f;//75%	
 		
 		return porcentajeDescuento;		
