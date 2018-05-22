@@ -13,14 +13,15 @@ public class iniciaBaseDeDatos {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		long startTime = System.currentTimeMillis() ;
 		agregaTransporteEstacion();
 		agregaLectora();
 		agregaSeccionTramoColectivo();
 		tCargarMultiplesUsuariosYTarjetas.main(args);
 		testCargarMovimientosEnBaseDeDatos.main(args);
-		System.out.println("Base inicializada");
 		TestAgregarTramosDeEntradaTrenYSubte.main(args);
-
+		long endTime = System.currentTimeMillis()  - startTime; 
+		System.out.println("Base inicializada en: " + endTime);
 	}
 
 	public static void agregaTransporteEstacion() {
@@ -38,7 +39,7 @@ public class iniciaBaseDeDatos {
 		edao.agregar(new Estacion(t, "Adrogue"));
 		edao.agregar(new Estacion(t, "Temperley"));
 		edao.agregar(new Estacion(t, "Lomas"));
-		edao.agregar(new Estacion(t, "Bandfield"));
+		edao.agregar(new Estacion(t, "Banfield"));
 		edao.agregar(new Estacion(t, "Escalada"));
 		edao.agregar(new Estacion(t, "Lanus"));
 		edao.agregar(new Estacion(t, "Gerli"));
@@ -207,7 +208,7 @@ public class iniciaBaseDeDatos {
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Adrogue"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Temperley"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lomas"),s2));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Bandfield"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Banfield"),s2));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Escalada"),s2));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lanus"),s2));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Gerli"),s2));
@@ -220,7 +221,7 @@ public class iniciaBaseDeDatos {
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Adrogue"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lomas"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Temperley"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Bandfield"),s2));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Banfield"),s2));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Escalada"),s2));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lanus"),s2));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Gerli"),s2));
@@ -231,7 +232,7 @@ public class iniciaBaseDeDatos {
 		estacionA = edao.traerEstacion("Burzaco");
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Adrogue"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lomas"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Bandfield"),s1));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Banfield"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Escalada"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lanus"),s2));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Gerli"),s2));
@@ -242,7 +243,7 @@ public class iniciaBaseDeDatos {
 		estacionA = edao.traerEstacion("Adrogue");
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Temperley"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lomas"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Bandfield"),s1));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Banfield"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Escalada"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lanus"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Gerli"),s2));
@@ -252,7 +253,7 @@ public class iniciaBaseDeDatos {
 
 		estacionA = edao.traerEstacion("Temperley");
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lomas"),s1));
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Bandfield"),s1));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Banfield"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Escalada"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lanus"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Gerli"),s1));
@@ -261,7 +262,7 @@ public class iniciaBaseDeDatos {
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Pza. Constitucion"),s2));
 
 		estacionA = edao.traerEstacion("Lomas");
-		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Bandfield"),s1));
+		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Banfield"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Escalada"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lanus"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Gerli"),s1));
@@ -269,7 +270,7 @@ public class iniciaBaseDeDatos {
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Hipolito Yrigoyen"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Pza. Constitucion"),s2));
 
-		estacionA = edao.traerEstacion("Bandfield");
+		estacionA = edao.traerEstacion("Banfield");
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Escalada"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Lanus"),s1));
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Gerli"),s1));

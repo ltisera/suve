@@ -13,27 +13,15 @@ function traerListaTarjetas(){
 			url:"TraerListas",
 			type:"POST",
 			success:function(response){
-				/*
-				var opcion = document.createElement("option");
-				opcion.text = "Kiwi";
-			    $("#inpTipoTransporte").append("Kiwo");
-			    opcion.text = "naranja";
-			    $("#inpTipoTransporte").append(opcion);
-			    opcion.text = "pepino";
-			    $("#inpTipoTransporte").append(opcion);
-			    /*/
 				console.log(response);
-			    console.log(response.item1);
-			    
 				for(i in response){
 					var opcion = document.createElement("option");
 					opcion.text = response[i];
-				    $("#lstTarjetas").append(opcion);
-				    
+				    $("#lstTarjetas").append(opcion);    
 				}
 			},
 			error:function(response){
-				alert("LA PUTA QUE TE PARIIOO");
+				alert("No se ha podido cargar la lista de Tarjetas");
 			}
 		});
 }
@@ -48,23 +36,16 @@ function traerListaLineas(){
 		type:"POST",
 		success:function(response){
 			console.log(response);
-			var x = document.getElementById("lstLinea");
-			$("#lstLinea").empty();
+			$("#inpLinea").empty();
 			for(i in response){
 				var opcion = document.createElement("option");
 				opcion.text = response[i];
-			    $("#lstLinea").append(opcion);
-			    
+			    $("#inpLinea").append(opcion);
 			}
-
-			
-			
-			
 		},
 		error:function(){
-			alert("LA sdfsdIOO");
+			alert("No se ha podido cargar la lista de Lineas");
 		}
-		
 	});
 }
 
@@ -79,11 +60,11 @@ function traerListaEstaciones(){
 		type:"POST",
 		success:function(response){
 			console.log(response);
-			$("#lstEstaciones").empty();
+			$("#inpEstaciones").empty();
 			for(i in response){
 				var opcion = document.createElement("option");
 				opcion.text = response[i];
-			    $("#lstEstaciones").append(opcion);
+			    $("#inpEstaciones").append(opcion);
 			    
 			}
 
@@ -105,6 +86,8 @@ function traerListaLectoras(){
 		},
 		url:"TraerListas",
 		type:"POST",
+		success:crearOpciones(response,"\"#inpLectora\""),
+		/*
 		success:function(response){
 			console.log(response);
 			$("#lstLectora").empty();
@@ -112,13 +95,26 @@ function traerListaLectoras(){
 				var opcion = document.createElement("option");
 				opcion.text = response[i];
 			    $("#lstLectora").append(opcion);
-			    
 			}
-
 		},
+		*/
 		error:function(){
 			alert("Error en carga de lista de lectoras");
 		}
 		
 	});
+}
+
+function crearOpciones(response,idLista){
+	alert("Entre");
+	console.log(response);
+	$(idLista).empty();
+	var opcion = document.createElement("option");
+	opcion.text = "Elija una opcion:";
+    $(idLista).append(opcion);
+	for(i in response){
+		var opcion = document.createElement("option");
+		opcion.text = response[i];
+	    $(idLista).append(opcion);
+	}
 }
