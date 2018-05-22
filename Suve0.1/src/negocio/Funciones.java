@@ -39,7 +39,7 @@ public class Funciones {
 	{
 		float porcentajeDescuento = 0;
 		int intRedSube = 1;
-		if(boletosRedSube.size()>0 && boletosRedSube.get(boletosRedSube.size()-1).getIntRedSube() <= boletosRedSube.size() && boletosRedSube.get(boletosRedSube.size()-1).getIntRedSube() < 6)
+		if(boletosRedSube.size()>0 && boletosRedSube.get(boletosRedSube.size()-1).getIntRedSube() != 0 && boletosRedSube.get(boletosRedSube.size()-1).getIntRedSube() <= boletosRedSube.size() && boletosRedSube.get(boletosRedSube.size()-1).getIntRedSube() < 6)
 		{
 			if(boletosRedSube.get(boletosRedSube.size()-1).getIntRedSube()==1) porcentajeDescuento = 0.5f;//50%
 			if(boletosRedSube.get(boletosRedSube.size()-1).getIntRedSube()>=2) porcentajeDescuento = 0.75f;//75%
@@ -60,5 +60,15 @@ public class Funciones {
 		return contieneTarifa;
 		
 		
+	}
+
+	public static boolean tiempoDeViajeValido(GregorianCalendar fechaAnterior, GregorianCalendar fechaActual) 
+	{
+		return sonFechasIguales(fechaAnterior, fechaActual) && fechaAnterior.get(Calendar.HOUR) > (fechaActual.get(Calendar.HOUR)-2) && fechaAnterior.get(Calendar.HOUR) <= fechaActual.get(Calendar.HOUR);
+	}
+	
+	public static boolean sonFechasIguales(GregorianCalendar fechaAnterior,GregorianCalendar fechaActual)
+	{
+		return (fechaAnterior.get(Calendar.YEAR)==fechaActual.get(Calendar.YEAR) && fechaAnterior.get(Calendar.MONTH)==fechaActual.get(Calendar.MONTH) && fechaAnterior.get(Calendar.DAY_OF_MONTH)==fechaActual.get(Calendar.DAY_OF_MONTH));
 	}
 }

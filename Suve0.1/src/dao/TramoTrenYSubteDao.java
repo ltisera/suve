@@ -103,7 +103,6 @@ public class TramoTrenYSubteDao {
 		TramoTrenYSubte objeto = null;
 		try {
 			iniciaOperacion();
-			//objeto = (TramoTrenYSubte) session.createQuery("from TramoTrenYSubte t inner join fetch t.seccionViaje inner join fetch t.estacionA ea inner join fetch ea.transporte inner join fetch t.estacionB where t.estacionA = "+idEstacionA+" and t.estacionB is null").uniqueResult();
 			objeto = (TramoTrenYSubte) session.createQuery("from TramoTrenYSubte t inner join fetch t.seccionViaje inner join fetch t.estacionA ea inner join fetch ea.transporte where t.estacionA = "+idEstacionA+" and t.estacionB is null").uniqueResult();
 		} finally {
 			session.close();

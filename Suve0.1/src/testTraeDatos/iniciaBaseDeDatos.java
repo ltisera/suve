@@ -5,6 +5,7 @@ import java.util.List;
 
 import dao.*;
 import datos.*;
+import testModificaDatos.TestAgregarTramosDeEntradaTrenYSubte;
 import testModificaDatos.tCargarMultiplesUsuariosYTarjetas;
 import testModificaDatos.testCargarMovimientosEnBaseDeDatos;
 
@@ -18,6 +19,7 @@ public class iniciaBaseDeDatos {
 		tCargarMultiplesUsuariosYTarjetas.main(args);
 		testCargarMovimientosEnBaseDeDatos.main(args);
 		System.out.println("Base inicializada");
+		TestAgregarTramosDeEntradaTrenYSubte.main(args);
 
 	}
 
@@ -299,6 +301,8 @@ public class iniciaBaseDeDatos {
 
 		estacionA = edao.traerEstacion("Hipolito Yrigoyen");
 		tramodao.agregar(new TramoTrenYSubte(estacionA,edao.traerEstacion("Pza. Constitucion"),s1));
+		
+		
 
 	}
 

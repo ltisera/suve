@@ -48,31 +48,36 @@ public class AdminDeLectoras
 	
 	public void agregarBoleto(int numeroSerieLectora, Tarjeta tarjeta, GregorianCalendar fechaHora)throws Exception
 	{
+		boolean calcularDescuentos = true;
 		if(tarjeta == null)
 			throw new Exception("ERROR: La tarjeta no existe.");
 		if(!tarjeta.isActiva()) 
 			throw new Exception("ERROR: tarjeta inactiva.");
 		LectoraTrenYSubte lectora = traerLectoraTrenYSubte(numeroSerieLectora);
 		TramoTrenYSubte tramo = tramosConsultas.traerTramoUnaEstacion(lectora.getEstacion().getIdEstacion());
-		System.out.println("\n------"+tramo+"-----\n");
+		System.out.println("\n---tramo---"+tramo+"-----\n");
 		Boleto nuevoBoleto = new Boleto(fechaHora,(Lectora)lectora,tramo.getSeccionViaje().getMonto(),tarjeta,tramo);
 		if(lectora.getEstacion().getTransporte().getTipoTransporte() == TipoTransporte.Tren)
 		{
 			Boleto boletoAnterior = movimientoAlta.traerUltimoBoleto(tarjeta.getIdTarjeta());
-			if((boletoAnterior!=null 
-				&& boletoAnterior.getTramoTrenYSubte().getEstacionA().getTransporte().equals(lectora.getEstacion().getTransporte()) 
-				&& boletoAnterior.getTramoTrenYSubte().getEstacionB()==null))
-			{
-					tramo = tramosConsultas.traerTramoTrenYSubte(boletoAnterior.getTramoTrenYSubte().getEstacionA(),lectora.getEstacion());
-					nuevoBoleto.setMonto(-(boletoAnterior.getMonto()-tramo.getSeccionViaje().getMonto()));
+			calcularDescuentos = boletoAnterior!=null && boletoAnterior.getTramoTrenYSubte().getEstacionA().getTransporte().equals(lectora.getEstacion().getTransporte()) &&
+					Funciones.tiempoDeViajeValido(boletoAnterior.getFecha(), fechaHora) && !lectora.getEstacion().equals(boletoAnterior.getTramoTrenYSubte().getEstacionA());
+			if(calcularDescuentos)
+			{			
+				System.out.println("\n-------calculo descuentos\n");
+				tramo = tramosConsultas.traerTramoTrenYSubte(boletoAnterior.getTramoTrenYSubte().getEstacionA(),lectora.getEstacion());
+				nuevoBoleto.setMonto(-(boletoAnterior.getMonto()-tramo.getSeccionViaje().getMonto()));
 			}
 		}
-		System.out.println("\n\nMonto sin descuentos = "+nuevoBoleto.getMonto()+"   Red Sube = "+nuevoBoleto.getIntRedSube()+"\n");
-		Funciones.calcularRedSube(movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora), nuevoBoleto);
-		System.out.println("\n\nMonto red sube = "+nuevoBoleto.getMonto()+"   Red Sube = "+nuevoBoleto.getIntRedSube()+"\n");
-		TarifaSocial tarifa = tarjetaAbm.traerTarifaSocial();
-		if(Funciones.tarjetaContieneTarifaSocial(tarjeta.getBeneficios().toArray(), tarifa))
-			Funciones.calcularTarifaSocial(nuevoBoleto, tarifa);
+		if(calcularDescuentos)
+		{
+			System.out.println("\n\nMonto sin descuentos = "+nuevoBoleto.getMonto()+"\n");
+			Funciones.calcularRedSube(movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora), nuevoBoleto);
+			System.out.println("\n\nMonto red sube = "+nuevoBoleto.getMonto()+"   Red Sube = "+nuevoBoleto.getIntRedSube()+"\n");
+			TarifaSocial tarifa = tarjetaAbm.traerTarifaSocial();
+			if(Funciones.tarjetaContieneTarifaSocial(tarjeta.getBeneficios().toArray(), tarifa))
+				Funciones.calcularTarifaSocial(nuevoBoleto, tarifa);
+		}		
 		if(tarjeta.getMonto() - nuevoBoleto.getMonto() < -25) 
 			throw new Exception("ERROR: saldo insuficiente");
 		movimientoAlta.agregarBoleto(nuevoBoleto);

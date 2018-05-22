@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import datos.Estacion;
+import datos.TipoTransporte;
 
 public class EstacionDao {
 	private static Session session;
@@ -99,6 +100,18 @@ public class EstacionDao {
 		try {
 			iniciaOperacion();
 			lista = session.createQuery("from Estacion e where e.transporte="+idTransporte).list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	
+	
+	public List<Estacion> traerEstacionPorTipoTransporte(TipoTransporte tipoTransporte) throws HibernateException {
+		List<Estacion> lista = null ;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Estacion e inner join fetch e.transporte t where t.tipoTransporte="+tipoTransporte.ordinal()).list();
 		} finally {
 			session.close();
 		}

@@ -214,7 +214,7 @@ public class MovimientoDao {
 		try 
 		{
 			iniciaOperacion();
-			objeto = (Boleto) session.createQuery("from Boleto b inner join fetch b.tramoTrenYSubte inner join fetch b.tarjeta where b.fecha in (select max(bb.fecha) from Boleto bb where bb.tarjeta ="+idTarjeta+")").uniqueResult();
+			objeto = (Boleto) session.createQuery("from Boleto b inner join fetch b.tramoTrenYSubte t inner join fetch t.seccionViaje inner join fetch t.estacionA ea inner join fetch ea.transporte inner join fetch b.tarjeta where b.idMovimiento in (select max(bb.idMovimiento) from Boleto bb where bb.tarjeta ="+idTarjeta+" and t.estacionB is null)").uniqueResult();
 		} finally {
 			session.close();
 		}

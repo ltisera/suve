@@ -29,15 +29,6 @@ public class TestAgregarBoletoTren {
 		TramoTrenYSubteDao tcdao = new TramoTrenYSubteDao();
 		TarjetaABM tabm = new TarjetaABM();
 		
-		/*
-		estDao.agregar(new Estacion(tdao.traerTransporte(1l), "Banfield"));
-		dao.agregar(new LectoraTrenYSubte(estDao.traerEstacion(2l), 101202));
-		sdao.agregar(new SeccionViaje("Seccion Maxima Tren",10));
-		sdao.agregar(new SeccionViaje("Seccion 2 Tren", 4));
-		tcdao.agregar(new TramoTrenYSubte(dao.traerLectoraTrenYSubte(101202).getEstacion(), null, sdao.traerSeccionViaje(2l)));
-		tcdao.agregar(new TramoTrenYSubte(dao.traerLectoraTrenYSubte(3331234).getEstacion(), dao.traerLectoraTrenYSubte(101202).getEstacion(), sdao.traerSeccionViaje(3l)));
-		*/
-		
 		Tarjeta tarjeta = tabm.traerTarjetaConBeneficios(117);
 		tarjeta.setActiva(true);
 		tabm.modificarTarjeta(tarjeta);
