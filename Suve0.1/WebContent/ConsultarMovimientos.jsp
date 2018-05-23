@@ -13,7 +13,7 @@
     <script type="text/javascript" src="js/TraemeLasListas.js"></script>
     <script>
     $(document).ready(function(){
-    	traerListaTarjetasConsulta();
+    	//traerListaTarjetasConsulta();
         $("#consultarMovimientos").click(consultarMov);
     });
 
@@ -72,7 +72,7 @@ function traerListaTarjetasConsulta(){
 			<h1>Consultas de Movimientos</h1>
 			<div>
 				<label>Ingrese Tarjeta: </label>
-				<input id="inpTarjetaCon" name="numTarjetaCon" list="lstTarjetasConsulta"></input>
+				<input id="inpTarjetaCon" name="numTarjetaCon" list="lstTarjetas"></input>
 				<datalist id="lstTarjetasConsulta"></datalist>
 				
 				<br>

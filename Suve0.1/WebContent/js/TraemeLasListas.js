@@ -18,7 +18,7 @@ function traerListaTarjetas(){
 				for(i in response){
 					var opcion = document.createElement("option");
 					opcion.text = response[i];
-				    $("#lstTarjetasConsulta").append(opcion);
+				    //$("#lstTarjetasConsulta").append(opcion);
 				    $("#lstTarjetas").append(opcion);
 					   
 				}

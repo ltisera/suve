@@ -15,16 +15,8 @@
 	$(document).ready(function() {
 		/*Ocultamos los elementos al inicio*/
 		ocultarElementos();
-		//traerListaTarjetas();
+		traerListaTarjetas();
 		$("#colBolMue").hide();
-		
-		/*Seccion de pruebas
-		var x = document.getElementById("mySelect");
-	    var option = document.createElement("option");
-	    option.text = "Kiwi";
-	    x.add(option);
-		*/
-		
 
 		/*Cambios en los inputs*/
 		$("#inpTarjeta").change(cambiaTarjeta);
