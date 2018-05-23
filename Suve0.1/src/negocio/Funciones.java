@@ -35,7 +35,7 @@ public class Funciones {
 	}
 	
 	
-	public static  float calcularRedSube(List<Boleto> lstBoletosRedSube, int intRedSubeNuevoBoleto)
+	public static  float calcularRedSube(int intRedSubeNuevoBoleto)
 	{
 		float porcentajeDescuento = 0;
 		if(intRedSubeNuevoBoleto==2) 
@@ -61,11 +61,6 @@ public class Funciones {
 	public static boolean tiempoDeViajeValido(GregorianCalendar fechaAnterior, GregorianCalendar fechaActual) 
 	{
 		//Hacer segundos(Fecha Actual) - segundos(Fecha anterior) <=  7200 segundos
-		return sonFechasIguales(fechaAnterior, fechaActual) && fechaAnterior.get(Calendar.HOUR) > (fechaActual.get(Calendar.HOUR)-2) && fechaAnterior.get(Calendar.HOUR) <= fechaActual.get(Calendar.HOUR);
-	}
-	
-	public static boolean sonFechasIguales(GregorianCalendar fechaAnterior,GregorianCalendar fechaActual)
-	{
-		return (fechaAnterior.get(Calendar.YEAR)==fechaActual.get(Calendar.YEAR) && fechaAnterior.get(Calendar.MONTH)==fechaActual.get(Calendar.MONTH) && fechaAnterior.get(Calendar.DAY_OF_MONTH)==fechaActual.get(Calendar.DAY_OF_MONTH));
+		return (fechaActual.getTimeInMillis()-fechaAnterior.getTimeInMillis())<7200000;
 	}
 }
