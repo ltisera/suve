@@ -9,15 +9,15 @@
 		<property column="fecha" name="fecha" type="calendar" />
 		<property column="monto" name="monto" type="float" />
 
-		<many-to-one column="idTarjeta" name="tarjeta" class="datos.Tarjeta" not-null="true" />
-		<many-to-one column="idLectora" name="lectora" class="datos.Lectora" not-null="true" />
+		<many-to-one column="idTarjeta" name="tarjeta" class="datos.Tarjeta" not-null="true" fetch="join"/>
+		<many-to-one column="idLectora" name="lectora" class="datos.Lectora" not-null="true" fetch="join"/>
 	
 		<joined-subclass name="datos.Boleto" table="Boleto">
 			<key column="idMovimiento" />
 			<property column="intRedSube" name="intRedSube" type="int" />
 			
-			<many-to-one column="idTramoTrenYSubte" name="tramoTrenYSubte" class="datos.TramoTrenYSubte" not-null="false" />
-			<many-to-one column="idTramoColectivo" name="tramoColectivo" class="datos.TramoColectivo" not-null="false" />
+			<many-to-one column="idTramoTrenYSubte" name="tramoTrenYSubte" class="datos.TramoTrenYSubte" not-null="false" fetch="join"/>
+			<many-to-one column="idTramoColectivo" name="tramoColectivo" class="datos.TramoColectivo" not-null="false" fetch="join"/>
 
 		</joined-subclass>
 

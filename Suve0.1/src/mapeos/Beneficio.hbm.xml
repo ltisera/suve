@@ -8,12 +8,12 @@
 		</id>
 		<property column="nombre" name="nombre" type="string" />
 
-		<set table="usuarioxbeneficio" name="usuarios" outer-join="true">
+		<set table="usuarioxbeneficio" name="usuarios" outer-join="true" fetch="join">
 			<key column="idBeneficio" />
 			<many-to-many column="idUsuario" class="datos.Usuario" fetch="join"/>
 		</set>
 
-		<set table="tarjetaxbeneficio" name="tarjetas" outer-join="true">
+		<set table="tarjetaxbeneficio" name="tarjetas" outer-join="true" fetch="join">
 			<key column="idBeneficio" />
 			<many-to-many column="idTarjeta" class="datos.Tarjeta" fetch="join" />
 		</set>

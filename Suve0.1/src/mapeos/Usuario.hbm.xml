@@ -18,9 +18,9 @@
 			</type>
 		</property>
 		
-		<set table="usuarioxbeneficio" name="beneficios" outer-join="true">
+		<set table="usuarioxbeneficio" name="beneficios" outer-join="true" fetch="join">
 			<key column="idUsuario"/>
-			<many-to-many column="idBeneficio" class="datos.Beneficio"/>
+			<many-to-many column="idBeneficio" class="datos.Beneficio" fetch="join"/>
 		</set>
 		
 	</class>

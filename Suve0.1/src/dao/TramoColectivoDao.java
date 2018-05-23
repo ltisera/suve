@@ -77,7 +77,7 @@ public class TramoColectivoDao {
 		List<TramoColectivo> lista= null ;
 		try {
 			iniciaOperacion();
-			lista= session.createQuery( "from TramoColectivo t order by t.idTramoColectivo asc" ).list();
+			lista= session.createQuery( "from TramoColectivo t inner join fetch t.seccionViaje order by t.idTramoColectivo asc" ).list();
 		} finally {
 			session.close();
 		}

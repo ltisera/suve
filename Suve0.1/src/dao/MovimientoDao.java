@@ -116,7 +116,7 @@ public class MovimientoDao {
 		List<Movimiento> lista = null;
 		try {
 			iniciaOperacion();
-			lista = session.createQuery("from Movimiento m").list();
+			lista = session.createQuery("from Movimiento m order by m.fecha desc ").list();
 		} finally {
 			session.close();
 		}
@@ -190,6 +190,19 @@ public class MovimientoDao {
 		}
 		return lista;
 	}
+	
+	public List<Movimiento> traerMovimientosPorTarjeta(long idTarjeta) 
+	{
+		List<Movimiento> lista = new ArrayList<Movimiento>();
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Movimiento m join fetch m.lectora where m.tarjeta=" + idTarjeta+" order by m.fecha desc ").list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+
 
 	public List<Boleto> trerBoletosRedSube(long idTarjeta, GregorianCalendar fechaA) 
 	{

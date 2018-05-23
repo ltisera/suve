@@ -10,45 +10,54 @@
 <TITLE>SuViajes</TITLE>
 
     <script src="js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="js/TraemeLasListas.js"></script>
     <script>
     $(document).ready(function(){
-    	 $("#consultarBoleto").click(function() {
-			var boleto = $("#boleto").val();
-			console.log("Entro a aj");
-			$.ajax({
-				data: {"boleto":boleto},
-				url: "MostrarBoleto",
-				type:"POST",
-				beforeSend: function () {
-                    $("#divMostrarBoleto").html("Procesando, espere por favor...");
-	            },
-	            success:  function (response) {
-		            	$("#divMostrarBoleto").html(response);
-	            },
-	            error:	function (response) {
-	                    alert(response);
-	            }
-			});
-    	});
-    	 $("#consultarMovimientos").click(function(){
-    		 $.ajax({
-    			 url: "ListarMovimientos",
-    			 type: "POST",
-    			 beforeSend: function () {
-                     $("#divMostrarMovimientos").html("Procesando, espere por favor...");
- 	            },
- 	            success:  function (response) {
- 	            		$("#divMostrarBoleto").html("");
- 	                    $("#divMostrarMovimientos").html(response);
- 	            },
- 	            error:	function () {
- 	                    alert("DAAA MISHI");
- 	            }
-    		 });
-    	 
-   			 
-		});
+    	traerListaTarjetasConsulta();
+        $("#consultarMovimientos").click(consultarMov);
     });
+
+
+    
+function consultarMov(){
+	$.ajax({
+		data:{
+			"tarjeta":$("#inpTarjetaConsulta").val()
+			},
+		url: "ListarMovimientos",
+		type:"POST",
+		success: function(response){
+			$("#divMostrarMovimientos").html(response);
+		},
+		error: function(response){
+			alert("la pucha e icho");
+		}
+			
+	});
+	
+}
+
+function traerListaTarjetasConsulta(){
+	$.ajax({
+		data:{
+			"lista": "Tarjetas"
+			},
+		url:"TraerListas",
+		async: false,
+		type:"POST",
+		success:function(response){
+			console.log(response);
+			for(i in response){
+				var opcion = document.createElement("option");
+				opcion.text = response[i];
+			    $("#lstTarjetasConsulta").append(opcion);    
+			}
+		},
+		error:function(response){
+			alert("Con error Tarjetas");
+		}
+	});
+}
     </script>
 
 
@@ -60,23 +69,18 @@
 		
 		</div>
 		<div class="container">
-			<h1>Busqueda de 1 boletito</h1>
-			<form class="navbar-form navbar-right">
-				<div class="form-group">
-					<label for="boleto">Este es DIOS:</label> 
-					<INPUT id="boleto" name="boleto">
-				</div>
-				<INPUT id="consultarBoleto" type="button" class="btn btn-success" value="Consultar"/>
-			</form>
+			<h1>Consultas de Movimientos</h1>
+			<div>
+				<label>Ingrese Tarjeta: </label>
+				<input id="inpTarjetaCon" name="numTarjetaCon" list="lstTarjetasConsulta"></input>
+				<datalist id="lstTarjetasConsulta"></datalist>
+				
+				<br>
+				<INPUT id="consultarMovimientos" type="button" class="btn btn-success" value="Consultar"/>
+			</div>
 		</div>
+
 		<div class="container">
-			<div id="divMostrarBoleto">
-			</div> 
-			
-			
-		</div>
-		<div class="container">
-			<input id = "consultarMovimientos" type="button" class ="btn btn-succes" value = "Lista los movimientos pa!"/>
 			<div id="divMostrarMovimientos">
 			</div>
 		</div>

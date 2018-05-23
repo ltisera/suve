@@ -11,13 +11,16 @@ function traerListaTarjetas(){
 				"lista": "Tarjetas",
 				},
 			url:"TraerListas",
+			async: false,
 			type:"POST",
 			success:function(response){
 				console.log(response);
 				for(i in response){
 					var opcion = document.createElement("option");
 					opcion.text = response[i];
-				    $("#lstTarjetas").append(opcion);    
+				    $("#lstTarjetasConsulta").append(opcion);
+				    $("#lstTarjetas").append(opcion);
+					   
 				}
 			},
 			error:function(response){

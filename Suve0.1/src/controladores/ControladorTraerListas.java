@@ -63,6 +63,8 @@ public class ControladorTraerListas extends HttpServlet {
 			traerListaLectoras(request, response);
 		}
 		if(request.getParameter("lista").equals("Tarjetas")) {
+			System.out.println("generando lista de tarjetas");
+			
 			traerListaTarjetas(request, response);
 		}
 		
@@ -133,7 +135,8 @@ public class ControladorTraerListas extends HttpServlet {
 	}
 	protected void traerListaTarjetas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			
+			long startTime = System.currentTimeMillis() ;
+			System.out.println("Arranco en " + startTime);
 			response.setStatus(200);
 			response.setContentType("application/json");
 			PrintWriter salida = response.getWriter();
@@ -153,6 +156,8 @@ public class ControladorTraerListas extends HttpServlet {
 			//salida.println( "[\"manzaa\",\"pera\",\"frutilsda\"]" );
 			System.out.println(miResponse);
 			salida.println( miResponse);
+			long endTime = System.currentTimeMillis()  - startTime; 
+			System.out.println("Tardo: " + endTime);
 			//Esto No es jason?
 		
 		} catch (Exception e){

@@ -15,7 +15,7 @@
 	$(document).ready(function() {
 		/*Ocultamos los elementos al inicio*/
 		ocultarElementos();
-		traerListaTarjetas();
+		//traerListaTarjetas();
 		$("#colBolMue").hide();
 		
 		/*Seccion de pruebas
@@ -72,7 +72,7 @@ function agregarViaje(){
 				$("#divMostrarBoleto").html(response);
 			},
 			error : function(response) {
-				alert("Mal alla")
+				alert("Error al intentar agregar el viaje")
 			}
 		});
 	}

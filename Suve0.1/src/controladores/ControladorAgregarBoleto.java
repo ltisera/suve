@@ -38,6 +38,7 @@ public class ControladorAgregarBoleto extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("Entras1");
 		procesaSolicitud(request, response);
 	}
 
@@ -46,6 +47,7 @@ public class ControladorAgregarBoleto extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("Entras2");
 		procesaSolicitud(request, response);
 	}
 	
@@ -56,7 +58,7 @@ public class ControladorAgregarBoleto extends HttpServlet {
 		int numSerieTarjeta = Integer.parseInt(request.getParameter("numSerieTarjeta"));
 		int numSerieLectora =Integer.parseInt(request.getParameter("numSerieLectora"));
 		TarjetaDao tardao = new TarjetaDao();
-		
+		System.out.println("Entras");
 		AdminDeLectoras manejador = new AdminDeLectoras();
 		
 		GregorianCalendar fechaHora = new GregorianCalendar(Integer.parseInt(request.getParameter("fanio")), 
@@ -82,8 +84,12 @@ public class ControladorAgregarBoleto extends HttpServlet {
 			}
 			else {
 				try {
-					System.out.println("Agrego un boleto de colectivo");
-					manejador.agregarBoleto(numSerieLectora,tardao.traerTarjeta(numSerieTarjeta), fechaHora, tramo);
+					System.out.println("Agrego un boleto de colectivo con Tramo:" + tramo.getSeccionViaje().getMonto());
+					LectoraDao lecdao = new LectoraDao();
+					Lectora l = lecdao.traerLectoraColectivo(numSerieLectora);
+					System.out.println("La nueva prueba1");
+					manejador.agregarBoleto(l.getNumeroSerieLectora(),tardao.traerTarjeta(numSerieTarjeta), new GregorianCalendar(), tramo);
+					
 				} catch (Exception e) {
 					System.out.println("Puto " + e);
 				}
@@ -93,12 +99,13 @@ public class ControladorAgregarBoleto extends HttpServlet {
 			try {
 				System.out.println("Agrego unboleto de TS");
 				manejador.agregarBoleto(numSerieLectora,tardao.traerTarjeta(numSerieTarjeta), fechaHora);
+				System.out.println("Y LO AGREGA TS");
 			} catch (Exception e){
 				System.out.println(e);
 			}
 		}
 		
-		
+		response.setStatus(200);
 		System.out.println(Funciones.TraeFechaYHora(fechaHora));
 	}
 	

@@ -7,6 +7,6 @@
 			<generator class="identity" />
 		</id>
 		<property column="nombre" name="nombre" type="string" />
-		<many-to-one column="idTransporte" name="transporte" />
+		<many-to-one column="idTransporte" name="transporte" fetch="join" />
 	</class>
 </hibernate-mapping>

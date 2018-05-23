@@ -6,8 +6,8 @@
 		<id column="idTramoTrenYSubte" name="idTramoTrenYSubte">
 			<generator class="identity" />
 		</id>
-		<many-to-one column="estacionA" name="estacionA" class="datos.Estacion" not-null="true" />
-		<many-to-one column="estacionB" name="estacionB" class="datos.Estacion" not-null="false" />
-		<many-to-one column="idSeccionViaje" name="seccionViaje" class="datos.SeccionViaje" not-null="true" />
+		<many-to-one column="estacionA" name="estacionA" class="datos.Estacion" not-null="true" fetch="join"/>
+		<many-to-one column="estacionB" name="estacionB" class="datos.Estacion" not-null="false" fetch="join"/>
+		<many-to-one column="idSeccionViaje" name="seccionViaje" class="datos.SeccionViaje" not-null="true" fetch="join"/>
 	</class>
 </hibernate-mapping>
