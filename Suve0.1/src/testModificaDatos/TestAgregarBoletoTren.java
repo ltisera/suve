@@ -9,7 +9,7 @@ import dao.SeccionViajeDao;
 import dao.TramoTrenYSubteDao;
 import dao.TransporteDao;
 import datos.Estacion;
-import datos.LectoraTrenYSubte;
+import datos.LectoraEstacion;
 import datos.SeccionViaje;
 import datos.Tarjeta;
 import datos.TramoTrenYSubte;

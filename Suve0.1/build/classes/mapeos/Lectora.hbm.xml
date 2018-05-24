@@ -7,7 +7,7 @@
 			<generator class="identity" />
 		</id>
 		<property column="numeroSerieLectora" name="numeroSerieLectora" type="int"/>
-		<joined-subclass name="datos.LectoraTrenYSubte" table="LectoraTrenYSubte">
+		<joined-subclass name="datos.LectoraEstacion" table="LectoraEstacion">
 			<key column="idLectora" />
 			<many-to-one column="idEstacion" name="estacion" class="datos.Estacion" not-null="true" fetch="join"/>
 		</joined-subclass>

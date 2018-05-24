@@ -9,7 +9,7 @@ import datos.Lectora;
 //import negocio.LectoraColectivo;
 import datos.LectoraColectivo;
 import datos.LectoraEstacion;
-import datos.LectoraTrenYSubte;
+
 
 public class LectoraDao {
 	private static Session session;
@@ -142,13 +142,13 @@ public class LectoraDao {
 		return objeto;
 	}
 
-	public LectoraTrenYSubte traerLectoraTrenYSubte(int numeroSerieLectora) 
+	public LectoraEstacion traerLectoraEstacion(int numeroSerieLectora) 
 	{
-		LectoraTrenYSubte objeto = null;
+		LectoraEstacion objeto = null;
 		try 
 		{
 			iniciaOperacion();
-			objeto = (LectoraTrenYSubte) session.createQuery("from LectoraTrenYSubte l inner join fetch l.estacion e inner join fetch e.transporte where l.numeroSerieLectora ="+numeroSerieLectora).uniqueResult();
+			objeto = (LectoraEstacion) session.createQuery("from LectoraEstacion l inner join fetch l.estacion e inner join fetch e.transporte where l.numeroSerieLectora ="+numeroSerieLectora).uniqueResult();
 		} finally {
 			session.close();
 		}

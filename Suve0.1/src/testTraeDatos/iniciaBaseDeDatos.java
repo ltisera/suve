@@ -126,7 +126,7 @@ public class iniciaBaseDeDatos {
 		for (Estacion e:edao.traerEstacion()){
 			for(int i=0; i<=15;i++)
 			{
-				ldao.agregar(new LectoraTrenYSubte(e,numeroSerieLectora));
+				ldao.agregar(new LectoraEstacion(e,numeroSerieLectora));
 				numeroSerieLectora++;
 			}
 		}

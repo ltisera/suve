@@ -8,7 +8,7 @@ import datos.Boleto;
 import datos.Estacion;
 import datos.Lectora;
 import datos.LectoraColectivo;
-import datos.LectoraTrenYSubte;
+import datos.LectoraEstacion;
 import datos.TarifaSocial;
 import datos.Tarjeta;
 import datos.TipoTransporte;
@@ -59,9 +59,9 @@ public class AdminDeLectoras
 		return lectoraDao.traerLectoraColectivo(numeroSerieLectora);
 	}
 	
-	private LectoraTrenYSubte traerLectoraTrenYSubte(int numeroSerieLectora) 
+	private LectoraEstacion traerLectoraEstacion(int numeroSerieLectora) 
 	{
-		return lectoraDao.traerLectoraTrenYSubte(numeroSerieLectora);
+		return lectoraDao.traerLectoraEstacion(numeroSerieLectora);
 	}
 	
 	public boolean esBoletoDeEntradaTren(Boleto boletoAnterior)
@@ -92,7 +92,7 @@ public class AdminDeLectoras
 		Boleto nuevoBoleto = null;
 		List<Boleto> lstBoletosUltimas2horas = movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora);
 		Boleto boletoAnterior = movimientoAlta.traerUltimoBoleto(tarjeta.getIdTarjeta());
-		LectoraTrenYSubte lectora = traerLectoraTrenYSubte(numeroSerieLectora);
+		LectoraEstacion lectora = traerLectoraEstacion(numeroSerieLectora);
 		TramoTrenYSubte tramo = tramosConsultas.traerTramoUnaEstacion(lectora.getEstacion().getIdEstacion());//Tramo Estacion - Null
 		
 		if(lectora.getEstacion().getTransporte().getTipoTransporte() == TipoTransporte.Tren)
@@ -110,7 +110,7 @@ public class AdminDeLectoras
 	}
 	
 	
-	public Boleto crearBoletoTren(LectoraTrenYSubte lectora, Tarjeta tarjeta, GregorianCalendar fechaHora,TramoTrenYSubte tramo,List<Boleto> lstBoletosUltimas2horas,Boleto boletoAnterior)
+	public Boleto crearBoletoTren(LectoraEstacion lectora, Tarjeta tarjeta, GregorianCalendar fechaHora,TramoTrenYSubte tramo,List<Boleto> lstBoletosUltimas2horas,Boleto boletoAnterior)
 	{
 		Boleto nuevoBoleto = new Boleto(fechaHora,(Lectora)lectora,tramo.getSeccionViaje().getMonto(),tarjeta,tramo);
 		TarifaSocial tarifa = tarjetaAbm.traerTarifaSocial();
@@ -136,7 +136,7 @@ public class AdminDeLectoras
 	}
 	
 	
-	public Boleto crearBoletoSubte(LectoraTrenYSubte lectora, Tarjeta tarjeta, GregorianCalendar fechaHora,TramoTrenYSubte tramo,List<Boleto> lstBoletosUltimas2horas,Boleto boletoAnterior)
+	public Boleto crearBoletoSubte(LectoraEstacion lectora, Tarjeta tarjeta, GregorianCalendar fechaHora,TramoTrenYSubte tramo,List<Boleto> lstBoletosUltimas2horas,Boleto boletoAnterior)
 	{
 		boolean calcularDescuentos = true;
 		Boleto nuevoBoleto = new Boleto(fechaHora,(Lectora)lectora,tramo.getSeccionViaje().getMonto(),tarjeta,tramo); 

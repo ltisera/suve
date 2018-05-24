@@ -62,10 +62,10 @@ public class ControladorListaMovimiento extends HttpServlet {
 			else{
 				//Imprime los movimientos de una tarjeta
 				TarjetaDao tardao = new TarjetaDao();
-				listmov = mdao.traerMovimientosPorTarjeta(tardao.traerTarjeta(Integer.parseInt(request.getParameter("tarjeta"))).getIdTarjeta());
+				listmov = mdao.traerMovimientosPorTarjetaConCase(tardao.traerTarjeta(Integer.parseInt(request.getParameter("tarjeta"))).getIdTarjeta());
 				System.out.println("la tarjeta que buscamos es:" + (long)Integer.parseInt(request.getParameter("tarjeta")) +"el size: " + listmov.size());
 			}
-			
+						
 			response.setStatus(200);
 			PrintWriter salida = response.getWriter();
 			salida.println( "<!DOCTYPE 4.01 Transitional//EN\">" );
@@ -97,19 +97,34 @@ public class ControladorListaMovimiento extends HttpServlet {
 				else {
 					salida.println("<th>"+m.getIdMovimiento()+":Boleto</th>");
 					Lectora lec = m.getLectora();
-					System.out.println("Es LecColetivo" + (m.getLectora() instanceof LectoraTrenYSubte));
+					System.out.println("El id de la lectora es: " + lec.getIdLectora());
+					System.out.println("Es LecColetivo " + (m.getLectora() instanceof LectoraColectivo));
 					if(m.getLectora() instanceof LectoraColectivo) {
-						System.out.println("QUE CARAJO:" +((LectoraColectivo)lec).getTransporte().getIdTransporte());
-						salida.println( " <th>"+((LectoraColectivo)lec).getTransporte().getIdTransporte()+"</th> " );
+						System.out.println("IdTransporte: " +((LectoraColectivo)lec).getTransporte().getIdTransporte());
+						salida.println( " <th>"+((LectoraColectivo)lec).getTransporte().getTipoTransporte()+"</th> " );
+						salida.println( " <th>"+((LectoraColectivo)lec).getTransporte().getLinea()+"</th> " );
+						salida.println( " <th>"+"BuscarTramo"+"</th> " );
+						
 					}
-					System.out.println("Es LecTYS" + (m.getLectora() instanceof LectoraTrenYSubte));
-					if(m.getLectora() instanceof LectoraTrenYSubte) {
-						System.out.println("QUE CARAJO:" +((LectoraTrenYSubte)lec).getEstacion().getTransporte().getTipoTransporte());
-						salida.println( " <th>"+((LectoraTrenYSubte)lec).getEstacion().getTransporte().getTipoTransporte()+"</th> " );
+					System.out.println("Es LecTYS " + (m.getLectora() instanceof LectoraEstacion));
+					if(m.getLectora() instanceof LectoraEstacion) {
+						System.out.println("QUE CARAJO:" +((LectoraEstacion)lec).getEstacion().getTransporte().getTipoTransporte());
+						salida.println( " <th>"+((LectoraEstacion)lec).getEstacion().getTransporte().getTipoTransporte()+"</th> " );
+						salida.println( " <th>"+((LectoraEstacion)lec).getEstacion().getTransporte().getLinea()+"</th> " );
+						salida.println( " <th>"+((LectoraEstacion)lec).getEstacion().getNombre()+"</th> " );
+						
 					}
-				salida.println( " <th>"+Funciones.TraeFechaYHora(m.getFecha())+"</th> ");
-				salida.println( " <th>"+m.getMonto()+"</th> ");
-				salida.println( " </tr> ");
+					
+					salida.println( " <th>"+Funciones.TraeFechaYHora(m.getFecha())+"</th> ");
+					salida.println( " <th>"+m.getMonto()+"</th> ");
+					if(m instanceof Boleto) {
+						salida.println( " <th>"+((Boleto)m).getIntRedSube()+"</th> ");
+					}
+					else {
+						salida.println( " <th></th> ");
+					}
+					salida.println( " <th>No hago desc</th> ");
+					salida.println( " </tr> ");
 				}
 			}
 			salida.println( " </BODY>" );

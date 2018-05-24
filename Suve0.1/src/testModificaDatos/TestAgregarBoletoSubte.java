@@ -13,7 +13,7 @@ import negocio.TarjetaABM;
 import datos.Transporte;
 import datos.Estacion;
 import datos.Lectora;
-import datos.LectoraTrenYSubte;
+import datos.LectoraEstacion;
 import datos.SeccionViaje;
 import datos.TarifaSocial;
 import datos.Tarjeta;

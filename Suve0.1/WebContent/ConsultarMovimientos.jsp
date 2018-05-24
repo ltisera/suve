@@ -22,7 +22,7 @@
 function consultarMov(){
 	$.ajax({
 		data:{
-			"tarjeta":$("#inpTarjetaConsulta").val()
+			"tarjeta":$("#inpTarjetaCon").val()
 			},
 		url: "ListarMovimientos",
 		type:"POST",

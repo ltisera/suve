@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import datos.Boleto;
-import datos.Movimiento;
-import datos.Recarga;
+import datos.*;
 import negocio.Funciones;
 
 public class MovimientoDao {
@@ -196,13 +195,38 @@ public class MovimientoDao {
 		List<Movimiento> lista = new ArrayList<Movimiento>();
 		try {
 			iniciaOperacion();
-			lista = session.createQuery("from Movimiento m join fetch m.lectora where m.tarjeta=" + idTarjeta+" order by m.fecha desc ").list();
+			lista = session.createQuery("from Movimiento m inner join fetch m.lectora where m.tarjeta=" + idTarjeta+" order by m.fecha desc ").list();
 		} finally {
 			session.close();
 		}
 		return lista;
 	}
-
+	public List<Movimiento> traerMovimientosPorTarjetaConCase(long idTarjeta) 
+	{
+		List<Movimiento> lista = new ArrayList<Movimiento>();
+		try {
+			iniciaOperacion();
+			String consultaHQL ="";
+			lista = session.createQuery("from Movimiento m inner join fetch m.lectora where m.tarjeta=" + idTarjeta+" order by m.fecha desc ").list();
+			for(Movimiento m:lista) {
+				if(m.getLectora() instanceof LectoraColectivo)
+				{
+					Hibernate.initialize(((LectoraColectivo)m.getLectora()).getTransporte());
+				}
+				if(m.getLectora() instanceof LectoraEstacion)
+				{
+					Hibernate.initialize(((LectoraEstacion)m.getLectora()).getEstacion());
+				}
+					
+			}
+			//("from Movimiento m inner join fetch m.lectora as l CASE where type(l) = LectoraColectivo THEN inner join fetch l.transporte END CASE where type(l) = LectoraEstacion THEN inner join fetch l.estacion END")
+			
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	
 
 	public List<Boleto> trerBoletosRedSube(long idTarjeta, GregorianCalendar fechaA) 
 	{

@@ -4,8 +4,8 @@ public class LectoraEstacion extends Lectora{
 	private Estacion estacion;
 	
 	public LectoraEstacion() {}
-	public LectoraEstacion(Estacion estacion) {
-		super();
+	public LectoraEstacion(Estacion estacion,int numeroDeSerie) {
+		super(numeroDeSerie);
 		this.estacion = estacion;
 	}
 	

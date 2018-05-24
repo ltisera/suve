@@ -24,11 +24,15 @@
 		$("#inpLinea").change(cambiaLinea);
 		$("#inpEstacion").change(cambiaEstacion);
 		$("#inpLectora").change(cambiaLectora);
-		
+		setInterval(OcultaDiv, 3000);
 		
 		$("#btnAgregar").click(agregarViaje);
 	});
 
+function OcultaDiv(){
+	$("#divEstadoBoleto").hide();
+}
+	
 function agregarViaje(){
 
 	var unafecha = "" + f.getDate()+"/"+f.getMonth()+"/"+f.getFullYear() + " * " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds()
@@ -56,15 +60,19 @@ function agregarViaje(){
 			url : "AgregarBoleto",
 			type : "POST",
 			beforeSend : function() {
-
+				$("#lblEstadoBoleto").val("Generando Boleto");
+				
 			},
 			success : function(response) {
 				console.log("Esta es la response");
 				console.log(response);
+				$("#lblEstadoBoleto").html("Boleto Creado Correctamente");
+				$("#divEstadoBoleto").show();
 				$("#divMostrarBoleto").html(response);
 			},
 			error : function(response) {
-				alert("Error al intentar agregar el viaje")
+				$("#lblEstadoBoleto").html("El boleto no se pudo Generar");
+				$("#divEstadoBoleto").show();
 			}
 		});
 	}
@@ -209,6 +217,9 @@ function ocultarElementos(){
 					</div>
 					<INPUT id="btnAgregar" type="button" class="btn btn-success" value="Agregar"></input>
 					
+				</div>
+				<div id="divEstadoBoleto">
+					<label id="lblEstadoBoleto">ARRRRR</label>
 				</div>
 			</form>
 		</div>
