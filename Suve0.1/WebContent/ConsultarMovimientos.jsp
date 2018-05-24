@@ -43,7 +43,6 @@ function traerListaTarjetasConsulta(){
 			"lista": "Tarjetas"
 			},
 		url:"TraerListas",
-		async: false,
 		type:"POST",
 		success:function(response){
 			console.log(response);

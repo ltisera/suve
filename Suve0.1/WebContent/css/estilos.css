@@ -1,7 +1,27 @@
 @charset "ISO-8859-1";
 
+*{
+	margin: 0px;
+	padding: 0px;
+}
 body{
-	background-color:#108CCC; 
-	color:#ffffff;
+	/*background-color:#108CCC; 
+	color:#ffffff;*/
+	background-color:#108CCC;
+	color:black;
+	
+}
+
+
+#divInicio{
+	background-color: red;
+	color: white;
+}
+
+#divAgregarViaje{
+	background-color: green;
+}
+#colNumTar{
+	background-color: blue;
 }
 
