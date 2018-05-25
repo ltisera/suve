@@ -18,7 +18,7 @@ public class TestDETEST {
 		TransporteDao transdao = new TransporteDao();
 		TramoColectivoDao tramdao = new TramoColectivoDao();
 		
-		Tarjeta t = tdao.traerTarjeta(12l);
+		Tarjeta t = tdao.traerTarjeta(9l);
 		
 		System.out.println("Monto de t: " + t.getMonto());
 		/*
@@ -29,33 +29,35 @@ public class TestDETEST {
 		}
 		
 		System.out.println("ACA SE BAJO DEL BONDY");
+		*/
 		/*
 		//Colectivo2
 		try {
-			adm.agregarBoleto(lecdao.traerLectorasPorLinea(transdao.traerTransporte("271").getIdTransporte()).get(1).getNumeroSerieLectora()  , t, new GregorianCalendar(), tramdao.traerTramoColectivo(2l));
+			adm.agregarBoleto(lecdao.traerLectorasPorLinea(transdao.traerTransporte("800").getIdTransporte()).get(1).getNumeroSerieLectora()  , t, new GregorianCalendar(), tramdao.traerTramoColectivo(2l));
 		}catch (Exception e){
 			System.out.println(e);
 		}
 		System.out.println("ACA SE BAJO DEL BONDY 2");
 		*/
-		/*
-		//Tren Subida
-		Estacion edesubida = edao.traerEstacion("Glew");
+		
+		//SUBTE
+		Estacion edesubida = edao.traerEstacion("Independencia");
 		try {
 			adm.agregarBoleto(lecdao.traerLectorasPorEstacion(edesubida.getIdEstacion()).get(1).getNumeroSerieLectora(), t, new GregorianCalendar());
 		}catch (Exception e){
 			System.out.println(e);
 		}
-		*/
 		
-		//Tren Bajada
 		
-		Estacion edebajada = edao.traerEstacion("Once");
+		//TREN
+		/*
+		Estacion edebajada = edao.traerEstacion("Escalada");
 		try {
 			adm.agregarBoleto(lecdao.traerLectorasPorEstacion(edebajada.getIdEstacion()).get(1).getNumeroSerieLectora(), t, new GregorianCalendar());
 		}catch (Exception e){
 			System.out.println(e);
 		}
+		*/
 		System.out.println("Monto de t: " + t.getMonto());
 		
 	}

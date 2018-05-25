@@ -4,7 +4,7 @@ import java.util.GregorianCalendar;
 
 import negocio.Funciones;
 
-public class Movimiento {
+public class Movimiento implements Comparable<Boleto>{
 	private long idMovimiento;
 	private GregorianCalendar fecha;
 	private float monto;
@@ -70,4 +70,10 @@ public class Movimiento {
 		}
 		return equals;
 	}
+	
+    @Override
+    public int compareTo(Boleto compareBoleto) {
+        int compareId=(int)((Boleto)compareBoleto).getIdMovimiento();
+        return (int)this.idMovimiento-compareId;
+    }
 }

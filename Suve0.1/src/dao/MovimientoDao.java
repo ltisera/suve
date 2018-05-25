@@ -228,7 +228,7 @@ public class MovimientoDao {
 	}
 	
 
-	public List<Boleto> trerBoletosRedSube(long idTarjeta, GregorianCalendar fechaA) 
+	public List<Boleto> traerBoletosRedSube(long idTarjeta, GregorianCalendar fechaA) 
 	{
 		List<Boleto> lista = new ArrayList<Boleto>();
 		GregorianCalendar fechaB = (GregorianCalendar) fechaA.clone();
@@ -244,6 +244,44 @@ public class MovimientoDao {
 		}
 		return lista;
 	}
+	
+	
+	public List<Boleto> traerBoletosRedSubeColectivo(long idTarjeta, GregorianCalendar fechaA) 
+	{
+		List<Boleto> lista = new ArrayList<Boleto>();
+		GregorianCalendar fechaB = (GregorianCalendar) fechaA.clone();
+		fechaB.add(Calendar.HOUR, -2);
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Boleto b inner join fetch b.lectora l inner join fetch l.transporte where b.fecha < :fechaA and b.fecha > :fechaB and b.tarjeta=" + idTarjeta)
+					.setParameter("fechaA", fechaA)
+					.setParameter("fechaB", fechaB)
+					.list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	
+	
+	public List<Boleto> traerBoletosRedSubeTrenYSubte(long idTarjeta, GregorianCalendar fechaA) 
+	{
+		List<Boleto> lista = new ArrayList<Boleto>();
+		GregorianCalendar fechaB = (GregorianCalendar) fechaA.clone();
+		fechaB.add(Calendar.HOUR, -2);
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Boleto b inner join fetch b.lectora l inner join fetch l.estacion e inner join fetch e.transporte where b.fecha < :fechaA and b.fecha > :fechaB and b.tarjeta=" + idTarjeta)
+					.setParameter("fechaA", fechaA)
+					.setParameter("fechaB", fechaB)
+					.list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	
+	
 
 	public Boleto traerUltimoBoleto(long idTarjeta) 
 	{

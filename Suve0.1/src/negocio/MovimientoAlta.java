@@ -2,6 +2,7 @@ package negocio;
 
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Collections;
 
 import dao.MovimientoDao;
 import datos.Boleto;
@@ -15,9 +16,12 @@ public class MovimientoAlta
 		movdao.agregar(boleto);
 	}
 	
-	public List<Boleto> traerBoletosRedSube(Tarjeta tarjeta, GregorianCalendar fecha2)
+	public List<Boleto> traerBoletosRedSube(Tarjeta tarjeta, GregorianCalendar fechaActual)
 	{
-		return movdao.trerBoletosRedSube(tarjeta.getIdTarjeta(), fecha2);
+		List<Boleto> lstb = movdao.traerBoletosRedSubeColectivo(tarjeta.getIdTarjeta(), fechaActual);
+		lstb.addAll(movdao.traerBoletosRedSubeTrenYSubte(tarjeta.getIdTarjeta(), fechaActual));
+		Collections.sort(lstb);
+		return lstb;
 	}
 
 	public Boleto traerUltimoBoleto(long idTarjeta) 
