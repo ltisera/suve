@@ -12,6 +12,28 @@ body{
 	
 }
 
+/* Elementos de index.jsp */
+/* Cabecera de index */
+#divCabecera{
+	width:100%;
+	background-color: red;
+	color: white;
+}
+
+#divFoto{
+	float:left;
+	width:40%;
+	background-color: blue;
+	
+}
+#divManejaFecha{
+	float:right;
+	width:49%;
+	background-color: yellow;
+	
+}
+
+
 
 #divInicio{
 	background-color: red;
@@ -22,6 +44,7 @@ body{
 	background-color: green;
 }
 #colNumTar{
+	width: 70%;
 	background-color: blue;
 }
 

@@ -51,16 +51,15 @@
 
 <body>
 
-	<table width="100%">
-		<tr>
-			<th align="left">
+	<div id="divCabecera">
+			<div id="divFoto">
 				<%@ include file="/cabecera.jsp" %>
-			</th>
-			<th id="divManejaFecha" align="left">
+			</div>
+			<div id="divManejaFecha">
 				<%@ include file="/manejaFecha.jsp" %>
-			</th>
-		</tr>
-	</table>
+			</div>
+
+	</div>
 	<table width="100%">
 		<tr id="columnita">
 			<th width="20%" valign="top" align="left"class="pepe">
