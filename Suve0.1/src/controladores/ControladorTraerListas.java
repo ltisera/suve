@@ -67,6 +67,11 @@ public class ControladorTraerListas extends HttpServlet {
 			
 			traerListaTarjetas(request, response);
 		}
+		if(request.getParameter("lista").equals("UltimosViajes")) {
+			System.out.println("Leyendo Viajes de tarjeta");
+			
+			traerListaUltimosViajes(request, response);
+		}
 		
 	}
 
@@ -229,5 +234,58 @@ public class ControladorTraerListas extends HttpServlet {
 		}
 		
 	}
-		
+	protected void traerListaUltimosViajes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			response.setStatus(200);
+			PrintWriter salida = response.getWriter();
+			TarjetaDao tardao = new TarjetaDao();
+			MovimientoDao mdao = new MovimientoDao();
+			long idTarjeta = tardao.traerTarjeta(Integer.parseInt(request.getParameter("tarjeta"))).getIdTarjeta();
+			List<Movimiento> lm = mdao.traerMovimientosPorTarjetaConCase(idTarjeta);
+			
+			salida.println( "<!DOCTYPE 4.01 Transitional//EN\">" );
+			salida.println( "<HTML>" );
+			salida.println( " <HEAD>" );
+			salida.println( " <TITLE>Sistema Suve</TITLE>" );
+			salida.println( " </HEAD>" );
+			salida.println( " <BODY>" );
+			salida.println( " <table border=\"1\" style=\"width:75%\">" );
+			salida.println( " <tr>" );
+			salida.println( " <th>Transporte</th> " );
+			salida.println( " <th>Estacion/Tramo</th> ");
+			salida.println( " <th>Monto</th> ");
+			salida.println( " <th>RedSube</th> ");
+			salida.println( " <th>Descuentos</th> ");
+			salida.println( " </tr> ");
+			System.out.println("Te gusta perrita eh! " + idTarjeta);
+			System.out.println(lm);
+			for(Movimiento m:lm) {
+				if(m instanceof Boleto) {
+					Lectora lec = m.getLectora();
+					if(m.getLectora() instanceof LectoraColectivo) {
+						System.out.println("IdTransporte: " +((LectoraColectivo)lec).getTransporte().getIdTransporte());
+						salida.println( " <th>"+((LectoraColectivo)lec).getTransporte().getTipoTransporte()+"</th> " );
+						salida.println( " <th>"+"BuscarTramo"+"</th> " );
+						
+					}
+					System.out.println("Es LecTYS " + (m.getLectora() instanceof LectoraEstacion));
+					if(m.getLectora() instanceof LectoraEstacion) {
+						System.out.println("QUE CARAJO:" +((LectoraEstacion)lec).getEstacion().getTransporte().getTipoTransporte());
+						salida.println( " <th>"+((LectoraEstacion)lec).getEstacion().getTransporte().getTipoTransporte()+"</th> " );
+						salida.println( " <th>"+((LectoraEstacion)lec).getEstacion().getNombre()+"</th> " );
+						
+					}
+					salida.println( " <th>"+m.getMonto()+"</th> ");
+					salida.println( " <th>"+((Boleto)m).getIntRedSube()+"</th> ");
+					salida.println( " <th>No hago desc</th> ");
+					salida.println( " </tr> ");
+				}
+			}
+			salida.println( " </BODY>" );
+			salida.println( "</HTML>" );
+			
+		} catch (Exception e){
+			response.sendError(500, "Algo paso fdfsdf" );
+		}
+	}
 }

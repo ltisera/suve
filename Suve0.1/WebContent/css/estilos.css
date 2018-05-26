@@ -8,7 +8,7 @@ body{
 	/*background-color:#108CCC; 
 	color:#ffffff;*/
 	background-color:#108CCC;
-	color:black;
+	color:white;
 	
 }
 
@@ -16,35 +16,46 @@ body{
 /* Cabecera de index */
 #divCabecera{
 	width:100%;
-	background-color: red;
+	/*background-color: red;*/
 	color: white;
 }
 
 #divFoto{
 	float:left;
 	width:40%;
-	background-color: blue;
+	/*background-color: blue;*/
 	
 }
 #divManejaFecha{
 	float:right;
 	width:49%;
-	background-color: yellow;
+	/*background-color: yellow;*/
 	
 }
 
 
 
 #divInicio{
-	background-color: red;
+	/*background-color: red;*/
 	color: white;
 }
 
-#divAgregarViaje{
-	background-color: green;
+
+/* AgregarViajes */
+
+#divGeneralAgrega{
+	float:left;
+	width:40%;
+	/*background-color: green;*/
+}
+
+#divDatosTarjeta{
+	float:right;
+	width:60%;
+	/*background-color: red;*/
 }
 #colNumTar{
-	width: 70%;
-	background-color: blue;
+	width: 100%;
+	/*background-color: blue;*/
 }
 

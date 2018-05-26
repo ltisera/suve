@@ -5,6 +5,7 @@ function cargo() {
 	alert("Dale");
 }
 
+
 function traerListaTarjetas(){
 		$.ajax({
 			data:{
@@ -117,7 +118,23 @@ function traerListaLineas(){
 	});
 }
 
-
+function traerUltimosViajes(){
+	$.ajax({
+		data:{
+			"lista":"UltimosViajes",
+			"tarjeta":$("#inpTarjeta").val()
+			},
+		url: "TraerListas",
+		type:"POST",
+		success: function(response){
+			$("#divDatosTarjeta").html(response);
+		},
+		error: function(response){
+			alert("Otro error dio");
+		}
+			
+	});
+}
 
 function crearOpciones(response,idLista){
 	alert("Entre");
