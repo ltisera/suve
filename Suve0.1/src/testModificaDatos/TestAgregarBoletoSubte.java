@@ -55,7 +55,7 @@ public class TestAgregarBoletoSubte {
 		
 		try 
 		{
-			admLectora.agregarBoleto(101202, tabm.traerTarjetaConBeneficios(109), new GregorianCalendar());
+			admLectora.agregarBoleto(admLectora.traerLectoraEstacion(101202), tabm.traerTarjetaConBeneficios(109), new GregorianCalendar());
 		} catch (Exception e) 
 		{
 			System.out.println(e);

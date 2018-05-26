@@ -18,7 +18,7 @@ public class TestDETEST {
 		TransporteDao transdao = new TransporteDao();
 		TramoColectivoDao tramdao = new TramoColectivoDao();
 		
-		Tarjeta t = tdao.traerTarjeta(9l);
+		Tarjeta t = tdao.traerTarjeta(6l);
 		
 		System.out.println("Monto de t: " + t.getMonto());
 		/*
@@ -30,6 +30,7 @@ public class TestDETEST {
 		
 		System.out.println("ACA SE BAJO DEL BONDY");
 		*/
+		/*
 		//Colectivo2
 		try {
 			adm.agregarBoleto(lecdao.traerLectorasPorLinea(transdao.traerTransporte("800").getIdTransporte()).get(1).getNumeroSerieLectora()  , t, new GregorianCalendar(), tramdao.traerTramoColectivo(2l));
@@ -37,7 +38,7 @@ public class TestDETEST {
 			System.out.println(e);
 		}
 		System.out.println("ACA SE BAJO DEL BONDY 2");
-		
+		*/
 		//SUBTE
 		/*
 		Estacion edesubida = edao.traerEstacion("Independencia");
@@ -49,14 +50,14 @@ public class TestDETEST {
 		*/
 		
 		//TREN
-		/*
-		Estacion edebajada = edao.traerEstacion("Escalada");
+		
+		Estacion edebajada = edao.traerEstacion("Glew");
 		try {
-			adm.agregarBoleto(lecdao.traerLectorasPorEstacion(edebajada.getIdEstacion()).get(1).getNumeroSerieLectora(), t, new GregorianCalendar());
+			adm.agregarBoleto((LectoraEstacion)lecdao.traerLectorasPorEstacion(edebajada.getIdEstacion()).get(1), t, new GregorianCalendar());
 		}catch (Exception e){
 			System.out.println(e);
 		}
-		*/
+		
 		System.out.println("Monto de t: " + t.getMonto());
 		
 	}

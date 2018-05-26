@@ -39,7 +39,7 @@ public class TestAgregarBoletoTren {
 		
 		try 
 		{
-			admLectora.agregarBoleto(101202, tabm.traerTarjetaConBeneficios(117), new GregorianCalendar());
+			admLectora.agregarBoleto(admLectora.traerLectoraEstacion(101202), tabm.traerTarjetaConBeneficios(117), new GregorianCalendar());
 		} catch (Exception e) 
 		{
 			System.out.println(e);
@@ -51,7 +51,7 @@ public class TestAgregarBoletoTren {
 		
 		try 
 		{
-			admLectora.agregarBoleto(3331234, tabm.traerTarjetaConBeneficios(117), new GregorianCalendar());
+			admLectora.agregarBoleto(admLectora.traerLectoraEstacion(3331234), tabm.traerTarjetaConBeneficios(117), new GregorianCalendar());
 		} catch (Exception e) 
 		{
 			System.out.println(e);

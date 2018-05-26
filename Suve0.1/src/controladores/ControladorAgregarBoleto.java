@@ -86,9 +86,9 @@ public class ControladorAgregarBoleto extends HttpServlet {
 				try {
 					System.out.println("Agrego un boleto de colectivo con Tramo:" + tramo.getSeccionViaje().getMonto());
 					LectoraDao lecdao = new LectoraDao();
-					Lectora l = lecdao.traerLectoraColectivo(numSerieLectora);
+					LectoraColectivo l = lecdao.traerLectoraColectivo(numSerieLectora);
 					System.out.println("La nueva prueba1");
-					manejador.agregarBoleto(l.getNumeroSerieLectora(),tardao.traerTarjeta(numSerieTarjeta), new GregorianCalendar(), tramo);
+					manejador.agregarBoleto(l,tardao.traerTarjeta(numSerieTarjeta), new GregorianCalendar(), tramo);
 					
 				} catch (Exception e) {
 					System.out.println("Puto " + e);
@@ -98,7 +98,8 @@ public class ControladorAgregarBoleto extends HttpServlet {
 		else {
 			try {
 				System.out.println("Agrego unboleto de TS");
-				manejador.agregarBoleto(numSerieLectora,tardao.traerTarjeta(numSerieTarjeta), fechaHora);
+				LectoraEstacion lectoraEstacion = manejador.traerLectoraEstacion(numSerieLectora);
+				manejador.agregarBoleto(lectoraEstacion,tardao.traerTarjeta(numSerieTarjeta), fechaHora);
 				System.out.println("Y LO AGREGA TS");
 			} catch (Exception e){
 				System.out.println(e);

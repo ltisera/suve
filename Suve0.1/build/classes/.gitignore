@@ -1,8 +1,11 @@
-/mapeos/
+/controladores/
 /dao/
 /datos/
 /funciones/
+/hibernate.cfg.xml
+/hibernate.properties
+/mapeos/
+/negocio/
+/testLucas/
 /testModificaDatos/
 /testTraeDatos/
-/controladores/
-/negocio/

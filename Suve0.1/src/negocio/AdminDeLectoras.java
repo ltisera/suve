@@ -24,7 +24,7 @@ public class AdminDeLectoras
 	TramosConsultas tramosConsultas = new TramosConsultas();
 	
 	//-------------AGREGA BOLETO DE COLECTIVO-------------\\
-	public Boleto agregarBoleto(int numeroSerieLectora, Tarjeta tarjeta, GregorianCalendar fechaHora, TramoColectivo tramo) throws Exception
+	public Boleto agregarBoleto(LectoraColectivo lectora, Tarjeta tarjeta, GregorianCalendar fechaHora, TramoColectivo tramo) throws Exception
 	{
 		if(tarjeta == null)
 			throw new Exception("ERROR: La tarjeta no existe.");
@@ -33,7 +33,6 @@ public class AdminDeLectoras
 		TarifaSocial tarifa = tarjetaAbm.traerTarifaSocial();
 		List<Boleto> lstBoletosUltimas2horas = movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora);
 		Boleto boletoAnterior = movimientoAlta.traerUltimoBoleto(tarjeta.getIdTarjeta());
-		LectoraColectivo lectora = traerLectoraColectivo(numeroSerieLectora);
 		Boleto nuevoBoleto = new Boleto(fechaHora,(Lectora)lectora,tramo.getSeccionViaje().getMonto(),tarjeta,tramo);
 		
 		if(redSubeEnCurso(lstBoletosUltimas2horas) && !esBoletoDeEntradaTren(boletoAnterior) && !lineaTransporteRepetidaEnRedSube(lstBoletosUltimas2horas, lectora.getTransporte()))
@@ -42,7 +41,7 @@ public class AdminDeLectoras
 			nuevoBoleto.setMonto(nuevoBoleto.getMonto()-(nuevoBoleto.getMonto()*Funciones.calcularRedSube(nuevoBoleto.getIntRedSube())));
 		}
 		
-		if(Funciones.tarjetaContieneTarifaSocial(tarjeta.getBeneficios().toArray(), tarifa))
+		if(Funciones.tarjetaContieneTarifaSocial(tarjeta.getBeneficios(), tarifa))
 			Funciones.calcularTarifaSocial(nuevoBoleto, tarifa);
 		
 		if(tarjeta.getMonto() - nuevoBoleto.getMonto() < -25) 
@@ -60,7 +59,7 @@ public class AdminDeLectoras
 		return lectoraDao.traerLectoraColectivo(numeroSerieLectora);
 	}
 	
-	private LectoraEstacion traerLectoraEstacion(int numeroSerieLectora) 
+	public LectoraEstacion traerLectoraEstacion(int numeroSerieLectora) 
 	{
 		return lectoraDao.traerLectoraEstacion(numeroSerieLectora);
 	}
@@ -84,7 +83,7 @@ public class AdminDeLectoras
 	}	
 	
 	//-------------AGREGA BOLETO DE TREN O SUBTE-------------\\
-	public Boleto agregarBoleto(int numeroSerieLectora, Tarjeta tarjeta, GregorianCalendar fechaHora)throws Exception
+	public Boleto agregarBoleto(LectoraEstacion lectora, Tarjeta tarjeta, GregorianCalendar fechaHora)throws Exception
 	{
 		if(tarjeta == null)
 			throw new Exception("ERROR: La tarjeta no existe.");
@@ -93,7 +92,6 @@ public class AdminDeLectoras
 		Boleto nuevoBoleto = null;
 		List<Boleto> lstBoletosUltimas2horas = movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora);
 		Boleto boletoAnterior = movimientoAlta.traerUltimoBoleto(tarjeta.getIdTarjeta());
-		LectoraEstacion lectora = traerLectoraEstacion(numeroSerieLectora);
 		TramoTrenYSubte tramo = tramosConsultas.traerTramoUnaEstacion(lectora.getEstacion().getIdEstacion());//Tramo Estacion - Null
 		if(lectora.getEstacion().getTransporte().getTipoTransporte() == TipoTransporte.Tren)
 			nuevoBoleto = crearBoletoTren(lectora, tarjeta, fechaHora, tramo, lstBoletosUltimas2horas, boletoAnterior);
@@ -122,9 +120,10 @@ public class AdminDeLectoras
 			tramo = tramosConsultas.traerTramoTrenYSubte(boletoAnterior.getTramoTrenYSubte().getEstacionA(),lectora.getEstacion());
 			nuevoBoleto.setTramoTrenYSubte(tramo);
 			nuevoBoleto.setIntRedSube(boletoAnterior.getIntRedSube());
-			nuevoBoleto.setMonto(-(boletoAnterior.getMonto()-(tramo.getSeccionViaje().getMonto()-(tramo.getSeccionViaje().getMonto()*Funciones.calcularRedSube(nuevoBoleto.getIntRedSube())))));
-			if(Funciones.tarjetaContieneTarifaSocial(tarjeta.getBeneficios().toArray(), tarifa))
-				Funciones.calcularTarifaSocial(nuevoBoleto, tarifa);
+			if(Funciones.tarjetaContieneTarifaSocial(tarjeta.getBeneficios(), tarifa))
+				Funciones.calcularTarifaSocialTren(nuevoBoleto,boletoAnterior.getMonto(), tarifa);
+			else
+				nuevoBoleto.setMonto(-(boletoAnterior.getMonto()-(tramo.getSeccionViaje().getMonto()-(tramo.getSeccionViaje().getMonto()*Funciones.calcularRedSube(nuevoBoleto.getIntRedSube())))));
 		} 
 		else 
 		{
@@ -148,7 +147,7 @@ public class AdminDeLectoras
 				nuevoBoleto.setMonto(nuevoBoleto.getMonto()-(nuevoBoleto.getMonto()*Funciones.calcularRedSube(nuevoBoleto.getIntRedSube())));
 		}
 		
-		if(Funciones.tarjetaContieneTarifaSocial(tarjeta.getBeneficios().toArray(), tarifa))
+		if(Funciones.tarjetaContieneTarifaSocial(tarjeta.getBeneficios(), tarifa))
 			Funciones.calcularTarifaSocial(nuevoBoleto, tarifa);
 
 		return nuevoBoleto;

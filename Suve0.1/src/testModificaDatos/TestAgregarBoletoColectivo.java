@@ -37,7 +37,7 @@ public class TestAgregarBoletoColectivo {
 		System.out.println("Agregar boleto de colectivo con la tarjeta 106 (inactiva): \n");
 		try 
 		{
-			admLectora.agregarBoleto(100101, tabm.traerTarjetaConBeneficios(106), new GregorianCalendar(), tcdao.traerTramoColectivo(1l));//traerTarjetaConBeneficios esta devolviendo null. La consulta no esta funcionando.
+			admLectora.agregarBoleto(admLectora.traerLectoraColectivo(100101), tabm.traerTarjetaConBeneficios(106), new GregorianCalendar(), tcdao.traerTramoColectivo(1l));//traerTarjetaConBeneficios esta devolviendo null. La consulta no esta funcionando.
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -53,7 +53,7 @@ public class TestAgregarBoletoColectivo {
 		
 		try 
 		{
-			admLectora.agregarBoleto(100101, tarjeta101, new GregorianCalendar(), tcdao.traerTramoColectivo(1l));
+			admLectora.agregarBoleto(admLectora.traerLectoraColectivo(100101), tarjeta101, new GregorianCalendar(), tcdao.traerTramoColectivo(1l));
 		} catch (Exception e) {
 			System.out.println(e);
 		}

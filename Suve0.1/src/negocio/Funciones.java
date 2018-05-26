@@ -3,11 +3,13 @@ package negocio;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.proxy.HibernateProxy;
 
 import datos.TarifaSocial;
 import datos.Tarjeta;
+import datos.Beneficio;
 import datos.Boleto;
 
 public class Funciones {
@@ -34,6 +36,14 @@ public class Funciones {
 		nuevoBoleto.setMonto(nuevoBoleto.getMonto()-(nuevoBoleto.getMonto()* (tarifa.getPorcentajeDescuento()/100)));
 	}
 	
+	public static void calcularTarifaSocialTren(Boleto nuevoBoleto, float montoBoletoEntrada, TarifaSocial tarifa)
+	{
+		float seccion = nuevoBoleto.getTramoTrenYSubte().getSeccionViaje().getMonto();
+		float descuentoRedSube = calcularRedSube(nuevoBoleto.getIntRedSube());
+		float seccionRedSube = seccion - (seccion*descuentoRedSube);
+		float descuentoTarifa = tarifa.getPorcentajeDescuento()/100;
+		nuevoBoleto.setMonto(-(montoBoletoEntrada - (seccionRedSube - (seccionRedSube * descuentoTarifa))));
+	}
 	
 	public static  float calcularRedSube(int intRedSubeNuevoBoleto)
 	{
@@ -47,11 +57,11 @@ public class Funciones {
 		return porcentajeDescuento;		
 	}
 
-	public static boolean tarjetaContieneTarifaSocial(Object[] array, TarifaSocial tarifa) 
+	public static boolean tarjetaContieneTarifaSocial(Set<Beneficio> beneficios, TarifaSocial tarifa) 
 	{
 		boolean contieneTarifa = false;
-		for(Object o: array)
-			if(o instanceof TarifaSocial) contieneTarifa = true;
+		for(Beneficio b: beneficios)
+			if(b instanceof TarifaSocial) contieneTarifa = true;
 		return contieneTarifa;
 		
 		
