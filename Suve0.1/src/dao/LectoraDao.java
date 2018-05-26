@@ -135,7 +135,7 @@ public class LectoraDao {
 		LectoraColectivo objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (LectoraColectivo) session.createQuery("from LectoraColectivo l where l.numeroSerieLectora ="+numeroSerieLectora).uniqueResult();
+			objeto = (LectoraColectivo) session.createQuery("from LectoraColectivo l inner join fetch l.transporte where l.numeroSerieLectora ="+numeroSerieLectora).uniqueResult();
 		} finally {
 			session.close();
 		}

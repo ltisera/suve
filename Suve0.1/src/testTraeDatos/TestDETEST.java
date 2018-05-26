@@ -30,7 +30,6 @@ public class TestDETEST {
 		
 		System.out.println("ACA SE BAJO DEL BONDY");
 		*/
-		/*
 		//Colectivo2
 		try {
 			adm.agregarBoleto(lecdao.traerLectorasPorLinea(transdao.traerTransporte("800").getIdTransporte()).get(1).getNumeroSerieLectora()  , t, new GregorianCalendar(), tramdao.traerTramoColectivo(2l));
@@ -38,16 +37,16 @@ public class TestDETEST {
 			System.out.println(e);
 		}
 		System.out.println("ACA SE BAJO DEL BONDY 2");
-		*/
 		
 		//SUBTE
+		/*
 		Estacion edesubida = edao.traerEstacion("Independencia");
 		try {
 			adm.agregarBoleto(lecdao.traerLectorasPorEstacion(edesubida.getIdEstacion()).get(1).getNumeroSerieLectora(), t, new GregorianCalendar());
 		}catch (Exception e){
 			System.out.println(e);
 		}
-		
+		*/
 		
 		//TREN
 		/*
