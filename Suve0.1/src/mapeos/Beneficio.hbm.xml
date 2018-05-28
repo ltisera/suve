@@ -23,7 +23,7 @@
 		</joined-subclass>
 		<joined-subclass name="datos.BoletoEstudiantil" table="boletoestudiantil">
 			<key column="idBeneficio" />
-			<property column="intervalo" name="intervalo" type="calendar" />
+			<property column="intervaloEnDias" name="intervaloEnDias" type="int" />
 			<property column="monto" name="monto" type="float" />
 		</joined-subclass>
 	</class>

@@ -9,7 +9,7 @@ public class testAgregarUnBeneficio {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		BeneficioDao bendao = new BeneficioDao();
-		BoletoEstudiantil be = new BoletoEstudiantil("ElcAmilaso", new GregorianCalendar(), 300f);
+		BoletoEstudiantil be = new BoletoEstudiantil("ElcAmilaso", 30, 300f);
 		bendao.agregar(be);
 		
 	}

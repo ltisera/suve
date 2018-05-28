@@ -3,20 +3,20 @@ package datos;
 import java.util.GregorianCalendar;
 
 public class BoletoEstudiantil extends Beneficio{
-	private GregorianCalendar intervalo;
+	private int intervaloEnDias;
 	private float monto;
 	
 	public BoletoEstudiantil() {}
-	public BoletoEstudiantil(String nombre, GregorianCalendar intervalo, float monto) {
+	public BoletoEstudiantil(String nombre, int intervaloEnDias, float monto) {
 		super(nombre);
-		this.intervalo = intervalo;
+		this.intervaloEnDias = intervaloEnDias;
 		this.monto = monto;
 	}
-	public GregorianCalendar getIntervalo() {
-		return intervalo;
+	public int getIntervaloEnDias() {
+		return intervaloEnDias;
 	}
-	public void setIntervalo(GregorianCalendar intervalo) {
-		this.intervalo = intervalo;
+	public void setIntervaloEnDias(int intervaloEnDias) {
+		this.intervaloEnDias = intervaloEnDias;
 	}
 	public float getMonto() {
 		return monto;

@@ -7,6 +7,7 @@ import dao.*;
 import datos.*;
 import testModificaDatos.TestAgregarTramosDeEntradaTrenYSubte;
 import testModificaDatos.tCargarMultiplesUsuariosYTarjetas;
+import testModificaDatos.testAgregaBeneficio;
 import testModificaDatos.testCargarMovimientosEnBaseDeDatos;
 
 public class iniciaBaseDeDatos {
@@ -17,9 +18,11 @@ public class iniciaBaseDeDatos {
 		agregaTransporteEstacion();
 		agregaLectora();
 		agregaSeccionTramoColectivo();
-		tCargarMultiplesUsuariosYTarjetas.main(args);
-		testCargarMovimientosEnBaseDeDatos.main(args);
 		TestAgregarTramosDeEntradaTrenYSubte.main(args);
+		tCargarMultiplesUsuariosYTarjetas.main(args);
+		testAgregaBeneficio.main(args);
+		testCargarMovimientosEnBaseDeDatos.main(args);
+		
 		long endTime = System.currentTimeMillis()  - startTime; 
 		System.out.println("Base inicializada en: " + endTime);
 	}
@@ -143,36 +146,36 @@ public class iniciaBaseDeDatos {
 	public static void agregaSeccionTramoColectivo(){
 		SeccionViajeDao sdao = new SeccionViajeDao();
 		TramoColectivoDao tdao = new TramoColectivoDao();
-		sdao.agregar(new SeccionViaje("Subte Unica Seccion", 7.5f,TipoTransporte.Subte));
+		sdao.agregar(new SeccionViaje("Unica Seccion", 7.5f,TipoTransporte.Subte));
 		
-		long idSeccion = sdao.agregar(new SeccionViaje("Tren 1era Seccion", 3f,TipoTransporte.Tren));
+		long idSeccion = sdao.agregar(new SeccionViaje("1era Seccion", 3f,TipoTransporte.Tren));
 		SeccionViaje s1 = sdao.traerSeccionViaje(idSeccion);
 		
-		idSeccion = sdao.agregar(new SeccionViaje("Tren 2da Seccion", 4.5f,TipoTransporte.Tren));
+		idSeccion = sdao.agregar(new SeccionViaje("2da Seccion", 4.5f,TipoTransporte.Tren));
 		SeccionViaje s2 = sdao.traerSeccionViaje(idSeccion);
 		
-		idSeccion = sdao.agregar(new SeccionViaje("Tren 3era Seccion", 6.25f,TipoTransporte.Tren));
+		idSeccion = sdao.agregar(new SeccionViaje("3era Seccion", 6.25f,TipoTransporte.Tren));
 		SeccionViaje s3 = sdao.traerSeccionViaje(idSeccion);
 		
 		agregarTramoTren(s1,s2,s3);
 		
-		idSeccion = sdao.agregar(new SeccionViaje("Colectivo 1era Seccion", 9f,TipoTransporte.Colectivo));
+		idSeccion = sdao.agregar(new SeccionViaje("1era Seccion", 9f,TipoTransporte.Colectivo));
 		SeccionViaje s = sdao.traerSeccionViaje(idSeccion);
 		tdao.agregar(new TramoColectivo(0f,3f,s));
 		
-		idSeccion = sdao.agregar(new SeccionViaje("Colectivo 2da Seccion", 9.25f,TipoTransporte.Colectivo));
+		idSeccion = sdao.agregar(new SeccionViaje("2da Seccion", 9.25f,TipoTransporte.Colectivo));
 		s = sdao.traerSeccionViaje(idSeccion);
 		tdao.agregar(new TramoColectivo(3f,6f,s));
 		
-		idSeccion = sdao.agregar(new SeccionViaje("Colectivo 3era Seccion", 9.5f,TipoTransporte.Colectivo));
+		idSeccion = sdao.agregar(new SeccionViaje("3era Seccion", 9.5f,TipoTransporte.Colectivo));
 		s = sdao.traerSeccionViaje(idSeccion);
 		tdao.agregar(new TramoColectivo(6f,12f,s));
 		
-		idSeccion = sdao.agregar(new SeccionViaje("Colectivo 4ta Seccion", 10.25f,TipoTransporte.Colectivo));
+		idSeccion = sdao.agregar(new SeccionViaje("4ta Seccion", 10.25f,TipoTransporte.Colectivo));
 		s = sdao.traerSeccionViaje(idSeccion);
 		tdao.agregar(new TramoColectivo(12f,30f,s));
 		
-		idSeccion = sdao.agregar(new SeccionViaje("Colectivo 5ta Seccion", 10.75f,TipoTransporte.Colectivo));
+		idSeccion = sdao.agregar(new SeccionViaje("5ta Seccion", 10.75f,TipoTransporte.Colectivo));
 		s = sdao.traerSeccionViaje(idSeccion);
 		tdao.agregar(new TramoColectivo(30f,-1f,s));
 	}

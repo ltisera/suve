@@ -10,7 +10,7 @@ public class testTraerRecarga {
 		Recarga b = mdao.traerRecarga(3);
 		if (b != null) {
 			System.out.println("Traje la Recarga: " + b.getIdMovimiento() + " y cargue: " + b.getMonto());
-			System.out.println("Propio: " + b.isSaldoPendiente());
+			System.out.println("Propio: " + b.isEsBoletoEstudiantil());
 		}
 		else {
 			System.out.println(b);

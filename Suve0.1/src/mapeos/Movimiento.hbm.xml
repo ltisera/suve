@@ -23,7 +23,7 @@
 
 		<joined-subclass name="datos.Recarga" table="Recarga">
 			<key column="idMovimiento" />
-			<property column="saldoPendiente" name="saldoPendiente" type="boolean" />
+			<property column="esBoletoEstudiantil" name="esBoletoEstudiantil" type="boolean" />
 		</joined-subclass>
 		
 	</class>

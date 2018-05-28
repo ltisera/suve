@@ -1,6 +1,9 @@
 package testModificaDatos;
 
 import datos.*;
+
+import java.util.List;
+
 import dao.*;
 
 public class testAgregaBeneficio {
@@ -9,10 +12,19 @@ public class testAgregaBeneficio {
 		// TODO Auto-generated method stub
 		BeneficioDao bendao = new BeneficioDao();
 		bendao.agregar(new TarifaSocial("Tf Soc", 55));
+		bendao.agregar(new BoletoEstudiantil("Boleto Estudiantil", 30, 300));
+		
 		TarjetaDao tardao = new TarjetaDao();
-		Tarjeta t = tardao.traerTarjeta(6l);
-		t.getBeneficios().add(bendao.traerBeneficio(1l));
-		tardao.actualizar(t);
+		for(long i = 1; i < 9;i++) {
+			Tarjeta t = tardao.traerTarjetaConBeneficios(tardao.traerTarjeta(i).getNumeroSerieTarjeta());
+			t.getBeneficios().add(bendao.traerBeneficio(1l));
+			tardao.actualizar(t);
+		}
+		for(long i = 4; i < 11;i++) {
+			Tarjeta t = tardao.traerTarjetaConBeneficios(tardao.traerTarjeta(i).getNumeroSerieTarjeta());
+			t.getBeneficios().add(bendao.traerBeneficio(2l));
+			tardao.actualizar(t);
+		}
 		System.out.println("Y con eso ya esta");
 	}
 
