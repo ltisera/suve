@@ -77,7 +77,7 @@ function componerCalendar(avance){
 		
 
 		
-		<table style="border: solid 2px #cccccc;">	
+		<table id=tblManejaFecha >	
 			<tr>
 				<th colspan="4">Fecha Actual: <label id="quefecha"></label></th>
 

@@ -13,6 +13,7 @@ import org.hibernate.TransientPropertyValueException;
 
 import dao.*;
 import datos.*;
+import negocio.Funciones;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -256,8 +257,8 @@ public class ControladorTraerListas extends HttpServlet {
 			salida.println( " <table border=\"1\" style=\"width:75%\">" );
 			salida.println( " Saldo de la tarjeta: "+ t.getMonto() +" " );
 			salida.println( " <tr>" );
-			salida.println( " <th>Transporte</th> " );
-			salida.println( " <th>Estacion/Tramo</th> ");
+			salida.println( " <th>Fecha</th> " );
+			salida.println( " <th>Estacion</th> ");
 			salida.println( " <th>Monto</th> ");
 			salida.println( " <th>RedSube</th> ");
 			salida.println( " <th>Descuentos</th> ");
@@ -265,13 +266,13 @@ public class ControladorTraerListas extends HttpServlet {
 			for(Movimiento m:lm) {
 				if(m instanceof Boleto) {
 					Lectora lec = m.getLectora();
+					salida.println( " <th>"+Funciones.TraeFechaYHora(m.getFecha())+"</th> " );
 					if(m.getLectora() instanceof LectoraColectivo) {
-						salida.println( " <th>"+((LectoraColectivo)lec).getTransporte().getTipoTransporte()+"</th> " );
-						salida.println( " <th>"+tramdao.traerTramoColectivo(((Boleto)m).getTramoColectivo().getIdTramoColectivo()).getSeccionViaje().getNombre()+"</th> " );
+						salida.println( " <th>"+"Linea " +((LectoraColectivo) m.getLectora()).getTransporte().getLinea()+"</th> " );
 						
 					}
 					if(m.getLectora() instanceof LectoraEstacion) {
-						salida.println( " <th>"+((LectoraEstacion)lec).getEstacion().getTransporte().getTipoTransporte()+"</th> " );
+						
 						salida.println( " <th>"+((LectoraEstacion)lec).getEstacion().getNombre()+"</th> " );
 						
 					}

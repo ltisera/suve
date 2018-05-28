@@ -71,16 +71,17 @@ function agregarViaje(){
 				console.log("Esta es la response");
 				console.log(response);
 				traerUltimosViajes();
-				$("#lblEstadoBoleto").html("Boleto Creado Correctamente");
+				$("#lblEstadoBoleto").html("Boleto creado correctamente");
 				$("#divEstadoBoleto").show();
 				$("#divMostrarBoleto").html(response);
-				setTimeout(OcultaDiv,2000);
+				setTimeout(OcultaDiv,4000);
 				
 			},
 			error : function(response) {
-				$("#lblEstadoBoleto").html("El boleto no se pudo Generar");
+				console.log(response);
+				$("#lblEstadoBoleto").html("El boleto no se pudo generar, " + response.responseText);
 				$("#divEstadoBoleto").show();
-				setTimeout(OcultaDiv,2000);
+				setTimeout(OcultaDiv,4000);
 			}
 		});
 	}

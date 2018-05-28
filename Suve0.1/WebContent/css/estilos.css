@@ -4,6 +4,7 @@
 	margin: 0px;
 	padding: 0px;
 }
+
 body{
 	/*background-color:#108CCC; 
 	color:#ffffff;*/
@@ -15,6 +16,7 @@ body{
 /* Elementos de index.jsp */
 /* Cabecera de index */
 #divCabecera{
+	position: relative;
 	width:100%;
 	/*background-color: red;*/
 	color: white;
@@ -22,18 +24,26 @@ body{
 
 #divFoto{
 	float:left;
-	width:40%;
+	width:30%;
 	/*background-color: blue;*/
 	
 }
 #divManejaFecha{
+	position: absolute;
 	float:right;
-	width:49%;
-	/*background-color: yellow;*/
+	left:40%;
+	width:60%; 
+	height: 160px;
+	top:25px;
 	
 }
 
-
+#tblManejaFecha{
+	border: solid 2px #cccccc;
+	
+	
+	
+}
 
 #divInicio{
 	/*background-color: red;*/

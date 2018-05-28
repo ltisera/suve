@@ -27,9 +27,9 @@ public class AdminDeLectoras
 	public Boleto agregarBoleto(LectoraColectivo lectora, Tarjeta tarjeta, GregorianCalendar fechaHora, TramoColectivo tramo) throws Exception
 	{
 		if(tarjeta == null)
-			throw new Exception("ERROR: La tarjeta no existe.");
+			throw new Exception("la tarjeta no existe.");
 		if(!tarjeta.isActiva()) 
-			throw new Exception("ERROR: tarjeta inactiva.");
+			throw new Exception("tarjeta inactiva.");
 		TarifaSocial tarifa = tarjetaAbm.traerTarifaSocial();
 		List<Boleto> lstBoletosUltimas2horas = movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora);
 		Boleto boletoAnterior = movimientoAlta.traerUltimoBoleto(tarjeta.getIdTarjeta());
@@ -45,7 +45,7 @@ public class AdminDeLectoras
 			Funciones.calcularTarifaSocial(nuevoBoleto, tarifa);
 		
 		if(tarjeta.getMonto() - nuevoBoleto.getMonto() < -25) 
-			throw new Exception("ERROR: saldo insuficiente");
+			throw new Exception("saldo insuficiente");
 		
 		movimientoAlta.agregarBoleto(nuevoBoleto);
 		tarjeta.setMonto(tarjeta.getMonto()-nuevoBoleto.getMonto());
@@ -85,10 +85,11 @@ public class AdminDeLectoras
 	//-------------AGREGA BOLETO DE TREN O SUBTE-------------\\
 	public Boleto agregarBoleto(LectoraEstacion lectora, Tarjeta tarjeta, GregorianCalendar fechaHora)throws Exception
 	{
-		if(tarjeta == null)
-			throw new Exception("ERROR: La tarjeta no existe.");
+		if(tarjeta == null) {
+			throw new Exception("la tarjeta no existe.");
+		}
 		if(!tarjeta.isActiva()) 
-			throw new Exception("ERROR: tarjeta inactiva.");
+			throw new Exception("tarjeta inactiva.");
 		Boleto nuevoBoleto = null;
 		List<Boleto> lstBoletosUltimas2horas = movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora);
 		Boleto boletoAnterior = movimientoAlta.traerUltimoBoleto(tarjeta.getIdTarjeta());
@@ -99,7 +100,7 @@ public class AdminDeLectoras
 			nuevoBoleto = crearBoletoSubte(lectora, tarjeta, fechaHora, tramo, lstBoletosUltimas2horas, boletoAnterior);
 			
 		if(tarjeta.getMonto() - nuevoBoleto.getMonto() < -25) 
-			throw new Exception("ERROR: saldo insuficiente");
+			throw new Exception("saldo insuficiente");
 		movimientoAlta.agregarBoleto(nuevoBoleto);
 		tarjeta.setMonto(tarjeta.getMonto()-nuevoBoleto.getMonto());
 		tarjetaAbm.modificarTarjeta(tarjeta);
@@ -110,8 +111,16 @@ public class AdminDeLectoras
 	
 	public Boleto crearBoletoTren(LectoraEstacion lectora, Tarjeta tarjeta, GregorianCalendar fechaHora,TramoTrenYSubte tramo,List<Boleto> lstBoletosUltimas2horas,Boleto boletoAnterior)
 	{
-		Boleto nuevoBoleto = new Boleto(fechaHora,(Lectora)lectora,tramo.getSeccionViaje().getMonto(),tarjeta,tramo);
+		
 		TarifaSocial tarifa = tarjetaAbm.traerTarifaSocial();
+		float montoDeEntrada = tramo.getSeccionViaje().getMonto();
+		
+		if(Funciones.tarjetaContieneTarifaSocial(tarjeta.getBeneficios(), tarifa)) {
+			montoDeEntrada = montoDeEntrada * (100-tarifa.getPorcentajeDescuento()) / 100;
+		}
+		
+		Boleto nuevoBoleto = new Boleto(fechaHora,(Lectora)lectora,montoDeEntrada,tarjeta,tramo);
+		
 		boolean esBoletoDeSalida = boletoAnterior!=null &&  Funciones.tiempoDeViajeValido(boletoAnterior.getFecha(), fechaHora) &&
 				esMismoTransporteYDiferenteEstacion(boletoAnterior.getTramoTrenYSubte().getEstacionA(), lectora.getEstacion());
 		

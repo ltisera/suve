@@ -24,7 +24,7 @@ function traerListaTarjetas(){
 				}
 			},
 			error:function(response){
-				alert("No se ha podido cargar la lista de Tarjetas");
+				alert("No se ha podido cargar la lista de tarjetas");
 			}
 		});
 }
@@ -130,7 +130,7 @@ function traerUltimosViajes(){
 			$("#divDatosTarjeta").html(response);
 		},
 		error: function(response){
-			alert("Otro error dio");
+			$("#divDatosTarjeta").html("me pa que no esta tu tarjeta");
 		}
 			
 	});

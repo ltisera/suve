@@ -101,7 +101,9 @@ public class TarjetaDao {
 		try {
 			iniciaOperacion();
 			objeto = (Tarjeta) session.createQuery( "from Tarjeta t where t.numeroSerieTarjeta="+numeroSerieTarjeta).uniqueResult();
-			Hibernate.initialize(objeto.getBeneficios());
+			if(objeto!= null) {
+				Hibernate.initialize(objeto.getBeneficios());
+			}
 		} finally {
 			session.close();
 		}

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.HibernateException;
+
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -38,7 +40,6 @@ public class ControladorAgregarBoleto extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		System.out.println("Entras1");
 		procesaSolicitud(request, response);
 	}
 
@@ -47,7 +48,6 @@ public class ControladorAgregarBoleto extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("Entras2");
 		procesaSolicitud(request, response);
 	}
 	
@@ -58,8 +58,9 @@ public class ControladorAgregarBoleto extends HttpServlet {
 		int numSerieTarjeta = Integer.parseInt(request.getParameter("numSerieTarjeta"));
 		int numSerieLectora =Integer.parseInt(request.getParameter("numSerieLectora"));
 		TarjetaDao tardao = new TarjetaDao();
-		System.out.println("Entras");
 		AdminDeLectoras manejador = new AdminDeLectoras();
+		
+		PrintWriter salida = response.getWriter();
 		
 		GregorianCalendar fechaHora = new GregorianCalendar(Integer.parseInt(request.getParameter("fanio")), 
 															Integer.parseInt(request.getParameter("fmes")), 
@@ -89,24 +90,27 @@ public class ControladorAgregarBoleto extends HttpServlet {
 					LectoraColectivo l = lecdao.traerLectoraColectivo(numSerieLectora);
 					System.out.println("La nueva prueba1");
 					manejador.agregarBoleto(l,tardao.traerTarjeta(numSerieTarjeta), new GregorianCalendar(), tramo);
+					response.setStatus(200);
 					
 				} catch (Exception e) {
-					System.out.println("Puto " + e);
+					response.setStatus(500);
+					salida.println(e.getMessage());
 				}
 			}
 		}
 		else {
 			try {
-				System.out.println("Agrego unboleto de TS");
+				System.out.println("Antes de TS");
 				LectoraEstacion lectoraEstacion = manejador.traerLectoraEstacion(numSerieLectora);
 				manejador.agregarBoleto(lectoraEstacion,tardao.traerTarjeta(numSerieTarjeta), fechaHora);
-				System.out.println("Y LO AGREGA TS");
+				response.setStatus(200);
 			} catch (Exception e){
-				System.out.println(e);
+				response.setStatus(500);
+				salida.println(e.getMessage());
 			}
 		}
 		
-		response.setStatus(200);
+		
 		System.out.println(Funciones.TraeFechaYHora(fechaHora));
 	}
 	

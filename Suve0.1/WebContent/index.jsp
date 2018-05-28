@@ -69,6 +69,9 @@
 				<input id="btnAgregarViaje" type="button" value="Agregar Viaje" style="width:150px"/>
 				<br>
 				<input id="btnConsultarMovimientos" type="button" value="Consultar Movimientos" style="width:150px"/>
+				<br>
+				<input id="btnCargarSaldoEstudiantil" type="button" value="Saldo Estudiantil" style="width:150px"/>
+				
 			
 				
 			</th>
