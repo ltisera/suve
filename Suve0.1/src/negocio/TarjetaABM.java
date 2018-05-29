@@ -3,12 +3,13 @@ package negocio;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Set;
 
 import dao.BeneficioDao;
 import dao.TarjetaDao;
 import datos.Beneficio;
 import datos.BoletoEstudiantil;
+import datos.Lectora;
+import datos.Recarga;
 import datos.TarifaSocial;
 import datos.Tarjeta;
 
@@ -48,20 +49,37 @@ public class TarjetaABM
 		return tarjetaDao.traerTarjetaCompleta();
 	}
 	
-	public boolean cargarBoletoEstudiantil(GregorianCalendar fechaSistema) {
+	public boolean tarjetaContieneBoletoEstudiantil(Tarjeta t) 
+	{
+		boolean contiene = false;
+		for(Beneficio b: t.getBeneficios())
+			if(b instanceof BoletoEstudiantil) contiene = true;
+		return contiene;
+	}
+	
+	public boolean cargarBoletoEstudiantil(GregorianCalendar fechaSistema) throws Exception {
 		boolean cargaExitosa = false;
 		MovimientoAlta mov = new MovimientoAlta();
-		GregorianCalendar fechaProximaCarga = mov.traerRecargaEstudiantil().getFecha(); //Consigo la ultima fecha en a que se cargo el boleto
-		fechaProximaCarga.add(Calendar.DAY_OF_MONTH, this.traerBoletoEstudiantil().getIntervaloEnDias()); //le agrego los dias del intervalo para calcular cuando sera la proxima fecha a cargar
+		Recarga recargaEstudiantil = mov.traerRecargaEstudiantil();
+		GregorianCalendar fechaProximaCarga = (GregorianCalendar) fechaSistema.clone();
+		if(recargaEstudiantil != null) {
+			fechaProximaCarga = recargaEstudiantil.getFecha(); //Consigo la ultima fecha en a que se cargo el boleto
+			fechaProximaCarga.add(Calendar.DAY_OF_MONTH, this.traerBoletoEstudiantil().getIntervaloEnDias()); //le agrego los dias del intervalo para calcular cuando sera la proxima fecha a cargar			System.out.println(Funciones.TraeFechaYHora(fechaProximaCarga));
+		}
 		if(fechaSistema.compareTo(fechaProximaCarga)>=0) { // 0 Son iguales +0 la fecha del sistema es posterior a la de la proxima carga 
+			AdminDeLectoras adl = new AdminDeLectoras();
+			System.out.println("Cargando saldo estudiantil");
+			//Que lectora usar?????
+			Lectora l = adl.traerLectoraEstacion(3331000);
 			for(Tarjeta t: this.traerTarjetaConBeneficios()) {
-				if(t.getBeneficios().contains(this.bolEstudiantil)) {
-					t.setMonto(t.getMonto() + this.bolEstudiantil.getMonto());
-					this.modificarTarjeta(t);
+				if(this.tarjetaContieneBoletoEstudiantil(t)) {
+					System.out.println("Tarjeta con Boleto Estudiantil");
+					adl.agregarRecarga(l, t, fechaSistema, bolEstudiantil.getMonto(), true);
 				}
 			}
 			cargaExitosa = true;
 		}
+		System.out.println("Cargado de saldo estudiantil Finalizado");
 		return cargaExitosa;
 	}
 }

@@ -17,6 +17,12 @@ public class MovimientoAlta
 		movdao.agregar(boleto);
 	}
 	
+	public void agregarRecarga(Recarga recarga)
+	{
+		movdao.agregar(recarga);
+	}
+	
+	
 	public List<Boleto> traerBoletosRedSube(Tarjeta tarjeta, GregorianCalendar fechaActual)
 	{
 		List<Boleto> lstb = movdao.traerBoletosRedSubeColectivo(tarjeta.getIdTarjeta(), fechaActual);

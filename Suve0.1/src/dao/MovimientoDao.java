@@ -93,7 +93,7 @@ public class MovimientoDao {
 		Recarga objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Recarga) session.createQuery("from Recarga r where r.esBoletoEstudiantil = 1 order by fecha desc").uniqueResult();
+			objeto = (Recarga) session.createQuery("from Recarga r where (select Max (r.idMovimiento) from Recarga r where r.esBoletoEstudiantil = 1)=r.idMovimiento").uniqueResult();
 		}  finally {
 			session.close();
 		}

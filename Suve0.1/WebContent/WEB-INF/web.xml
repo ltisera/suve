@@ -27,7 +27,7 @@
 		<servlet-class>controladores.ControladorCargarBoletoEstudiantil</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ControladoCargarBoletoEstudiantil</servlet-name>
+		<servlet-name>ControladorCargarBoletoEstudiantil</servlet-name>
 		<url-pattern>/CargarBoletoEstudiantil</url-pattern>
 	</servlet-mapping>
 	

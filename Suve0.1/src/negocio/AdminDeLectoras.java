@@ -9,6 +9,7 @@ import datos.Estacion;
 import datos.Lectora;
 import datos.LectoraColectivo;
 import datos.LectoraEstacion;
+import datos.Recarga;
 import datos.TarifaSocial;
 import datos.Tarjeta;
 import datos.TipoTransporte;
@@ -22,6 +23,15 @@ public class AdminDeLectoras
 	TarjetaABM tarjetaAbm = new TarjetaABM();
 	MovimientoAlta movimientoAlta = new MovimientoAlta();
 	TramosConsultas tramosConsultas = new TramosConsultas();
+	
+	public Recarga agregarRecarga(Lectora lectora, Tarjeta tarjeta, GregorianCalendar fechaHora, float monto,boolean esRecargaEstudiantil) throws Exception{
+		//Falta validar que no sean null y que la fecha no sea posterior al ultimo movimietno de la tarjeta
+		Recarga recarga = new Recarga(fechaHora, lectora, monto, tarjeta, esRecargaEstudiantil);
+		movimientoAlta.agregarRecarga(recarga);
+		tarjeta.setMonto(tarjeta.getMonto() + monto);
+		tarjetaAbm.modificarTarjeta(tarjeta);
+		return recarga;
+	}
 	
 	//-------------AGREGA BOLETO DE COLECTIVO-------------\\
 	public Boleto agregarBoleto(LectoraColectivo lectora, Tarjeta tarjeta, GregorianCalendar fechaHora, TramoColectivo tramo) throws Exception

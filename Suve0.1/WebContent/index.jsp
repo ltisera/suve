@@ -17,22 +17,22 @@
 		$("#divManejaFecha").hide();
 		$("#divConsultarMovimientos").hide();
 		$("#divCargarSaldoEstudiantil").hide();
+		$("#divInicio").show();
 		
 		$("#btnInicio").click(function() {
-			$("#divInicio").show();
 			$("#divManejaFecha").hide();
 			$("#divAgregarViaje").hide();
 			$("#divConsultarMovimientos").hide();
 			$("#divCargarSaldoEstudiantil").hide();
+			$("#divInicio").show();
 		});
 		
 		$("#btnAgregarViaje").click(function() {
 			$("#divInicio").hide();
-			$("#divManejaFecha").show("fast");
-			$("#divAgregarViaje").show("slow");
 			$("#divConsultarMovimientos").hide();
 			$("#divCargarSaldoEstudiantil").hide();
-			
+			$("#divManejaFecha").show("fast");
+			$("#divAgregarViaje").show("slow");
 		});
 		
 		$("#btnConsultarMovimientos").click(function() {
@@ -43,41 +43,18 @@
 			$("#divConsultarMovimientos").show("slow");
 		});
 		
-		$("#btnCargarSaldoEstudiantil").click(cargarSaldoEstudiantil);
+		$("#btnCargarSaldoEstudiantil").click(function() {
+			$("#divInicio").hide();
+			$("#divAgregarViaje").hide();
+			$("#divConsultarMovimientos").hide();
+			$("#divManejaFecha").show("fast");
+			$("#divCargarSaldoEstudiantil").show("slow");
+		});
 		
 	});
 		
-function cargarSaldoEstudiantil(){
-	/*
-	$.ajax({
-		data : {
-			"fdia": f.getDate(),
-			"fmes": f.getMonth(),
-			"fanio": f.getFullYear(),
-			"fhora": f.getHours(),
-			"fminuto": f.getMinutes(),
-			"fsegundo": f.getSeconds()
-		},
-		url : "CargarBoletoEstudiantil",
-		type : "POST",
-		beforeSend : function() {
-		},
-		success : function(response) {
-		},
-		error : function(response) {
-			alert(response.getText());
-		}
-	});	
-	*/
-}
-		
 		
 </script>
-
-<script>
-	
-</script>
-
 
 </HEAD>
 
@@ -116,7 +93,9 @@ function cargarSaldoEstudiantil(){
 				<div id="divConsultarMovimientos" class="container">
 					<%@ include file="/ConsultarMovimientos.jsp"%>
 				</div>
-				<div id="divCargarSaldoEstudiantil" class="container"></div>
+				<div id="divCargarSaldoEstudiantil" class="container">
+					<%@ include file="/SaldoEstudiantil.jsp"%>
+				</div>
 			</th>
 		</tr>
 	</table>

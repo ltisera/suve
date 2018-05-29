@@ -9,11 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.HibernateException;
-
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 import negocio.TarjetaABM;
 
@@ -61,15 +57,18 @@ public class ControladorCargarBoletoEstudiantil extends HttpServlet {
 															Integer.parseInt(request.getParameter("fhora")), 
 															Integer.parseInt(request.getParameter("fminuto")), 
 															Integer.parseInt(request.getParameter("fsegundo")));
-		if(abmTarjetas.cargarBoletoEstudiantil(fechaHora)) {
-			response.setStatus(200);
-		}
-		else {
+		try {
+			if(abmTarjetas.cargarBoletoEstudiantil(fechaHora)) {
+				response.setStatus(200);
+			}
+			else {
+				response.setStatus(500);
+				salida.println("Aun no ha pasado la proxima fecha de carga");
+			}
+		}catch(Exception e) {
 			response.setStatus(500);
-			salida.println("Aun no ha pasado la proxima fecha de carga");
+			salida.println(e.getMessage());
 		}
+		
 	}
-	
-	
-
 }
