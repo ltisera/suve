@@ -104,7 +104,7 @@ public class TransporteDao {
 		List<Transporte> lista= null ;
 		try {
 			iniciaOperacion();
-			lista= session.createQuery("from Transporte t where tipoTransporte = "+tipoTransporte.ordinal()).list();
+			lista= session.createQuery("from Transporte t where tipoTransporte = "+tipoTransporte.ordinal()+" order by t.linea asc").list();
 		} finally {
 			session.close();
 		}

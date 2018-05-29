@@ -20,13 +20,13 @@ public class testCargarMovimientosEnBaseDeDatos {
 		List<TramoColectivo> lsttramo = tramodao.traerTramoColectivo();
 		List<LectoraColectivo> lstleccol = lecdao.traerLectoraColectivo();
 		List<LectoraEstacion> lstlecest = lecdao.traerLectoraEstacion();
-		int avance;
-		GregorianCalendar fecha = null;
+		int avance = 0;
+		GregorianCalendar fecha = new GregorianCalendar();
+		fecha.add(Calendar.MONTH, -3);
+		
 		for(long ntar = 1; ntar <= 19; ntar++)
 		{
-			avance = (((int) Math.random() * 10000) +100);
-			fecha = new GregorianCalendar();
-			fecha.add(Calendar.MONTH, -1);
+			
 			Tarjeta latarjet = tardao.traerTarjeta(tardao.traerTarjeta(ntar).getNumeroSerieTarjeta());
 			for(long i =0;i < 40;i++) {
 				fecha.add(Calendar.MINUTE, avance);
@@ -55,7 +55,7 @@ public class testCargarMovimientosEnBaseDeDatos {
 					tardao.actualizar(latarjet);
 					lec1 = null;
 				}
-				avance = ((int) (Math.random() * 120) +5);
+				avance = ((int) (Math.random() * 60) +5);
 			}
 		}
 

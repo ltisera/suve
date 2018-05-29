@@ -331,4 +331,17 @@ public class MovimientoDao {
 		}
 		return objeto;
 	}
+	
+	public Movimiento traerUltimoMovimiento() 
+	{
+		Movimiento objeto = null;
+		try 
+		{
+			iniciaOperacion();
+			objeto = (Movimiento) session.createQuery("from Movimiento m where (select Max (m.idMovimiento) from Movimiento m )=m.idMovimiento").uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
 }

@@ -175,7 +175,7 @@ function ocultarElementos(){
 
 <body>
 	<div id="divGeneralAgrega">
-		<h1>Agregado de 1 Boleto</h1>
+		<h1>Agregar Boleto</h1>
 		<form>
 	
 			<div id="colNumTar">

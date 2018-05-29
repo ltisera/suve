@@ -1,6 +1,7 @@
 @charset "ISO-8859-1";
 
 *{
+
 	margin: 0px;
 	padding: 0px;
 }
@@ -53,6 +54,20 @@ body{
 
 /* AgregarViajes */
 
+.lblFecha{
+	font-size: 12px;
+}
+.lblMontoVerde{
+	font-weight: bold;
+	color:#8bff6b;
+}
+.lblMontoRojo{
+	font-weight: bold;
+	color:#e82c71;
+}
+.fila{
+	color:white;
+}
 #divGeneralAgrega{
 	float:left;
 	width:40%;

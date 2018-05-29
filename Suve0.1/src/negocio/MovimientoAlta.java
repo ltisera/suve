@@ -6,6 +6,7 @@ import java.util.Collections;
 
 import dao.MovimientoDao;
 import datos.Boleto;
+import datos.Movimiento;
 import datos.Recarga;
 import datos.Tarjeta;
 
@@ -40,4 +41,19 @@ public class MovimientoAlta
 		return movdao.traerRecargaEstudiantil();
 	}
 	
+	public boolean esFechaValida(GregorianCalendar fechaNuevoBoleto) {
+		boolean valido = false;
+		Movimiento m = movdao.traerUltimoMovimiento();
+		
+		if( m == null) {
+			valido = true;
+		}
+		else {
+			
+			if(fechaNuevoBoleto.compareTo(movdao.traerUltimoMovimiento().getFecha())>=0) {
+				valido = true;
+			}
+		}
+		return valido;
+	}
 }

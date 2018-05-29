@@ -89,7 +89,7 @@ public class ControladorAgregarBoleto extends HttpServlet {
 					LectoraDao lecdao = new LectoraDao();
 					LectoraColectivo l = lecdao.traerLectoraColectivo(numSerieLectora);
 					System.out.println("La nueva prueba1");
-					manejador.agregarBoleto(l,tardao.traerTarjeta(numSerieTarjeta), new GregorianCalendar(), tramo);
+					manejador.agregarBoleto(l,tardao.traerTarjeta(numSerieTarjeta), fechaHora, tramo);
 					response.setStatus(200);
 					
 				} catch (Exception e) {

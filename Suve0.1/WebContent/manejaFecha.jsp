@@ -54,6 +54,9 @@ function sumarSegundos(){
 	segundosTotales = segundosTotales + parseInt($("#idMinuto").val()) * 60;
 	segundosTotales = segundosTotales + parseInt($("#idSegundo").val()) * 1;
 	console.log(segundosTotales);
+	if(isNaN(segundosTotales)){
+		segundosTotales = 0;
+	}
 	return segundosTotales;
 }
 

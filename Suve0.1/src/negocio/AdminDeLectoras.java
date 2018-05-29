@@ -26,6 +26,11 @@ public class AdminDeLectoras
 	
 	public Recarga agregarRecarga(Lectora lectora, Tarjeta tarjeta, GregorianCalendar fechaHora, float monto,boolean esRecargaEstudiantil) throws Exception{
 		//Falta validar que no sean null y que la fecha no sea posterior al ultimo movimietno de la tarjeta
+		
+		if(!movimientoAlta.esFechaValida(fechaHora)) {
+			throw new Exception("Fecha Invalida.");
+		}
+		
 		Recarga recarga = new Recarga(fechaHora, lectora, monto, tarjeta, esRecargaEstudiantil);
 		movimientoAlta.agregarRecarga(recarga);
 		tarjeta.setMonto(tarjeta.getMonto() + monto);
@@ -40,6 +45,9 @@ public class AdminDeLectoras
 			throw new Exception("la tarjeta no existe.");
 		if(!tarjeta.isActiva()) 
 			throw new Exception("tarjeta inactiva.");
+		if(!movimientoAlta.esFechaValida(fechaHora)) {
+			throw new Exception("Fecha Invalida.");
+		}
 		TarifaSocial tarifa = tarjetaAbm.traerTarifaSocial();
 		List<Boleto> lstBoletosUltimas2horas = movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora);
 		Boleto boletoAnterior = movimientoAlta.traerUltimoBoleto(tarjeta.getIdTarjeta());
@@ -100,6 +108,11 @@ public class AdminDeLectoras
 		}
 		if(!tarjeta.isActiva()) 
 			throw new Exception("tarjeta inactiva.");
+		
+		if(!movimientoAlta.esFechaValida(fechaHora)) {
+			throw new Exception("Fecha Invalida.");
+		}
+		
 		Boleto nuevoBoleto = null;
 		List<Boleto> lstBoletosUltimas2horas = movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora);
 		Boleto boletoAnterior = movimientoAlta.traerUltimoBoleto(tarjeta.getIdTarjeta());

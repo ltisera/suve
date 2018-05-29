@@ -1,14 +1,10 @@
-package testTraeDatos;
+package testModificaDatos;
 
 
 import java.util.List;
 
 import dao.*;
 import datos.*;
-import testModificaDatos.TestAgregarTramosDeEntradaTrenYSubte;
-import testModificaDatos.tCargarMultiplesUsuariosYTarjetas;
-import testModificaDatos.testAgregaBeneficio;
-import testModificaDatos.testCargarMovimientosEnBaseDeDatos;
 
 public class iniciaBaseDeDatos {
 

@@ -250,17 +250,23 @@ public class ControladorTraerListas extends HttpServlet {
 			salida.println( " </HEAD>" );
 			salida.println( " <BODY>" );
 			salida.println( " <table border=\"1\" style=\"width:75%\">" );
-			salida.println( " Saldo de la tarjeta: "+ t.getMonto() +" " );
+			if(t.getMonto() >= 0) {
+				salida.println( " Saldo de la tarjeta: <label class=\"lblMontoVerde\">"+ t.getMonto() +"</label> " );
+			} else {
+				salida.println( " Saldo de la tarjeta: <label class=\"lblMontoRojo\">"+ t.getMonto() +"</label> " );
+			}
+			
+				
 			salida.println( " <tr>" );
-			salida.println( " <th>Fecha</th> " );
-			salida.println( " <th>Estacion</th> ");
-			salida.println( " <th>Monto</th> ");
-			salida.println( " <th>RedSube</th> ");
-			salida.println( " <th>Descuentos</th> ");
+			salida.println( " <th class=\"fila\">Fecha</th> " );
+			salida.println( " <th class=\"fila\">Estacion</th> ");
+			salida.println( " <th class=\"fila\"> Monto </th> ");
+			salida.println( " <th class=\"fila\">R.S.</th> ");
+			salida.println( " <th class=\"fila\">Descuentos</th> ");
 			salida.println( " </tr> ");
 			for(Movimiento m:lm) {
 				Lectora lec = m.getLectora();
-				salida.println( " <th>"+Funciones.TraeFechaYHora(m.getFecha())+"</th> " );
+				salida.println( " <th class=\"lblFecha\">"+Funciones.TraeFechaYHora(m.getFecha())+"</th> " );
 				if(m.getLectora() instanceof LectoraColectivo) {
 					salida.println( " <th>"+"Linea " +((LectoraColectivo) m.getLectora()).getTransporte().getLinea()+"</th> " );
 				}
@@ -270,10 +276,14 @@ public class ControladorTraerListas extends HttpServlet {
 				else if(m.getLectora() instanceof LectoraCarga) {
 					salida.println( " <th>"+((LectoraCarga)lec).getEstacion().getNombre()+"</th> " );
 				}
-				salida.println( " <th>"+m.getMonto()+"</th> ");
+				if(m.getMonto()>=0 && m instanceof Boleto) {
+					salida.println( " <th class=\"lblMontoRojo\">"+m.getMonto()+"</th> ");
+				} else {
+					salida.println( " <th class=\"lblMontoVerde\">"+m.getMonto()+"</th> ");
+				}
 				if(m instanceof Boleto) {
 					salida.println( " <th>"+((Boleto)m).getIntRedSube()+"</th> ");
-					salida.print( " <th>");
+					salida.print( " <th class=\"lblFecha\">");
 
 					Set<Beneficio> lbene = t.getBeneficios();
 					if (lbene.size() > 0) {
