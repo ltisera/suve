@@ -6,9 +6,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import datos.Boleto;
+import datos.BoletoEstudiantil;
 import datos.Beneficio;
-import datos.Recarga;
 import datos.TarifaSocial;
 
 public class BeneficioDao {
@@ -64,28 +63,6 @@ public class BeneficioDao {
 		} finally {
 			session.close();
 		}
-	}
-	
-	public Boleto traerBoleto(long idBeneficio) {
-		Boleto objeto = null;
-		try {
-			iniciaOperacion();
-			objeto = (Boleto) session.get(Boleto.class, idBeneficio);
-		}  finally {
-			session.close();
-		}
-		return objeto;
-	}
-	
-	public Recarga traerRecarga(long idBeneficio) {
-		Recarga objeto = null;
-		try {
-			iniciaOperacion();
-			objeto = (Recarga) session.get(Recarga.class, idBeneficio);
-		}  finally {
-			session.close();
-		}
-		return objeto;
 	}
 	
 	public Beneficio traerBeneficio(long idBeneficio) {
@@ -155,24 +132,25 @@ public class BeneficioDao {
 		return lista;
 	}
 	*/
-	public List<Boleto> traerBoleto(){
-		List<Boleto> lista = null;
-		try {
-			iniciaOperacion();
-			//lista = session.createQuery("from Boleto b where b.monto > 30 and b.monto < 32 order by b.idBeneficio asc").list();
-			lista = session.createQuery("from Boleto").list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
-	
+
 	public TarifaSocial traerTarifaSocial()
 	{
 		TarifaSocial objeto = null;
 		try {
 			iniciaOperacion();
 			objeto = (TarifaSocial) session.createQuery("from TarifaSocial").uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
+	
+	public BoletoEstudiantil traerBoletoEstudiantil()
+	{
+		BoletoEstudiantil objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (BoletoEstudiantil) session.createQuery("from BoletoEstudiantil").uniqueResult();
 		} finally {
 			session.close();
 		}

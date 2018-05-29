@@ -14,6 +14,7 @@ import datos.*;
 import negocio.Funciones;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Servlet implementation class ControladorListaMovimiento
@@ -50,24 +51,21 @@ public class ControladorListaMovimiento extends HttpServlet {
 	
 	private void BuscarMovimientos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter salida = response.getWriter();
 		try {
 			MovimientoDao mdao = new MovimientoDao();
 			
 			List<Movimiento> listmov = null;
-			System.out.println(request.getParameter("tarjeta"));
+			TarjetaDao tardao = new TarjetaDao();
 			if(request.getParameter("tarjeta").equals("")) {
 				//Imprime los movimientos Completos
-				listmov = mdao.traerMovimientos();
+				listmov = mdao.traerMovimientosConCase();
 			} 
 			else{
 				//Imprime los movimientos de una tarjeta
-				TarjetaDao tardao = new TarjetaDao();
-				listmov = mdao.traerMovimientosPorTarjetaConCase(tardao.traerTarjeta(Integer.parseInt(request.getParameter("tarjeta"))).getIdTarjeta());
-				System.out.println("la tarjeta que buscamos es:" + (long)Integer.parseInt(request.getParameter("tarjeta")) +"el size: " + listmov.size());
+				listmov = mdao.traerMovimientosPorTarjetaConCase(tardao.traerIdTarjeta(Integer.parseInt(request.getParameter("tarjeta"))));			
 			}
-						
 			response.setStatus(200);
-			PrintWriter salida = response.getWriter();
 			salida.println( "<!DOCTYPE 4.01 Transitional//EN\">" );
 			salida.println( "<HTML>" );
 			salida.println( " <HEAD>" );
@@ -76,61 +74,81 @@ public class ControladorListaMovimiento extends HttpServlet {
 			salida.println( " <BODY>" );
 			salida.println( " <table border=\"1\" style=\"width:75%\">" );
 			salida.println( " <tr>" );
+			salida.println( " <th>Fecha</th> ");
+			if(request.getParameter("tarjeta").equals(""))
+				salida.println( " <th>Tarjeta</th>" );
 			salida.println( " <th>IDMovimiento</th>" );
 			salida.println( " <th>Transporte</th> " );
 			salida.println( " <th>Linea</th> ");
-			salida.println( " <th>Estacion/Tramo</th> ");
-			salida.println( " <th>Fecha</th> ");
+			salida.println( " <th>Estacion</th> ");
 			salida.println( " <th>Monto</th> ");
 			salida.println( " <th>RedSube</th> ");
 			salida.println( " <th>Descuentos</th> ");
 			salida.println( " </tr> ");
-			
-			
 			for(Movimiento m: listmov) {
 				salida.println( " <tr>" );
-				if(m instanceof Recarga) {
-					salida.println( " <th>"+m.getIdMovimiento()+":Recarga</th>" );//Id Movimiento
-					salida.println( " <th></th>" );//Transporte
+				//Fecha
+				salida.println( " <th>"+Funciones.TraeFechaYHora(m.getFecha())+"</th> ");
+				//IDTarjeta
+				if(request.getParameter("tarjeta").equals("")) {
+					salida.println( " <th>"+m.getTarjeta().getNumeroSerieTarjeta()+"</th>" );
 				}
-				
+				//IDMovimiento
+				if(m instanceof Recarga) {
+					salida.println( " <th>"+m.getIdMovimiento()+":Recarga</th>" );
+				}
 				else {
 					salida.println("<th>"+m.getIdMovimiento()+":Boleto</th>");
-					Lectora lec = m.getLectora();
-					System.out.println("El id de la lectora es: " + lec.getIdLectora());
-					System.out.println("Es LecColetivo " + (m.getLectora() instanceof LectoraColectivo));
-					if(m.getLectora() instanceof LectoraColectivo) {
-						System.out.println("IdTransporte: " +((LectoraColectivo)lec).getTransporte().getIdTransporte());
-						salida.println( " <th>"+((LectoraColectivo)lec).getTransporte().getTipoTransporte()+"</th> " );
-						salida.println( " <th>"+((LectoraColectivo)lec).getTransporte().getLinea()+"</th> " );
-						salida.println( " <th>"+"BuscarTramo"+"</th> " );
-						
-					}
-					System.out.println("Es LecTYS " + (m.getLectora() instanceof LectoraEstacion));
-					if(m.getLectora() instanceof LectoraEstacion) {
-						System.out.println("QUE CARAJO:" +((LectoraEstacion)lec).getEstacion().getTransporte().getTipoTransporte());
-						salida.println( " <th>"+((LectoraEstacion)lec).getEstacion().getTransporte().getTipoTransporte()+"</th> " );
-						salida.println( " <th>"+((LectoraEstacion)lec).getEstacion().getTransporte().getLinea()+"</th> " );
-						salida.println( " <th>"+((LectoraEstacion)lec).getEstacion().getNombre()+"</th> " );
-						
-					}
-					
-					salida.println( " <th>"+Funciones.TraeFechaYHora(m.getFecha())+"</th> ");
-					salida.println( " <th>"+m.getMonto()+"</th> ");
-					if(m instanceof Boleto) {
-						salida.println( " <th>"+((Boleto)m).getIntRedSube()+"</th> ");
+				}
+				Lectora lec = m.getLectora();
+				if(m.getLectora() instanceof LectoraColectivo) {
+					//Transporte
+					salida.println( " <th>"+((LectoraColectivo)lec).getTransporte().getTipoTransporte()+"</th> " );
+					//Linea
+					salida.println( " <th>"+((LectoraColectivo)lec).getTransporte().getLinea()+"</th> " );
+					//Estacion/Tramo
+					salida.println( " <th>"+((Boleto)m).getTramoColectivo().toString()+"</th> " );
+				}
+				if(m.getLectora() instanceof LectoraEstacion) {
+					//Transporte
+					salida.println( " <th>"+((LectoraEstacion)lec).getEstacion().getTransporte().getTipoTransporte()+"</th> " );
+					//Linea
+					salida.println( " <th>"+((LectoraEstacion)lec).getEstacion().getTransporte().getLinea()+"</th> " );
+					//Estacion/Tramo
+					salida.println( " <th>"+((LectoraEstacion)lec).getEstacion().getNombre()+"</th> " );
+
+				}
+				//Monto
+				salida.println( " <th>"+m.getMonto()+"</th> ");
+				//RedSube y beneficios
+				if(m instanceof Boleto) {
+					salida.println( " <th>"+((Boleto)m).getIntRedSube()+"</th> ");
+					salida.print( " <th>");
+					Set<Beneficio> lbene = m.getTarjeta().getBeneficios();
+					if (lbene.size() > 0) {
+						for(Beneficio b:lbene) {
+							salida.print(b.getNombre()+" ");
+						}
 					}
 					else {
-						salida.println( " <th></th> ");
+						salida.print("---");
 					}
-					salida.println( " <th>No hago desc</th> ");
-					salida.println( " </tr> ");
+					salida.print("</th> ");
 				}
+				else {
+					salida.println( " <th>---</th> ");
+					if(((Recarga)m).isEsBoletoEstudiantil())
+						salida.println( " <th>Recarga de Boleto Estudiantil</th> ");
+					else
+						salida.println( " <th>---</th> ");
+				}
+				salida.println( " </tr> ");
 			}
 			salida.println( " </BODY>" );
 			salida.println( "</HTML>" );
 		} catch (Exception e) {
-			response.sendError(500, "Las Lista no cargo por que es jodida");
+			response.sendError(500);
+			salida.println(e.getMessage());
 		}
 
 	}	

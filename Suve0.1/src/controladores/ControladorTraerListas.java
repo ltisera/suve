@@ -9,13 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.TransientPropertyValueException;
-
 import dao.*;
 import datos.*;
 import negocio.Funciones;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 /**
@@ -242,7 +238,6 @@ public class ControladorTraerListas extends HttpServlet {
 			PrintWriter salida = response.getWriter();
 			TarjetaDao tardao = new TarjetaDao();
 			MovimientoDao mdao = new MovimientoDao();
-			TramoColectivoDao tramdao = new TramoColectivoDao();
 			
 			Tarjeta t=tardao.traerTarjeta(Integer.parseInt(request.getParameter("tarjeta")));
 			long idTarjeta = tardao.traerTarjeta(Integer.parseInt(request.getParameter("tarjeta"))).getIdTarjeta();
@@ -264,28 +259,41 @@ public class ControladorTraerListas extends HttpServlet {
 			salida.println( " <th>Descuentos</th> ");
 			salida.println( " </tr> ");
 			for(Movimiento m:lm) {
+				Lectora lec = m.getLectora();
+				salida.println( " <th>"+Funciones.TraeFechaYHora(m.getFecha())+"</th> " );
+				if(m.getLectora() instanceof LectoraColectivo) {
+					salida.println( " <th>"+"Linea " +((LectoraColectivo) m.getLectora()).getTransporte().getLinea()+"</th> " );
+				}
+				else if(m.getLectora() instanceof LectoraEstacion) {
+					salida.println( " <th>"+((LectoraEstacion)lec).getEstacion().getNombre()+"</th> " );
+				}
+				else if(m.getLectora() instanceof LectoraCarga) {
+					salida.println( " <th>"+((LectoraCarga)lec).getEstacion().getNombre()+"</th> " );
+				}
+				salida.println( " <th>"+m.getMonto()+"</th> ");
 				if(m instanceof Boleto) {
-					Lectora lec = m.getLectora();
-					salida.println( " <th>"+Funciones.TraeFechaYHora(m.getFecha())+"</th> " );
-					if(m.getLectora() instanceof LectoraColectivo) {
-						salida.println( " <th>"+"Linea " +((LectoraColectivo) m.getLectora()).getTransporte().getLinea()+"</th> " );
-						
-					}
-					if(m.getLectora() instanceof LectoraEstacion) {
-						
-						salida.println( " <th>"+((LectoraEstacion)lec).getEstacion().getNombre()+"</th> " );
-						
-					}
-					salida.println( " <th>"+m.getMonto()+"</th> ");
 					salida.println( " <th>"+((Boleto)m).getIntRedSube()+"</th> ");
 					salida.print( " <th>");
+
 					Set<Beneficio> lbene = t.getBeneficios();
-					for(Beneficio b:lbene) {
-						salida.print(b.getNombre());
+					if (lbene.size() > 0) {
+						for(Beneficio b:lbene) {
+							salida.print(b.getNombre()+" ");
+						}
+					}
+					else {
+						salida.print("---");
 					}
 					salida.print("</th> ");
-					salida.println( " </tr> ");
 				}
+				else {
+					salida.println( " <th>---</th> ");
+					if(((Recarga)m).isEsBoletoEstudiantil())
+						salida.println( " <th>Recarga de Boleto Estudiantil</th> ");
+					else
+						salida.println( " <th>---</th> ");
+				}
+				salida.println( " </tr> ");
 			}
 			salida.println( " </BODY>" );
 			salida.println( "</HTML>" );

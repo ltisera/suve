@@ -2,13 +2,11 @@ package negocio;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Set;
 
 import org.hibernate.proxy.HibernateProxy;
 
 import datos.TarifaSocial;
-import datos.Tarjeta;
 import datos.Beneficio;
 import datos.Boleto;
 
@@ -63,11 +61,8 @@ public class Funciones {
 		for(Beneficio b: beneficios)
 			if(b instanceof TarifaSocial) contieneTarifa = true;
 		return contieneTarifa;
-		
-		
 	}
-	
-	
+
 	public static boolean tiempoDeViajeValido(GregorianCalendar fechaAnterior, GregorianCalendar fechaActual) 
 	{
 		//Hacer segundos(Fecha Actual) - segundos(Fecha anterior) <=  7200 segundos

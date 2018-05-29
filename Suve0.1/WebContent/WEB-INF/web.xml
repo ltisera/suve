@@ -23,6 +23,15 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>ControladorCargarBoletoEstudiantil</servlet-name>
+		<servlet-class>controladores.ControladorCargarBoletoEstudiantil</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ControladoCargarBoletoEstudiantil</servlet-name>
+		<url-pattern>/CargarBoletoEstudiantil</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>ControladorListaMovimiento</servlet-name>
 		<servlet-class>controladores.ControladorListaMovimiento</servlet-class>
 	</servlet>

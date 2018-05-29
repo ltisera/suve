@@ -1,13 +1,12 @@
 package testModificaDatos;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import dao.*;
 import datos.*;
 import negocio.AdminDeLectoras;
 import java.util.List;
-
-import org.hibernate.HibernateException;
 
 public class testCargarMovimientosEnBaseDeDatos {
 
@@ -18,42 +17,49 @@ public class testCargarMovimientosEnBaseDeDatos {
 		LectoraDao lecdao = new LectoraDao();
 		TarjetaDao tardao = new TarjetaDao();
 		TramoColectivoDao tramodao = new TramoColectivoDao();
-		List<Lectora> lalectora = lecdao.traerLectora();
-		TramoColectivo tramo = tramodao.traerTramoColectivo(1l);
+		List<TramoColectivo> lsttramo = tramodao.traerTramoColectivo();
+		List<LectoraColectivo> lstleccol = lecdao.traerLectoraColectivo();
+		List<LectoraEstacion> lstlecest = lecdao.traerLectoraEstacion();
+		int avance;
+		GregorianCalendar fecha = null;
 		for(long ntar = 1; ntar <= 19; ntar++)
 		{
-			Tarjeta latarjet = tardao.traerTarjeta(ntar);
+			avance = (((int) Math.random() * 10000) +100);
+			fecha = new GregorianCalendar();
+			fecha.add(Calendar.MONTH, -1);
+			Tarjeta latarjet = tardao.traerTarjeta(tardao.traerTarjeta(ntar).getNumeroSerieTarjeta());
 			for(long i =0;i < 40;i++) {
-				int monto = (int) (Math.random() * 100) + 1;
-				Lectora lec1 = lalectora.get((int)Math.random()*lalectora.size());
-				if((int) (Math.random() * 2) == 0){
-					if(lec1 instanceof LectoraEstacion) {
-						try {
-							manejador.agregarBoleto((LectoraEstacion)lec1, latarjet, new GregorianCalendar());
-						}catch(Exception e) {
-							
+				fecha.add(Calendar.MINUTE, avance);
+				if(((int) (Math.random() * 7) != 0)){
+					try {
+						if((int) (Math.random() * 2) == 0){
+							LectoraEstacion lec1 = lstlecest.get((int) (Math.random()*lstlecest.size()));
+							manejador.agregarBoleto(lec1, latarjet, fecha);
+							lec1 = null;
 						}
-					}
-					if(lec1 instanceof LectoraColectivo){
-						TramoColectivoDao tramdao = new TramoColectivoDao();
-						try {
-							manejador.agregarBoleto((LectoraColectivo)lec1, latarjet, new GregorianCalendar(), tramdao.traerTramoColectivo(2l));
-						} catch (Exception e) {
-							
+						else {
+							LectoraColectivo lec1 = lstleccol.get((int) (Math.random()*lstleccol.size()));
+							TramoColectivo tramo = lsttramo.get(((int)(Math.random()*4)));
+							manejador.agregarBoleto(lec1, latarjet, fecha, tramo);
+							lec1 = null;
+							tramo = null;
 						}
+					}catch(Exception e) {
+						//...
 					}
-
 				}
 				else {
-					movdao.agregar(new Recarga(new GregorianCalendar(), lec1, monto, latarjet, false));
-					//System.out.println("recarga");
+					Lectora lec1 = lstlecest.get((int) (Math.random()*lstlecest.size()));
+					long id = movdao.agregar(new Recarga(fecha, lec1, (float) (Math.random() * 100) + 20, latarjet, false));
+					latarjet.setMonto(latarjet.getMonto()+movdao.traerMovimiento(id).getMonto());
+					tardao.actualizar(latarjet);
+					lec1 = null;
 				}
-				
-			
+				avance = ((int) (Math.random() * 120) +5);
 			}
 		}
-		
-		
+
+
 
 	}
 

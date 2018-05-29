@@ -6,6 +6,7 @@ import java.util.Collections;
 
 import dao.MovimientoDao;
 import datos.Boleto;
+import datos.Recarga;
 import datos.Tarjeta;
 
 public class MovimientoAlta 
@@ -28,4 +29,9 @@ public class MovimientoAlta
 	{
 		return movdao.traerUltimoBoleto(idTarjeta);
 	}
+	
+	public Recarga traerRecargaEstudiantil() {
+		return movdao.traerRecargaEstudiantil();
+	}
+	
 }

@@ -89,6 +89,17 @@ public class MovimientoDao {
 		return objeto;
 	}
 	
+	public Recarga traerRecargaEstudiantil() {
+		Recarga objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Recarga) session.createQuery("from Recarga r where r.esBoletoEstudiantil = 1 order by fecha desc").uniqueResult();
+		}  finally {
+			session.close();
+		}
+		return objeto;
+	}
+	
 	public Movimiento traerMovimiento(long idMovimiento) {
 		Movimiento objeto = null;
 		try {
@@ -207,11 +218,13 @@ public class MovimientoDao {
 		try {
 			iniciaOperacion();
 			String consultaHQL ="";
-			lista = session.createQuery("from Movimiento m inner join fetch m.lectora where m.tarjeta=" + idTarjeta+" order by m.fecha desc ").list();
+			lista = session.createQuery("from Movimiento m inner join fetch m.lectora inner join fetch m.tarjeta where m.tarjeta=" + idTarjeta+" order by m.fecha desc ").list();
 			for(Movimiento m:lista) {
+				Hibernate.initialize((m.getTarjeta()).getBeneficios());
 				if(m.getLectora() instanceof LectoraColectivo)
 				{
 					Hibernate.initialize(((LectoraColectivo)m.getLectora()).getTransporte());
+					Hibernate.initialize(((Boleto)m).getTramoColectivo());
 				}
 				if(m.getLectora() instanceof LectoraEstacion)
 				{
@@ -221,6 +234,29 @@ public class MovimientoDao {
 			}
 			//("from Movimiento m inner join fetch m.lectora as l CASE where type(l) = LectoraColectivo THEN inner join fetch l.transporte END CASE where type(l) = LectoraEstacion THEN inner join fetch l.estacion END")
 			
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	public List<Movimiento> traerMovimientosConCase() 
+	{
+		List<Movimiento> lista = new ArrayList<Movimiento>();
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Movimiento m inner join fetch m.tarjeta inner join fetch m.lectora order by m.fecha desc").list();
+			for(Movimiento m:lista) {
+				Hibernate.initialize((m.getTarjeta()).getBeneficios());
+				if(m.getLectora() instanceof LectoraColectivo)
+				{
+					Hibernate.initialize(((LectoraColectivo)m.getLectora()).getTransporte());
+					Hibernate.initialize(((Boleto)m).getTramoColectivo());
+				}
+				if(m.getLectora() instanceof LectoraEstacion)
+				{
+					Hibernate.initialize(((LectoraEstacion)m.getLectora()).getEstacion());
+				}		
+			}
 		} finally {
 			session.close();
 		}

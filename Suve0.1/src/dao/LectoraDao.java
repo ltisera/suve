@@ -129,7 +129,7 @@ public class LectoraDao {
 		}
 		return lista;
 	}
-
+	
 	public LectoraColectivo traerLectoraColectivo(int numeroSerieLectora) 
 	{
 		LectoraColectivo objeto = null;
@@ -140,6 +140,17 @@ public class LectoraDao {
 			session.close();
 		}
 		return objeto;
+	}
+	
+	public List<LectoraColectivo> traerLectoraColectivo() throws HibernateException {
+		List<LectoraColectivo> lista = null ;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from LectoraColectivo l inner join fetch l.transporte").list();
+		} finally {
+			session.close();
+		}
+		return lista;
 	}
 
 	public LectoraEstacion traerLectoraEstacion(int numeroSerieLectora) 
@@ -155,4 +166,15 @@ public class LectoraDao {
 		return objeto;
 	}
 	
+	public List<LectoraEstacion> traerLectoraEstacion() throws HibernateException {
+		List<LectoraEstacion> lista = null ;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from LectoraEstacion l inner join fetch l.estacion as e inner join fetch e.transporte").list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+
 }

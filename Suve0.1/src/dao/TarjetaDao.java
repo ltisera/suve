@@ -90,6 +90,9 @@ public class TarjetaDao {
 		try {
 			iniciaOperacion();
 			lista= session.createQuery( "from Tarjeta t join fetch t.usuario order by t.idTarjeta asc" ).list();
+			for(Tarjeta t:lista) {
+				Hibernate.initialize(t.getBeneficios());
+			}
 		} finally {
 			session.close();
 		}
@@ -104,6 +107,16 @@ public class TarjetaDao {
 			if(objeto!= null) {
 				Hibernate.initialize(objeto.getBeneficios());
 			}
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
+	public long traerIdTarjeta(int numeroSerieTarjeta) throws HibernateException {
+		long objeto = -1;
+		try {
+			iniciaOperacion();
+			objeto = (long) session.createQuery( "select idTarjeta from Tarjeta t where t.numeroSerieTarjeta="+numeroSerieTarjeta).uniqueResult();
 		} finally {
 			session.close();
 		}

@@ -114,7 +114,6 @@ public class iniciaBaseDeDatos {
 		//Colectivo
 		for(int i=0; i<10;i++)
 		{
-			tdao.agregar(new Transporte(i + "00", TipoTransporte.Colectivo));
 			tdao.agregar(new Transporte("11"+i, TipoTransporte.Colectivo));
 			tdao.agregar(new Transporte("2"+i+"1", TipoTransporte.Colectivo));
 			tdao.agregar(new Transporte("43"+i, TipoTransporte.Colectivo));
@@ -127,7 +126,7 @@ public class iniciaBaseDeDatos {
 		EstacionDao edao = new EstacionDao();
 		int numeroSerieLectora = 3331000;
 		for (Estacion e:edao.traerEstacion()){
-			for(int i=0; i<=15;i++)
+			for(int i=0; i<=10;i++)
 			{
 				ldao.agregar(new LectoraEstacion(e,numeroSerieLectora));
 				numeroSerieLectora++;
@@ -135,7 +134,7 @@ public class iniciaBaseDeDatos {
 		}
 		TransporteDao tdao = new TransporteDao();
 		for(Transporte t:tdao.traerLineasPorTransporte(TipoTransporte.Colectivo)) {
-			for(int i=0; i<=15;i++)
+			for(int i=0; i<=10;i++)
 			{
 				ldao.agregar(new LectoraColectivo(t,numeroSerieLectora));
 				numeroSerieLectora++;
