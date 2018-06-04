@@ -47,10 +47,19 @@ body{
 #divMenu{
 	clear:both;
 	float:left;
-	width: 150px;
-	
-	
+	width: 180px;
 }
+
+#divBtnInicio{
+	width: 150px;
+	height: 30px;
+	background-color: yellow;
+}
+
+#divBtnagregarViaje{
+	background-color: yellow;
+}
+
 #divContenido{
 	float:left;
 	left:40px;

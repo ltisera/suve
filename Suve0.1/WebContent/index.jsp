@@ -19,10 +19,14 @@
 		$("#divCargarSaldoEstudiantil").hide();
 		$("#divInicio").show();
 		
-		$("#divMenu").mouseover(poner);
-		$("#divMenu").mouseleave(sacar);
-
-		$("#btnInicio").click(function() {
+		$("#divBtnInicio").mouseover(function(){
+			$("#imgInicio").attr("src","recursos/btnInicioOn.png");
+		});
+		$("#divBtnInicio").mouseleave(function(){
+			$("#imgInicio").attr("src","recursos/btnInicioOff.png");
+		});
+		$("#divBtnInicio").click(function() {
+			$("#imgInicio").attr("src","recursos/btnInicioSel.png");
 			$("#divManejaFecha").hide();
 			$("#divAgregarViaje").hide();
 			$("#divConsultarMovimientos").hide();
@@ -30,7 +34,14 @@
 			$("#divInicio").show();
 		});
 		
-		$("#btnAgregarViaje").click(function() {
+		$("#divBtnAgregarViaje").mouseover(function(){
+			$("#imgAgregarViajes").attr("src","recursos/btnAgregarViajeOn.png");
+		});
+		$("#divBtnAgregarViajes").mouseleave(function(){
+			$("#imgAgregarViajes").attr("src","recursos/btnAgregarViajeOff.png");
+		});
+		$("#divBtnAgregarViaje").click(function() {
+			$("#imgAgregarViajes").attr("src","recursos/btnAgregarViajeSel.png");
 			$("#divInicio").hide();
 			$("#divConsultarMovimientos").hide();
 			$("#divCargarSaldoEstudiantil").hide();
@@ -38,7 +49,14 @@
 			$("#divAgregarViaje").show("slow");
 		});
 		
-		$("#btnConsultarMovimientos").click(function() {
+		$("#divBtnConsultarMovimientos").mouseover(function(){
+			$("#imgConsultarMovimientos").attr("src","recursos/btnConsultarMovimientosOn.png");
+		});
+		$("#divBtnConsultarMovimientos").mouseleave(function(){
+			$("#imgConsultarMovimientos").attr("src","recursos/btnConsultarMovimientosOff.png");
+		});
+		$("#divBtnConsultarMovimientos").click(function() {
+			$("#imgConsultarMovimientos").attr("src","recursos/btnConsultarMovimientosSel.png");
 			$("#divInicio").hide();
 			$("#divManejaFecha").hide();
 			$("#divAgregarViaje").hide();
@@ -46,7 +64,14 @@
 			$("#divConsultarMovimientos").show("slow");
 		});
 		
-		$("#btnCargarSaldoEstudiantil").click(function() {
+		$("#divBtnCargarSaldoEstudiantil").mouseover(function(){
+			$("#imgInicio").attr("src","recursos/btnCargarSaldoEstudiantilOn.png");
+		});
+		$("#divBtnCargarSaldoEstudiantil").mouseleave(function(){
+			$("#imgCargarSaldoEstudiantil").attr("src","recursos/btnCargarSaldoEstudiantilOff.png");
+		});
+		$("#divBtnCargarSaldoEstudiantil").click(function() {
+			$("#imgCargarSaldoEstudiantil").attr("src","recursos/btnCargarSaldoEstudiantilSel.png");
 			$("#divInicio").hide();
 			$("#divAgregarViaje").hide();
 			$("#divConsultarMovimientos").hide();
@@ -55,17 +80,6 @@
 		});
 		
 	});
-		
-
-
-function poner(){
-	console.log("Pongo");
-	$("#imgInicio").attr("src","recursos/btnInicioA.png");
-}
-function sacar(){
-	console.log("saco");
-	$("#imgInicio").attr("src","recursos/btnInicio.png");
-}
 
 </script>
 
@@ -84,16 +98,14 @@ function sacar(){
 	</div>
 	<div id="divContenedorInferior">
 		<div id="divMenu">
-			<!-- Contenedor del menu --> 
-			<input id="btnInicio" type="button" value="" style="width: 130px"></input> 
-			<div><img id="imgInicio" alt="" src="recursos/btnInicio.png"></div>
+			<!-- Contenedor del menu -->
+			<div id="divBtnInicio"><img id="imgInicio" alt="" src="recursos/btnInicioSel.png"></div>
 			<br> 
-			<input id="btnAgregarViaje" type="button" value="Agregar Viaje"	style="width: 150px" /> 
+			<div id="divBtnAgregarViaje"><img id="imgAgregarViaje" alt="" src="recursos/btnAgregarViajeOff.png"></div>
 			<br> 
-			<input id="btnConsultarMovimientos" type="button" value="Consultar Movimientos" style="width: 150px" /> 
+			<div id="divBtnConsultarMovimientos"><img id="imgConsultarMovimientos" alt="" src="recursos/btnConsultarMovimientosOff.png"></div>
 			<br> 
-			<input id="btnCargarSaldoEstudiantil" type="button" value="Saldo Estudiantil" style="width: 150px" />
-	
+			<div id="divBtnCArgarSaldoEstudiantil"><img id="imgCargarSaldoEstudiantil" alt="" src="recursos/btnCargarSaldoEstudiantilOff.png"></div>	
 		</div>
 		<div id="divContenido">
 			<!-- Contenedor del contenido OMG -->
