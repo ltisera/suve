@@ -53,11 +53,21 @@ body{
 #divBtnInicio{
 	width: 150px;
 	height: 30px;
-	background-color: yellow;
 }
 
-#divBtnagregarViaje{
-	background-color: yellow;
+#divBtnAgregarViaje{
+	width: 150px;
+	height: 30px;
+}
+
+#divBtnConsultarMovimientos{
+	width: 150px;
+	height: 30px;
+}
+
+#divBtnCargarSaldoEstudiantil{
+	width: 150px;
+	height: 30px;
 }
 
 #divContenido{

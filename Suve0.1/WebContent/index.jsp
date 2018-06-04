@@ -19,67 +19,77 @@
 		$("#divCargarSaldoEstudiantil").hide();
 		$("#divInicio").show();
 		
-		$("#divBtnInicio").mouseover(function(){
-			$("#imgInicio").attr("src","recursos/btnInicioOn.png");
-		});
-		$("#divBtnInicio").mouseleave(function(){
-			$("#imgInicio").attr("src","recursos/btnInicioOff.png");
-		});
-		$("#divBtnInicio").click(function() {
-			$("#imgInicio").attr("src","recursos/btnInicioSel.png");
-			$("#divManejaFecha").hide();
-			$("#divAgregarViaje").hide();
-			$("#divConsultarMovimientos").hide();
-			$("#divCargarSaldoEstudiantil").hide();
-			$("#divInicio").show();
-		});
+		if ($("#imgInicio").attr("src") != "recursos/btnInicioSel.png"){
+			$("#divBtnInicio").mouseenter(function(){
+				$("#imgInicio").attr("src","recursos/btnInicioOn.png");
+			});
+			$("#divBtnInicio").mouseleave(function(){
+				$("#imgInicio").attr("src","recursos/btnInicioOff.png");
+			});
+			$("#divBtnInicio").click(function() {
+				hideAll();
+				$("#imgInicio").attr("src","recursos/btnInicioSel.png");
+				$("#divInicio").show();
+			});
+		}
 		
-		$("#divBtnAgregarViaje").mouseover(function(){
-			$("#imgAgregarViajes").attr("src","recursos/btnAgregarViajeOn.png");
-		});
-		$("#divBtnAgregarViajes").mouseleave(function(){
-			$("#imgAgregarViajes").attr("src","recursos/btnAgregarViajeOff.png");
-		});
-		$("#divBtnAgregarViaje").click(function() {
-			$("#imgAgregarViajes").attr("src","recursos/btnAgregarViajeSel.png");
-			$("#divInicio").hide();
-			$("#divConsultarMovimientos").hide();
-			$("#divCargarSaldoEstudiantil").hide();
-			$("#divManejaFecha").show("fast");
-			$("#divAgregarViaje").show("slow");
-		});
+		if ($("#imgAgregarViaje").attr("src") != "recursos/btnAgregarViajeSel.png"){
+			$("#divBtnAgregarViaje").mouseenter(function(){
+				$("#imgAgregarViaje").attr("src","recursos/btnAgregarViajeOn.png");
+			});
+			$("#divBtnAgregarViaje").mouseleave(function(){
+				$("#imgAgregarViaje").attr("src","recursos/btnAgregarViajeOff.png");
+			});
+			$("#divBtnAgregarViaje").click(function() {
+				hideAll();
+				$("#imgAgregarViaje").attr("src","recursos/btnAgregarViajeSel.png");
+				$("#divManejaFecha").show("fast");
+				$("#divAgregarViaje").show("slow");
+			});
+		}
 		
-		$("#divBtnConsultarMovimientos").mouseover(function(){
-			$("#imgConsultarMovimientos").attr("src","recursos/btnConsultarMovimientosOn.png");
-		});
-		$("#divBtnConsultarMovimientos").mouseleave(function(){
-			$("#imgConsultarMovimientos").attr("src","recursos/btnConsultarMovimientosOff.png");
-		});
-		$("#divBtnConsultarMovimientos").click(function() {
-			$("#imgConsultarMovimientos").attr("src","recursos/btnConsultarMovimientosSel.png");
-			$("#divInicio").hide();
-			$("#divManejaFecha").hide();
-			$("#divAgregarViaje").hide();
-			$("#divCargarSaldoEstudiantil").hide();
-			$("#divConsultarMovimientos").show("slow");
-		});
+		if ($("#imgConsultarMovimientos").attr("src") != "recursos/btnConsultarMovimientosSel.png"){
+			$("#divBtnConsultarMovimientos").mouseenter(function(){
+				$("#imgConsultarMovimientos").attr("src","recursos/btnConsultarMovimientosOn.png");
+			});
+			$("#divBtnConsultarMovimientos").mouseleave(function(){
+				$("#imgConsultarMovimientos").attr("src","recursos/btnConsultarMovimientosOff.png");
+			});
+			$("#divBtnConsultarMovimientos").click(function() {
+				hideAll();
+				$("#imgConsultarMovimientos").attr("src","recursos/btnConsultarMovimientosSel.png");
+				$("#divConsultarMovimientos").show("slow");
+			});	
+		}
 		
-		$("#divBtnCargarSaldoEstudiantil").mouseover(function(){
-			$("#imgInicio").attr("src","recursos/btnCargarSaldoEstudiantilOn.png");
-		});
-		$("#divBtnCargarSaldoEstudiantil").mouseleave(function(){
-			$("#imgCargarSaldoEstudiantil").attr("src","recursos/btnCargarSaldoEstudiantilOff.png");
-		});
-		$("#divBtnCargarSaldoEstudiantil").click(function() {
-			$("#imgCargarSaldoEstudiantil").attr("src","recursos/btnCargarSaldoEstudiantilSel.png");
-			$("#divInicio").hide();
-			$("#divAgregarViaje").hide();
-			$("#divConsultarMovimientos").hide();
-			$("#divManejaFecha").show("fast");
-			$("#divCargarSaldoEstudiantil").show("slow");
-		});
+		if ($("#imgCargarSaldoEstudiantil").attr("src") != "recursos/btnCargarSaldoEstudiantilSel.png"){
+			$("#divBtnCargarSaldoEstudiantil").mouseenter(function(){
+				$("#imgCargarSaldoEstudiantil").attr("src","recursos/btnCargarSaldoEstudiantilOn.png");
+			});
+			$("#divBtnCargarSaldoEstudiantil").mouseleave(function(){
+				$("#imgCargarSaldoEstudiantil").attr("src","recursos/btnCargarSaldoEstudiantilOff.png");
+			});
+			$("#divBtnCargarSaldoEstudiantil").click(function() {
+				hideAll();
+				$("#imgCargarSaldoEstudiantil").attr("src","recursos/btnCargarSaldoEstudiantilSel.png");
+				$("#divManejaFecha").show("fast");
+				$("#divCargarSaldoEstudiantil").show("slow");
+			});
+		}
 		
 	});
+	
+function hideAll(){
+	$("#divInicio").hide();
+	$("#divAgregarViaje").hide();
+	$("#divManejaFecha").hide();
+	$("#divConsultarMovimientos").hide();
+	$("#divCargarSaldoEstudiantil").hide();
+	$("#imgInicio").attr("src","recursos/btnInicioOff.png");
+	$("#imgAgregarViaje").attr("src","recursos/btnAgregarViajeOff.png");
+	$("#imgConsultarMovimientos").attr("src","recursos/btnConsultarMovimientosOff.png");
+	$("#imgCargarSaldoEstudiantil").attr("src","recursos/btnCargarSaldoEstudiantilOff.png");
+}
 
 </script>
 
@@ -100,12 +110,9 @@
 		<div id="divMenu">
 			<!-- Contenedor del menu -->
 			<div id="divBtnInicio"><img id="imgInicio" alt="" src="recursos/btnInicioSel.png"></div>
-			<br> 
 			<div id="divBtnAgregarViaje"><img id="imgAgregarViaje" alt="" src="recursos/btnAgregarViajeOff.png"></div>
-			<br> 
 			<div id="divBtnConsultarMovimientos"><img id="imgConsultarMovimientos" alt="" src="recursos/btnConsultarMovimientosOff.png"></div>
-			<br> 
-			<div id="divBtnCArgarSaldoEstudiantil"><img id="imgCargarSaldoEstudiantil" alt="" src="recursos/btnCargarSaldoEstudiantilOff.png"></div>	
+			<div id="divBtnCargarSaldoEstudiantil"><img id="imgCargarSaldoEstudiantil" alt="" src="recursos/btnCargarSaldoEstudiantilOff.png"></div>	
 		</div>
 		<div id="divContenido">
 			<!-- Contenedor del contenido OMG -->
