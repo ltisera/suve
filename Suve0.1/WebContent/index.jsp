@@ -19,6 +19,9 @@
 		$("#divCargarSaldoEstudiantil").hide();
 		$("#divInicio").show();
 		
+		$("#divMenu").mouseover(poner);
+		$("#divMenu").mouseleave(sacar);
+
 		$("#btnInicio").click(function() {
 			$("#divManejaFecha").hide();
 			$("#divAgregarViaje").hide();
@@ -53,7 +56,17 @@
 		
 	});
 		
-		
+
+
+function poner(){
+	console.log("Pongo");
+	$("#imgInicio").attr("src","recursos/btnInicioA.png");
+}
+function sacar(){
+	console.log("saco");
+	$("#imgInicio").attr("src","recursos/btnInicio.png");
+}
+
 </script>
 
 </HEAD>
@@ -69,36 +82,36 @@
 		</div>
 
 	</div>
-	<table width="100%">
-		<tr id="columnita">
-			<th width="20%" valign="top" align="left" class="pepe">
-				<!-- Contenedor del menu --> 
-				<input id="btnInicio" type="button" value="Inicio" style="width: 150px"/> 
-				<br> 
-				<input id="btnAgregarViaje" type="button" value="Agregar Viaje"	style="width: 150px" /> 
-				<br> 
-				<input id="btnConsultarMovimientos" type="button" value="Consultar Movimientos" style="width: 150px" /> 
-				<br> 
-				<input id="btnCargarSaldoEstudiantil" type="button" value="Saldo Estudiantil" style="width: 150px" />
+	<div id="divContenedorInferior">
+		<div id="divMenu">
+			<!-- Contenedor del menu --> 
+			<input id="btnInicio" type="button" value="" style="width: 130px"></input> 
+			<div><img id="imgInicio" alt="" src="recursos/btnInicio.png"></div>
+			<br> 
+			<input id="btnAgregarViaje" type="button" value="Agregar Viaje"	style="width: 150px" /> 
+			<br> 
+			<input id="btnConsultarMovimientos" type="button" value="Consultar Movimientos" style="width: 150px" /> 
+			<br> 
+			<input id="btnCargarSaldoEstudiantil" type="button" value="Saldo Estudiantil" style="width: 150px" />
+	
+		</div>
+		<div id="divContenido">
+			<!-- Contenedor del contenido OMG -->
+			<div id="divInicio" class="container">
+				<h1>Bienvenidos al sistema de gestion SUVE</h1>
+			</div>
+			<div id="divAgregarViaje" class="container">
+				<%@ include file="/AgregarViaje.jsp"%>
+			</div>
+			<div id="divConsultarMovimientos" class="container">
+				<%@ include file="/ConsultarMovimientos.jsp"%>
+			</div>
+			<div id="divCargarSaldoEstudiantil" class="container">
+				<%@ include file="/SaldoEstudiantil.jsp"%>
+			</div>
+		</div>
 
-			</th>
-			<th width="80%" align="left" class="pepe">
-				<!-- Contenedor del contenido OMG -->
-				<div id="divInicio" class="container">
-					<h1>Bienvenidos al sistema de gestion SUVE</h1>
-				</div>
-				<div id="divAgregarViaje" class="container">
-					<%@ include file="/AgregarViaje.jsp"%>
-				</div>
-				<div id="divConsultarMovimientos" class="container">
-					<%@ include file="/ConsultarMovimientos.jsp"%>
-				</div>
-				<div id="divCargarSaldoEstudiantil" class="container">
-					<%@ include file="/SaldoEstudiantil.jsp"%>
-				</div>
-			</th>
-		</tr>
-	</table>
+	</div>	
 
 </body>
 </html>

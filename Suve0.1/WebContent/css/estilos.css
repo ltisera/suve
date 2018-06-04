@@ -4,12 +4,13 @@
 
 	margin: 0px;
 	padding: 0px;
+	
 }
 
 body{
-	/*background-color:#108CCC; 
-	color:#ffffff;*/
-	background-color:#108CCC;
+	background-color:#108CCC; 
+	color:#ffffff;
+	/*background-color:#7092be;*/
 	color:white;
 	
 }
@@ -29,6 +30,7 @@ body{
 	/*background-color: blue;*/
 	
 }
+
 #divManejaFecha{
 	position: absolute;
 	float:right;
@@ -36,6 +38,22 @@ body{
 	width:60%; 
 	height: 160px;
 	top:25px;
+	
+}
+
+#divContInf{
+	
+}
+#divMenu{
+	clear:both;
+	float:left;
+	width: 150px;
+	
+	
+}
+#divContenido{
+	float:left;
+	left:40px;
 	
 }
 
@@ -49,6 +67,8 @@ body{
 #divInicio{
 	/*background-color: red;*/
 	color: white;
+	width: 130px;
+	height: 30px;
 }
 
 
