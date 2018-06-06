@@ -60,7 +60,7 @@ public class TramoColectivoDao {
 			session.close();
 		}
 	}
-	
+	/*
 	public TramoColectivo traerTramoColectivo(long idTramoColectivo) throws HibernateException {
 		TramoColectivo objeto = null;
 		try {
@@ -71,7 +71,7 @@ public class TramoColectivoDao {
 		}
 		return objeto;
 	}
-			
+	*/		
 	@SuppressWarnings ( "unchecked" )
 	public List<TramoColectivo> traerTramoColectivo() throws HibernateException {
 		List<TramoColectivo> lista= null ;
@@ -83,7 +83,6 @@ public class TramoColectivoDao {
 		}
 		return lista;
 	}
-
 	public TramoColectivo traerTramoColectivo(float kMin, float kMax) 
 	{
 		TramoColectivo objeto = null; 
@@ -93,7 +92,6 @@ public class TramoColectivoDao {
 		} finally {
 			session.close();
 		}
-		return objeto;
-		
+		return objeto;	
 	}
 }

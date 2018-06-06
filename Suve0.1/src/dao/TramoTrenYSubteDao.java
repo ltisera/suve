@@ -1,13 +1,10 @@
 package dao;
 
-	import java.util.List;
-	import org.hibernate.HibernateException;
-	import org.hibernate.Session;
-	import org.hibernate.Transaction;
-
-import datos.Estacion;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import datos.TramoTrenYSubte;
-	
+
 public class TramoTrenYSubteDao {
 	private static Session session;
 	private Transaction tx;
@@ -62,7 +59,7 @@ public class TramoTrenYSubteDao {
 			session.close();
 		}
 	}
-	
+	/*
 	public TramoTrenYSubte traerTramoTrenYSubte(long idTramoTrenYSubte) throws HibernateException {
 		TramoTrenYSubte objeto = null;
 		try {
@@ -85,20 +82,20 @@ public class TramoTrenYSubteDao {
 		}
 		return lista;
 	}
-
-	public TramoTrenYSubte traerTramoTrenYSubte(Estacion estacionA, Estacion estacionB) 
+	*/
+	public TramoTrenYSubte traerTramoTrenYSubte(long estacionA, long estacionB) 
 	{
 		TramoTrenYSubte objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (TramoTrenYSubte) session.createQuery("from TramoTrenYSubte t inner join fetch t.seccionViaje inner join fetch t.estacionA ea inner join fetch ea.transporte inner join fetch t.estacionB eb inner join fetch eb.transporte where (t.estacionA = "+estacionA.getIdEstacion()+" and t.estacionB="+estacionB.getIdEstacion()+") or (t.estacionA ="+estacionB.getIdEstacion()+" and t.estacionB="+estacionA.getIdEstacion()+")").uniqueResult();
+			objeto = (TramoTrenYSubte) session.createQuery("from TramoTrenYSubte t inner join fetch t.seccionViaje inner join fetch t.estacionA ea inner join fetch ea.transporte inner join fetch t.estacionB eb inner join fetch eb.transporte where (t.estacionA = "+estacionA+" and t.estacionB="+estacionB+") or (t.estacionA ="+estacionB+" and t.estacionB="+estacionA+")").uniqueResult();
 		} finally {
 			session.close();
 		}
 		return objeto;
 	}
 	
-	public TramoTrenYSubte traerTramoUnaEstacion(long idEstacionA)
+	public TramoTrenYSubte traerTramoTrenYSubte(long idEstacionA)
 	{
 		TramoTrenYSubte objeto = null;
 		try {

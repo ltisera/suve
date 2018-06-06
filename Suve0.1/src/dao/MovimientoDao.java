@@ -9,8 +9,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import datos.*;
-import negocio.Funciones;
+import datos.Movimiento;
+import datos.Boleto;
+import datos.Recarga;
+import datos.LectoraColectivo;
+import datos.LectoraEstacion;
 
 public class MovimientoDao {
 	private static Session session;
@@ -66,7 +69,7 @@ public class MovimientoDao {
 			session.close();
 		}
 	}
-	
+	/*
 	public Boleto traerBoleto(long idMovimiento) {
 		Boleto objeto = null;
 		try {
@@ -88,7 +91,7 @@ public class MovimientoDao {
 		}
 		return objeto;
 	}
-	
+	*/
 	public Recarga traerRecargaEstudiantil() {
 		Recarga objeto = null;
 		try {
@@ -110,18 +113,7 @@ public class MovimientoDao {
 		}
 		return objeto;
 	}
-	
-	public Movimiento traerMovimientoCompleto(long idMovimiento){
-		Movimiento objeto = null;
-		try {
-			iniciaOperacion();
-			objeto = (Movimiento) session.createQuery("from Movimiento m inner join fetch m.lectora inner join fetch m.tarjeta where m.idMovimiento="+idMovimiento).uniqueResult();
-		} finally {
-			session.close();
-		}
-		return objeto;
-	}
-
+	/*
 	public List<Movimiento> traerMovimientos(){
 		List<Movimiento> lista = null;
 		try {
@@ -133,51 +125,6 @@ public class MovimientoDao {
 		return lista;
 	}
 	
-	public List<Movimiento> traerMovimientoCompleto(){
-		List<Movimiento> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Movimiento m inner join fetch m.lectora inner join fetch m.tarjeta").list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
-	
-	/*
-	public List<Movimiento> traerMovimientoYLectora(){
-		List<Movimiento> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Movimiento m inner join fetch m.lectora").list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
-	
-	public List<Movimiento> traerMovimientoYTarjeta(){
-		List<Movimiento> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Movimiento m inner join fetch m.tarjeta").list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
-	*/
-	public List<Boleto> traerBoletoCompleto(){
-		List<Boleto> lista = null;
-		try {
-			iniciaOperacion();
-			//lista = session.createQuery("from Movimiento m inner join fetch m.lectora inner join fetch m.tarjeta").list();
-			lista = session.createQuery("from Boleto b inner join fetch b.tramoColectivo").list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
 	public List<Boleto> traerBoleto(){
 		List<Boleto> lista = null;
 		try {
@@ -212,12 +159,13 @@ public class MovimientoDao {
 		}
 		return lista;
 	}
-	public List<Movimiento> traerMovimientosPorTarjetaConCase(long idTarjeta) 
+	*/
+	@SuppressWarnings("unchecked")
+	public List<Movimiento> traerMovimientoCompletoPorTarjeta(long idTarjeta) 
 	{
 		List<Movimiento> lista = new ArrayList<Movimiento>();
 		try {
 			iniciaOperacion();
-			String consultaHQL ="";
 			lista = session.createQuery("from Movimiento m inner join fetch m.lectora inner join fetch m.tarjeta where m.tarjeta=" + idTarjeta+" order by m.fecha desc ").list();
 			for(Movimiento m:lista) {
 				Hibernate.initialize((m.getTarjeta()).getBeneficios());
@@ -239,7 +187,8 @@ public class MovimientoDao {
 		}
 		return lista;
 	}
-	public List<Movimiento> traerMovimientosConCase() 
+	@SuppressWarnings("unchecked")
+	public List<Movimiento> traerMovimientoCompleto() 
 	{
 		List<Movimiento> lista = new ArrayList<Movimiento>();
 		try {
@@ -262,7 +211,7 @@ public class MovimientoDao {
 		}
 		return lista;
 	}
-	
+	/*
 
 	public List<Boleto> traerBoletosRedSube(long idTarjeta, GregorianCalendar fechaA) 
 	{
@@ -281,7 +230,8 @@ public class MovimientoDao {
 		return lista;
 	}
 	
-	
+	*/
+	@SuppressWarnings("unchecked")
 	public List<Boleto> traerBoletosRedSubeColectivo(long idTarjeta, GregorianCalendar fechaA) 
 	{
 		List<Boleto> lista = new ArrayList<Boleto>();
@@ -298,8 +248,7 @@ public class MovimientoDao {
 		}
 		return lista;
 	}
-	
-	
+	@SuppressWarnings("unchecked")
 	public List<Boleto> traerBoletosRedSubeTrenYSubte(long idTarjeta, GregorianCalendar fechaA) 
 	{
 		List<Boleto> lista = new ArrayList<Boleto>();
@@ -316,9 +265,7 @@ public class MovimientoDao {
 		}
 		return lista;
 	}
-	
-	
-
+	//No trae solo ultimo boleto de tren(?
 	public Boleto traerUltimoBoleto(long idTarjeta) 
 	{
 		Boleto objeto = null;
@@ -331,7 +278,6 @@ public class MovimientoDao {
 		}
 		return objeto;
 	}
-	
 	public Movimiento traerUltimoMovimiento() 
 	{
 		Movimiento objeto = null;
@@ -344,4 +290,5 @@ public class MovimientoDao {
 		}
 		return objeto;
 	}
+	
 }

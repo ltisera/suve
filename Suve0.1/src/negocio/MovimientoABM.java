@@ -10,7 +10,7 @@ import datos.Movimiento;
 import datos.Recarga;
 import datos.Tarjeta;
 
-public class MovimientoAlta 
+public class MovimientoABM 
 {
 	MovimientoDao movdao = new MovimientoDao();
 	public void agregarBoleto(Boleto boleto)
@@ -32,9 +32,15 @@ public class MovimientoAlta
 		return lstb;
 	}
 
+	//No trae solo ultimo boleto de tren(?
 	public Boleto traerUltimoBoleto(long idTarjeta) 
 	{
 		return movdao.traerUltimoBoleto(idTarjeta);
+	}
+	
+	public Movimiento traerUltimoMovimiento() 
+	{
+		return movdao.traerUltimoMovimiento();
 	}
 	
 	public Recarga traerRecargaEstudiantil() {
@@ -43,14 +49,14 @@ public class MovimientoAlta
 	
 	public boolean esFechaValida(GregorianCalendar fechaNuevoBoleto) {
 		boolean valido = false;
-		Movimiento m = movdao.traerUltimoMovimiento();
+		Movimiento m = this.traerUltimoMovimiento();
 		
 		if( m == null) {
 			valido = true;
 		}
 		else {
 			
-			if(fechaNuevoBoleto.compareTo(movdao.traerUltimoMovimiento().getFecha())>=0) {
+			if(fechaNuevoBoleto.compareTo(m.getFecha())>=0) {
 				valido = true;
 			}
 		}

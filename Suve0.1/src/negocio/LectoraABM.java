@@ -17,12 +17,12 @@ import datos.TramoColectivo;
 import datos.TramoTrenYSubte;
 import datos.Transporte;
 
-public class AdminDeLectoras
+public class LectoraABM
 {
 	LectoraDao lectoraDao = new LectoraDao();
 	TarjetaABM tarjetaAbm = new TarjetaABM();
-	MovimientoAlta movimientoAlta = new MovimientoAlta();
-	TramosConsultas tramosConsultas = new TramosConsultas();
+	MovimientoABM movimientoAlta = new MovimientoABM();
+	TramoABM tramosConsultas = new TramoABM();
 	
 	public Recarga agregarRecarga(Lectora lectora, Tarjeta tarjeta, GregorianCalendar fechaHora, float monto,boolean esRecargaEstudiantil) throws Exception{
 		//Falta validar que no sean null y que la fecha no sea posterior al ultimo movimietno de la tarjeta
@@ -76,12 +76,10 @@ public class AdminDeLectoras
 	{
 		return lectoraDao.traerLectoraColectivo(numeroSerieLectora);
 	}
-	
 	public LectoraEstacion traerLectoraEstacion(int numeroSerieLectora) 
 	{
 		return lectoraDao.traerLectoraEstacion(numeroSerieLectora);
 	}
-	
 	public boolean esBoletoDeEntradaTren(Boleto boletoAnterior)
 	{
 		return boletoAnterior != null && boletoAnterior.getTramoTrenYSubte().getEstacionA().getTransporte().getTipoTransporte()==TipoTransporte.Tren && boletoAnterior.getMonto()>0;
@@ -116,7 +114,7 @@ public class AdminDeLectoras
 		Boleto nuevoBoleto = null;
 		List<Boleto> lstBoletosUltimas2horas = movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora);
 		Boleto boletoAnterior = movimientoAlta.traerUltimoBoleto(tarjeta.getIdTarjeta());
-		TramoTrenYSubte tramo = tramosConsultas.traerTramoUnaEstacion(lectora.getEstacion().getIdEstacion());//Tramo Estacion - Null
+		TramoTrenYSubte tramo = tramosConsultas.traerTramoTrenYSubte(lectora.getEstacion().getIdEstacion());//Tramo Estacion - Null
 		if(lectora.getEstacion().getTransporte().getTipoTransporte() == TipoTransporte.Tren)
 			nuevoBoleto = crearBoletoTren(lectora, tarjeta, fechaHora, tramo, lstBoletosUltimas2horas, boletoAnterior);
 		else//boleto de subte
@@ -149,7 +147,7 @@ public class AdminDeLectoras
 		
 		if(esBoletoDeSalida)
 		{			
-			tramo = tramosConsultas.traerTramoTrenYSubte(boletoAnterior.getTramoTrenYSubte().getEstacionA(),lectora.getEstacion());
+			tramo = tramosConsultas.traerTramoTrenYSubte(boletoAnterior.getTramoTrenYSubte().getEstacionA().getIdEstacion(),lectora.getEstacion().getIdEstacion());
 			nuevoBoleto.setTramoTrenYSubte(tramo);
 			nuevoBoleto.setIntRedSube(boletoAnterior.getIntRedSube());
 			if(Funciones.tarjetaContieneTarifaSocial(tarjeta.getBeneficios(), tarifa))

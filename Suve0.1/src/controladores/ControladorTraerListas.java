@@ -241,7 +241,7 @@ public class ControladorTraerListas extends HttpServlet {
 			
 			Tarjeta t=tardao.traerTarjeta(Integer.parseInt(request.getParameter("tarjeta")));
 			long idTarjeta = tardao.traerTarjeta(Integer.parseInt(request.getParameter("tarjeta"))).getIdTarjeta();
-			List<Movimiento> lm = mdao.traerMovimientosPorTarjetaConCase(idTarjeta);
+			List<Movimiento> lm = mdao.traerMovimientoCompletoPorTarjeta(idTarjeta);
 			
 			salida.println( "<!DOCTYPE 4.01 Transitional//EN\">" );
 			salida.println( "<HTML>" );

@@ -59,11 +59,11 @@ public class ControladorListaMovimiento extends HttpServlet {
 			TarjetaDao tardao = new TarjetaDao();
 			if(request.getParameter("tarjeta").equals("")) {
 				//Imprime los movimientos Completos
-				listmov = mdao.traerMovimientosConCase();
+				listmov = mdao.traerMovimientoCompleto();
 			} 
 			else{
 				//Imprime los movimientos de una tarjeta
-				listmov = mdao.traerMovimientosPorTarjetaConCase(tardao.traerIdTarjeta(Integer.parseInt(request.getParameter("tarjeta"))));			
+				listmov = mdao.traerMovimientoCompletoPorTarjeta(tardao.traerIdTarjeta(Integer.parseInt(request.getParameter("tarjeta"))));			
 			}
 			response.setStatus(200);
 			salida.println( "<!DOCTYPE 4.01 Transitional//EN\">" );

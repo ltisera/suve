@@ -1,7 +1,5 @@
 package datos;
 
-import java.util.GregorianCalendar;
-
 public class BoletoEstudiantil extends Beneficio{
 	private int intervaloEnDias;
 	private float monto;

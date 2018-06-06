@@ -5,14 +5,14 @@ import java.util.GregorianCalendar;
 
 import dao.*;
 import datos.*;
-import negocio.AdminDeLectoras;
+import negocio.LectoraABM;
 import java.util.List;
 
 public class testCargarMovimientosEnBaseDeDatos {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		AdminDeLectoras manejador = new AdminDeLectoras();
+		LectoraABM manejador = new LectoraABM();
 		MovimientoDao movdao = new MovimientoDao();
 		LectoraDao lecdao = new LectoraDao();
 		TarjetaDao tardao = new TarjetaDao();

@@ -73,7 +73,7 @@ public class TarjetaDao {
 		}
 		return objeto;
 	}
-			
+	
 	@SuppressWarnings ( "unchecked" )
 	public List<Tarjeta> traerTarjeta() throws HibernateException {
 		List<Tarjeta> lista= null ;
@@ -85,33 +85,7 @@ public class TarjetaDao {
 		}
 		return lista;
 	}
-	public List<Tarjeta> traerTarjetaCompleta() throws HibernateException {
-		List<Tarjeta> lista= null ;
-		try {
-			iniciaOperacion();
-			lista= session.createQuery( "from Tarjeta t join fetch t.usuario order by t.idTarjeta asc" ).list();
-			for(Tarjeta t:lista) {
-				Hibernate.initialize(t.getBeneficios());
-			}
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
 
-	public Tarjeta traerTarjeta(int numeroSerieTarjeta) throws HibernateException {
-		Tarjeta objeto = null;
-		try {
-			iniciaOperacion();
-			objeto = (Tarjeta) session.createQuery( "from Tarjeta t where t.numeroSerieTarjeta="+numeroSerieTarjeta).uniqueResult();
-			if(objeto!= null) {
-				Hibernate.initialize(objeto.getBeneficios());
-			}
-		} finally {
-			session.close();
-		}
-		return objeto;
-	}
 	public long traerIdTarjeta(int numeroSerieTarjeta) throws HibernateException {
 		long objeto = -1;
 		try {
@@ -122,7 +96,35 @@ public class TarjetaDao {
 		}
 		return objeto;
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	public List<Tarjeta> traerTarjetaConBeneficios() throws HibernateException {
+		List<Tarjeta> lista= null ;
+		try {
+			iniciaOperacion();
+			lista= session.createQuery( "from Tarjeta t order by t.idTarjeta asc" ).list();
+			for(Tarjeta t:lista) {
+				Hibernate.initialize(t.getBeneficios());
+			}
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	
+	public Tarjeta traerTarjetaConBeneficios(long idTarjeta) 
+	{
+		Tarjeta objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Tarjeta) session.createQuery("from Tarjeta t where t.idTarjeta="+idTarjeta).uniqueResult();
+			Hibernate.initialize(objeto.getBeneficios());
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
+	
 	public Tarjeta traerTarjetaConBeneficios(int numeroSerieTarjeta) 
 	{
 		Tarjeta objeto = null;
@@ -135,5 +137,4 @@ public class TarjetaDao {
 		}
 		return objeto;
 	}
-	
 }

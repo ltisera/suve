@@ -66,6 +66,7 @@ public class LectoraDao {
 		}
 	}
 	
+	/*
 	public Lectora traerLectora(long idLectora) throws HibernateException {
 		Lectora objeto = null;
 		try {
@@ -87,7 +88,6 @@ public class LectoraDao {
 		}
 		return objeto;
 	}
-	
 	public List<Lectora> traerLectora() throws HibernateException {
 		List<Lectora> lista = null ;
 		try {
@@ -98,27 +98,6 @@ public class LectoraDao {
 		}
 		return lista;
 	}
-	public List<Lectora> traerLectorasPorLinea(long idTransporte) throws HibernateException {
-		List<Lectora> lista = null ;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Lectora l where l.transporte="+idTransporte).list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
-	public List<Lectora> traerLectorasPorEstacion(long idEstacion) throws HibernateException {
-		List<Lectora> lista = null ;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Lectora l where l.estacion="+idEstacion).list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
-	
 	public List<Lectora> traerLectoraCompleta() throws HibernateException {
 		List<Lectora> lista = null ;
 		try {
@@ -129,7 +108,29 @@ public class LectoraDao {
 		}
 		return lista;
 	}
-	
+	*/
+	@SuppressWarnings("unchecked")
+	public List<Lectora> traerLectorasPorLinea(long idTransporte) throws HibernateException {
+		List<Lectora> lista = null ;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Lectora l where l.transporte="+idTransporte).list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	@SuppressWarnings("unchecked")
+	public List<Lectora> traerLectorasPorEstacion(long idEstacion) throws HibernateException {
+		List<Lectora> lista = null ;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Lectora l where l.estacion="+idEstacion).list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
 	public LectoraColectivo traerLectoraColectivo(int numeroSerieLectora) 
 	{
 		LectoraColectivo objeto = null;
@@ -141,7 +142,7 @@ public class LectoraDao {
 		}
 		return objeto;
 	}
-	
+	@SuppressWarnings("unchecked")
 	public List<LectoraColectivo> traerLectoraColectivo() throws HibernateException {
 		List<LectoraColectivo> lista = null ;
 		try {
@@ -152,7 +153,6 @@ public class LectoraDao {
 		}
 		return lista;
 	}
-
 	public LectoraEstacion traerLectoraEstacion(int numeroSerieLectora) 
 	{
 		LectoraEstacion objeto = null;
@@ -165,7 +165,7 @@ public class LectoraDao {
 		}
 		return objeto;
 	}
-	
+	@SuppressWarnings("unchecked")
 	public List<LectoraEstacion> traerLectoraEstacion() throws HibernateException {
 		List<LectoraEstacion> lista = null ;
 		try {
@@ -176,5 +176,5 @@ public class LectoraDao {
 		}
 		return lista;
 	}
-
+	
 }

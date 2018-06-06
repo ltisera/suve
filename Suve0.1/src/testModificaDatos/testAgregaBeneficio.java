@@ -1,9 +1,6 @@
 package testModificaDatos;
 
 import datos.*;
-
-import java.util.List;
-
 import dao.*;
 
 public class testAgregaBeneficio {
@@ -16,12 +13,12 @@ public class testAgregaBeneficio {
 		
 		TarjetaDao tardao = new TarjetaDao();
 		for(long i = 1; i < 9;i++) {
-			Tarjeta t = tardao.traerTarjetaConBeneficios(tardao.traerTarjeta(i).getNumeroSerieTarjeta());
+			Tarjeta t = tardao.traerTarjetaConBeneficios(i);
 			t.getBeneficios().add(bendao.traerBeneficio(ts));
 			tardao.actualizar(t);
 		}
 		for(long i = 4; i < 11;i++) {
-			Tarjeta t = tardao.traerTarjetaConBeneficios(tardao.traerTarjeta(i).getNumeroSerieTarjeta());
+			Tarjeta t = tardao.traerTarjetaConBeneficios(i);
 			t.getBeneficios().add(bendao.traerBeneficio(be));
 			tardao.actualizar(t);
 		}

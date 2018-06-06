@@ -64,7 +64,6 @@ public class TransporteDao {
 			session.close();
 		}
 	}
-	
 	public Transporte traerTransporte(long idTransporte) throws HibernateException {
 		Transporte objeto = null;
 		try {

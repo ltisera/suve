@@ -58,7 +58,7 @@ public class ControladorAgregarBoleto extends HttpServlet {
 		int numSerieTarjeta = Integer.parseInt(request.getParameter("numSerieTarjeta"));
 		int numSerieLectora =Integer.parseInt(request.getParameter("numSerieLectora"));
 		TarjetaDao tardao = new TarjetaDao();
-		AdminDeLectoras manejador = new AdminDeLectoras();
+		LectoraABM manejador = new LectoraABM();
 		
 		PrintWriter salida = response.getWriter();
 		
@@ -81,7 +81,7 @@ public class ControladorAgregarBoleto extends HttpServlet {
 				}
 			}
 			if(tramo==null) {
-				System.out.println("Taradooo EHhh");
+				System.out.println("Tramo Nulo");
 			}
 			else {
 				try {

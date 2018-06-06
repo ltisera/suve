@@ -62,7 +62,7 @@ public class EstacionDao {
 			session.close();
 		}
 	}
-	
+	/*
 	public Estacion traerEstacion(long idEstacion) throws HibernateException {
 		Estacion objeto = null;
 		try {
@@ -74,6 +74,8 @@ public class EstacionDao {
 		return objeto;
 	}
 	
+	*/
+	
 	public Estacion traerEstacion(String nombre) throws HibernateException {
 		Estacion objeto = null;
 		try {
@@ -84,7 +86,7 @@ public class EstacionDao {
 		}
 		return objeto;
 	}
-	
+	@SuppressWarnings("unchecked")
 	public List<Estacion> traerEstacion() throws HibernateException {
 		List<Estacion> lista = null ;
 		try {
@@ -95,6 +97,7 @@ public class EstacionDao {
 		}
 		return lista;
 	}
+	@SuppressWarnings("unchecked")
 	public List<Estacion> traerEstacionPorTransporte(long idTransporte) throws HibernateException {
 		List<Estacion> lista = null ;
 		try {
@@ -105,8 +108,7 @@ public class EstacionDao {
 		}
 		return lista;
 	}
-	
-	
+	@SuppressWarnings("unchecked")
 	public List<Estacion> traerEstacionPorTipoTransporte(TipoTransporte tipoTransporte) throws HibernateException {
 		List<Estacion> lista = null ;
 		try {

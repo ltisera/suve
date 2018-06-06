@@ -44,11 +44,10 @@ public class TarjetaABM
 	{
 		return tarjetaDao.traerTarjetaConBeneficios(numeroSerieTarjeta);
 	}
-	public List<Tarjeta> traerTarjetaConBeneficios() 
+	public List<Tarjeta> traerTarjetaConBeneficios()
 	{
-		return tarjetaDao.traerTarjetaCompleta();
+		return tarjetaDao.traerTarjetaConBeneficios(); //Sin usuario
 	}
-	
 	public boolean tarjetaContieneBoletoEstudiantil(Tarjeta t) 
 	{
 		boolean contiene = false;
@@ -59,7 +58,7 @@ public class TarjetaABM
 	
 	public boolean cargarBoletoEstudiantil(GregorianCalendar fechaSistema) throws Exception {
 		boolean cargaExitosa = false;
-		MovimientoAlta mov = new MovimientoAlta();
+		MovimientoABM mov = new MovimientoABM();
 		Recarga recargaEstudiantil = mov.traerRecargaEstudiantil();
 		GregorianCalendar fechaProximaCarga = (GregorianCalendar) fechaSistema.clone();
 		if(recargaEstudiantil != null) {
@@ -67,7 +66,7 @@ public class TarjetaABM
 			fechaProximaCarga.add(Calendar.DAY_OF_MONTH, this.traerBoletoEstudiantil().getIntervaloEnDias()); //le agrego los dias del intervalo para calcular cuando sera la proxima fecha a cargar			System.out.println(Funciones.TraeFechaYHora(fechaProximaCarga));
 		}
 		if(fechaSistema.compareTo(fechaProximaCarga)>=0) { // 0 Son iguales +0 la fecha del sistema es posterior a la de la proxima carga 
-			AdminDeLectoras adl = new AdminDeLectoras();
+			LectoraABM adl = new LectoraABM();
 			System.out.println("Cargando saldo estudiantil");
 			//Que lectora usar?????
 			Lectora l = adl.traerLectoraEstacion(3331000);

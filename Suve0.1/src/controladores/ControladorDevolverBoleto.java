@@ -51,7 +51,7 @@ public class ControladorDevolverBoleto extends HttpServlet {
 		try {
 			MovimientoDao mdao = new MovimientoDao();
 			long idBoleto = (long) Integer.parseInt(request.getParameter("boleto"));
-			Boleto b = mdao.traerBoleto(idBoleto);
+			Boleto b = (Boleto) mdao.traerMovimiento(idBoleto);
 			response.setStatus(200);
 			PrintWriter salida = response.getWriter();
 			salida.println( "<!DOCTYPE 4.01 Transitional//EN\">" );

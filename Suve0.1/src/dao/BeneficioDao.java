@@ -1,6 +1,6 @@
 package dao;
 
-import java.util.List;
+//import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -76,56 +76,12 @@ public class BeneficioDao {
 		return objeto;
 	}
 	
-	public Beneficio traerBeneficioCompleto(long idBeneficio){
-		Beneficio objeto = null;
-		try {
-			iniciaOperacion();
-			objeto = (Beneficio) session.createQuery("from Beneficio m inner join fetch m.lectora inner join fetch m.tarjeta where m.idBeneficio="+idBeneficio).uniqueResult();
-		} finally {
-			session.close();
-		}
-		return objeto;
-	}
-
-	public List<Beneficio> traerBeneficios(){
+	/*
+	public List<Beneficio> traerBeneficio(){
 		List<Beneficio> lista = null;
 		try {
 			iniciaOperacion();
 			lista = session.createQuery("from Beneficio m").list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
-	
-	public List<Beneficio> traerBeneficioCompleto(){
-		List<Beneficio> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Beneficio m inner join fetch m.lectora inner join fetch m.tarjeta").list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
-	
-	/*
-	public List<Beneficio> traerBeneficioYLectora(){
-		List<Beneficio> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Beneficio m inner join fetch m.lectora").list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
-	
-	public List<Beneficio> traerBeneficioYTarjeta(){
-		List<Beneficio> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Beneficio m inner join fetch m.tarjeta").list();
 		} finally {
 			session.close();
 		}
