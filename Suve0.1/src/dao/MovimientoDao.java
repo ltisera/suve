@@ -69,29 +69,6 @@ public class MovimientoDao {
 			session.close();
 		}
 	}
-	/*
-	public Boleto traerBoleto(long idMovimiento) {
-		Boleto objeto = null;
-		try {
-			iniciaOperacion();
-			objeto = (Boleto) session.get(Boleto.class, idMovimiento);
-		}  finally {
-			session.close();
-		}
-		return objeto;
-	}
-	
-	public Recarga traerRecarga(long idMovimiento) {
-		Recarga objeto = null;
-		try {
-			iniciaOperacion();
-			objeto = (Recarga) session.get(Recarga.class, idMovimiento);
-		}  finally {
-			session.close();
-		}
-		return objeto;
-	}
-	*/
 	public Recarga traerRecargaEstudiantil() {
 		Recarga objeto = null;
 		try {
@@ -113,7 +90,7 @@ public class MovimientoDao {
 		}
 		return objeto;
 	}
-	/*
+	
 	public List<Movimiento> traerMovimientos(){
 		List<Movimiento> lista = null;
 		try {
@@ -124,42 +101,6 @@ public class MovimientoDao {
 		}
 		return lista;
 	}
-	
-	public List<Boleto> traerBoleto(){
-		List<Boleto> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Boleto").list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
-	
-	public List<Recarga> traerRecarga(){
-		List<Recarga> lista = null;
-		try {
-			iniciaOperacion();
-			//lista = session.createQuery("from Movimiento m inner join fetch m.lectora inner join fetch m.tarjeta").list();
-			lista = session.createQuery("from Recarga r where saldoPendiente = false").list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
-	
-	public List<Movimiento> traerMovimientosPorTarjeta(long idTarjeta) 
-	{
-		List<Movimiento> lista = new ArrayList<Movimiento>();
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Movimiento m inner join fetch m.lectora where m.tarjeta=" + idTarjeta+" order by m.fecha desc ").list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
-	*/
 	@SuppressWarnings("unchecked")
 	public List<Movimiento> traerMovimientoCompletoPorTarjeta(long idTarjeta) 
 	{
@@ -211,27 +152,7 @@ public class MovimientoDao {
 		}
 		return lista;
 	}
-	/*
-
-	public List<Boleto> traerBoletosRedSube(long idTarjeta, GregorianCalendar fechaA) 
-	{
-		List<Boleto> lista = new ArrayList<Boleto>();
-		GregorianCalendar fechaB = (GregorianCalendar) fechaA.clone();
-		fechaB.add(Calendar.HOUR, -2);
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from Boleto b where b.fecha < :fechaA and b.fecha > :fechaB and b.tarjeta=" + idTarjeta)
-					.setParameter("fechaA", fechaA)
-					.setParameter("fechaB", fechaB)
-					.list();
-		} finally {
-			session.close();
-		}
-		return lista;
-	}
-	
-	*/
-	@SuppressWarnings("unchecked")
+		@SuppressWarnings("unchecked")
 	public List<Boleto> traerBoletosRedSubeColectivo(long idTarjeta, GregorianCalendar fechaA) 
 	{
 		List<Boleto> lista = new ArrayList<Boleto>();
@@ -292,3 +213,84 @@ public class MovimientoDao {
 	}
 	
 }
+
+/* DEPRECADOS
+public List<Boleto> traerBoleto(){
+	List<Boleto> lista = null;
+	try {
+		iniciaOperacion();
+		lista = session.createQuery("from Boleto").list();
+	} finally {
+		session.close();
+	}
+	return lista;
+}
+
+public List<Recarga> traerRecarga(){
+	List<Recarga> lista = null;
+	try {
+		iniciaOperacion();
+		//lista = session.createQuery("from Movimiento m inner join fetch m.lectora inner join fetch m.tarjeta").list();
+		lista = session.createQuery("from Recarga r where saldoPendiente = false").list();
+	} finally {
+		session.close();
+	}
+	return lista;
+}
+
+public List<Movimiento> traerMovimientosPorTarjeta(long idTarjeta) 
+{
+	List<Movimiento> lista = new ArrayList<Movimiento>();
+	try {
+		iniciaOperacion();
+		lista = session.createQuery("from Movimiento m inner join fetch m.lectora where m.tarjeta=" + idTarjeta+" order by m.fecha desc ").list();
+	} finally {
+		session.close();
+	}
+	return lista;
+}
+*/
+
+/*
+
+public List<Boleto> traerBoletosRedSube(long idTarjeta, GregorianCalendar fechaA) 
+{
+	List<Boleto> lista = new ArrayList<Boleto>();
+	GregorianCalendar fechaB = (GregorianCalendar) fechaA.clone();
+	fechaB.add(Calendar.HOUR, -2);
+	try {
+		iniciaOperacion();
+		lista = session.createQuery("from Boleto b where b.fecha < :fechaA and b.fecha > :fechaB and b.tarjeta=" + idTarjeta)
+				.setParameter("fechaA", fechaA)
+				.setParameter("fechaB", fechaB)
+				.list();
+	} finally {
+		session.close();
+	}
+	return lista;
+}
+
+*/
+/*
+public Boleto traerBoleto(long idMovimiento) {
+	Boleto objeto = null;
+	try {
+		iniciaOperacion();
+		objeto = (Boleto) session.get(Boleto.class, idMovimiento);
+	}  finally {
+		session.close();
+	}
+	return objeto;
+}
+
+public Recarga traerRecarga(long idMovimiento) {
+	Recarga objeto = null;
+	try {
+		iniciaOperacion();
+		objeto = (Recarga) session.get(Recarga.class, idMovimiento);
+	}  finally {
+		session.close();
+	}
+	return objeto;
+}
+*/

@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<img alt="" src="recursos/suve.jpg">
+	<img alt="" src="recursos/suve.png">
 </body>
 </html>

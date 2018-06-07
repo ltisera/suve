@@ -10,17 +10,20 @@ public class iniciaBaseDeDatos {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		long startTime = System.currentTimeMillis() ;
-		agregaTransporteEstacion();
-		agregaLectora();
-		agregaSeccionTramoColectivo();
-		TestAgregarTramosDeEntradaTrenYSubte.main(args);
-		tCargarMultiplesUsuariosYTarjetas.main(args);
-		testAgregaBeneficio.main(args);
-		testCargarMovimientosEnBaseDeDatos.main(args);
-		
-		long endTime = System.currentTimeMillis()  - startTime; 
-		System.out.println("Base inicializada en: " + endTime);
+		EstacionDao undao = new EstacionDao();
+		if(undao.traerEstacion().size()==0){
+			long startTime = System.currentTimeMillis() ;
+			agregaTransporteEstacion();
+			agregaLectora();
+			agregaSeccionTramoColectivo();
+			TestAgregarTramosDeEntradaTrenYSubte.main(args);
+			tCargarMultiplesUsuariosYTarjetas.main(args);
+			testAgregaBeneficio.main(args);
+			testCargarMovimientosEnBaseDeDatos.main(args);
+			
+			long endTime = System.currentTimeMillis()  - startTime; 
+			System.out.println("Base inicializada en: " + endTime);
+		}
 	}
 
 	public static void agregaTransporteEstacion() {

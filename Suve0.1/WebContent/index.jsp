@@ -19,63 +19,85 @@
 		$("#divCargarSaldoEstudiantil").hide();
 		$("#divInicio").show();
 		
-		if ($("#imgInicio").attr("src") != "recursos/btnInicioSel.png"){
-			$("#divBtnInicio").mouseenter(function(){
+	
+		$("#divBtnInicio").mouseenter(function(){
+			if ($("#imgInicio").attr("src") != "recursos/btnInicioSel.png"){
 				$("#imgInicio").attr("src","recursos/btnInicioOn.png");
-			});
-			$("#divBtnInicio").mouseleave(function(){
+			}
+		});
+		$("#divBtnInicio").mouseleave(function(){
+			if ($("#imgInicio").attr("src") != "recursos/btnInicioSel.png"){
 				$("#imgInicio").attr("src","recursos/btnInicioOff.png");
-			});
-			$("#divBtnInicio").click(function() {
+			}
+		});
+		
+		
+		$("#divBtnInicio").click(function() {
+			if ($("#imgInicio").attr("src") != "recursos/btnInicioSel.png"){
 				hideAll();
 				$("#imgInicio").attr("src","recursos/btnInicioSel.png");
 				$("#divInicio").show();
-			});
-		}
+			}
+		});
 		
-		if ($("#imgAgregarViaje").attr("src") != "recursos/btnAgregarViajeSel.png"){
-			$("#divBtnAgregarViaje").mouseenter(function(){
+		$("#divBtnAgregarViaje").mouseenter(function(){
+			if ($("#imgAgregarViaje").attr("src") != "recursos/btnAgregarViajeSel.png"){
 				$("#imgAgregarViaje").attr("src","recursos/btnAgregarViajeOn.png");
-			});
-			$("#divBtnAgregarViaje").mouseleave(function(){
+			}
+		});
+		$("#divBtnAgregarViaje").mouseleave(function(){
+			if ($("#imgAgregarViaje").attr("src") != "recursos/btnAgregarViajeSel.png"){
 				$("#imgAgregarViaje").attr("src","recursos/btnAgregarViajeOff.png");
-			});
-			$("#divBtnAgregarViaje").click(function() {
+			}
+		});
+		$("#divBtnAgregarViaje").click(function() {
+			if ($("#imgAgregarViaje").attr("src") != "recursos/btnAgregarViajeSel.png"){
 				hideAll();
 				$("#imgAgregarViaje").attr("src","recursos/btnAgregarViajeSel.png");
 				$("#divManejaFecha").show("fast");
 				$("#divAgregarViaje").show("slow");
-			});
-		}
+			}
+		});
 		
-		if ($("#imgConsultarMovimientos").attr("src") != "recursos/btnConsultarMovimientosSel.png"){
-			$("#divBtnConsultarMovimientos").mouseenter(function(){
+		
+		$("#divBtnConsultarMovimientos").mouseenter(function(){
+			if ($("#imgConsultarMovimientos").attr("src") != "recursos/btnConsultarMovimientosSel.png"){
 				$("#imgConsultarMovimientos").attr("src","recursos/btnConsultarMovimientosOn.png");
-			});
-			$("#divBtnConsultarMovimientos").mouseleave(function(){
+			}
+		});
+		$("#divBtnConsultarMovimientos").mouseleave(function(){
+			if ($("#imgConsultarMovimientos").attr("src") != "recursos/btnConsultarMovimientosSel.png"){
 				$("#imgConsultarMovimientos").attr("src","recursos/btnConsultarMovimientosOff.png");
-			});
-			$("#divBtnConsultarMovimientos").click(function() {
+			}
+		});
+		$("#divBtnConsultarMovimientos").click(function() {
+			if ($("#imgConsultarMovimientos").attr("src") != "recursos/btnConsultarMovimientosSel.png"){
 				hideAll();
 				$("#imgConsultarMovimientos").attr("src","recursos/btnConsultarMovimientosSel.png");
 				$("#divConsultarMovimientos").show("slow");
-			});	
-		}
+			}
+		});	
 		
-		if ($("#imgCargarSaldoEstudiantil").attr("src") != "recursos/btnCargarSaldoEstudiantilSel.png"){
-			$("#divBtnCargarSaldoEstudiantil").mouseenter(function(){
+		
+		$("#divBtnCargarSaldoEstudiantil").mouseenter(function(){
+			if ($("#imgCargarSaldoEstudiantil").attr("src") != "recursos/btnCargarSaldoEstudiantilSel.png"){
 				$("#imgCargarSaldoEstudiantil").attr("src","recursos/btnCargarSaldoEstudiantilOn.png");
-			});
-			$("#divBtnCargarSaldoEstudiantil").mouseleave(function(){
+			}
+		});
+		$("#divBtnCargarSaldoEstudiantil").mouseleave(function(){
+			if ($("#imgCargarSaldoEstudiantil").attr("src") != "recursos/btnCargarSaldoEstudiantilSel.png"){
 				$("#imgCargarSaldoEstudiantil").attr("src","recursos/btnCargarSaldoEstudiantilOff.png");
-			});
-			$("#divBtnCargarSaldoEstudiantil").click(function() {
+			}
+		});
+		$("#divBtnCargarSaldoEstudiantil").click(function() {
+			if ($("#imgCargarSaldoEstudiantil").attr("src") != "recursos/btnCargarSaldoEstudiantilSel.png"){
 				hideAll();
 				$("#imgCargarSaldoEstudiantil").attr("src","recursos/btnCargarSaldoEstudiantilSel.png");
 				$("#divManejaFecha").show("fast");
 				$("#divCargarSaldoEstudiantil").show("slow");
-			});
-		}
+			}
+		});
+		
 		
 	});
 	

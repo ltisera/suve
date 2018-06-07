@@ -27,7 +27,7 @@ public class testCargarMovimientosEnBaseDeDatos {
 		for(long ntar = 1; ntar <= 19; ntar++)
 		{
 			
-			Tarjeta latarjet = tardao.traerTarjeta(tardao.traerTarjeta(ntar).getNumeroSerieTarjeta());
+			Tarjeta latarjet = tardao.traerTarjeta(ntar);
 			for(long i =0;i < 40;i++) {
 				fecha.add(Calendar.MINUTE, avance);
 				if(((int) (Math.random() * 7) != 0)){
