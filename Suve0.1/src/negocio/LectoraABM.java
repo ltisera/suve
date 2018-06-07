@@ -45,9 +45,10 @@ public class LectoraABM
 			throw new Exception("la tarjeta no existe.");
 		if(!tarjeta.isActiva()) 
 			throw new Exception("tarjeta inactiva.");
-		if(!movimientoAlta.esFechaValida(fechaHora)) {
+		if(!movimientoAlta.esFechaValida(fechaHora)) 
 			throw new Exception("Fecha Invalida.");
-		}
+		if(tramo==null)
+			throw new Exception("Tramo invalido.");
 		TarifaSocial tarifa = tarjetaAbm.traerTarifaSocial();
 		List<Boleto> lstBoletosUltimas2horas = movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora);
 		Boleto boletoAnterior = movimientoAlta.traerUltimoBoleto(tarjeta.getIdTarjeta());
@@ -230,6 +231,27 @@ public class LectoraABM
 		}
 		
 		return subteRepetido;
+	}
+
+	public List<Lectora> traerLectorasPorLinea(long idTransporte) 
+	{
+		return lectoraDao.traerLectorasPorLinea(idTransporte);
+	}
+
+	public List<Lectora> traerLectorasPorEstacion(Estacion estacion) 
+	{
+		return lectoraDao.traerLectorasPorEstacion(estacion.getIdEstacion());
+	}
+
+	public String stringDeListaLectoras(List<Lectora> lstLectora) 
+	{
+		String listaLectoras = "[";
+		for (Lectora l:lstLectora) {
+			listaLectoras += "\""+l.getNumeroSerieLectora()+"\",";
+		}
+		
+		listaLectoras =listaLectoras.substring(0, listaLectoras.length()-1);
+		return listaLectoras +="]";
 	}
 
 

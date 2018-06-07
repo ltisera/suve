@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.*;
 import datos.*;
 import negocio.Funciones;
+import negocio.MovimientoABM;
 
 import java.util.List;
 import java.util.Set;
@@ -53,17 +54,17 @@ public class ControladorListaMovimiento extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter salida = response.getWriter();
 		try {
-			MovimientoDao mdao = new MovimientoDao();
+			MovimientoABM movimientoABM = new MovimientoABM();
 			
 			List<Movimiento> listmov = null;
 			TarjetaDao tardao = new TarjetaDao();
 			if(request.getParameter("tarjeta").equals("")) {
 				//Imprime los movimientos Completos
-				listmov = mdao.traerMovimientoCompleto();
+				listmov = movimientoABM.traerMovimientoCompleto();
 			} 
 			else{
 				//Imprime los movimientos de una tarjeta
-				listmov = mdao.traerMovimientoCompletoPorTarjeta(tardao.traerIdTarjeta(Integer.parseInt(request.getParameter("tarjeta"))));			
+				listmov = movimientoABM.traerMovimientoCompletoPorTarjeta(tardao.traerIdTarjeta(Integer.parseInt(request.getParameter("tarjeta"))));			
 			}
 			response.setStatus(200);
 			salida.println( "<!DOCTYPE 4.01 Transitional//EN\">" );

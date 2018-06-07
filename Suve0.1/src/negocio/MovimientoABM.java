@@ -62,4 +62,18 @@ public class MovimientoABM
 		}
 		return valido;
 	}
+	
+	public Movimiento traerMovimiento(long idMovimiento)
+	{
+		return movdao.traerMovimiento(idMovimiento);
+	}
+
+	public List<Movimiento> traerMovimientoCompleto() 
+	{
+		return movdao.traerMovimientoCompleto();
+	}
+
+	public List<Movimiento> traerMovimientoCompletoPorTarjeta(long idTarjeta) {
+		return movdao.traerMovimientoCompletoPorTarjeta(idTarjeta);
+	}
 }

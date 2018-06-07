@@ -11,7 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.*;
 import datos.*;
+import negocio.EstacionABM;
 import negocio.Funciones;
+import negocio.LectoraABM;
+import negocio.MovimientoABM;
+import negocio.TarjetaABM;
+import negocio.TramoABM;
+import negocio.TransporteABM;
+
 import java.util.List;
 import java.util.Set;
 /**
@@ -80,29 +87,20 @@ public class ControladorTraerListas extends HttpServlet {
 			response.setContentType("application/json");
 			PrintWriter salida = response.getWriter();
 			
-			TransporteDao tdao = new TransporteDao();
-			TipoTransporte tipo = null;
+			TransporteABM transporteABM = new TransporteABM();
+			List<Transporte> lstTransporte = null;
 			if(request.getParameter("transporte").equals("Colectivo")) {
-				tipo = TipoTransporte.Colectivo;
+				lstTransporte = transporteABM.traerLineasPorTransporte(TipoTransporte.Colectivo);
 			}
 			if(request.getParameter("transporte").equals("Tren")) {
-				tipo = TipoTransporte.Tren;
+				lstTransporte = transporteABM.traerLineasPorTransporte(TipoTransporte.Tren);
 			}
 			if(request.getParameter("transporte").equals("Subte")) {
-				tipo = TipoTransporte.Subte;
+				lstTransporte = transporteABM.traerLineasPorTransporte(TipoTransporte.Subte);
 			}
 			
-			
-			List<Transporte> lt = tdao.traerLineasPorTransporte(tipo);
-			String objetoJ = "[";
-			for (Transporte t:lt) {
-				objetoJ += "\""+t.getLinea()+"\",";
-			}
-			objetoJ = objetoJ.substring(0, objetoJ.length()-1);
-			objetoJ +="]";
-			salida.println(objetoJ);
-			System.out.println(objetoJ);
-			System.out.println("tipoTransporte:" + request.getParameter("transporte") + "\nLista: " + lt);
+
+			salida.println(transporteABM.stringListaDeNombresDeLineas(lstTransporte));
 		
 		} catch (Exception e){
 			response.sendError(500, "El ID del boleto no fue encontrado" );
@@ -116,20 +114,12 @@ public class ControladorTraerListas extends HttpServlet {
 			response.setContentType("application/json");
 			PrintWriter salida = response.getWriter();
 			
-			EstacionDao edao = new EstacionDao();
-			TransporteDao tdao = new TransporteDao();
-			List<Estacion> le = edao.traerEstacionPorTransporte(tdao.traerTransporte(request.getParameter("linea")).getIdTransporte());
+			EstacionABM estacionABM = new EstacionABM();
+			TransporteABM transporteABM = new TransporteABM();
+			List<Estacion> lstEstacion = estacionABM.traerEstacionPorTransporte(transporteABM.traerTransporte(request.getParameter("linea")).getIdTransporte());
 			
-			String objetoJ = "[";
-			for (Estacion e:le) {
-				objetoJ += "\""+e.getNombre()+"\",";
-			}
-			
-			objetoJ = objetoJ.substring(0, objetoJ.length()-1);
-			objetoJ +="]";
-			salida.println(objetoJ);
-			System.out.println(objetoJ);
-			System.out.println("Linea:" + request.getParameter("linea") + "\nLista: " + le);
+
+			salida.println(estacionABM.stringListaNombresDeEstaciones(lstEstacion));
 		
 		} catch (Exception e){
 			response.sendError(500, "El ID del boleto no fue encontrado" );
@@ -138,30 +128,15 @@ public class ControladorTraerListas extends HttpServlet {
 	}
 	protected void traerListaTarjetas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			long startTime = System.currentTimeMillis() ;
-			System.out.println("Arranco en " + startTime);
 			response.setStatus(200);
 			response.setContentType("application/json");
 			PrintWriter salida = response.getWriter();
-			//Esto es un obj Jason?
-			TarjetaDao tardao = new TarjetaDao();
-			List<Tarjeta> lt= tardao.traerTarjeta();
 			
-			String miResponse ="";
-			miResponse ="[";
+			TarjetaABM tarjetaABM = new TarjetaABM();
+			List<Tarjeta> lstTarjeta= tarjetaABM.traerTarjeta();
+		
 			
-			for(Tarjeta s:lt) {
-				miResponse += "\"" + s.getNumeroSerieTarjeta() + "\",";
-			}
-			miResponse = miResponse.substring(0, miResponse.length()-1);
-			miResponse += "]";
-			
-			//salida.println( "[\"manzaa\",\"pera\",\"frutilsda\"]" );
-			System.out.println(miResponse);
-			salida.println( miResponse);
-			long endTime = System.currentTimeMillis()  - startTime; 
-			System.out.println("Tardo: " + endTime);
-			//Esto No es jason?
+			salida.println(tarjetaABM.stringListaTarjetas(lstTarjeta));
 		
 		} catch (Exception e){
 			response.sendError(500, "Error Traer Lista Tarjeta" );
@@ -175,19 +150,11 @@ public class ControladorTraerListas extends HttpServlet {
 			response.setContentType("application/json");
 			PrintWriter salida = response.getWriter();
 			
-			TramoColectivoDao tdao = new TramoColectivoDao();
-			List<TramoColectivo> list = tdao.traerTramoColectivo();
+			TramoABM tramoABM = new TramoABM();
+			List<TramoColectivo> lstTramoColectivo = tramoABM.traerTramoColectivo();
 			
-			String objetoJ = "[";
-			for (TramoColectivo t:list) {
-				objetoJ += "\""+t+"\",";
-			}
-			
-			objetoJ = objetoJ.substring(0, objetoJ.length()-1);
-			objetoJ +="]";
-			salida.println(objetoJ);
-			System.out.println(objetoJ);
-			System.out.println("Linea:" + request.getParameter("linea") + "\nLista: " + list);
+
+			salida.println(tramoABM.stringDeListaTramoColectivo(lstTramoColectivo));
 		
 		} catch (Exception e){
 			response.sendError(500, "El ID del boleto no fue encontrado" );
@@ -200,32 +167,18 @@ public class ControladorTraerListas extends HttpServlet {
 			response.setStatus(200);
 			response.setContentType("application/json");
 			PrintWriter salida = response.getWriter();
-			
-			LectoraDao lecdao = new LectoraDao();
-			List<Lectora> list = null;
+			TransporteABM transporteABM = new TransporteABM();
+			LectoraABM lectoraABM = new LectoraABM();
+			List<Lectora> lstLectora = null;
 			if(request.getParameter("transporte").equals("Colectivo")) {
-				TransporteDao tdao = new TransporteDao();
-				System.out.println("VAMO A IMPRIMI");
-				Transporte t = tdao.traerTransporte(request.getParameter("linea"));
-				list = lecdao.traerLectorasPorLinea(t.getIdTransporte());
-				System.out.println("La lista:" + list);
+				lstLectora = lectoraABM.traerLectorasPorLinea(transporteABM.traerTransporte(request.getParameter("linea")).getIdTransporte());
 			}
 			else {
-				EstacionDao edao = new EstacionDao();
-				Estacion e = edao.traerEstacion(request.getParameter("estacion"));
-				list = lecdao.traerLectorasPorEstacion(e.getIdEstacion());
+				EstacionABM estacionABM = new EstacionABM();
+				lstLectora = lectoraABM.traerLectorasPorEstacion(estacionABM.traerEstacion(request.getParameter("estacion")));
 			}
-			
-			String objetoJ = "[";
-			for (Lectora t:list) {
-				objetoJ += "\""+t.getNumeroSerieLectora()+"\",";
-			}
-			
-			objetoJ = objetoJ.substring(0, objetoJ.length()-1);
-			objetoJ +="]";
-			salida.println(objetoJ);
-			System.out.println(objetoJ);
-			System.out.println("Estacion:" + request.getParameter("estacion") + "\nLista: " + list);
+		
+			salida.println(lectoraABM.stringDeListaLectoras(lstLectora));
 		
 		} catch (Exception e){
 			response.sendError(500, "Algo paso no se que" );
@@ -236,13 +189,12 @@ public class ControladorTraerListas extends HttpServlet {
 		try {
 			response.setStatus(200);
 			PrintWriter salida = response.getWriter();
-			TarjetaDao tardao = new TarjetaDao();
-			MovimientoDao mdao = new MovimientoDao();
+			TarjetaABM tarjetaABM = new TarjetaABM();
+			MovimientoABM movimientoABM = new MovimientoABM();
 			
-			Tarjeta t=tardao.traerTarjetaConBeneficios(Integer.parseInt(request.getParameter("tarjeta")));
-			System.out.println("Encontre la tarjeta:" + t);
+			Tarjeta tarjeta = tarjetaABM.traerTarjetaConBeneficios(Integer.parseInt(request.getParameter("tarjeta")));
 			
-			List<Movimiento> lm = mdao.traerMovimientoCompletoPorTarjeta(t.getIdTarjeta());
+			List<Movimiento> lstMovimiento = movimientoABM.traerMovimientoCompletoPorTarjeta(tarjeta.getIdTarjeta());
 			
 			salida.println( "<!DOCTYPE 4.01 Transitional//EN\">" );
 			salida.println( "<HTML>" );
@@ -251,10 +203,10 @@ public class ControladorTraerListas extends HttpServlet {
 			salida.println( " </HEAD>" );
 			salida.println( " <BODY>" );
 			salida.println( " <table border=\"1\" style=\"width:75%\">" );
-			if(t.getMonto() >= 0) {
-				salida.println( " Saldo de la tarjeta: <label class=\"lblMontoVerde\">"+ t.getMonto() +"</label> " );
+			if(tarjeta.getMonto() >= 0) {
+				salida.println( " Saldo de la tarjeta: <label class=\"lblMontoVerde\">"+ tarjeta.getMonto() +"</label> " );
 			} else {
-				salida.println( " Saldo de la tarjeta: <label class=\"lblMontoRojo\">"+ t.getMonto() +"</label> " );
+				salida.println( " Saldo de la tarjeta: <label class=\"lblMontoRojo\">"+ tarjeta.getMonto() +"</label> " );
 			}
 			
 				
@@ -265,7 +217,7 @@ public class ControladorTraerListas extends HttpServlet {
 			salida.println( " <th class=\"fila\">R.S.</th> ");
 			salida.println( " <th class=\"fila\">Descuentos</th> ");
 			salida.println( " </tr> ");
-			for(Movimiento m:lm) {
+			for(Movimiento m:lstMovimiento) {
 				Lectora lec = m.getLectora();
 				salida.println( " <th class=\"lblFecha\">"+Funciones.TraeFechaYHora(m.getFecha())+"</th> " );
 				if(m.getLectora() instanceof LectoraColectivo) {
@@ -286,7 +238,7 @@ public class ControladorTraerListas extends HttpServlet {
 					salida.println( " <th>"+((Boleto)m).getIntRedSube()+"</th> ");
 					salida.print( " <th class=\"lblFecha\">");
 
-					Set<Beneficio> lbene = t.getBeneficios();
+					Set<Beneficio> lbene = tarjeta.getBeneficios();
 					if (lbene.size() > 0) {
 						for(Beneficio b:lbene) {
 							salida.print(b.getNombre()+" ");

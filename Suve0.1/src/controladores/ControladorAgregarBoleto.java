@@ -11,12 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.HibernateException;
 
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.List;
-
-import dao.*;
-import datos.*;
 import negocio.*;
 
 /**
@@ -53,12 +48,13 @@ public class ControladorAgregarBoleto extends HttpServlet {
 	
 	
 	
-	protected void procesaSolicitud(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void procesaSolicitud(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		int numSerieTarjeta = Integer.parseInt(request.getParameter("numSerieTarjeta"));
 		int numSerieLectora =Integer.parseInt(request.getParameter("numSerieLectora"));
-		TarjetaDao tardao = new TarjetaDao();
-		LectoraABM manejador = new LectoraABM();
+		TarjetaABM tarjetaABM = new TarjetaABM();
+		LectoraABM lectoraABM = new LectoraABM();
+		TramoABM tramoABM = new TramoABM();
 		
 		PrintWriter salida = response.getWriter();
 		
@@ -69,49 +65,33 @@ public class ControladorAgregarBoleto extends HttpServlet {
 															Integer.parseInt(request.getParameter("fminuto")), 
 															Integer.parseInt(request.getParameter("fsegundo")));
 		
-		if(request.getParameter("tipoTransporte").equals("Colectivo")) {
-			//En estacion voy a tener el tramo
-			TramoColectivoDao tdao = new TramoColectivoDao();
-			List<TramoColectivo> list = tdao.traerTramoColectivo();
-			TramoColectivo tramo = null;
-			for(TramoColectivo ttemp:list) {
-				System.out.println(ttemp.toString());
-				if( request.getParameter("estacion").equals(ttemp.toString())){
-					tramo = ttemp;
-				}
-			}
-			if(tramo==null) {
-				System.out.println("Tramo Nulo");
-			}
-			else {
-				try {
-					System.out.println("Agrego un boleto de colectivo con Tramo:" + tramo.getSeccionViaje().getMonto());
-					LectoraDao lecdao = new LectoraDao();
-					LectoraColectivo l = lecdao.traerLectoraColectivo(numSerieLectora);
-					System.out.println("La nueva prueba1");
-					manejador.agregarBoleto(l,tardao.traerTarjetaConBeneficios(numSerieTarjeta), fechaHora, tramo);
-					response.setStatus(200);
-					
-				} catch (Exception e) {
-					response.setStatus(500);
-					salida.println(e.getMessage());
-				}
-			}
-		}
-		else {
-			try {
-				System.out.println("Antes de TS");
-				LectoraEstacion lectoraEstacion = manejador.traerLectoraEstacion(numSerieLectora);
-				manejador.agregarBoleto(lectoraEstacion,tardao.traerTarjetaConBeneficios(numSerieTarjeta), fechaHora);
+		if(request.getParameter("tipoTransporte").equals("Colectivo")) 
+		{
+			try 
+			{
+				lectoraABM.agregarBoleto(lectoraABM.traerLectoraColectivo(numSerieLectora),tarjetaABM.traerTarjetaConBeneficios(numSerieTarjeta), fechaHora, tramoABM.traerTramoColectivo(request.getParameter("estacion")));
 				response.setStatus(200);
-			} catch (Exception e){
+
+			} 
+			catch (Exception e) 
+			{
 				response.setStatus(500);
 				salida.println(e.getMessage());
 			}
 		}
-		
-		
-		System.out.println(Funciones.TraeFechaYHora(fechaHora));
+		else 
+		{
+			try 
+			{
+				lectoraABM.agregarBoleto(lectoraABM.traerLectoraEstacion(numSerieLectora),tarjetaABM.traerTarjetaConBeneficios(numSerieTarjeta), fechaHora);
+				response.setStatus(200);
+			}
+			catch (Exception e)
+			{
+				response.setStatus(500);
+				salida.println(e.getMessage());
+			}
+		}
 	}
 	
 	

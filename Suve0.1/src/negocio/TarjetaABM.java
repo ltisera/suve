@@ -81,4 +81,20 @@ public class TarjetaABM
 		System.out.println("Cargado de saldo estudiantil Finalizado");
 		return cargaExitosa;
 	}
+
+	public List<Tarjeta> traerTarjeta() 
+	{
+		return tarjetaDao.traerTarjeta();
+	}
+
+	public String stringListaTarjetas(List<Tarjeta> lstTarjeta) 
+	{
+		String listaTarjetas ="[";
+		
+		for(Tarjeta t:lstTarjeta) {
+			listaTarjetas += "\"" + t.getNumeroSerieTarjeta() + "\",";
+		}
+		listaTarjetas = listaTarjetas.substring(0, listaTarjetas.length()-1);
+		return listaTarjetas += "]";
+	}
 }

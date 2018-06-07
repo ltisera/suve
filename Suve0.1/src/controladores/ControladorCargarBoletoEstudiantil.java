@@ -48,7 +48,7 @@ public class ControladorCargarBoletoEstudiantil extends HttpServlet {
 	
 	protected void procesaSolicitud(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		TarjetaABM abmTarjetas = new TarjetaABM();
+		TarjetaABM tarjetaABM = new TarjetaABM();
 		PrintWriter salida = response.getWriter();
 		
 		GregorianCalendar fechaHora = new GregorianCalendar(Integer.parseInt(request.getParameter("fanio")), 
@@ -58,7 +58,7 @@ public class ControladorCargarBoletoEstudiantil extends HttpServlet {
 															Integer.parseInt(request.getParameter("fminuto")), 
 															Integer.parseInt(request.getParameter("fsegundo")));
 		try {
-			if(abmTarjetas.cargarBoletoEstudiantil(fechaHora)) {
+			if(tarjetaABM.cargarBoletoEstudiantil(fechaHora)) {
 				response.setStatus(200);
 			}
 			else {
