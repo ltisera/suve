@@ -128,13 +128,37 @@ function hideAll(){
 		</div>
 
 	</div>
+	<div id="divLinita"></div>
 	<div id="divContenedorInferior">
 		<div id="divMenu">
 			<!-- Contenedor del menu -->
+			<br>
+			<br>
+			<br>
+			<br>
 			<div id="divBtnInicio"><img id="imgInicio" alt="" src="recursos/btnInicioSel.png"></div>
+			<br>
 			<div id="divBtnAgregarViaje"><img id="imgAgregarViaje" alt="" src="recursos/btnAgregarViajeOff.png"></div>
+			<br>
 			<div id="divBtnConsultarMovimientos"><img id="imgConsultarMovimientos" alt="" src="recursos/btnConsultarMovimientosOff.png"></div>
-			<div id="divBtnCargarSaldoEstudiantil"><img id="imgCargarSaldoEstudiantil" alt="" src="recursos/btnCargarSaldoEstudiantilOff.png"></div>	
+			<br>
+			<div id="divBtnCargarSaldoEstudiantil"><img id="imgCargarSaldoEstudiantil" alt="" src="recursos/btnCargarSaldoEstudiantilOff.png"></div>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+				
 		</div>
 		<div id="divContenido">
 			<!-- Contenedor del contenido OMG -->

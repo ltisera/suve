@@ -239,9 +239,10 @@ public class ControladorTraerListas extends HttpServlet {
 			TarjetaDao tardao = new TarjetaDao();
 			MovimientoDao mdao = new MovimientoDao();
 			
-			Tarjeta t=tardao.traerTarjeta(Integer.parseInt(request.getParameter("tarjeta")));
-			long idTarjeta = tardao.traerTarjeta(Integer.parseInt(request.getParameter("tarjeta"))).getIdTarjeta();
-			List<Movimiento> lm = mdao.traerMovimientoCompletoPorTarjeta(idTarjeta);
+			Tarjeta t=tardao.traerTarjetaConBeneficios(Integer.parseInt(request.getParameter("tarjeta")));
+			System.out.println("Encontre la tarjeta:" + t);
+			
+			List<Movimiento> lm = mdao.traerMovimientoCompletoPorTarjeta(t.getIdTarjeta());
 			
 			salida.println( "<!DOCTYPE 4.01 Transitional//EN\">" );
 			salida.println( "<HTML>" );

@@ -18,10 +18,11 @@ body{
 /* Elementos de index.jsp */
 /* Cabecera de index */
 #divCabecera{
-	position: relative;
 	width:100%;
 	/*background-color: red;*/
 	color: white;
+	position:fixed;
+	background-color:#7092be;
 }
 
 #divFoto{
@@ -40,16 +41,25 @@ body{
 	top:25px;
 	
 }
-
-#divContInf{
-	
+/*Divisor de cabecera*/
+#divLinita{
+	border-top: solid thick white;
+	margin-left:150px;
+	margin-top:150px;
+	width: 100%;
+	position:fixed;
 }
+/*Menu Lateral Izquierdo*/
 #divMenu{
+	position:fixed;
+	margin-top:150px;
+	border-right: thick white solid;
+	
 	clear:both;
 	float:left;
-	width: 180px;
+	width: 150px;
 }
-
+/*Botones*/
 #divBtnInicio{
 	width: 150px;
 	height: 30px;
@@ -70,12 +80,14 @@ body{
 	height: 30px;
 }
 
+/*Contenido*/
 #divContenido{
-	float:left;
-	left:40px;
+	margin-top:160px;
+	float:right;
+	width: 80%;
+	
 	
 }
-
 #tblManejaFecha{
 	border: solid 2px #cccccc;
 	
@@ -86,8 +98,7 @@ body{
 #divInicio{
 	/*background-color: red;*/
 	color: white;
-	width: 130px;
-	height: 30px;
+	
 }
 
 

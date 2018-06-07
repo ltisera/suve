@@ -89,7 +89,7 @@ public class ControladorAgregarBoleto extends HttpServlet {
 					LectoraDao lecdao = new LectoraDao();
 					LectoraColectivo l = lecdao.traerLectoraColectivo(numSerieLectora);
 					System.out.println("La nueva prueba1");
-					manejador.agregarBoleto(l,tardao.traerTarjeta(numSerieTarjeta), fechaHora, tramo);
+					manejador.agregarBoleto(l,tardao.traerTarjetaConBeneficios(numSerieTarjeta), fechaHora, tramo);
 					response.setStatus(200);
 					
 				} catch (Exception e) {
@@ -102,7 +102,7 @@ public class ControladorAgregarBoleto extends HttpServlet {
 			try {
 				System.out.println("Antes de TS");
 				LectoraEstacion lectoraEstacion = manejador.traerLectoraEstacion(numSerieLectora);
-				manejador.agregarBoleto(lectoraEstacion,tardao.traerTarjeta(numSerieTarjeta), fechaHora);
+				manejador.agregarBoleto(lectoraEstacion,tardao.traerTarjetaConBeneficios(numSerieTarjeta), fechaHora);
 				response.setStatus(200);
 			} catch (Exception e){
 				response.setStatus(500);
