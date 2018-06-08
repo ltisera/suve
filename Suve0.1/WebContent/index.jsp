@@ -1,12 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 
 <HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <TITLE>SuViajes</TITLE>
 <link rel="stylesheet" type="text/css" href="css/estilos.css">
 
@@ -164,6 +162,15 @@ function hideAll(){
 			<!-- Contenedor del contenido OMG -->
 			<div id="divInicio" class="container">
 				<h1>Bienvenidos al sistema de gestion SUVE</h1>
+				<div id="divLoggin">
+					<label id="lblUsser">Usuario:</label>
+					<input></input>
+					<br>
+					<label id="lblPsswd">Contraseña:</label>
+					<input></input>
+					<br>
+					
+				</div>
 			</div>
 			<div id="divAgregarViaje" class="container">
 				<%@ include file="/AgregarViaje.jsp"%>

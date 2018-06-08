@@ -1,0 +1,28 @@
+
+
+Estadisticas y reportes
+
+Modificamos consulta de movimiento y le agregamos
+Input para seleccionar el TIPO DE TRANSPORTE (refinar busqueda)
+
+1) Mandar fechaInicio FechaFin TipoTransporte
+	Reporte Imprimo Tabla de
+	Recibo lstBOLETO
+		|_ Monto
+		|_ Fecha
+		|_ Nro Tarjeta
+
+	Estadistica, Grafico Barras de Viajes por dia De colectivo 
+	Estadistica, Grafico Circular viajeros por linea de TREN
+	Estadisticas Subte, Molinetes saltados (?)
+
+2) Mandar fechaInicio FechaFin linea
+	Reporte Imprimo Tabla de
+	Recibo lstBOLETO
+		|_ Monto
+		|_ Fecha
+		|_ Nro Tarjeta	
+		|_ montoDeTramo
+
+		NroTarj Fecha MontoDeTramo   MontoCobrado
+		111		21/05     $9            $4,5

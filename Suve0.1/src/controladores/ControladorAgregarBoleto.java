@@ -154,7 +154,12 @@ public class ControladorAgregarBoleto extends HttpServlet {
 		}
 		salida.println("Valor del boleto sin red sube: "+montoSINDESC+"$<br>");
 		salida.println("Red Sube actual: "+b.getPorcentajeRedSube()+"%");
-		salida.println("<br>Porcentaje Tarifa social: "+bendao.traerTarifaSocial().getPorcentajeDescuento()+"%<br>");
+		if(tarabm.tieneTarifaSocial(t)) {
+			salida.println("<br>Porcentaje Tarifa social: "+bendao.traerTarifaSocial().getPorcentajeDescuento()+"%<br>");
+		}
+		else {
+			salida.println("<br>Porcentaje Tarifa social: --<br>");
+		}
 		salida.println("</label>");
 		salida.println("</div>");
 		salida.println("<div id=\"divEstadoBoletoInf\">");

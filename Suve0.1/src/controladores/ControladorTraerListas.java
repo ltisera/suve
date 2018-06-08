@@ -230,9 +230,9 @@ public class ControladorTraerListas extends HttpServlet {
 					salida.println( " <th>"+((LectoraCarga)lec).getEstacion().getNombre()+"</th> " );
 				}
 				if(m.getMonto()>=0 && m instanceof Boleto) {
-					salida.println( " <th class=\"lblMontoRojo\">"+m.getMonto()+"</th> ");
+					salida.println( " <th class=\"lblMontoRojo\">$"+ (-1)*m.getMonto()+"</th> ");
 				} else {
-					salida.println( " <th class=\"lblMontoVerde\">"+m.getMonto()+"</th> ");
+					salida.println( " <th class=\"lblMontoVerde\">$"+(-1)*m.getMonto()+"</th> ");
 				}
 				if(m instanceof Boleto) {
 					salida.println( " <th>"+((Boleto)m).getIntRedSube()+"</th> ");
