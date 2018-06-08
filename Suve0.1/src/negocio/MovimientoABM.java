@@ -2,6 +2,7 @@ package negocio;
 
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Collections;
 
 import dao.MovimientoDao;
@@ -9,6 +10,8 @@ import datos.Boleto;
 import datos.Movimiento;
 import datos.Recarga;
 import datos.Tarjeta;
+import datos.TipoTransporte;
+import datos.Transporte;
 
 public class MovimientoABM 
 {
@@ -75,5 +78,25 @@ public class MovimientoABM
 
 	public List<Movimiento> traerMovimientoCompletoPorTarjeta(long idTarjeta) {
 		return movdao.traerMovimientoCompletoPorTarjeta(idTarjeta);
+	}
+	
+	public List<Boleto> viajesRealizados(GregorianCalendar fechaDesde, GregorianCalendar fechaHasta, TipoTransporte tipoTransporte)
+	{
+		List<Boleto> lstViajesRealizados = new ArrayList<Boleto>();
+		if(tipoTransporte == TipoTransporte.Colectivo)
+			lstViajesRealizados = movdao.viajesRealizadosEnColectivo(fechaDesde, fechaHasta);
+		else
+			lstViajesRealizados = movdao.viajesRealizadosEnTrenOSubte(fechaDesde, fechaHasta, tipoTransporte);
+		return lstViajesRealizados;
+	}
+	
+	public List<Boleto> viajesRealizados(GregorianCalendar fechaDesde, GregorianCalendar fechaHasta, Transporte transporte)
+	{
+		List<Boleto> lstViajesRealizados = new ArrayList<Boleto>();
+		if(transporte.getTipoTransporte() == TipoTransporte.Colectivo)
+			lstViajesRealizados = movdao.viajesRealizadosEnLineaColectivo(fechaDesde, fechaHasta, transporte.getIdTransporte());
+		else
+			lstViajesRealizados = movdao.viajesRealizadosEnLineaTrenOSubte(fechaDesde, fechaHasta, transporte.getIdTransporte());
+		return lstViajesRealizados;
 	}
 }
