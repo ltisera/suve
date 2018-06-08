@@ -27,24 +27,61 @@
 		$("#inpLectora").change(cambiaLectora);
 		OcultaDiv();
 		
-		$("#btnAgregar").click(agregarViaje);
+		$("#divBoton").mouseenter(entraMouseAAgregar);
+		$("#divBoton").mouseleave(saleMouseAAgregar);
+		$("#divBoton").mousedown(apretaMouseAAgregar);
+		$("#divBoton").mouseup(sueltaMouseAAgregar);
+		
+
+		//$("#btnAgregar").click(agregarViaje);
 	});
 
 function OcultaDiv(){
 	$("#divEstadoBoleto").hide();
 }
 
+function apretaMouseAAgregar(){
+	etq=document.getElementById("lblAgregar");
+	etq.style.marginTop="2px";
+	etq.style.marginLeft="3px";
+}
+function sueltaMouseAAgregar(){
+	etq.style.marginTop="0px";
+	etq.style.marginLeft="0px";
+	agregarViaje();
+}
+
+function entraMouseAAgregar(){
+	miboton=document.getElementById("divBoton");
+	miboton.style.backgroundColor = "#3F608B";
+}
+function saleMouseAAgregar(){
+	miboton=document.getElementById("divBoton");
+	miboton.style.backgroundColor = "#7092be";
+}
+
+
+function previsualizarViaje(){
+	procesaViaje("previsualizar");
+}
 
 function agregarViaje(){
+	procesaViaje("agregar");
+}
 
-	var unafecha = "" + f.getDate()+"/"+f.getMonth()+"/"+f.getFullYear() + " * " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds()
+function procesaViaje(queOpera){
+
+	//var unafecha = "" + f.getDate()+"/"+f.getMonth()+"/"+f.getFullYear() + " * " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds()
 	var numTarjeta = parseInt($("#inpTarjeta").val());
-
+	console.log("Aca estoy ehhh!!!");
+	console.log(queOpera);
+	
 	if (isNaN(numTarjeta)) {
 		alert("No estas mandando numeros");
 	} else {
 		$.ajax({
 			data : {
+				"operacion": queOpera,
 				"numSerieTarjeta" : $("#inpTarjeta").val(),
 				"numSerieLectora": $("#inpLectora").val(),
 				"linea": $("#inpLinea").val(),
@@ -71,17 +108,17 @@ function agregarViaje(){
 				console.log("Esta es la response");
 				console.log(response);
 				traerUltimosViajes();
-				$("#lblEstadoBoleto").html("Boleto creado correctamente");
+				$("#divEstadoBoleto").html(response);
 				$("#divEstadoBoleto").show();
-				$("#divMostrarBoleto").html(response);
-				setTimeout(OcultaDiv,4000);
+				//$("#divMostrarBoleto").html(response);
+				
 				
 			},
 			error : function(response) {
 				console.log(response);
-				$("#lblEstadoBoleto").html("El boleto no se pudo generar, " + response.responseText);
+				$("#divEstadoBoleto").html("El boleto no se pudo generar, " + response.responseText);
 				$("#divEstadoBoleto").show();
-				setTimeout(OcultaDiv,4000);
+				
 			}
 		});
 	}
@@ -150,11 +187,11 @@ function cambiaEstacion() {
 
 function cambiaLectora() {
 	if($("#inpLectora").val()!=""){
-		$("#btnAgregar").show();
-		
+		$("#colAgregar").show();
+		previsualizarViaje();
 	}
 	else{
-		$("#btnAgregar").hide();
+		$("#colAgregar").hide();
 	}
 }
 
@@ -163,7 +200,7 @@ function ocultarElementos(){
 	$("#colLinea").hide();
 	$("#colLectora").hide();
 	$("#colEstacion").hide();
-	$("#btnAgregar").hide();
+	$("#colAgregar").hide();
 }
 
 
@@ -181,12 +218,12 @@ function ocultarElementos(){
 			<div id="colNumTar">
 					<label>Ingrese el numero de tarjeta:</label>
 					<br>
-					<input id="inpTarjeta" name="numTarjeta" list="lstTarjetas"></input>
+					<input id="inpTarjeta" name="numTarjeta" list="lstTarjetas" class="selText"></input>
 					<datalist id="lstTarjetas"></datalist>
 			</div>
 			<div id="colTrans" >
 				<label id="lblTipoTransporte">Seleccione Transporte:</label> <br>
-				<select id="inpTipoTransporte" >
+				<select id="inpTipoTransporte" class="selText">
 					<option value="Vacio">Elija una opcion:</option>
 					<option value="Tren">Tren</option>
 					<option value="Subte">Subte</option>
@@ -195,33 +232,33 @@ function ocultarElementos(){
 			</div>
 			<div id="colLinea" >
 				<label id="lblLinea">Seleccione la Linea:</label> <br>
-				<select id="inpLinea">
+				<select id="inpLinea" class="selText">
 
 				</select>
 			</div>
 			
 			<div id="colEstacion">
 				<label id="lblEstacion">Seleccione una Opcion:</label> <br>
-				<select id="inpEstacion">
+				<select id="inpEstacion" class="selText">
 					<option value="Construir Lista de Estaciones">
 				</select>
 			</div>
 		
 			<div id="colLectora">
 				<label id="lblLectora">Seleccione la Lectora:</label> <br>
-				<select id="inpLectora">
+				<select id="inpLectora" class="selText">
 					<option value="Construir Lista de Lectora">
 				</select>
 			</div>
 			<div id="colAgregar">
-				<INPUT id="btnAgregar" type="button" class="btn btn-success" value="Agregar"></input>
+				<div id=divBoton>
+					<label id="lblAgregar">Agregar</label>
+				</div>		
 			</div>
 		
 			
-
-			
 			<div id="divEstadoBoleto">
-				<label id="lblEstadoBoleto">Generando Boleto</label>
+				
 			</div>
 		</form>
 	</div>

@@ -130,6 +130,26 @@ public class LectoraABM
 		return nuevoBoleto;
 	}
 	
+	public Boleto traerBoletoAnterio(Tarjeta tarjeta){
+		return movimientoAlta.traerUltimoBoleto(tarjeta.getIdTarjeta());
+	}
+	
+	public Boleto previsualizarBoleto(LectoraEstacion lectora, Tarjeta tarjeta, GregorianCalendar fechaHora)throws Exception
+	{
+		Boleto nuevoBoleto = null;
+		List<Boleto> lstBoletosUltimas2horas = movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora);
+		Boleto boletoAnterior = movimientoAlta.traerUltimoBoleto(tarjeta.getIdTarjeta());
+		TramoTrenYSubte tramo = tramosConsultas.traerTramoTrenYSubte(lectora.getEstacion().getIdEstacion());//Tramo Estacion - Null
+		if(lectora.getEstacion().getTransporte().getTipoTransporte() == TipoTransporte.Tren)
+			nuevoBoleto = crearBoletoTren(lectora, tarjeta, fechaHora, tramo, lstBoletosUltimas2horas, boletoAnterior);
+		else//boleto de subte
+			nuevoBoleto = crearBoletoSubte(lectora, tarjeta, fechaHora, tramo, lstBoletosUltimas2horas, boletoAnterior);
+			
+		//movimientoAlta.agregarBoleto(nuevoBoleto);
+		//tarjeta.setMonto(tarjeta.getMonto()-nuevoBoleto.getMonto());
+		//tarjetaAbm.modificarTarjeta(tarjeta);
+		return nuevoBoleto;
+	}
 	
 	public Boleto crearBoletoTren(LectoraEstacion lectora, Tarjeta tarjeta, GregorianCalendar fechaHora,TramoTrenYSubte tramo,List<Boleto> lstBoletosUltimas2horas,Boleto boletoAnterior)
 	{

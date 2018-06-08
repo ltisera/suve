@@ -118,15 +118,20 @@ body{
 .fila{
 	color:white;
 }
+
+
+.selText{
+	width: 300px;
+}
 #divGeneralAgrega{
 	float:left;
-	width:40%;
+	width:45%;
 	/*background-color: green;*/
 }
 
 #divDatosTarjeta{
 	float:right;
-	width:60%;
+	width:55%;
 	/*background-color: red;*/
 }
 #colNumTar{
@@ -134,3 +139,51 @@ body{
 	/*background-color: blue;*/
 }
 
+#divEstadoBoleto{
+	width: 80%;
+}
+#divEstadoBoletoInf{
+	border: white solid 2px;
+	margin-top: 20px;
+	display:flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+#divMostrarBoleto1{
+	float:left;
+	width:33%;
+	
+}
+#divMostrarBoleto2{
+	float:left;
+	width:33%;
+	
+}
+#divMostrarBoleto3{
+	float:left;
+	width:33%;
+	
+}
+
+/*Elementos del Boleto Previsualizado*/
+#lblAgregar{
+	font: arial;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+    display:inline-block;
+}
+#divBoton{
+	margin-top:15px;
+	height: 20px !important;
+	width: 130px !important;
+	border: white solid 2px;
+	border-radius : 10px;
+	
+	text-align: center;
+	
+}

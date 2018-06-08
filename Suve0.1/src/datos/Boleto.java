@@ -54,4 +54,18 @@ public class Boleto extends Movimiento{
 	public boolean equals(Boleto boleto) {
 		return super.equals(boleto) && intRedSube == boleto.getIntRedSube();
 	}
+	
+	public float getPorcentajeRedSube()
+	{
+		float porcentajeRedSube= 0;
+		
+		if(intRedSube ==2) 
+			porcentajeRedSube = 50f;//50%
+				
+		if(intRedSube>=3) 
+			porcentajeRedSube = 75f;//75%	
+		
+		return porcentajeRedSube;		
+	}
+
 }
