@@ -134,6 +134,25 @@ public class LectoraABM
 		return movimientoAlta.traerUltimoBoleto(tarjeta.getIdTarjeta());
 	}
 	
+	
+	public Boleto previsualizarBoleto(LectoraColectivo lectora, Tarjeta tarjeta, GregorianCalendar fechaHora, TramoColectivo tramo){
+		TarifaSocial tarifa = tarjetaAbm.traerTarifaSocial();
+		List<Boleto> lstBoletosUltimas2horas = movimientoAlta.traerBoletosRedSube(tarjeta, fechaHora);
+		Boleto boletoAnterior = movimientoAlta.traerUltimoBoleto(tarjeta.getIdTarjeta());
+		Boleto nuevoBoleto = new Boleto(fechaHora,(Lectora)lectora,tramo.getSeccionViaje().getMonto(),tarjeta,tramo);
+		
+		if(redSubeEnCurso(lstBoletosUltimas2horas) && !esBoletoDeEntradaTren(boletoAnterior) && !lineaTransporteRepetidaEnRedSube(lstBoletosUltimas2horas, lectora.getTransporte()))
+		{
+			nuevoBoleto.setIntRedSube(lstBoletosUltimas2horas.get(lstBoletosUltimas2horas.size()-1).getIntRedSube()+1);
+			nuevoBoleto.setMonto(nuevoBoleto.getMonto()-(nuevoBoleto.getMonto()*Funciones.calcularRedSube(nuevoBoleto.getIntRedSube())));
+		}
+		
+		if(Funciones.tarjetaContieneTarifaSocial(tarjeta.getBeneficios(), tarifa))
+			Funciones.calcularTarifaSocial(nuevoBoleto, tarifa);
+		
+		return nuevoBoleto;
+	}
+	
 	public Boleto previsualizarBoleto(LectoraEstacion lectora, Tarjeta tarjeta, GregorianCalendar fechaHora)throws Exception
 	{
 		Boleto nuevoBoleto = null;

@@ -3,6 +3,7 @@ package negocio;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Set;
 
 import dao.BeneficioDao;
 import dao.TarjetaDao;
@@ -96,5 +97,13 @@ public class TarjetaABM
 		}
 		listaTarjetas = listaTarjetas.substring(0, listaTarjetas.length()-1);
 		return listaTarjetas += "]";
+	}
+	
+	public boolean tieneTarifaSocial(Tarjeta tar) 
+	{
+		boolean contieneTarifa = false;
+		for(Beneficio b: tar.getBeneficios())
+			if(b instanceof TarifaSocial) contieneTarifa = true;
+		return contieneTarifa;
 	}
 }

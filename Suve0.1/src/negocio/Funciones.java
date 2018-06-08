@@ -68,4 +68,15 @@ public class Funciones {
 		//Hacer segundos(Fecha Actual) - segundos(Fecha anterior) <=  7200 segundos
 		return (fechaActual.getTimeInMillis()-fechaAnterior.getTimeInMillis())<7200000;
 	}
+	
+	public static float redondea2D(float valor) {
+		float valTemp;
+		int parteEntera = (int) valor;
+		valTemp = valor - parteEntera;
+		valTemp = valTemp * 100;
+		
+		
+				
+		return valor;
+	}
 }

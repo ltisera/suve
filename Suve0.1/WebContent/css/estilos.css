@@ -140,7 +140,7 @@ body{
 }
 
 #divEstadoBoleto{
-	width: 80%;
+	width: 60%;
 }
 #divEstadoBoletoInf{
 	border: white solid 2px;
@@ -152,19 +152,14 @@ body{
 
 #divMostrarBoleto1{
 	float:left;
-	width:33%;
+	width:45%;
 	
 }
 #divMostrarBoleto2{
 	float:left;
-	width:33%;
-	
-}
-#divMostrarBoleto3{
-	float:left;
-	width:33%;
-	
-}
+	width:45%;
+}	
+
 
 /*Elementos del Boleto Previsualizado*/
 #lblAgregar{
