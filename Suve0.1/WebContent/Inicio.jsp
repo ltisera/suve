@@ -10,14 +10,14 @@
 <script>
 	$(document).ready(function() {
 
-		$("#divBoton").mouseenter(entraMouseBoton);
-		$("#divBoton").mouseleave(saleMouseBoton);
-		$("#divBoton").mousedown(apretaMouseBoton);
-		$("#divBoton").mouseup(sueltaMouseBoton);
+		$("#divBotonInicio").mouseenter(entraMouseBoton);
+		$("#divBotonInicio").mouseleave(saleMouseBoton);
+		$("#divBotonInicio").mousedown(apretaMouseBoton);
+		$("#divBotonInicio").mouseup(sueltaMouseBoton);
 	});
 
 	function apretaMouseBoton() {
-		etq = document.getElementById("lblBoton");
+		etq = document.getElementById("lblBotonInicio");
 		etq.style.marginTop = "2px";
 		etq.style.marginLeft = "3px";
 	}
@@ -28,11 +28,11 @@
 	}
 
 	function entraMouseBoton() {
-		miboton = document.getElementById("divBoton");
+		miboton = document.getElementById("divBotonInicio");
 		miboton.style.backgroundColor = "#3F608B";
 	}
 	function saleMouseBoton() {
-		miboton = document.getElementById("divBoton");
+		miboton = document.getElementById("divBotonInicio");
 		miboton.style.backgroundColor = "#7092be";
 	}
 	
@@ -72,8 +72,8 @@
 			<br>
 			<input id="inpPass" type="password"></input>
 			<br>
-			<div id=divBoton>
-				<label id="lblBoton">Ingresar</label>
+			<div id=divBotonInicio>
+				<label id="lblBotonInicio">Ingresar</label>
 			</div>
 		</div>
 		<div id="divEstadoLoggin"></div>

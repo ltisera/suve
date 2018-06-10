@@ -14,10 +14,14 @@ public class UsuarioABM {
 	}
 	
 	public Usuario comprobarPassword(String user, String pass) {
-		Usuario u = this.traerUsuario(Integer.parseInt(user));
-		if(u!=null && !u.getPassword().equals(pass)) {		
-			//Si el usuario existe pero la contraseña es incorrecta devuelve un usuario nulo
-			u = null;
+		Usuario u = null;
+		if(!user.isEmpty() && !pass.isEmpty()) {
+			//Si el usuario o contraseñas pasadas por parametros estan vacios no entra
+			u = this.traerUsuario(Integer.parseInt(user));
+			if(u!=null && !u.getPassword().equals(pass)) {		
+				//Si el usuario existe pero la contraseña es incorrecta devuelve un usuario nulo
+				u = null;
+			}
 		}
 		return u;
 	}
