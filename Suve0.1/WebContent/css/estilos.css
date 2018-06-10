@@ -100,13 +100,16 @@ body{
 	color: white;
 	
 }
-#divLoggin{
+#divIniciarSesion{
 	border: solid white 2px;
 	float: left;
 	margin-top:30px;
 	width: 40%;
 	height: 300px !important;
 	margin: 4px;
+}
+#divBienvenidoUsuario{
+	float: right;
 }
 
 /* AgregarViajes */

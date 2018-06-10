@@ -161,16 +161,7 @@ function hideAll(){
 		<div id="divContenido">
 			<!-- Contenedor del contenido OMG -->
 			<div id="divInicio" class="container">
-				<h1>Bienvenidos al sistema de gestion SUVE</h1>
-				<div id="divLoggin">
-					<label id="lblUsser">Usuario:</label>
-					<input></input>
-					<br>
-					<label id="lblPsswd">Contraseña:</label>
-					<input></input>
-					<br>
-					
-				</div>
+				<%@ include file="/Inicio.jsp"%>
 			</div>
 			<div id="divAgregarViaje" class="container">
 				<%@ include file="/AgregarViaje.jsp"%>
