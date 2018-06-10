@@ -41,6 +41,13 @@ body{
 	top:25px;
 	
 }
+
+#divBienvenidoUsuario{
+	position: absolute;
+	right: 20px;
+	bottom: 10px;
+}
+
 /*Divisor de cabecera*/
 #divLinita{
 	border-top: solid thick white;
@@ -108,8 +115,13 @@ body{
 	height: 300px !important;
 	margin: 4px;
 }
-#divBienvenidoUsuario{
-	float: right;
+
+#divLoggin{
+	margin-top:5%;
+	margin-left:10%;
+}
+#divEstadoLoggin{
+	margin-left:10%;
 }
 
 /* AgregarViajes */

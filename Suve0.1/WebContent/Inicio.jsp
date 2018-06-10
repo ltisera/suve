@@ -44,12 +44,11 @@
 			},
 			url : "IniciarSesion",
 			type : "POST",
-			/*
 			beforeSend : function() {
-				
+				$("#divEstadoLoggin").html("");
 			},
-			*/
 			success : function(response) {
+				$("#divEstadoLoggin").html("Sesion Iniciada");
 				$("#divBienvenidoUsuario").html("Bievenido " + response);
 				$("#divLoggin").hide();
 			},
@@ -58,15 +57,20 @@
 			}
 		});
 	}
+
 </script>
 </head>
 <body>
 	<h1>Bienvenidos al sistema de gestion SUVE</h1>
 	<div id="divIniciarSesion">
 		<div id="divLoggin">
-			<label id="lblUser">Usuario (DNI):</label> <input id="inpUser"></input>
+			<label id="lblUser">Usuario (DNI):</label> 
+			<br>
+			<input id="inpUser"></input>
 			<br> 
-			<label id="lblPass">Contraseña:</label> <input id="inpPass" type="password"></input>
+			<label id="lblPass">Contraseña:</label> 
+			<br>
+			<input id="inpPass" type="password"></input>
 			<br>
 			<div id=divBoton>
 				<label id="lblBoton">Ingresar</label>

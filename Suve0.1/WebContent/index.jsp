@@ -118,13 +118,7 @@ function hideAll(){
 <body>
 
 	<div id="divCabecera">
-		<div id="divFoto">
-			<%@ include file="/cabecera.jsp"%>
-		</div>
-		<div id="divManejaFecha">
-			<%@ include file="/manejaFecha.jsp"%>
-		</div>
-
+		<%@ include file="/cabecera.jsp"%>
 	</div>
 	<div id="divLinita"></div>
 	<div id="divContenedorInferior">
