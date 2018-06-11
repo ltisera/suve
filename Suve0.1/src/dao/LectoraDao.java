@@ -176,5 +176,16 @@ public class LectoraDao {
 		}
 		return lista;
 	}
+	public Lectora traerLectora(int numeroSerieLectora) 
+	{
+		Lectora objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Lectora) session.createQuery("from Lectora l where l.numeroSerieLectora ="+numeroSerieLectora).uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
 	
 }

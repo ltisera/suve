@@ -37,6 +37,18 @@ public class LectoraABM
 		tarjetaAbm.modificarTarjeta(tarjeta);
 		return recarga;
 	}
+	public Lectora traerLectora(int numeroSerieLectora) 
+	{
+		return lectoraDao.traerLectora(numeroSerieLectora);
+	}
+	public Recarga agregarRecarga(int numSerieLectora, int numSerieTarjeta, GregorianCalendar fechaHora, float monto,boolean esRecargaEstudiantil) throws Exception{
+		Recarga r = null;
+		Lectora l = this.traerLectora(numSerieLectora);
+		Tarjeta t = tarjetaAbm.traerTarjeta(numSerieTarjeta);
+		if(l!=null && t!=null)
+			r = this.agregarRecarga(l, t, fechaHora, monto, esRecargaEstudiantil);
+		return r;
+	}
 	
 	//-------------AGREGA BOLETO DE COLECTIVO-------------\\
 	public Boleto agregarBoleto(LectoraColectivo lectora, Tarjeta tarjeta, GregorianCalendar fechaHora, TramoColectivo tramo) throws Exception
