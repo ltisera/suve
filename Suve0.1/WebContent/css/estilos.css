@@ -109,23 +109,28 @@ body{
 
 #divBtnInicio{
 	width: 150px;
-	height: 30px;
+	height: 50px;
 }
 
 #divBtnAgregarViaje{
 	width: 150px;
-	height: 30px;
+	height: 50px;
 }
 
 #divBtnConsultarMovimientos{
 	width: 150px;
-	height: 30px;
+	height: 50px;
 }
 
-#divBtnCargarSaldoEstudiantil{
+#divBtnCargarSaldo{
 	width: 150px;
-	height: 30px;
+	height: 50px;
 }
+#divBtnEstadisticas{
+	width: 150px;
+	height: 50px;
+}
+
 
 /*Contenido*/
 #divContenido{
@@ -274,5 +279,19 @@ body{
 	border-radius : 10px;
 	
 	text-align: center;
+	
+}
+
+
+/*Estadisticas*/
+canvas{
+
+  width:300px !important;
+  height:300px !important;
+
+}
+#divContEstadisticas{
+	width: 400px !important;
+	height: 400px !important;
 	
 }

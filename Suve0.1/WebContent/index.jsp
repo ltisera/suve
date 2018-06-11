@@ -14,10 +14,8 @@
 var tipoSesion = "inicio";
 
 	$(document).ready(function(){
-		$("#divAgregarViaje").hide();
-		$("#divManejaFecha").hide();
-		$("#divConsultarMovimientos").hide();
-		$("#divCargarSaldo").hide();
+		hideAll();
+		$("#imgInicio").attr("src","recursos/btnInicioSel.png");
 		$("#divInicio").show();
 		revisarContenido();
 		
@@ -101,6 +99,26 @@ var tipoSesion = "inicio";
 			}
 		});
 		
+		$("#divBtnEstadisticas").mouseenter(function(){
+			if ($("#imgEstadisticas").attr("src") != "recursos/btnEstadisticasSel.png"){
+				$("#imgEstadisticas").attr("src","recursos/btnEstadisticasOn.png");
+			}
+		});
+		$("#divBtnEstadisticas").mouseleave(function(){
+			if ($("#imgEstadisticas").attr("src") != "recursos/btnEstadisticasSel.png"){
+				$("#imgEstadisticas").attr("src","recursos/btnEstadisticasOff.png");
+			}
+		});
+		$("#divBtnEstadisticas").click(function() {
+			if ($("#imgEstadisticas").attr("src") != "recursos/btnEstadisticasSel.png"){
+				hideAll();
+				$("#imgEstadisticas").attr("src","recursos/btnEstadisticasSel.png");
+				$("#divManejaFecha").show("fast");
+				$("#divEstadisticas").show("slow");
+				
+			}
+		});
+		
 		
 	});
 
@@ -110,12 +128,15 @@ function revisarContenido(){
 		$("#divBtnAgregarViaje").hide();
 		$("#divBtnConsultarMovimientos").hide();
 		$("#divBtnCargarSaldo").hide();
+		$("#divBtnEstadisticas").hide();
+		
 		
 	}
 	if(tipoSesion == "administrador"){
 		$("#divBtnAgregarViaje").show();
 		$("#divBtnConsultarMovimientos").show();
 		$("#divBtnCargarSaldo").show();
+		$("#divBtnEstadisticas").show();
 
 		
 	}
@@ -131,10 +152,12 @@ function hideAll(){
 	$("#divManejaFecha").hide();
 	$("#divConsultarMovimientos").hide();
 	$("#divCargarSaldo").hide();
+	$("#divEstadisticas").hide();
 	$("#imgInicio").attr("src","recursos/btnInicioOff.png");
 	$("#imgAgregarViaje").attr("src","recursos/btnAgregarViajeOff.png");
 	$("#imgConsultarMovimientos").attr("src","recursos/btnConsultarMovimientosOff.png");
 	$("#imgCargarSaldo").attr("src","recursos/btnCargarSaldoOff.png");
+	$("#imgEstadisticas").attr("src","recursos/btnEstadisticasOff.png");
 }
 
 </script>
@@ -155,12 +178,10 @@ function hideAll(){
 			<br>
 			<br>
 			<div id="divBtnInicio"><img id="imgInicio" alt="" src="recursos/btnInicioSel.png"></div>
-			<br>
 			<div id="divBtnAgregarViaje"><img id="imgAgregarViaje" alt="" src="recursos/btnAgregarViajeOff.png"></div>
-			<br>
 			<div id="divBtnConsultarMovimientos"><img id="imgConsultarMovimientos" alt="" src="recursos/btnConsultarMovimientosOff.png"></div>
-			<br>
 			<div id="divBtnCargarSaldo"><img id="imgCargarSaldo" alt="" src="recursos/btnCargarSaldoOff.png"></div>
+			<div id="divBtnEstadisticas"><img id="imgEstadisticas" alt="" src="recursos/btnEstadisticasOff.png"></div>
 			<br>
 			<br>
 			<br>
@@ -183,14 +204,7 @@ function hideAll(){
 			<br>
 			<br>
 			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-				
+					
 		</div>
 		<div id="divContenido">
 			<!-- Contenedor del contenido OMG -->
@@ -207,8 +221,9 @@ function hideAll(){
 				<div id="divContRecarga">
 					<%@ include file="/Recarga.jsp"%>
 				</div>
-				
-				
+			</div>
+			<div id="divEstadisticas" class="container">
+				<%@ include file="/Estadisticas.jsp"%>
 			</div>
 		</div>
 
