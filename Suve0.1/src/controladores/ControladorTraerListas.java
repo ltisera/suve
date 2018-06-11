@@ -67,6 +67,9 @@ public class ControladorTraerListas extends HttpServlet {
 		if(request.getParameter("lista").equals("Lectoras")) {
 			traerListaLectoras(request, response);
 		}
+		if(request.getParameter("lista").equals("LectorasCarga")) {
+			traerListaLectorasCarga(request, response);
+		}
 		if(request.getParameter("lista").equals("Tarjetas")) {
 			System.out.println("generando lista de tarjetas");
 			
@@ -179,6 +182,21 @@ public class ControladorTraerListas extends HttpServlet {
 			}
 		
 			salida.println(lectoraABM.stringDeListaLectoras(lstLectora));
+		
+		} catch (Exception e){
+			response.sendError(500, "Algo paso no se que" );
+		}
+		
+	}
+	protected void traerListaLectorasCarga(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			
+			response.setStatus(200);
+			response.setContentType("application/json");
+			PrintWriter salida = response.getWriter();
+			LectoraABM lectoraABM = new LectoraABM();
+			
+			salida.println(lectoraABM.traerLectoraCarga());
 		
 		} catch (Exception e){
 			response.sendError(500, "Algo paso no se que" );

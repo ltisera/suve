@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import datos.Lectora;
+import datos.LectoraCarga;
 //import negocio.LectoraColectivo;
 import datos.LectoraColectivo;
 import datos.LectoraEstacion;
@@ -171,6 +172,16 @@ public class LectoraDao {
 		try {
 			iniciaOperacion();
 			lista = session.createQuery("from LectoraEstacion l inner join fetch l.estacion as e inner join fetch e.transporte").list();
+		} finally {
+			session.close();
+		}
+		return lista;
+	}
+	public List<LectoraCarga> traerLectoraCarga() throws HibernateException {
+		List<LectoraCarga> lista = null ;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from LectoraCarga l inner join fetch l.estacion as e inner join fetch e.transporte").list();
 		} finally {
 			session.close();
 		}

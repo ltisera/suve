@@ -267,3 +267,12 @@ body{
 	text-align: center;
 	
 }
+#divBtnSaldoE{
+	margin-top:15px;
+	width: 130px !important;
+	border: white solid 2px;
+	border-radius : 10px;
+	
+	text-align: center;
+	
+}

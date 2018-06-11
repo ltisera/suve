@@ -27,7 +27,8 @@ public class ControladorRecarga extends HttpServlet{
 	{
 		int numSerieTarjeta = Integer.parseInt(request.getParameter("numSerieTarjeta"));
 		float monto = Integer.parseInt(request.getParameter("monto"));
-		int numSerieLectora = Integer.parseInt(request.getParameter("numSerieLectora"));
+		System.out.println("Num serie t: " + numSerieTarjeta);
+		int numSerieLectora = Integer.parseInt(request.getParameter("numSerieLectora").split(": ")[1]);
 		GregorianCalendar fechaHora = new GregorianCalendar(Integer.parseInt(request.getParameter("fanio")), 
 				Integer.parseInt(request.getParameter("fmes")), 
 				Integer.parseInt(request.getParameter("fdia")), 

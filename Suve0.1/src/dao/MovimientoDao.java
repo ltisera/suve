@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 
 import datos.Movimiento;
 import datos.Boleto;
+import datos.LectoraCarga;
 import datos.Recarga;
 import datos.TipoTransporte;
 import datos.LectoraColectivo;
@@ -121,6 +122,10 @@ public class MovimientoDao {
 				{
 					Hibernate.initialize(((LectoraEstacion)m.getLectora()).getEstacion());
 				}
+				if(m.getLectora() instanceof LectoraCarga)
+				{
+					Hibernate.initialize(((LectoraCarga)m.getLectora()).getEstacion());
+				}
 					
 			}
 			//("from Movimiento m inner join fetch m.lectora as l CASE where type(l) = LectoraColectivo THEN inner join fetch l.transporte END CASE where type(l) = LectoraEstacion THEN inner join fetch l.estacion END")
@@ -147,7 +152,12 @@ public class MovimientoDao {
 				if(m.getLectora() instanceof LectoraEstacion)
 				{
 					Hibernate.initialize(((LectoraEstacion)m.getLectora()).getEstacion());
-				}		
+				}
+				if(m.getLectora() instanceof LectoraCarga)
+				{
+					Hibernate.initialize(((LectoraCarga)m.getLectora()).getEstacion());
+				}
+				
 			}
 		} finally {
 			session.close();

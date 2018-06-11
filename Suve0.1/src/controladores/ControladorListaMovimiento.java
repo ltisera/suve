@@ -119,6 +119,15 @@ public class ControladorListaMovimiento extends HttpServlet {
 					salida.println( " <th>"+((LectoraEstacion)lec).getEstacion().getNombre()+"</th> " );
 
 				}
+				if(m.getLectora() instanceof LectoraCarga) {
+					//Transporte
+					salida.println( " <th>"+((LectoraCarga)lec).getEstacion().getTransporte().getTipoTransporte()+"</th> " );
+					//Linea
+					salida.println( " <th>"+((LectoraCarga)lec).getEstacion().getTransporte().getLinea()+"</th> " );
+					//Estacion/Tramo
+					salida.println( " <th>"+((LectoraCarga)lec).getEstacion().getNombre()+"</th> " );
+
+				}
 				//Monto
 				salida.println( " <th>"+m.getMonto()+"</th> ");
 				//RedSube y beneficios

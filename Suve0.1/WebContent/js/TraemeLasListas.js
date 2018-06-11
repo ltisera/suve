@@ -89,6 +89,31 @@ function traerListaLectoras(){
 		
 	});
 }
+function traerListaLectorasCarga(){
+	$.ajax({
+		data:{
+			"lista":"LectorasCarga"
+		},
+		url:"TraerListas",
+		type:"POST",
+		success:function(response){
+			console.log(response);
+			$("#inpPuntoCarga").empty();
+			var opcion = document.createElement("option");
+			opcion.text = "Seleccione una Lectora";
+		    $("#inpPuntoCarga").append(opcion);
+			for(i in response){
+				var opcion = document.createElement("option");
+				opcion.text = response[i];
+			    $("#inpPuntoCarga").append(opcion);
+			}
+		},
+		error:function(){
+			alert("Error en carga de lista de lectoras de Carga");
+		}
+		
+	});
+}
 
 
 function traerListaLineas(){

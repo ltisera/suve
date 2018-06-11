@@ -17,7 +17,7 @@ var tipoSesion = "inicio";
 		$("#divAgregarViaje").hide();
 		$("#divManejaFecha").hide();
 		$("#divConsultarMovimientos").hide();
-		$("#divCargarSaldoEstudiantil").hide();
+		$("#divCargarSaldo").hide();
 		$("#divInicio").show();
 		revisarContenido();
 		
@@ -81,22 +81,23 @@ var tipoSesion = "inicio";
 		});	
 		
 		
-		$("#divBtnCargarSaldoEstudiantil").mouseenter(function(){
-			if ($("#imgCargarSaldoEstudiantil").attr("src") != "recursos/btnCargarSaldoEstudiantilSel.png"){
-				$("#imgCargarSaldoEstudiantil").attr("src","recursos/btnCargarSaldoEstudiantilOn.png");
+		$("#divBtnCargarSaldo").mouseenter(function(){
+			if ($("#imgCargarSaldo").attr("src") != "recursos/btnCargarSaldoSel.png"){
+				$("#imgCargarSaldo").attr("src","recursos/btnCargarSaldoOn.png");
 			}
 		});
-		$("#divBtnCargarSaldoEstudiantil").mouseleave(function(){
-			if ($("#imgCargarSaldoEstudiantil").attr("src") != "recursos/btnCargarSaldoEstudiantilSel.png"){
-				$("#imgCargarSaldoEstudiantil").attr("src","recursos/btnCargarSaldoEstudiantilOff.png");
+		$("#divBtnCargarSaldo").mouseleave(function(){
+			if ($("#imgCargarSaldo").attr("src") != "recursos/btnCargarSaldoSel.png"){
+				$("#imgCargarSaldo").attr("src","recursos/btnCargarSaldoOff.png");
 			}
 		});
-		$("#divBtnCargarSaldoEstudiantil").click(function() {
-			if ($("#imgCargarSaldoEstudiantil").attr("src") != "recursos/btnCargarSaldoEstudiantilSel.png"){
+		$("#divBtnCargarSaldo").click(function() {
+			if ($("#imgCargarSaldo").attr("src") != "recursos/btnCargarSaldoSel.png"){
 				hideAll();
-				$("#imgCargarSaldoEstudiantil").attr("src","recursos/btnCargarSaldoEstudiantilSel.png");
+				$("#imgCargarSaldo").attr("src","recursos/btnCargarSaldoSel.png");
 				$("#divManejaFecha").show("fast");
-				$("#divCargarSaldoEstudiantil").show("slow");
+				$("#divCargarSaldo").show("slow");
+				traerListaLectorasCarga();
 			}
 		});
 		
@@ -108,17 +109,20 @@ function revisarContenido(){
 	if(tipoSesion == "inicio"){
 		$("#divBtnAgregarViaje").hide();
 		$("#divBtnConsultarMovimientos").hide();
-		$("#divBtnCargarSaldoEstudiantil").hide();
+		$("#divBtnCargarSaldo").hide();
 		
 	}
 	if(tipoSesion == "administrador"){
 		$("#divBtnAgregarViaje").show();
 		$("#divBtnConsultarMovimientos").show();
-		$("#divBtnCargarSaldoEstudiantil").show();
+		$("#divBtnCargarSaldo").show();
+
+		
 	}
 	if(tipoSesion == "pasajero"){
 		$("#divBtnAgregarViaje").show();
 		$("#divBtnConsultarMovimientos").show();
+
 	}
 }
 function hideAll(){
@@ -126,11 +130,11 @@ function hideAll(){
 	$("#divAgregarViaje").hide();
 	$("#divManejaFecha").hide();
 	$("#divConsultarMovimientos").hide();
-	$("#divCargarSaldoEstudiantil").hide();
+	$("#divCargarSaldo").hide();
 	$("#imgInicio").attr("src","recursos/btnInicioOff.png");
 	$("#imgAgregarViaje").attr("src","recursos/btnAgregarViajeOff.png");
 	$("#imgConsultarMovimientos").attr("src","recursos/btnConsultarMovimientosOff.png");
-	$("#imgCargarSaldoEstudiantil").attr("src","recursos/btnCargarSaldoEstudiantilOff.png");
+	$("#imgCargarSaldo").attr("src","recursos/btnCargarSaldoOff.png");
 }
 
 </script>
@@ -156,8 +160,7 @@ function hideAll(){
 			<br>
 			<div id="divBtnConsultarMovimientos"><img id="imgConsultarMovimientos" alt="" src="recursos/btnConsultarMovimientosOff.png"></div>
 			<br>
-			<div id="divBtnCargarSaldoEstudiantil"><img id="imgCargarSaldoEstudiantil" alt="" src="recursos/btnCargarSaldoEstudiantilOff.png"></div>
-			<br>
+			<div id="divBtnCargarSaldo"><img id="imgCargarSaldo" alt="" src="recursos/btnCargarSaldoOff.png"></div>
 			<br>
 			<br>
 			<br>
@@ -200,8 +203,12 @@ function hideAll(){
 			<div id="divConsultarMovimientos" class="container">
 				<%@ include file="/ConsultarMovimientos.jsp"%>
 			</div>
-			<div id="divCargarSaldoEstudiantil" class="container">
-				<%@ include file="/SaldoEstudiantil.jsp"%>
+			<div id="divCargarSaldo" class="container">
+				<div id="divContRecarga">
+					<%@ include file="/Recarga.jsp"%>
+				</div>
+				
+				
 			</div>
 		</div>
 

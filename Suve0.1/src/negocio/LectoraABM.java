@@ -4,9 +4,11 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import dao.LectoraDao;
+import dao.TarjetaDao;
 import datos.Boleto;
 import datos.Estacion;
 import datos.Lectora;
+import datos.LectoraCarga;
 import datos.LectoraColectivo;
 import datos.LectoraEstacion;
 import datos.Recarga;
@@ -47,6 +49,7 @@ public class LectoraABM
 		Tarjeta t = tarjetaAbm.traerTarjeta(numSerieTarjeta);
 		if(l!=null && t!=null)
 			r = this.agregarRecarga(l, t, fechaHora, monto, esRecargaEstudiantil);
+		System.out.println("Lectora: " + l + "\nTarjeta: " + t);
 		return r;
 	}
 	
@@ -92,6 +95,18 @@ public class LectoraABM
 	public LectoraEstacion traerLectoraEstacion(int numeroSerieLectora) 
 	{
 		return lectoraDao.traerLectoraEstacion(numeroSerieLectora);
+	}
+	public String traerLectoraCarga() 
+	{
+		String listaLectoras = "[";
+		for (LectoraCarga l:lectoraDao.traerLectoraCarga()) {
+			listaLectoras += "\""+ l.getEstacion().getNombre() +": "+ l.getNumeroSerieLectora()+"\",";
+		}
+		
+		listaLectoras =listaLectoras.substring(0, listaLectoras.length()-1);
+		return listaLectoras +="]";
+		
+		
 	}
 	public boolean esBoletoDeEntradaTren(Boleto boletoAnterior)
 	{

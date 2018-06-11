@@ -38,7 +38,7 @@ public class TarjetaABM
 	
 	public Tarjeta traerTarjeta(int numeroSerieTarjeta)
 	{
-		return tarjetaDao.traerTarjeta(numeroSerieTarjeta);
+		return tarjetaDao.traerTarjetaPorNumeroSerie(numeroSerieTarjeta);
 	}
 
 	public Tarjeta traerTarjetaConBeneficios(int numeroSerieTarjeta) 

@@ -6,13 +6,13 @@ public class LectoraCarga extends Lectora{
 	
 	public LectoraCarga() {}
 
-	public LectoraCarga(String ubicacion) {
-		super();
+	public LectoraCarga(String ubicacion, int numeroSerieLectora) {
+		super(numeroSerieLectora);
 		this.ubicacion = ubicacion;
 	}
 
-	public LectoraCarga(Estacion estacion) {
-		super();
+	public LectoraCarga(Estacion estacion, int numeroSerieLectora) {
+		super(numeroSerieLectora);
 		this.estacion = estacion;
 	}
 

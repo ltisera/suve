@@ -73,6 +73,16 @@ public class TarjetaDao {
 		}
 		return objeto;
 	}
+	public Tarjeta traerTarjetaPorNumeroSerie(int numeroSerie) throws HibernateException {
+		Tarjeta objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Tarjeta) session.createQuery( "from Tarjeta t where t.numeroSerieTarjeta="+numeroSerie).uniqueResult();
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
 	
 	@SuppressWarnings ( "unchecked" )
 	public List<Tarjeta> traerTarjeta() throws HibernateException {
