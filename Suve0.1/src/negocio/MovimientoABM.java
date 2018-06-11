@@ -95,8 +95,24 @@ public class MovimientoABM
 		List<Boleto> lstViajesRealizados = new ArrayList<Boleto>();
 		if(transporte.getTipoTransporte() == TipoTransporte.Colectivo)
 			lstViajesRealizados = movdao.viajesRealizadosEnLineaColectivo(fechaDesde, fechaHasta, transporte.getIdTransporte());
-		else
-			lstViajesRealizados = movdao.viajesRealizadosEnLineaTrenOSubte(fechaDesde, fechaHasta, transporte.getIdTransporte());
+		if(transporte.getTipoTransporte() == TipoTransporte.Subte)
+			lstViajesRealizados = movdao.viajesRealizadosEnLineaTrenOSubteEntrada(fechaDesde, fechaHasta, transporte.getIdTransporte());
+		if(transporte.getTipoTransporte() == TipoTransporte.Tren)
+		{
+			lstViajesRealizados = movdao.viajesRealizadosEnLineaTrenOSubteEntrada(fechaDesde, fechaHasta, transporte.getIdTransporte());
+			lstViajesRealizados.addAll(movdao.viajesRealizadosEnLineaTrenSalida(fechaDesde, fechaHasta, transporte.getIdTransporte()));
+			Collections.sort(lstViajesRealizados);
+		}
 		return lstViajesRealizados;
+	}
+	
+	public List<Boleto> viajesRealizados(GregorianCalendar fechaDesde, GregorianCalendar fechaHasta, Beneficio beneficio)
+	{
+		return movdao.viajesRealizados(fechaDesde, fechaHasta, beneficio.getIdBeneficio());
+	}
+	
+	public List<Boleto> viajesRealizadosConRedSube(GregorianCalendar fechaDesde, GregorianCalendar fechaHasta)
+	{
+		return movdao.viajesRealizadosConRedSube(fechaDesde, fechaHasta);
 	}
 }

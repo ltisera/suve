@@ -276,13 +276,13 @@ public class MovimientoDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Boleto> viajesRealizadosEnLineaTrenOSubte(GregorianCalendar fechaDesde, GregorianCalendar fechaHasta, long idTransporte) 
+	public List<Boleto> viajesRealizadosEnLineaTrenOSubteEntrada(GregorianCalendar fechaDesde, GregorianCalendar fechaHasta, long idTransporte) 
 	{
 		List<Boleto> lista = new ArrayList<Boleto>();
 		try 
 		{
 			iniciaOperacion();
-			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta inner join fetch b.tramoTrenYSubte tt inner join fetch tt.estacionA e where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta and e.transporte = "+idTransporte)
+			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta inner join fetch b.tramoTrenYSubte tt inner join fetch tt.estacionA e where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta and tt.estacionB is null and e.transporte = "+idTransporte)
 					.setParameter("fechaDesde", fechaDesde)
 					.setParameter("fechaHasta", fechaHasta)
 					.list();
@@ -290,6 +290,58 @@ public class MovimientoDao {
 			session.close(); 
 		}
 		return lista;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Boleto> viajesRealizadosEnLineaTrenSalida(GregorianCalendar fechaDesde, GregorianCalendar fechaHasta, long idTransporte) 
+	{
+		List<Boleto> lista = new ArrayList<Boleto>();
+		try 
+		{
+			iniciaOperacion();
+			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta inner join fetch b.tramoTrenYSubte tt inner join fetch tt.estacionA e inner join fetch tt.estacionB  where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta and e.transporte = "+idTransporte)
+					.setParameter("fechaDesde", fechaDesde)
+					.setParameter("fechaHasta", fechaHasta)
+					.list();
+		} finally {
+			session.close(); 
+		}
+		return lista;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Boleto> viajesRealizados(GregorianCalendar fechaDesde, GregorianCalendar fechaHasta, long idBeneficio) 
+	{
+		List<Boleto> lista = new ArrayList<Boleto>();
+		try 
+		{
+			iniciaOperacion();
+			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta t inner join fetch t.beneficios tb where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta and tb.idBeneficio = "+idBeneficio)
+					.setParameter("fechaDesde", fechaDesde)
+					.setParameter("fechaHasta", fechaHasta)
+					.list();
+		} finally {
+			session.close(); 
+		}
+		return lista;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Boleto> viajesRealizadosConRedSube(GregorianCalendar fechaDesde, GregorianCalendar fechaHasta) 
+	{
+		List<Boleto> lista = new ArrayList<Boleto>();
+		try 
+		{
+			iniciaOperacion();
+			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta and b.intRedSube >= 2 ")
+					.setParameter("fechaDesde", fechaDesde)
+					.setParameter("fechaHasta", fechaHasta)
+					.list();
+		} finally {
+			session.close(); 
+		}
+		return lista;
+		
 	}
 	
 	
