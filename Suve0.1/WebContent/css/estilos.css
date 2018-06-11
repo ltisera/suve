@@ -14,6 +14,31 @@ body{
 	color:white;
 	
 }
+/*Elementos Genericos (class)*/
+.caja2px{
+	border: white solid 2px;
+}
+
+.clsDivBoton{
+	margin-top:15px;
+	height: 20px !important;
+	width: 130px !important;
+	border: white solid 2px;
+	border-radius : 10px;
+	
+	text-align: center;
+}
+
+.clsLblBoton{
+	font: arial;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+    display:inline-block;
+}
 
 /* Elementos de index.jsp */
 /* Cabecera de index */
@@ -67,6 +92,21 @@ body{
 	width: 150px;
 }
 /*Botones*/
+#divBtnAvanzar{
+	margin-left: 23%;
+}
+
+#lblBotonInicio{
+	font: arial;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+    display:inline-block;
+}
+
 #divBtnInicio{
 	width: 150px;
 	height: 30px;
@@ -96,8 +136,9 @@ body{
 	
 }
 #tblManejaFecha{
-	border: solid 2px #cccccc;
-	
+	margin-top : -15px;
+	border: solid 2px white;
+	align-items: center;
 	
 	
 }
@@ -109,18 +150,29 @@ body{
 }
 #divIniciarSesion{
 	border: solid white 2px;
-	float: left;
 	margin-top:30px;
-	width: 40%;
+	width: 60%;
 	height: 300px !important;
-	margin: 4px;
+	margin: 0px;
+	float: left;
+}
+
+#divLogginPic{
+	border: white solid 2px;
+	width:120px;
+	height:120px;
+	float: left;
+	margin-top:5%;
 }
 
 #divLoggin{
 	margin-top:5%;
 	margin-left:10%;
+	width: 50%;
+	float: left;
 }
 #divEstadoLoggin{
+	clear:both;
 	margin-left:10%;
 }
 

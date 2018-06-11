@@ -49,8 +49,10 @@
 			},
 			success : function(response) {
 				$("#divEstadoLoggin").html("Sesion Iniciada");
-				$("#divBienvenidoUsuario").html("Bievenido " + response);
-				$("#divLoggin").hide();
+				$("#divBienvenidoUsuario").html("<img alt=\"\" src=\"recursos/logginE.png\"><br>"+"Bievenido " + response.apellido + ", " + response.nombre);
+				tipoSesion = response.tipo;
+				$("#divIniciarSesion").hide();
+				revisarContenido();
 			},
 			error : function(response) {
 				$("#divEstadoLoggin").html("Usuario y/o contraseña incorrectos");
@@ -63,7 +65,9 @@
 <body>
 	<h1>Bienvenidos al sistema de gestion SUVE</h1>
 	<div id="divIniciarSesion">
+		
 		<div id="divLoggin">
+			<h1>Iniciar sesion</h1>
 			<label id="lblUser">Usuario (DNI):</label> 
 			<br>
 			<input id="inpUser"></input>
@@ -76,6 +80,7 @@
 				<label id="lblBotonInicio">Ingresar</label>
 			</div>
 		</div>
+		<div id="divLogginPic"><img alt="" src="recursos/logginE.png"></div>
 		<div id="divEstadoLoggin"></div>
 	</div>
 	

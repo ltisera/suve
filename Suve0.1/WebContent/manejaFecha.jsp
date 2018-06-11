@@ -13,23 +13,52 @@
 <script src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript"></script>
 <script>
+var avance = 0;
+var lafecha = 0;
+var f =0;
+
 	$(document).ready(function(){
-		var lafecha = new Date();
-		var avance = 0;
+		lafecha = new Date();
 		$("#quefecha").html(lafecha);
-		var f = sumarAvance(lafecha, avance);
+		f = sumarAvance(lafecha, avance);
 		$("#quefecha").html(f.getDate()+"/"+(f.getMonth()+1)+"/"+f.getFullYear() + " Y la Hora: " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds());
 		setInterval(function(){calcularFecha(avance); }, 1000);
-		
-		$("#avanzar").click(function() {
-			avance = avance + sumarSegundos();
-			lafecha=new Date();
-			f = sumarAvance(lafecha, avance);
-			$("#quefecha").html(f.getDate()+"/"+(f.getMonth()+1)+"/"+f.getFullYear() + "<br>    " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds());
-		});
+		$("#avanzar").click(darAvance);
+		$("#divBtnAvanzar").mouseenter(entraMouseAAvanzar);
+		$("#divBtnAvanzar").mouseleave(saleMouseAAvanzar);
+		$("#divBtnAvanzar").mousedown(apretaMouseAAvanzar);
+		$("#divBtnAvanzar").mouseup(sueltaMouseAAvanzar);
 		
 	});
 
+function darAvance(){
+	
+	avance = avance + sumarSegundos();
+	console.log(avance);
+	lafecha=new Date();
+	f = sumarAvance(lafecha, avance);
+	$("#quefecha").html(f.getDate()+"/"+(f.getMonth()+1)+"/"+f.getFullYear() + "<br>    " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds());
+}
+
+function apretaMouseAAvanzar(){
+	etq=document.getElementById("lblAvanzar");
+	etq.style.marginTop="2px";
+	etq.style.marginLeft="3px";
+}
+function sueltaMouseAAvanzar(){
+	etq.style.marginTop="0px";
+	etq.style.marginLeft="0px";
+	darAvance();
+}
+
+function entraMouseAAvanzar(){
+	miboton=document.getElementById("divBtnAvanzar");
+	miboton.style.backgroundColor = "#3F608B";
+}
+function saleMouseAAvanzar(){
+	miboton=document.getElementById("divBtnAvanzar");
+	miboton.style.backgroundColor = "#7092be";
+}
 //Pruebas con la fecha
 function calcularFecha(avance){
 	//avance = avance + sumarSegundos();
@@ -103,7 +132,10 @@ function componerCalendar(avance){
 		
 			<tr>
 				<th colspan="4">
-					<input type="button" class ="btn btn-succes" id="avanzar" name="avanzar" value="avanzar"></input>
+					<div id="divBtnAvanzar" class="clsDivBoton">
+						<label id="lblAvanzar" class ="clsLblBoton">Avanzar</label>
+					</div>
+					
 				</th>
 			</tr>
 		</table>

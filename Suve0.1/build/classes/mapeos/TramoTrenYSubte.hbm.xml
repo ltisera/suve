@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="datos.TramoTrenYSubte" table="TramoTrenYSubte">
+		<id column="idTramoTrenYSubte" name="idTramoTrenYSubte">
+			<generator class="identity" />
+		</id>
+		<many-to-one column="estacionA" name="estacionA" class="datos.Estacion" not-null="true" fetch="join"/>
+		<many-to-one column="estacionB" name="estacionB" class="datos.Estacion" not-null="false" fetch="join"/>
+		<many-to-one column="idSeccionViaje" name="seccionViaje" class="datos.SeccionViaje" not-null="true" fetch="join"/>
+	</class>
+</hibernate-mapping>

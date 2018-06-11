@@ -1,6 +1,7 @@
 package negocio;
 
 import dao.UsuarioDao;
+import datos.TipoUsuario;
 import datos.Usuario;
 
 public class UsuarioABM {
@@ -24,5 +25,9 @@ public class UsuarioABM {
 			}
 		}
 		return u;
+	}
+	
+	public void crearUsuario(String nombre, String apellido, int dni, String mail, String password, TipoUsuario tipoUsuario) {
+		udao.agregar(new Usuario(nombre, apellido, dni, mail, password, tipoUsuario));
 	}
 }

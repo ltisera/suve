@@ -10,12 +10,16 @@
 
 <script src="js/jquery-3.3.1.js" type="text/javascript"></script>
 <script>
+
+var tipoSesion = "inicio";
+
 	$(document).ready(function(){
 		$("#divAgregarViaje").hide();
 		$("#divManejaFecha").hide();
 		$("#divConsultarMovimientos").hide();
 		$("#divCargarSaldoEstudiantil").hide();
 		$("#divInicio").show();
+		revisarContenido();
 		
 	
 		$("#divBtnInicio").mouseenter(function(){
@@ -98,7 +102,25 @@
 		
 		
 	});
+
+function revisarContenido(){
 	
+	if(tipoSesion == "inicio"){
+		$("#divBtnAgregarViaje").hide();
+		$("#divBtnConsultarMovimientos").hide();
+		$("#divBtnCargarSaldoEstudiantil").hide();
+		
+	}
+	if(tipoSesion == "administrador"){
+		$("#divBtnAgregarViaje").show();
+		$("#divBtnConsultarMovimientos").show();
+		$("#divBtnCargarSaldoEstudiantil").show();
+	}
+	if(tipoSesion == "pasajero"){
+		$("#divBtnAgregarViaje").show();
+		$("#divBtnConsultarMovimientos").show();
+	}
+}
 function hideAll(){
 	$("#divInicio").hide();
 	$("#divAgregarViaje").hide();
@@ -135,6 +157,21 @@ function hideAll(){
 			<div id="divBtnConsultarMovimientos"><img id="imgConsultarMovimientos" alt="" src="recursos/btnConsultarMovimientosOff.png"></div>
 			<br>
 			<div id="divBtnCargarSaldoEstudiantil"><img id="imgCargarSaldoEstudiantil" alt="" src="recursos/btnCargarSaldoEstudiantilOff.png"></div>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
 			<br>
 			<br>
 			<br>

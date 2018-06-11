@@ -15,6 +15,7 @@
 <script>
 	$(document).ready(function() {
 		/*Ocultamos los elementos al inicio*/
+		
 		ocultarElementos();
 		traerListaTarjetas();
 		$("#colBolMue").hide();

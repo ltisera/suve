@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="datos.SeccionViaje" table="SeccionViaje">
+		<id column="idSeccionViaje" name="idSeccionViaje">
+			<generator class="identity" />
+		</id>
+		
+		<property name="tipoTransporte">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">datos.TipoTransporte</param>
+				<param name="type">4</param>
+			</type>
+		</property>
+		
+		<property column="nombre" name="nombre" type="string" />
+		<property column="monto" name="monto" type="float" />
+	</class>
+</hibernate-mapping>

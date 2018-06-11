@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="datos.Beneficio" table="beneficio">
+		<id column="idBeneficio" name="idBeneficio">
+			<generator class="identity" />
+		</id>
+		<property column="nombre" name="nombre" type="string" />
+
+		<set table="usuarioxbeneficio" name="usuarios" outer-join="true" fetch="join">
+			<key column="idBeneficio" />
+			<many-to-many column="idUsuario" class="datos.Usuario" fetch="join"/>
+		</set>
+
+		<set table="tarjetaxbeneficio" name="tarjetas" outer-join="true" fetch="join">
+			<key column="idBeneficio" />
+			<many-to-many column="idTarjeta" class="datos.Tarjeta" fetch="join" />
+		</set>
+		<joined-subclass name="datos.TarifaSocial" table="tarifasocial">
+			<key column="idBeneficio" />
+			<property column="porcentajeDescuento" name="porcentajeDescuento" type="float" />
+		</joined-subclass>
+		<joined-subclass name="datos.BoletoEstudiantil" table="boletoestudiantil">
+			<key column="idBeneficio" />
+			<property column="intervaloEnDias" name="intervaloEnDias" type="int" />
+			<property column="monto" name="monto" type="float" />
+		</joined-subclass>
+	</class>
+</hibernate-mapping>
