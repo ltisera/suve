@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import datos.TipoUsuario;
+import datos.Tarjeta;
 import datos.Usuario;
+import negocio.TarjetaABM;
 import negocio.UsuarioABM;
 
 /**
@@ -49,34 +50,76 @@ public class ControladorDatosUsuario extends HttpServlet {
 			procesaBaja(request, response);
 		}
 		if(opera.equals("Datos")) {
+			System.out.println("Entre al if");
 			procesaDatos(request, response);
 		}	
 	}
 	protected void procesaAlta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int dni = Integer.parseInt(request.getParameter("dni"));
-		int numSerieTarjeta = Integer.parseInt(request.getParameter("numSerieTarjeta"));	
+		int numSerieTarjeta = Integer.parseInt(request.getParameter("numSerieTarjeta"));
+		UsuarioABM uabm = new UsuarioABM();
+		TarjetaABM tabm = new TarjetaABM();
+		Tarjeta t = tabm.traerTarjeta(numSerieTarjeta);
+		PrintWriter salida = response.getWriter();
+		try {
+			tabm.registrarTarjeta(t, uabm.traerUsuario(dni));
+			response.setContentType("application/json");
+			String salidaJson="{";
+			salidaJson += "\"numSerieTarjeta\":" + "\""+t.getNumeroSerieTarjeta()+"\",";
+			salidaJson += "\"monto\":" + "\""+t.getMonto()+"\"";
+			salida.println(salidaJson+"}");
+			response.setStatus(200);//Usuario obtenido
+		} catch (Exception e) {
+			salida.println(e);
+			response.setStatus(500);//Error
+		}
+		
 	}
 	protected void procesaBaja(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int numSerieTarjeta = Integer.parseInt(request.getParameter("numSerieTarjeta"));	
+		int numSerieTarjeta = Integer.parseInt(request.getParameter("numSerieTarjeta"));
+		TarjetaABM tabm = new TarjetaABM();
+		Tarjeta t = tabm.traerTarjeta(numSerieTarjeta);
+		PrintWriter salida = response.getWriter();
+		try {
+			tabm.darBaja(t);
+			response.setStatus(200);//Usuario obtenido
+		} catch (Exception e) {
+			salida.println(e);
+			response.setStatus(500);//Error
+		}
 	}
+	@SuppressWarnings("unused")
 	protected void procesaDatos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Entre a la funcion");
 		int dni = Integer.parseInt(request.getParameter("dni"));
+		System.out.println("parsee el dni");
 		UsuarioABM uabm = new UsuarioABM();
+		TarjetaABM tabm = new TarjetaABM();
 		Usuario u = uabm.traerUsuario(dni);
+		System.out.println("Traje al usuario");
+		Tarjeta t = tabm.traerTarjetaActiva(u.getIdUsuario());
+		System.out.println("Traje la tarjeta");
 		if(u!=null) {
+			System.out.println("Usuario no es nulo!!");
 			response.setContentType("application/json");
 			String salidaJson="{";	
 			salidaJson += "\"apellido\":" + "\""+u.getApellido()+"\",";
 			salidaJson += "\"nombre\":" + "\""+u.getNombre()+"\",";
 			salidaJson += "\"dni\":" + "\""+u.getDni()+"\",";
 			salidaJson += "\"mail\":" + "\""+u.getMail()+"\",";
-			//Preguntar si la tarjeta esta vacia o no
+			if(t!=null) {
+				System.out.println("Tarjeta no es nula");
+				salidaJson += "\"numSerieTarjeta\":" + "\""+t.getNumeroSerieTarjeta()+"\",";
+				salidaJson += "\"monto\":" + "\""+t.getMonto()+"\"";
+			}
+			else {
+				salidaJson += "\"numSerieTarjeta\":" + "\""+(-1)+"\"";
+			}
 			PrintWriter salida = response.getWriter();
-			salida.println(salidaJson);
+			salida.println(salidaJson+"}");
 			
 			response.setStatus(200);//Usuario obtenido
-		}
-		else {
+		}else {
 			response.setStatus(500);//Problemas al obtener usuario
 		}
 	}

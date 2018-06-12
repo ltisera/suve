@@ -153,7 +153,7 @@ public class TarjetaDao {
 		Tarjeta objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Tarjeta) session.createQuery("from Tarjeta t where t.idTarjeta in (select max(tt.idTarjeta) from Tarjeta tt where tt.usuario = "+idUsuario+")").uniqueResult();
+			objeto = (Tarjeta) session.createQuery("from Tarjeta t where t.activa = :true and t.usuario = "+idUsuario+")").setParameter("true", true).uniqueResult();
 			Hibernate.initialize(objeto.getBeneficios());
 		} finally {
 			session.close();

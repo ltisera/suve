@@ -117,6 +117,9 @@ public class TarjetaABM
 		tarjeta.setActiva(false);
 		tarjetaDao.actualizar(tarjeta);
 	}
+	public Tarjeta traerTarjetaActiva(long idUsuario) {
+		return tarjetaDao.traerTarjetaActiva(idUsuario);
+	}
 	
 	public void registrarTarjeta(Tarjeta tarjeta, Usuario usuario) throws Exception
 	{
@@ -124,7 +127,7 @@ public class TarjetaABM
 			throw new Exception("La tarjeta no existe.");
 		if(tarjeta.isActiva())
 			throw new Exception("La tarjeta pertenece a otra persona");
-		Tarjeta tarjetaVieja = tarjetaDao.traerTarjetaActiva(usuario.getIdUsuario());
+		Tarjeta tarjetaVieja = this.traerTarjetaActiva(usuario.getIdUsuario());
 		if(tarjetaVieja!=null && tarjetaVieja.isActiva())
 		{
 			tarjetaVieja.setActiva(false);

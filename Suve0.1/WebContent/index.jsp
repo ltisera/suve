@@ -134,7 +134,6 @@ var tipoSesion = "inicio";
 				hideAll();
 				$("#imgDatos").attr("src","recursos/btnDatosSel.png");
 				$("#divDatos").show("slow");
-				traerDatos();
 			}
 		});
 		
@@ -162,6 +161,7 @@ function revisarContenido(){
 	if(tipoSesion == "pasajero"){
 		$("#divBtnAgregarViaje").show();
 		$("#divBtnConsultarMovimientos").show();
+		traerDatos();
 		$("#divBtnDatos").show();
 
 	}

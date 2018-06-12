@@ -63,73 +63,88 @@ function saleMouseBotonDarAlta() {
 
 function darBaja() {
 	if(confirm("¿Esta seguro que quiere dar de baja la tarjeta "+$("#divNroSerieDatos").val()+"?")){
-		/*
 		$.ajax({
 			data : {
-				"operacion": "Baja"
+				"operacion": "Baja",
 				"numSerieTarjeta" : $("#divNroSerieDatos").val(),
 			},
 			url : "DatosUsuario",
 			type : "POST",
 			beforeSend : function() {
-				$("#lblRespuesta").html("Realizando carga");
+				//$("#lblRespuesta").html("Realizando carga");
 			},
 			success : function(response) {
-				$("#lblRespuesta").html("Carga realizada exitosamente");
+				$("#divMostrarTarjeta").hide()
+				$("#divAgregarTarjeta").show()
+				$("#divNroSerieDatos").html("");
+				$("#divMontoDatos").html("");
 			},
 			error : function(response) {
-				$("#lblRespuesta").html("Fallo la carga");
+				console.log("Error Baja");
 			}
 		});
-		*/
+
 	}else{
-		console.log("No gracias")
+		console.log("No gracias, no quiero dar de baja");
 	}
 }
 
 
 function darAlta() {
-	/*
-		$.ajax({
-			data : {
-				"operacion": "Alta"
-				"numSerieTarjeta" : $("#inpTarjetaDatos").val(),
-			},
-			url : "DatosUsuario",
-			type : "POST",
-			beforeSend : function() {
-				$("#lblRespuesta").html("Realizando carga");
-			},
-			success : function(response) {
-				$("#lblRespuesta").html("Carga realizada exitosamente");
-			},
-			error : function(response) {
-				$("#lblRespuesta").html("Fallo la carga");
-			}
-		});
-	*/
+	$.ajax({
+		data : {
+			"operacion": "Alta",
+			"numSerieTarjeta" : $("#inpTarjetaDatos").val(),
+		},
+		url : "DatosUsuario",
+		type : "POST",
+		beforeSend : function() {
+			//$("#lblRespuesta").html("Realizando carga");
+		},
+		success : function(response) {
+			$("#divNroSerieDatos").html(response.numSerieTarjeta);
+			$("#divMontoDatos").html(response.monto);
+			$("#divMostrarTarjeta").show()
+			$("#divAgregarTarjeta").hide()
+		},
+		error : function(response) {
+			console.log("Error Alta");
+		}
+	});
 }
 
 function traerDatos() {
-	/*
-		$.ajax({
-			data : {
-				"operacion": "Datos"
-				"dni" : $("#inpUser").val(),
-			},
-			url : "DatosUsuario",
-			type : "POST",
-			beforeSend : function() {
-				$("#lblRespuesta").html("Realizando carga");
-			},
-			success : function(response) {
-				$("#lblRespuesta").html("Carga realizada exitosamente");
-			},
-			error : function(response) {
-				$("#lblRespuesta").html("Fallo la carga");
+	$.ajax({
+		data : {
+			"operacion": "Datos",
+			"dni" : $("#inpUser").val(),
+		},
+		url : "DatosUsuario",
+		type : "POST",
+		beforeSend : function() {
+			//$("#lblRespuesta").html("Realizando carga");
+		},
+		success : function(response) {
+			$("#divApellidoDatos").html(response.apellido);
+			$("#divNombreDatos").html(response.nombre);
+			$("#divDniDatos").html(response.dni);
+			$("#divMailDatos").html(response.mail);
+			if(response.numSerieTarjeta != -1){
+				$("#divNroSerieDatos").html(response.numSerieTarjeta);
+				$("#divMontoDatos").html(response.monto);
+				$("#divMostrarTarjeta").show()
+				$("#divAgregarTarjeta").hide()
+			}else{
+				$("#divMostrarTarjeta").hide()
+				$("#divAgregarTarjeta").show()
+				$("#divNroSerieDatos").html("");
+				$("#divMontoDatos").html("");
 			}
-		});
-	*/
+		},
+		error : function(response) {
+			console.log("Error al traer los datos");
+		}
+	});
 }
 </script>
 </head>
