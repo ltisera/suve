@@ -1,70 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	id="WebApp_ID" version="3.1">
-	<display-name>Suve0.1</display-name>
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
-	</welcome-file-list>
-	
-	<servlet>
-		<servlet-name>ControladorIniciarSesion</servlet-name>
-		<servlet-class>controladores.ControladorIniciarSesion</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ControladorIniciarSesion</servlet-name>
-		<url-pattern>/IniciarSesion</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>ControladorAgregarBoleto</servlet-name>
-		<servlet-class>controladores.ControladorAgregarBoleto</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ControladorAgregarBoleto</servlet-name>
-		<url-pattern>/AgregarBoleto</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>ControladorCargarBoletoEstudiantil</servlet-name>
-		<servlet-class>controladores.ControladorCargarBoletoEstudiantil</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ControladorCargarBoletoEstudiantil</servlet-name>
-		<url-pattern>/CargarBoletoEstudiantil</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>ControladorListaMovimiento</servlet-name>
-		<servlet-class>controladores.ControladorListaMovimiento</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ControladorListaMovimiento</servlet-name>
-		<url-pattern>/ListarMovimientos</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>ControladorTraerListas</servlet-name>
-		<servlet-class>controladores.ControladorTraerListas</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ControladorTraerListas</servlet-name>
-		<url-pattern>/TraerListas</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>ControladorRecarga</servlet-name>
-		<servlet-class>controladores.ControladorRecarga</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ControladorRecarga</servlet-name>
-		<url-pattern>/Recarga</url-pattern>
-	</servlet-mapping>
-	
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>Suve0.1</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>ControladorIniciarSesion</servlet-name>
+    <servlet-class>controladores.ControladorIniciarSesion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControladorIniciarSesion</servlet-name>
+    <url-pattern>/IniciarSesion</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ControladorAgregarBoleto</servlet-name>
+    <servlet-class>controladores.ControladorAgregarBoleto</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControladorAgregarBoleto</servlet-name>
+    <url-pattern>/AgregarBoleto</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ControladorCargarBoletoEstudiantil</servlet-name>
+    <servlet-class>controladores.ControladorCargarBoletoEstudiantil</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControladorCargarBoletoEstudiantil</servlet-name>
+    <url-pattern>/CargarBoletoEstudiantil</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ControladorListaMovimiento</servlet-name>
+    <servlet-class>controladores.ControladorListaMovimiento</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControladorListaMovimiento</servlet-name>
+    <url-pattern>/ListarMovimientos</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ControladorTraerListas</servlet-name>
+    <servlet-class>controladores.ControladorTraerListas</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControladorTraerListas</servlet-name>
+    <url-pattern>/TraerListas</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ControladorRecarga</servlet-name>
+    <servlet-class>controladores.ControladorRecarga</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControladorRecarga</servlet-name>
+    <url-pattern>/Recarga</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ControladorEstadisticas</servlet-name>
+    <servlet-class>controladores.ControladorEstadisticas</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControladorEstadisticas</servlet-name>
+    <url-pattern>/Estadisticas</url-pattern>
+  </servlet-mapping>
 </web-app>

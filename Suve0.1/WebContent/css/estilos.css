@@ -286,12 +286,20 @@ body{
 /*Estadisticas*/
 canvas{
 
-  width:300px !important;
-  height:300px !important;
+  width:90% !important;
+  height:90% !important;
 
 }
+#divContEYR{
+	
+}
+#divContReportes{
+	float:left;
+	width: 45%;
+}
 #divContEstadisticas{
-	width: 400px !important;
-	height: 400px !important;
+	float:left;
+	width: 350px !important;
+	height: 350px !important;
 	
 }

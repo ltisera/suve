@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import dao.MovimientoDao;
+import datos.Beneficio;
 import datos.Boleto;
 import datos.Movimiento;
 import datos.Recarga;
