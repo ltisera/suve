@@ -3,7 +3,7 @@ package negocio;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Set;
+
 
 import dao.BeneficioDao;
 import dao.TarjetaDao;
@@ -13,6 +13,7 @@ import datos.Lectora;
 import datos.Recarga;
 import datos.TarifaSocial;
 import datos.Tarjeta;
+import datos.Usuario;
 
 public class TarjetaABM 
 {
@@ -105,5 +106,35 @@ public class TarjetaABM
 		for(Beneficio b: tar.getBeneficios())
 			if(b instanceof TarifaSocial) contieneTarifa = true;
 		return contieneTarifa;
+	}
+	
+	public void darBaja(Tarjeta tarjeta) throws Exception
+	{
+		if(tarjeta==null)
+			throw new Exception("La tarjeta no existe.");
+		if(!tarjeta.isActiva())
+			throw new Exception("La tarjeta ya fue dada de baja anteriormente.");
+		tarjeta.setActiva(false);
+		tarjetaDao.actualizar(tarjeta);
+	}
+	
+	public void registrarTarjeta(Tarjeta tarjeta, Usuario usuario) throws Exception
+	{
+		if(tarjeta==null)
+			throw new Exception("La tarjeta no existe.");
+		if(tarjeta.isActiva())
+			throw new Exception("La tarjeta pertenece a otra persona");
+		Tarjeta tarjetaVieja = tarjetaDao.traerTarjetaActiva(usuario.getIdUsuario());
+		if(tarjetaVieja!=null && tarjetaVieja.isActiva())
+		{
+			tarjetaVieja.setActiva(false);
+			tarjetaDao.actualizar(tarjetaVieja);
+		}
+		tarjeta.setUsuario(usuario);
+		tarjeta.setBeneficios(usuario.getBeneficios());
+		tarjeta.setMonto(0);
+		tarjeta.setActiva(true);
+		tarjetaDao.actualizar(tarjeta);		
+		
 	}
 }

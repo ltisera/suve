@@ -147,4 +147,17 @@ public class TarjetaDao {
 		}
 		return objeto;
 	}
+	
+	public Tarjeta traerTarjetaActiva(long idUsuario)
+	{
+		Tarjeta objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Tarjeta) session.createQuery("from Tarjeta t where t.idTarjeta in (select max(tt.idTarjeta) from Tarjeta tt where tt.usuario = "+idUsuario+")").uniqueResult();
+			Hibernate.initialize(objeto.getBeneficios());
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
 }
