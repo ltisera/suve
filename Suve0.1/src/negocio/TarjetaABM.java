@@ -125,7 +125,7 @@ public class TarjetaABM
 	{
 		if(tarjeta==null)
 			throw new Exception("La tarjeta no existe.");
-		if(tarjeta.isActiva())
+		if(tarjeta.getUsuario() != null && tarjeta.getUsuario().getIdUsuario() != usuario.getIdUsuario())
 			throw new Exception("La tarjeta pertenece a otra persona");
 		Tarjeta tarjetaVieja = this.traerTarjetaActiva(usuario.getIdUsuario());
 		if(tarjetaVieja!=null && tarjetaVieja.isActiva())

@@ -62,11 +62,11 @@ function saleMouseBotonDarAlta() {
 }
 
 function darBaja() {
-	if(confirm("¿Esta seguro que quiere dar de baja la tarjeta "+$("#divNroSerieDatos").val()+"?")){
+	if(confirm("¿Esta seguro que quiere dar de baja la tarjeta "+$("#divNroSerieDatos").html()+"?")){
 		$.ajax({
 			data : {
 				"operacion": "Baja",
-				"numSerieTarjeta" : $("#divNroSerieDatos").val(),
+				"numSerieTarjeta" : $("#divNroSerieDatos").html(),
 			},
 			url : "DatosUsuario",
 			type : "POST",
@@ -84,8 +84,6 @@ function darBaja() {
 			}
 		});
 
-	}else{
-		console.log("No gracias, no quiero dar de baja");
 	}
 }
 
@@ -95,20 +93,21 @@ function darAlta() {
 		data : {
 			"operacion": "Alta",
 			"numSerieTarjeta" : $("#inpTarjetaDatos").val(),
+			"dni" : $("#inpUser").val(),
 		},
 		url : "DatosUsuario",
 		type : "POST",
 		beforeSend : function() {
-			//$("#lblRespuesta").html("Realizando carga");
+			$("#divRespuestaDarAlta").html("");
 		},
 		success : function(response) {
 			$("#divNroSerieDatos").html(response.numSerieTarjeta);
-			$("#divMontoDatos").html(response.monto);
+			$("#divMontoDatos").html("$"+response.monto);
 			$("#divMostrarTarjeta").show()
 			$("#divAgregarTarjeta").hide()
 		},
 		error : function(response) {
-			console.log("Error Alta");
+			$("#divRespuestaDarAlta").html(response);
 		}
 	});
 }
@@ -142,6 +141,7 @@ function traerDatos() {
 			}
 		},
 		error : function(response) {
+			$("#divContDatos").hide();
 			console.log("Error al traer los datos");
 		}
 	});
@@ -193,6 +193,7 @@ function traerDatos() {
 			<div id=divBotonDarAlta class="clsDivBoton">
 					<label id="lblBotonDarAlta" class="clsLblBoton">Dar de alta</label>
 			</div>
+			<br><div id="divRespuestaDarAlta"></div>
 		</div>
 		
 	</div>

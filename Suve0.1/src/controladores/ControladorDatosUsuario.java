@@ -50,7 +50,6 @@ public class ControladorDatosUsuario extends HttpServlet {
 			procesaBaja(request, response);
 		}
 		if(opera.equals("Datos")) {
-			System.out.println("Entre al if");
 			procesaDatos(request, response);
 		}	
 	}
@@ -70,7 +69,7 @@ public class ControladorDatosUsuario extends HttpServlet {
 			salida.println(salidaJson+"}");
 			response.setStatus(200);//Usuario obtenido
 		} catch (Exception e) {
-			salida.println(e);
+			salida.println(e.getMessage());
 			response.setStatus(500);//Error
 		}
 		
@@ -84,23 +83,18 @@ public class ControladorDatosUsuario extends HttpServlet {
 			tabm.darBaja(t);
 			response.setStatus(200);//Usuario obtenido
 		} catch (Exception e) {
-			salida.println(e);
+			salida.println(e.getMessage());
 			response.setStatus(500);//Error
 		}
 	}
 	@SuppressWarnings("unused")
 	protected void procesaDatos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Entre a la funcion");
 		int dni = Integer.parseInt(request.getParameter("dni"));
-		System.out.println("parsee el dni");
 		UsuarioABM uabm = new UsuarioABM();
 		TarjetaABM tabm = new TarjetaABM();
 		Usuario u = uabm.traerUsuario(dni);
-		System.out.println("Traje al usuario");
 		Tarjeta t = tabm.traerTarjetaActiva(u.getIdUsuario());
-		System.out.println("Traje la tarjeta");
 		if(u!=null) {
-			System.out.println("Usuario no es nulo!!");
 			response.setContentType("application/json");
 			String salidaJson="{";	
 			salidaJson += "\"apellido\":" + "\""+u.getApellido()+"\",";
@@ -108,7 +102,6 @@ public class ControladorDatosUsuario extends HttpServlet {
 			salidaJson += "\"dni\":" + "\""+u.getDni()+"\",";
 			salidaJson += "\"mail\":" + "\""+u.getMail()+"\",";
 			if(t!=null) {
-				System.out.println("Tarjeta no es nula");
 				salidaJson += "\"numSerieTarjeta\":" + "\""+t.getNumeroSerieTarjeta()+"\",";
 				salidaJson += "\"monto\":" + "\""+t.getMonto()+"\"";
 			}

@@ -77,7 +77,7 @@ public class TarjetaDao {
 		Tarjeta objeto = null;
 		try {
 			iniciaOperacion();
-			objeto = (Tarjeta) session.createQuery( "from Tarjeta t where t.numeroSerieTarjeta="+numeroSerie).uniqueResult();
+			objeto = (Tarjeta) session.createQuery( "from Tarjeta t inner join fetch t.usuario where t.numeroSerieTarjeta="+numeroSerie).uniqueResult();
 		} finally {
 			session.close();
 		}
@@ -128,7 +128,8 @@ public class TarjetaDao {
 		try {
 			iniciaOperacion();
 			objeto = (Tarjeta) session.createQuery("from Tarjeta t where t.idTarjeta="+idTarjeta).uniqueResult();
-			Hibernate.initialize(objeto.getBeneficios());
+			if(objeto!=null)
+				Hibernate.initialize(objeto.getBeneficios());
 		} finally {
 			session.close();
 		}
@@ -141,7 +142,8 @@ public class TarjetaDao {
 		try {
 			iniciaOperacion();
 			objeto = (Tarjeta) session.createQuery("from Tarjeta t where t.numeroSerieTarjeta="+numeroSerieTarjeta).uniqueResult();
-			Hibernate.initialize(objeto.getBeneficios());
+			if(objeto!=null)
+				Hibernate.initialize(objeto.getBeneficios());
 		} finally {
 			session.close();
 		}
@@ -154,7 +156,8 @@ public class TarjetaDao {
 		try {
 			iniciaOperacion();
 			objeto = (Tarjeta) session.createQuery("from Tarjeta t where t.activa = :true and t.usuario = "+idUsuario+")").setParameter("true", true).uniqueResult();
-			Hibernate.initialize(objeto.getBeneficios());
+			if (objeto!=null)
+				Hibernate.initialize(objeto.getBeneficios());
 		} finally {
 			session.close();
 		}

@@ -354,15 +354,15 @@ canvas{
 	height: 100px;
 }
 #colTarjetaDatos{
-	width: 40%;
+	width: 50%;
 	float: left;
 }
 
 .colDatosA{
-	width: 30%;
+	width: 50%;
 	float: left;
 }
 .colDatosB{
-	width: 70%;
+	width: 50%;
 	float: left;
 }
