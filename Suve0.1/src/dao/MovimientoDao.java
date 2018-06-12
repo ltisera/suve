@@ -231,7 +231,7 @@ public class MovimientoDao {
 		try 
 		{
 			iniciaOperacion();
-			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta inner join fetch b.lectora l inner join fetch l.transporte where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta ")
+			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta t inner join fetch b.lectora l inner join fetch l.transporte where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta order by b.fecha asc, t.numeroSerieTarjeta asc")
 					.setParameter("fechaDesde", fechaDesde)
 					.setParameter("fechaHasta", fechaHasta)
 					.list();
@@ -248,7 +248,7 @@ public class MovimientoDao {
 		try 
 		{
 			iniciaOperacion();
-			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta inner join fetch b.lectora l inner join fetch l.estacion e inner join fetch e.transporte t where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta and t.tipoTransporte = "+tipoTransporte.ordinal())
+			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta tj inner join fetch b.lectora l inner join fetch l.estacion e inner join fetch e.transporte t where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta and t.tipoTransporte = "+tipoTransporte.ordinal()+" order by b.fecha asc, tj.numeroSerieTarjeta asc")
 					.setParameter("fechaDesde", fechaDesde)
 					.setParameter("fechaHasta", fechaHasta)
 					.list();
@@ -265,7 +265,7 @@ public class MovimientoDao {
 		try 
 		{
 			iniciaOperacion();
-			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta inner join fetch b.lectora l inner join fetch b.tramoColectivo tc inner join fetch tc.seccionViaje  where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta and l.transporte = "+idTransporte)
+			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta t inner join fetch b.lectora l inner join fetch b.tramoColectivo tc inner join fetch tc.seccionViaje  where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta and l.transporte = "+idTransporte+" order by b.fecha asc, t.numeroSerieTarjeta asc")
 					.setParameter("fechaDesde", fechaDesde)
 					.setParameter("fechaHasta", fechaHasta)
 					.list();
@@ -282,7 +282,7 @@ public class MovimientoDao {
 		try 
 		{
 			iniciaOperacion();
-			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta inner join fetch b.tramoTrenYSubte tt inner join fetch tt.estacionA e where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta and tt.estacionB is null and e.transporte = "+idTransporte)
+			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta t inner join fetch b.tramoTrenYSubte tt inner join fetch tt.estacionA e where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta and tt.estacionB is null and e.transporte = "+idTransporte+" order by b.fecha asc, t.numeroSerieTarjeta asc")
 					.setParameter("fechaDesde", fechaDesde)
 					.setParameter("fechaHasta", fechaHasta)
 					.list();
@@ -299,7 +299,7 @@ public class MovimientoDao {
 		try 
 		{
 			iniciaOperacion();
-			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta inner join fetch b.tramoTrenYSubte tt inner join fetch tt.estacionA e inner join fetch tt.estacionB  where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta and e.transporte = "+idTransporte)
+			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta t inner join fetch b.tramoTrenYSubte tt inner join fetch tt.estacionA e inner join fetch tt.estacionB  where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta and e.transporte = "+idTransporte+" order by b.fecha asc, t.numeroSerieTarjeta asc")
 					.setParameter("fechaDesde", fechaDesde)
 					.setParameter("fechaHasta", fechaHasta)
 					.list();
@@ -316,7 +316,7 @@ public class MovimientoDao {
 		try 
 		{
 			iniciaOperacion();
-			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta t inner join fetch t.beneficios tb where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta and tb.idBeneficio = "+idBeneficio)
+			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta t inner join fetch t.beneficios tb where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta and tb.idBeneficio = "+idBeneficio+" order by b.fecha asc, t.numeroSerieTarjeta asc")
 					.setParameter("fechaDesde", fechaDesde)
 					.setParameter("fechaHasta", fechaHasta)
 					.list();
@@ -333,7 +333,7 @@ public class MovimientoDao {
 		try 
 		{
 			iniciaOperacion();
-			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta and b.intRedSube >= 2 ")
+			lista = session.createQuery("from Boleto b inner join fetch b.tarjeta t where b.fecha >= :fechaDesde and b.fecha <= :fechaHasta and b.intRedSube >= 2 order by b.fecha asc, t.numeroSerieTarjeta asc")
 					.setParameter("fechaDesde", fechaDesde)
 					.setParameter("fechaHasta", fechaHasta)
 					.list();
