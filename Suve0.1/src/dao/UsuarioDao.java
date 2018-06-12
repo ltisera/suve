@@ -79,6 +79,7 @@ public class UsuarioDao {
 		try {
 			iniciaOperacion();
 			objeto = (Usuario) session.createQuery( "from Usuario u where u.dni=" +dni).uniqueResult();
+			Hibernate.initialize(objeto.getTarjetas());
 		} finally {
 			session.close();
 		}

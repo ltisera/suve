@@ -119,6 +119,25 @@ var tipoSesion = "inicio";
 			}
 		});
 		
+		$("#divBtnDatos").mouseenter(function(){
+			if ($("#imgDatos").attr("src") != "recursos/btnDatosSel.png"){
+				$("#imgDatos").attr("src","recursos/btnDatosOn.png");
+			}
+		});
+		$("#divBtnDatos").mouseleave(function(){
+			if ($("#imgDatos").attr("src") != "recursos/btnDatosSel.png"){
+				$("#imgDatos").attr("src","recursos/btnDatosOff.png");
+			}
+		});
+		$("#divBtnDatos").click(function() {
+			if ($("#imgDatos").attr("src") != "recursos/btnDatosSel.png"){
+				hideAll();
+				$("#imgDatos").attr("src","recursos/btnDatosSel.png");
+				$("#divDatos").show("slow");
+				traerDatos();
+			}
+		});
+		
 		
 	});
 
@@ -129,7 +148,7 @@ function revisarContenido(){
 		$("#divBtnConsultarMovimientos").hide();
 		$("#divBtnCargarSaldo").hide();
 		$("#divBtnEstadisticas").hide();
-		
+		$("#divBtnDatos").hide();
 		
 	}
 	if(tipoSesion == "administrador"){
@@ -143,6 +162,7 @@ function revisarContenido(){
 	if(tipoSesion == "pasajero"){
 		$("#divBtnAgregarViaje").show();
 		$("#divBtnConsultarMovimientos").show();
+		$("#divBtnDatos").show();
 
 	}
 }
@@ -153,11 +173,13 @@ function hideAll(){
 	$("#divConsultarMovimientos").hide();
 	$("#divCargarSaldo").hide();
 	$("#divEstadisticas").hide();
+	$("#divDatos").hide();
 	$("#imgInicio").attr("src","recursos/btnInicioOff.png");
 	$("#imgAgregarViaje").attr("src","recursos/btnAgregarViajeOff.png");
 	$("#imgConsultarMovimientos").attr("src","recursos/btnConsultarMovimientosOff.png");
 	$("#imgCargarSaldo").attr("src","recursos/btnCargarSaldoOff.png");
 	$("#imgEstadisticas").attr("src","recursos/btnEstadisticasOff.png");
+	$("#imgDatos").attr("src","recursos/btnDatosOff.png");
 }
 
 </script>
@@ -182,6 +204,7 @@ function hideAll(){
 			<div id="divBtnConsultarMovimientos"><img id="imgConsultarMovimientos" alt="" src="recursos/btnConsultarMovimientosOff.png"></div>
 			<div id="divBtnCargarSaldo"><img id="imgCargarSaldo" alt="" src="recursos/btnCargarSaldoOff.png"></div>
 			<div id="divBtnEstadisticas"><img id="imgEstadisticas" alt="" src="recursos/btnEstadisticasOff.png"></div>
+			<div id="divBtnDatos"><img id="imgDatos" alt="" src="recursos/btnDatosOff.png"></div>
 			<br>
 			<br>
 			<br>
@@ -224,6 +247,9 @@ function hideAll(){
 			</div>
 			<div id="divEstadisticas" class="container">
 				<%@ include file="/Estadisticas.jsp"%>
+			</div>
+			<div id="divDatos" class="container">
+				<%@ include file="/Datos.jsp"%>
 			</div>
 		</div>
 
