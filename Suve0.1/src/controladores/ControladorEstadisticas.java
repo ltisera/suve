@@ -1,7 +1,9 @@
 package controladores;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import datos.Boleto;
 import datos.TipoTransporte;
+import negocio.Funciones;
 import negocio.MovimientoABM;
 
 /**
@@ -45,6 +49,11 @@ public class ControladorEstadisticas extends HttpServlet {
 	
 	protected void procesarSolicitud(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MovimientoABM mabm = new MovimientoABM();
+		
+		response.setContentType("application/json");
+		PrintWriter salida = response.getWriter();
+		
+		
 		int fdYear = Integer.parseInt(request.getParameter("fechaDesde").split("-")[0]);
 		int fdMonth = Integer.parseInt(request.getParameter("fechaDesde").split("-")[1]);
 		int fdDate = Integer.parseInt(request.getParameter("fechaDesde").split("-")[2]);
@@ -55,7 +64,6 @@ public class ControladorEstadisticas extends HttpServlet {
 		
 		GregorianCalendar fechaDesde = new GregorianCalendar(fdYear, fdMonth-1, fdDate);
 		GregorianCalendar fechaHasta = new GregorianCalendar(fhYear, fhMonth-1, fhDate);
-		System.out.println("Mes" + fdMonth);
 		TipoTransporte tipoTransporte = null;
 		if(request.getParameter("tipoTransporte").equals("Tren")) {
 			tipoTransporte = TipoTransporte.Tren;
@@ -66,7 +74,24 @@ public class ControladorEstadisticas extends HttpServlet {
 		if(request.getParameter("tipoTransporte").equals("Subte")) {
 			tipoTransporte = TipoTransporte.Subte;
 		}
-		mabm.viajesRealizados(fechaDesde, fechaHasta, tipoTransporte);
+		System.out.println("GC1: " + Funciones.TraeFechaYHora(fechaDesde));
+		System.out.println("GC2: " + Funciones.TraeFechaYHora(fechaHasta));
+		System.out.println("TipoTransporte: " + tipoTransporte);
+		
+		List<Boleto> lb = mabm.viajesRealizados(fechaDesde, fechaHasta, tipoTransporte);
+		System.out.println(lb);
+		String salidaJson ="[";
+		for(Boleto b:lb) {
+			salidaJson += "{\"fechaHora\":\"" + Funciones.TraeFechaYHora(b.getFecha()) +"\",";
+			salidaJson += "\"numTarjeta\":\"" + b.getTarjeta().getNumeroSerieTarjeta()+"\",";
+			salidaJson += "\"monto\":\"" + b.getMonto()+"\"},";
+		}
+		salidaJson = salidaJson.substring(0, salidaJson.length()-1);
+		salidaJson += "]";
+		salida.println(salidaJson);
+		System.out.println("Salida Json:" + salidaJson);
+		response.setStatus(200);
 	}
 
 }
+

@@ -89,10 +89,47 @@ function generarReporte(){
 		url : "Estadisticas",
 		type : "POST",
 		beforeSend : function() {
+			$("#divTblReporte").html("");
 			$("#divReporte").html("Realizando Reportes");
 		},
 		success : function(response) {
+			console.log(response);
 			$("#divReporte").html("Carga realizada exitosamente");
+			var i = 0;
+			
+			for(i = 0; i < response.length;i++){
+				console.log("Entro al bucle: " + i);
+				console.log(response[i].fechaHora);
+				console.log(response[i].numTarjeta);
+				console.log(response[i].monto);
+				var nFila = document.createElement("div");
+				
+				if(i%2 != 0){
+					console.log("Una Par");
+					nFila.className = "clsFilaImpar";
+				} else {
+					console.log("Una Impar");
+					nFila.className = "clsFilaPar";
+				}
+
+				var cFecha = document.createElement("div");
+				cFecha.className = "clsColFecha";
+				cFecha.innerHTML = response[i].fechaHora;
+				nFila.appendChild(cFecha)
+
+				var cNumTarjeta = document.createElement("div");
+				cNumTarjeta.className = "clsColNumTarjeta";
+				cNumTarjeta.innerHTML = response[i].numTarjeta;
+				nFila.appendChild(cNumTarjeta);
+
+				var cMonto = document.createElement("div");
+				cMonto.className = "clsColMonto";
+				cMonto.innerHTML = response[i].monto;
+				nFila.appendChild(cMonto);
+
+				var tbl = document.getElementById("divTblReporte");
+				tbl.appendChild(nFila);
+			}
 		},
 		error : function(response) {
 			$("#divReporte").html("Fallo la carga");
@@ -103,7 +140,7 @@ function generarReporte(){
 </head>
 <body>
 	<div id="divContEYR">
-		<div id="divContReportes" class="caja2px">
+		<div id="divContReportes">
 			<select id="inpTipoReporteE">
 				<option value="Vacio">Elija una opcion:</option>
 					<option value="Tren">Reporte de Viajes Realizados</option>
@@ -128,6 +165,21 @@ function generarReporte(){
 				<label id="lblGenerarReporte" class="clsLblBoton">Generar Reporte</label>
 			</div>
 			<div id="divReporte">
+				
+			</div>
+			<br>
+			<div id="divTblReporte">
+				<div id ="divFila">
+					<div id="divColFecha" class="clsColFecha">
+						Fecha
+					</div>
+					<div id="divColNumTarjeta" class="clsColNumTarjeta">
+						Numero Tarjeta
+					</div>
+					<div id="divColMonto" class="clsColMonto">
+						Monto
+					</div>
+				</div>	
 			</div>
 		</div>
 		
