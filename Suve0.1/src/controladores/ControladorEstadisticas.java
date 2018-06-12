@@ -53,7 +53,7 @@ public class ControladorEstadisticas extends HttpServlet {
 		response.setContentType("application/json");
 		PrintWriter salida = response.getWriter();
 		
-		
+		System.out.println("ACA TOY1");
 		int fdYear = Integer.parseInt(request.getParameter("fechaDesde").split("-")[0]);
 		int fdMonth = Integer.parseInt(request.getParameter("fechaDesde").split("-")[1]);
 		int fdDate = Integer.parseInt(request.getParameter("fechaDesde").split("-")[2]);
@@ -84,6 +84,7 @@ public class ControladorEstadisticas extends HttpServlet {
 		for(Boleto b:lb) {
 			salidaJson += "{\"fechaHora\":\"" + Funciones.TraeFechaYHora(b.getFecha()) +"\",";
 			salidaJson += "\"numTarjeta\":\"" + b.getTarjeta().getNumeroSerieTarjeta()+"\",";
+			salidaJson += "\"intRedSube\":\"" + b.getIntRedSube()+"\",";
 			salidaJson += "\"monto\":\"" + b.getMonto()+"\"},";
 		}
 		salidaJson = salidaJson.substring(0, salidaJson.length()-1);
