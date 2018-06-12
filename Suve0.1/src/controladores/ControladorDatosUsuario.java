@@ -93,8 +93,8 @@ public class ControladorDatosUsuario extends HttpServlet {
 		UsuarioABM uabm = new UsuarioABM();
 		TarjetaABM tabm = new TarjetaABM();
 		Usuario u = uabm.traerUsuario(dni);
-		Tarjeta t = tabm.traerTarjetaActiva(u.getIdUsuario());
 		if(u!=null) {
+			Tarjeta t = tabm.traerTarjetaActiva(u.getIdUsuario());
 			response.setContentType("application/json");
 			String salidaJson="{";	
 			salidaJson += "\"apellido\":" + "\""+u.getApellido()+"\",";

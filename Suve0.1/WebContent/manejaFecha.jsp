@@ -38,6 +38,14 @@ function darAvance(){
 	lafecha=new Date();
 	f = sumarAvance(lafecha, avance);
 	$("#quefecha").html(f.getDate()+"/"+(f.getMonth()+1)+"/"+f.getFullYear() + "<br>    " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds());
+	inicializarInpManejaFecha()	
+}
+
+function inicializarInpManejaFecha(){
+	$("#idDia").val("");
+	$("#idHora").val("");
+	$("#idMinuto").val("");
+	$("#idSegundo").val("");
 }
 
 function apretaMouseAAvanzar(){

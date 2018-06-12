@@ -18,7 +18,7 @@ function traerListaTarjetas(){
 				for(i in response){
 					var opcion = document.createElement("option");
 					opcion.text = response[i];
-				    //$("#lstTarjetasConsulta").append(opcion);
+					opcion.value = response[i];
 				    $("#lstTarjetas").append(opcion);
 					   
 				}
@@ -44,18 +44,20 @@ function traerListaEstaciones(){
 			$("#inpEstacion").empty();
 			var opcion = document.createElement("option");
 			opcion.text = "Seleccione una Estacion";
+			opcion.value = "Vacio";
 		    $("#inpEstacion").append(opcion);
 			
 			for(i in response){
 				var opcion = document.createElement("option");
 				opcion.text = response[i];
+				opcion.value = response[i];
 			    $("#inpEstacion").append(opcion);
 			    
 			}
 
 		},
 		error:function(){
-			alert("LA sdfsdIOO");
+			alert("Error al traer la lista de estaciones");
 		}
 		
 	});
@@ -76,10 +78,12 @@ function traerListaLectoras(){
 			$("#inpLectora").empty();
 			var opcion = document.createElement("option");
 			opcion.text = "Seleccione una Lectora";
+			opcion.value = "Vacio";
 		    $("#inpLectora").append(opcion);
 			for(i in response){
 				var opcion = document.createElement("option");
 				opcion.text = response[i];
+				opcion.value = response[i];
 			    $("#inpLectora").append(opcion);
 			}
 		},
@@ -101,10 +105,12 @@ function traerListaLectorasCarga(){
 			$("#inpPuntoCarga").empty();
 			var opcion = document.createElement("option");
 			opcion.text = "Seleccione una Lectora";
+			opcion.value = "Vacio";
 		    $("#inpPuntoCarga").append(opcion);
 			for(i in response){
 				var opcion = document.createElement("option");
 				opcion.text = response[i];
+				opcion.value = response[i];
 			    $("#inpPuntoCarga").append(opcion);
 			}
 		},
@@ -129,11 +135,13 @@ function traerListaLineas(){
 			$("#inpLinea").empty();
 			var opcion = document.createElement("option");
 			opcion.text = "Seleccione una Linea";
+			opcion.value = "Vacio";
 		    $("#inpLinea").append(opcion);
 			
 			for(i in response){
 				var opcion = document.createElement("option");
 				opcion.text = response[i];
+				opcion.value = response[i];
 			    $("#inpLinea").append(opcion);
 			}
 		},
@@ -161,6 +169,7 @@ function traerUltimosViajes(){
 	});
 }
 
+/*
 function crearOpciones(response,idLista){
 	alert("Entre");
 	console.log(response);
@@ -174,3 +183,4 @@ function crearOpciones(response,idLista){
 	    $(idLista).append(opcion);
 	}
 }
+*/

@@ -167,18 +167,30 @@ function revisarContenido(){
 	}
 }
 function hideAll(){
+	//Inicio
 	$("#divInicio").hide();
-	$("#divAgregarViaje").hide();
-	$("#divManejaFecha").hide();
-	$("#divConsultarMovimientos").hide();
-	$("#divCargarSaldo").hide();
-	$("#divEstadisticas").hide();
-	$("#divDatos").hide();
 	$("#imgInicio").attr("src","recursos/btnInicioOff.png");
+	//AgregarViaje
+	$("#divAgregarViaje").hide();
+	$("#inpTarjeta").val("").change();
 	$("#imgAgregarViaje").attr("src","recursos/btnAgregarViajeOff.png");
+	//ManejaFecha
+	$("#divManejaFecha").hide();
+	inicializarInpManejaFecha()	
+	//ConsultarMovimientos
+	$("#divConsultarMovimientos").hide();
+	$("#inpTarjetaCon").val("");
 	$("#imgConsultarMovimientos").attr("src","recursos/btnConsultarMovimientosOff.png");
+	//CargarSaldo
+	$("#divCargarSaldo").hide();
 	$("#imgCargarSaldo").attr("src","recursos/btnCargarSaldoOff.png");
+	inicializarInpRecarga()
+	//Estadisticas
+	$("#divEstadisticas").hide();
 	$("#imgEstadisticas").attr("src","recursos/btnEstadisticasOff.png");
+	//Datos
+	$("#divDatos").hide();
+	$("#inpTarjetaDatos").val("");
 	$("#imgDatos").attr("src","recursos/btnDatosOff.png");
 }
 

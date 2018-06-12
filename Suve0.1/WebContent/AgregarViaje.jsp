@@ -72,10 +72,7 @@ function agregarViaje(){
 
 function procesaViaje(queOpera){
 
-	//var unafecha = "" + f.getDate()+"/"+f.getMonth()+"/"+f.getFullYear() + " * " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds()
 	var numTarjeta = parseInt($("#inpTarjeta").val());
-	console.log("Aca estoy ehhh!!!");
-	console.log(queOpera);
 	
 	if (isNaN(numTarjeta)) {
 		alert("No estas mandando numeros");
@@ -95,14 +92,12 @@ function procesaViaje(queOpera){
 				"fminuto": f.getMinutes(),
 				"fsegundo": f.getSeconds()
 
-				
 			},
 			url : "AgregarBoleto",
 			type : "POST",
 			beforeSend : function() {
 				$("#lblEstadoBoleto").html("Generando Boleto");
 				$("#divEstadoBoleto").show();
-				
 				
 			},
 			success : function(response) {
@@ -111,9 +106,9 @@ function procesaViaje(queOpera){
 				traerUltimosViajes();
 				$("#divEstadoBoleto").html(response);
 				$("#divEstadoBoleto").show();
-				//$("#divMostrarBoleto").html(response);
-				
-				
+				if(queOpera=="agregar"){
+					$("#inpTarjeta").val("").change();	
+				}
 			},
 			error : function(response) {
 				console.log(response);
@@ -134,60 +129,52 @@ function cambiaTarjeta(){
 	}
 	else{
 		ocultarElementos();
-		$("#inpTipoTransporte").val("Vacio");
-		cambiaTipoTransporte();
+		$("#inpTipoTransporte").val("Vacio").change();
 	}
 }
 	
 function cambiaTipoTransporte(){
 	if ($("#inpTipoTransporte").val() != "Vacio") {
-		console.log("VA");
 		traerListaLineas();
-		console.log("Viene");
 		$("#colLinea").show();
+		if ($("#inpTipoTransporte").val() == "Colectivo") {
+			$("#lblEstacion").html("Ingrese la Seccion:");		
+		}
+		else{
+			$("#lblEstacion").html("Ingrese la Estacion:");		
+		}
 	}
 	else{
 		$("#colLinea").hide();
-		$("#inpLinea").val("");
-		cambiaLinea();
+		$("#inpLinea").val("Vacio").change();
 	}
-
-	if ($("#inpTipoTransporte").val() == "Colectivo") {
-		$("#lblEstacion").html("Ingrese la Seccion:");		
-	}
-	else{
-		$("#lblEstacion").html("Ingrese la Estacion:");		
-	}
-	
-	
 }
 function cambiaLinea() {
-	if($("#inpLinea").val()!=""){
+	if($("#inpLinea").val()!="Vacio"){
+		alert("inp Linea con datos Vacio")
 		traerListaEstaciones();
 		$("#colEstacion").show()	
 	}
 	else{
 		$("#colEstacion").hide();
-		$("#inpEstacion").val("");
-		cambiaEstacion();
+		$("#inpEstacion").val("Vacio").change();
 	}
 }
 
 function cambiaEstacion() {
 	
-	if($("#inpEstacion").val()!=""){
+	if($("#inpEstacion").val()!="Vacio"){
 		traerListaLectoras();
 		$("#colLectora").show();
 	}
 	else{
 		$("#colLectora").hide();
-		$("#inpLectora").val("");
-		cambiaLectora();
+		$("#inpLectora").val("Vacio").change();
 	}
 }
 
 function cambiaLectora() {
-	if($("#inpLectora").val()!=""){
+	if($("#inpLectora").val()!="Vacio"){
 		$("#colAgregar").show();
 		previsualizarViaje();
 	}

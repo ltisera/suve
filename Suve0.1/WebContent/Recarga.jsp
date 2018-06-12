@@ -66,6 +66,12 @@ function saleMouseBtnSaldoE() {
 	miboton.style.backgroundColor = "#7092be";
 }
 
+function inicializarInpRecarga(){
+	$("#inpTarjetaR").val("");
+	$("#inpPuntoCarga").val("Vacio");
+	$("#inpMontoR").val("");
+}
+
 function cargarSaldoEstudiantil(){
 	$.ajax({
 		data : {
@@ -109,6 +115,7 @@ function recarga() {
 		},
 		success : function(response) {
 			$("#lblRespuesta").html("Carga realizada exitosamente");
+			inicializarInpRecarga()
 		},
 		error : function(response) {
 			$("#lblRespuesta").html("Fallo la carga");

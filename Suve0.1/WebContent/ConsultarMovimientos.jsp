@@ -7,15 +7,36 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <TITLE>SuViajes</TITLE>
-
+<link rel="stylesheet" type="text/css" href="css/estilos.css">
 <script src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="js/TraemeLasListas.js"></script>
 <script>
     $(document).ready(function(){
-    	//traerListaTarjetasConsulta();
-        $("#consultarMovimientos").click(consultarMov);
+    	$("#divBtnConsMovimientos").mouseenter(entraMouseBtnConsMovimientos);
+    	$("#divBtnConsMovimientos").mouseleave(saleMouseBtnConsMovimientos);
+    	$("#divBtnConsMovimientos").mousedown(apretaMouseBtnConsMovimientos);
+    	$("#divBtnConsMovimientos").mouseup(sueltaMouseBtnConsMovimientos);
     });
 
+    function apretaMouseBtnConsMovimientos() {
+    	etq = document.getElementById("lblBtnConsMovimientos");
+    	etq.style.marginTop = "2px";
+    	etq.style.marginLeft = "3px";
+    }
+    function sueltaMouseBtnConsMovimientos() {
+    	etq.style.marginTop = "0px";
+    	etq.style.marginLeft = "0px";
+    	consultarMov();
+    }
+
+    function entraMouseBtnConsMovimientos() {
+    	miboton = document.getElementById("divBtnConsMovimientos");
+    	miboton.style.backgroundColor = "#3F608B";
+    }
+    function saleMouseBtnConsMovimientos() {
+    	miboton = document.getElementById("divBtnConsMovimientos");
+    	miboton.style.backgroundColor = "#7092be";
+    }
 
 function consultarMov(){
 	$("#divMostrarMovimientos").html("<label>Cargando Movimientos... </label>");
@@ -48,8 +69,10 @@ function consultarMov(){
 			<div>
 				<label>Ingrese Tarjeta: </label> <input id="inpTarjetaCon" name="numTarjetaCon" list="lstTarjetas"></input>
 				<datalist id="lstTarjetasConsulta"></datalist>
-
-				<br> <INPUT id="consultarMovimientos" type="button" class="btn btn-success" value="Consultar" />
+				<br>
+				<div id=divBtnConsMovimientos class="clsDivBoton">
+					<label id="lblBtnConsMovimientos" class="clsLblBoton">Consultar</label>
+				</div>
 			</div>
 		</div>
 
