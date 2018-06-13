@@ -172,6 +172,7 @@ function hideAll(){
 	$("#imgInicio").attr("src","recursos/btnInicioOff.png");
 	//AgregarViaje
 	$("#divAgregarViaje").hide();
+	$("#divDatosTarjeta").html("");
 	$("#inpTarjeta").val("").change();
 	$("#imgAgregarViaje").attr("src","recursos/btnAgregarViajeOff.png");
 	//ManejaFecha
@@ -188,6 +189,8 @@ function hideAll(){
 	//Estadisticas
 	$("#divEstadisticas").hide();
 	$("#imgEstadisticas").attr("src","recursos/btnEstadisticasOff.png");
+	inicializarInpEstadisticas();
+	
 	//Datos
 	$("#divDatos").hide();
 	$("#inpTarjetaDatos").val("");

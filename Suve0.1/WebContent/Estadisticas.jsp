@@ -39,7 +39,12 @@ function apretaMouseAGenerarReporte(){
 function sueltaMouseAGenerarReporte(){
 	etq.style.marginTop="0px";
 	etq.style.marginLeft="0px";
-	generarReporte();
+	if($("#inpLineaE").val()=="Vacio"){
+		generarReporte();
+	} else {
+		generarReporteLinea();
+	}
+	
 }
 
 function entraMouseAGenerarReporte(){
@@ -50,6 +55,18 @@ function saleMouseAGenerarReporte(){
 	miboton=document.getElementById("divBtnGenerarReporte");
 	miboton.style.backgroundColor = "#7092be";
 }
+
+function inicializarInpEstadisticas(){
+	$("#inpTipoReporteE").val("Vacio");
+	$("#inpTipoTransporteE").val("Vacio");
+	$("#inpLineaE").val("Vacio");
+	$("#divTblReporte").html("");
+	$("#divReporte").html("");
+	$("#divContEstadisticas").hide();
+	
+	document.getElementById("divContEstadisticas").innerHTML="";
+
+} 
 
 </script>
 </head>

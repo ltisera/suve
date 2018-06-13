@@ -106,9 +106,7 @@ function procesaViaje(queOpera){
 				traerUltimosViajes();
 				$("#divEstadoBoleto").html(response);
 				$("#divEstadoBoleto").show();
-				if(queOpera=="agregar"){
-					$("#inpTarjeta").val("").change();	
-				}
+				
 			},
 			error : function(response) {
 				console.log(response);
@@ -150,8 +148,9 @@ function cambiaTipoTransporte(){
 	}
 }
 function cambiaLinea() {
-	if($("#inpLinea").val()!="Vacio"){
-		alert("inp Linea con datos Vacio")
+	if($("#inpLinea").val()!="Vacio" && $("#inpLinea").val()!=null){
+		console.log("Mirame el vacio");
+		console.log($("#inpLinea").val());
 		traerListaEstaciones();
 		$("#colEstacion").show()	
 	}
@@ -163,7 +162,7 @@ function cambiaLinea() {
 
 function cambiaEstacion() {
 	
-	if($("#inpEstacion").val()!="Vacio"){
+	if($("#inpEstacion").val()!="Vacio" && $("#inpEstacion").val()!=null){
 		traerListaLectoras();
 		$("#colLectora").show();
 	}
@@ -174,7 +173,7 @@ function cambiaEstacion() {
 }
 
 function cambiaLectora() {
-	if($("#inpLectora").val()!="Vacio"){
+	if($("#inpLectora").val()!="Vacio" && $("#inpLectora").val()!=null){
 		$("#colAgregar").show();
 		previsualizarViaje();
 	}

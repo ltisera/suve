@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.TransporteDao;
 import datos.Boleto;
 import datos.TipoTransporte;
 import negocio.Funciones;
 import negocio.MovimientoABM;
+import negocio.TransporteABM;
 
 /**
  * Servlet implementation class ControladorEstadisticas
@@ -48,12 +50,21 @@ public class ControladorEstadisticas extends HttpServlet {
 	}
 	
 	protected void procesarSolicitud(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getParameter("tipoReporte").equals("Reporte Tipo Transporte")) {
+			reporteTipoTransporte(request, response);
+		}
+		if(request.getParameter("tipoReporte").equals("Reporte Linea Transporte")) {
+			reporteLineaTransporte(request, response);
+		}
+			
+	}
+
+	protected void reporteTipoTransporte(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MovimientoABM mabm = new MovimientoABM();
 		
 		response.setContentType("application/json");
 		PrintWriter salida = response.getWriter();
 		
-		System.out.println("ACA TOY1");
 		int fdYear = Integer.parseInt(request.getParameter("fechaDesde").split("-")[0]);
 		int fdMonth = Integer.parseInt(request.getParameter("fechaDesde").split("-")[1]);
 		int fdDate = Integer.parseInt(request.getParameter("fechaDesde").split("-")[2]);
@@ -74,12 +85,8 @@ public class ControladorEstadisticas extends HttpServlet {
 		if(request.getParameter("tipoTransporte").equals("Subte")) {
 			tipoTransporte = TipoTransporte.Subte;
 		}
-		System.out.println("GC1: " + Funciones.TraeFechaYHora(fechaDesde));
-		System.out.println("GC2: " + Funciones.TraeFechaYHora(fechaHasta));
-		System.out.println("TipoTransporte: " + tipoTransporte);
 		
 		List<Boleto> lb = mabm.viajesRealizados(fechaDesde, fechaHasta, tipoTransporte);
-		System.out.println(lb);
 		String salidaJson ="[";
 		for(Boleto b:lb) {
 			salidaJson += "{\"fechaHora\":\"" + Funciones.TraeFechaYHora(b.getFecha()) +"\",";
@@ -90,9 +97,47 @@ public class ControladorEstadisticas extends HttpServlet {
 		salidaJson = salidaJson.substring(0, salidaJson.length()-1);
 		salidaJson += "]";
 		salida.println(salidaJson);
-		System.out.println("Salida Json:" + salidaJson);
 		response.setStatus(200);
 	}
-
+	
+	protected void reporteLineaTransporte(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+MovimientoABM mabm = new MovimientoABM();
+		
+		response.setContentType("application/json");
+		PrintWriter salida = response.getWriter();
+		
+		System.out.println("ACA TOY1");
+		int fdYear = Integer.parseInt(request.getParameter("fechaDesde").split("-")[0]);
+		int fdMonth = Integer.parseInt(request.getParameter("fechaDesde").split("-")[1]);
+		int fdDate = Integer.parseInt(request.getParameter("fechaDesde").split("-")[2]);
+		
+		int fhYear = Integer.parseInt(request.getParameter("fechaHasta").split("-")[0]);
+		int fhMonth = Integer.parseInt(request.getParameter("fechaHasta").split("-")[1]);
+		int fhDate = Integer.parseInt(request.getParameter("fechaHasta").split("-")[2]);
+		
+		GregorianCalendar fechaDesde = new GregorianCalendar(fdYear, fdMonth-1, fdDate);
+		GregorianCalendar fechaHasta = new GregorianCalendar(fhYear, fhMonth-1, fhDate);
+		
+		
+		TransporteABM tabm = new TransporteABM();
+		
+		List<Boleto> lb = mabm.viajesRealizados(fechaDesde, fechaHasta, tabm.traerTransporte(request.getParameter("tipoLinea")));
+		String salidaJson ="[";
+		for(Boleto b:lb) {
+			salidaJson += "{\"fechaHora\":\"" + Funciones.TraeFechaYHora(b.getFecha()) +"\",";
+			salidaJson += "\"numTarjeta\":\"" + b.getTarjeta().getNumeroSerieTarjeta()+"\",";
+			salidaJson += "\"intRedSube\":\"" + b.getIntRedSube()+"\",";
+			if(b.getTramoColectivo() !=null) {
+				salidaJson += "\"tramo\":\"" + b.getTramoColectivo()+"\",";
+			} else {
+				salidaJson += "\"tramo\":\"" + b.getTramoTrenYSubte()+"\",";
+			}
+			salidaJson += "\"monto\":\"" + b.getMonto()+"\"},";
+		}
+		salidaJson = salidaJson.substring(0, salidaJson.length()-1);
+		salidaJson += "]";
+		salida.println(salidaJson);
+		response.setStatus(200);
+	}
 }
 

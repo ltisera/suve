@@ -39,8 +39,13 @@ public class TramoTrenYSubte {
 	}
 	@Override
 	public String toString() {
-		return "TramoTrenYSubte [idTramoTrenYSubte=" + idTramoTrenYSubte + ", estacionA=" + estacionA + ", estacionB="
-				+ estacionB + ", seccionViaje=" + seccionViaje + "]";
+		String salidaTS="";
+		if(estacionB != null)
+			salidaTS = "[" + estacionA.getNombre() + ", "+ estacionB.getNombre() + "]";
+		else
+			salidaTS = "[" + estacionA.getNombre()+"]";
+		return salidaTS;
+		
 	}
 	
 	
