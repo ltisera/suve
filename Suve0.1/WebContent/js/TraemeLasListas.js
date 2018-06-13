@@ -14,7 +14,6 @@ function traerListaTarjetas(){
 			url:"TraerListas",
 			type:"POST",
 			success:function(response){
-				console.log(response);
 				for(i in response){
 					var opcion = document.createElement("option");
 					opcion.text = response[i];
@@ -40,7 +39,6 @@ function traerListaEstaciones(){
 		url:"TraerListas",
 		type:"POST",
 		success:function(response){
-			console.log(response);
 			$("#inpEstacion").empty();
 			var opcion = document.createElement("option");
 			opcion.text = "Seleccione una Estacion";
@@ -74,7 +72,6 @@ function traerListaLectoras(){
 		url:"TraerListas",
 		type:"POST",
 		success:function(response){
-			console.log(response);
 			$("#inpLectora").empty();
 			var opcion = document.createElement("option");
 			opcion.text = "Seleccione una Lectora";
@@ -101,7 +98,6 @@ function traerListaLectorasCarga(){
 		url:"TraerListas",
 		type:"POST",
 		success:function(response){
-			console.log(response);
 			$("#inpPuntoCarga").empty();
 			var opcion = document.createElement("option");
 			opcion.text = "Seleccione una Lectora";
@@ -131,7 +127,6 @@ function traerListaLineas(){
 		url:"TraerListas",
 		type:"POST",
 		success:function(response){
-			console.log(response);
 			$("#inpLinea").empty();
 			var opcion = document.createElement("option");
 			opcion.text = "Seleccione una Linea";
@@ -172,7 +167,6 @@ function traerUltimosViajes(){
 /*
 function crearOpciones(response,idLista){
 	alert("Entre");
-	console.log(response);
 	$(idLista).empty();
 	var opcion = document.createElement("option");
 	opcion.text = "Elija una opcion:";

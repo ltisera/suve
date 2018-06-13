@@ -20,7 +20,8 @@ public class iniciaBaseDeDatos {
 			tCargarMultiplesUsuariosYTarjetas.main(args);
 			testAgregaBeneficio.main(args);
 			testCargarMovimientosEnBaseDeDatos.main(args);
-			
+			testCrearLectoraCarga.main(args);
+			testCrearUsuarioAdmin.main(args);
 			long endTime = System.currentTimeMillis()  - startTime; 
 			System.out.println("Base inicializada en: " + endTime);
 		}

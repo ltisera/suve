@@ -44,4 +44,8 @@ public class TramoColectivo {
 			string = kMin + "km+" ;
 		return string;
 	}
+	
+	public boolean equals(TramoColectivo t) {
+		return t.getIdTramoColectivo() == this.getIdTramoColectivo();
+	}
 }

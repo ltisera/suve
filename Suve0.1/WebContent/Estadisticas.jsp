@@ -19,7 +19,7 @@
 		$("#divBtnGenerarReporte").mousedown(apretaMouseAGenerarReporte);
 		$("#divBtnGenerarReporte").mouseup(sueltaMouseAGenerarReporte);
 		$("#inpTipoTransporteE").change(cambiaTransporte);
-		
+		$("#inpTipoReporteE").hide();
 		$("#divContEstadisticas").hide();
 
 		
@@ -111,7 +111,7 @@ function inicializarInpEstadisticas(){
 		
 		
 		
-		<div id="divContEstadisticas" class="caja2px">
+		<div id="divContEstadisticas" >
 			
 			<canvas id="myChart"></canvas>
 			

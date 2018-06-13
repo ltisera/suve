@@ -57,8 +57,8 @@ public class Estacion {
 		boolean equals = false;
 		if (idEstacion == estacion.getIdEstacion() && nombre.equals(estacion.getNombre())) {
 			equals = true;
-			if(Funciones.isObjetoInicializado(this.getTransporte()) && Funciones.isObjetoInicializado(estacion.getTransporte()))
-				equals = transporte.equals(estacion.getTransporte());
+			/*if(Funciones.isObjetoInicializado(this.getTransporte()) && Funciones.isObjetoInicializado(estacion.getTransporte()))
+				equals = transporte.equals(estacion.getTransporte());*/
 		}
 		return equals;
 	}

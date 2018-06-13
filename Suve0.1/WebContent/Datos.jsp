@@ -142,7 +142,7 @@ function traerDatos() {
 		},
 		error : function(response) {
 			$("#divContDatos").hide();
-			console.log("Error al traer los datos");
+			
 		}
 	});
 }

@@ -34,7 +34,6 @@ var f =0;
 function darAvance(){
 	
 	avance = avance + sumarSegundos();
-	console.log(avance);
 	lafecha=new Date();
 	f = sumarAvance(lafecha, avance);
 	$("#quefecha").html(f.getDate()+"/"+(f.getMonth()+1)+"/"+f.getFullYear() + "<br>    " + f.getHours()+":"+f.getMinutes()+":"+f.getSeconds());
@@ -42,10 +41,10 @@ function darAvance(){
 }
 
 function inicializarInpManejaFecha(){
-	$("#idDia").val("");
-	$("#idHora").val("");
-	$("#idMinuto").val("");
-	$("#idSegundo").val("");
+	$("#idDia").val("0");
+	$("#idHora").val("0");
+	$("#idMinuto").val("0");
+	$("#idSegundo").val("0");
 }
 
 function apretaMouseAAvanzar(){
@@ -77,19 +76,16 @@ function calcularFecha(avance){
 //Pruebas con la fecha
 
 function sumarAvance(fecha, avanzate){
-	console.log("Avanzate:" + avanzate);
 	fecha.setSeconds(fecha.getSeconds()+avanzate);
 	return fecha;
 }
 
 function sumarSegundos(){
 	var segundosTotales = 0;
-	console.log(segundosTotales);
 	segundosTotales = segundosTotales + parseInt($("#idDia").val()) * 60*60*24;
 	segundosTotales = segundosTotales + parseInt($("#idHora").val()) *60*60;
 	segundosTotales = segundosTotales + parseInt($("#idMinuto").val()) * 60;
 	segundosTotales = segundosTotales + parseInt($("#idSegundo").val()) * 1;
-	console.log(segundosTotales);
 	if(isNaN(segundosTotales)){
 		segundosTotales = 0;
 	}

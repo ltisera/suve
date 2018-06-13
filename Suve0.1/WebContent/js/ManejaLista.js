@@ -25,8 +25,6 @@ function traerListaTarjetas(){
 			    opcion.text = "pepino";
 			    $("#inpTipoTransporte").append(opcion);
 			    /*/
-				console.log(response);
-			    console.log(response.item1);
 			    
 				for(i in response){
 					var opcion = document.createElement("option");

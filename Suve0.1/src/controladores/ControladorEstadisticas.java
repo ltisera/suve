@@ -13,9 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.TransporteDao;
 import datos.Boleto;
+import datos.Estacion;
 import datos.TipoTransporte;
+import datos.TramoColectivo;
+import datos.Transporte;
+import negocio.EstacionABM;
 import negocio.Funciones;
 import negocio.MovimientoABM;
+import negocio.TramoABM;
 import negocio.TransporteABM;
 
 /**
@@ -121,7 +126,28 @@ MovimientoABM mabm = new MovimientoABM();
 		
 		TransporteABM tabm = new TransporteABM();
 		
-		List<Boleto> lb = mabm.viajesRealizados(fechaDesde, fechaHasta, tabm.traerTransporte(request.getParameter("tipoLinea")));
+		Transporte t = tabm.traerTransporte(request.getParameter("tipoLinea"));
+		List<Boleto> lb = mabm.viajesRealizados(fechaDesde, fechaHasta, t);
+		EstacionABM eabm = new EstacionABM();
+		TramoABM tramoabm = new TramoABM();
+		
+		List<TramoColectivo> ltramo = null;
+
+		List<Estacion> lest = null;
+		int[] estEstaciones= null;
+		
+		if(t.getTipoTransporte() != TipoTransporte.Colectivo) {
+			lest = eabm.traerEstacionPorTransporte(t.getIdTransporte());
+			estEstaciones = new int[lest.size()];
+		}else {
+			ltramo = tramoabm.traerTramoColectivo();
+			estEstaciones = new int[ltramo.size()];
+		}
+		
+		for(int i = 0 ;i<estEstaciones.length ;i++) {
+			estEstaciones[i]=0;
+		}
+		
 		String salidaJson ="[";
 		for(Boleto b:lb) {
 			salidaJson += "{\"fechaHora\":\"" + Funciones.TraeFechaYHora(b.getFecha()) +"\",";
@@ -129,14 +155,61 @@ MovimientoABM mabm = new MovimientoABM();
 			salidaJson += "\"intRedSube\":\"" + b.getIntRedSube()+"\",";
 			if(b.getTramoColectivo() !=null) {
 				salidaJson += "\"tramo\":\"" + b.getTramoColectivo()+"\",";
+				salidaJson += "\"estadisticaTramo\":\"" + b.getTramoColectivo().getIdTramoColectivo()+"\",";
+				salidaJson += "\"nombreTramo\":\"" + b.getTramoColectivo()+"\",";
+				for(int i = 0; i < ltramo.size(); i++) {
+					if(ltramo.get(i).equals(b.getTramoColectivo())) {
+						estEstaciones[i] +=1;
+					}
+					
+				}
+				
 			} else {
 				salidaJson += "\"tramo\":\"" + b.getTramoTrenYSubte()+"\",";
+				if(b.getTramoTrenYSubte().getEstacionB()==null) {
+					salidaJson += "\"estadisticaTramo\":\"" + b.getTramoTrenYSubte().getEstacionA().getIdEstacion()+"\",";
+					salidaJson += "\"nombreTramo\":\"" + b.getTramoTrenYSubte().getEstacionA().getNombre()+"\",";
+					for(int i = 0; i < lest.size(); i++) {
+						if(lest.get(i).equals(b.getTramoTrenYSubte().getEstacionA())) {
+							estEstaciones[i] +=1;
+						}
+						
+					}
+					
+					
+				}
 			}
 			salidaJson += "\"monto\":\"" + b.getMonto()+"\"},";
 		}
-		salidaJson = salidaJson.substring(0, salidaJson.length()-1);
+		
+		String salidaArray = "[";
+		for(int i = 0 ;i<estEstaciones.length ;i++) {
+			salidaArray += estEstaciones[i]+",";
+		}
+			
+		
+		salidaArray = salidaArray.substring(0, salidaArray.length()-1);
+		salidaArray += "]},";
+		salidaJson += "{\"arrayEST\":" + salidaArray;
+		
+		String salidaLista="{\"arrayNombres\":[";
+		
+		if(t.getTipoTransporte() != TipoTransporte.Colectivo) {
+			for(Estacion e:lest) {
+				salidaLista +="\""+e.getNombre()+"\",";
+			}
+		} else {
+			for(TramoColectivo e:ltramo) {
+				salidaLista +="\""+e.toString()+"\",";
+			}
+		}
+		salidaLista = salidaLista.substring(0, salidaLista.length()-1);
+		salidaLista += "]}";
+		salidaJson += salidaLista;
 		salidaJson += "]";
 		salida.println(salidaJson);
+		System.out.println(salidaJson);
+		
 		response.setStatus(200);
 	}
 }

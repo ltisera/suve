@@ -41,9 +41,9 @@ public class TramoTrenYSubte {
 	public String toString() {
 		String salidaTS="";
 		if(estacionB != null)
-			salidaTS = "[" + estacionA.getNombre() + ", "+ estacionB.getNombre() + "]";
+			salidaTS = estacionA.getNombre() + ", "+ estacionB.getNombre();
 		else
-			salidaTS = "[" + estacionA.getNombre()+"]";
+			salidaTS = estacionA.getNombre();
 		return salidaTS;
 		
 	}

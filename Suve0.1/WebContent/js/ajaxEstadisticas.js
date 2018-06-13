@@ -3,7 +3,6 @@
  */
 
 function traerListaLineasE(){
-	console.log("Aqui llego bala");
 	$.ajax({
 		data:{
 			"lista":"Linea",
@@ -48,8 +47,29 @@ function generarGraficoEstadisticasPorTransporte(nrs){
 	    data: {
 	        labels: ["Descuento 0%", "Descuento 50%", "Descuento 75%"],
 	        datasets: [{
-	            label: "Bosta",
+	            label: "Descuentos Sube",
 	            backgroundColor: [
+	            	'rgb(0, 120, 255)',
+	            	'rgb(63, 96, 139)',
+	            	'rgb(0, 0, 255)',
+	            	'rgb(0, 120, 255)',
+	            	'rgb(63, 96, 139)',
+	            	'rgb(0, 0, 255)',
+	            	'rgb(0, 120, 255)',
+	            	'rgb(63, 96, 139)',
+	            	'rgb(0, 0, 255)',
+	            	'rgb(0, 120, 255)',
+	            	'rgb(63, 96, 139)',
+	            	'rgb(0, 0, 255)',
+	            	'rgb(0, 120, 255)',
+	            	'rgb(63, 96, 139)',
+	            	'rgb(0, 0, 255)',
+	            	'rgb(0, 120, 255)',
+	            	'rgb(63, 96, 139)',
+	            	'rgb(0, 0, 255)',
+	            	'rgb(0, 120, 255)',
+	            	'rgb(63, 96, 139)',
+	            	'rgb(0, 0, 255)',
 	            	'rgb(0, 120, 255)',
 	            	'rgb(63, 96, 139)',
 	            	'rgb(0, 0, 255)'
@@ -70,7 +90,11 @@ function generarGraficoEstadisticasPorTransporte(nrs){
 	});
 }
 
-function generarGraficoEstadisticasPorLinea(nrs){
+function generarGraficoEstadisticasPorLinea(lstVal, lstLbl, lstSize){
+	console.log(lstVal);
+	console.log(lstLbl);
+	console.log(lstSize);
+	
 	document.getElementById("divContEstadisticas").innerHTML="";
 	document.getElementById("divContEstadisticas").innerHTML='<canvas id="myChart"></canvas>';
 
@@ -79,20 +103,41 @@ function generarGraficoEstadisticasPorLinea(nrs){
 	Chart.defaults.global.defaultFontColor = 'white';
 	var chart = new Chart(ctx, {
 	    // The type of chart we want to create
-	    type: 'doughnut',
+	    type: 'bar',
 
 	    // The data for our dataset
 	    data: {
-	        labels: ["Descuento 0%", "Descuento 50%", "Descuento 75%"],
+	        labels: lstLbl,
 	        datasets: [{
-	            label: "Bosta",
+	            label: "Estadisticas por Linea",
 	            backgroundColor: [
+	            	'rgb(0, 120, 255)',
+	            	'rgb(63, 96, 139)',
+	            	'rgb(0, 0, 255)',
+	            	'rgb(0, 120, 255)',
+	            	'rgb(63, 96, 139)',
+	            	'rgb(0, 0, 255)',
+	            	'rgb(0, 120, 255)',
+	            	'rgb(63, 96, 139)',
+	            	'rgb(0, 0, 255)',
+	            	'rgb(0, 120, 255)',
+	            	'rgb(63, 96, 139)',
+	            	'rgb(0, 0, 255)',
+	            	'rgb(0, 120, 255)',
+	            	'rgb(63, 96, 139)',
+	            	'rgb(0, 0, 255)',
+	            	'rgb(0, 120, 255)',
+	            	'rgb(63, 96, 139)',
+	            	'rgb(0, 0, 255)',
+	            	'rgb(0, 120, 255)',
+	            	'rgb(63, 96, 139)',
+	            	'rgb(0, 0, 255)',
 	            	'rgb(0, 120, 255)',
 	            	'rgb(63, 96, 139)',
 	            	'rgb(0, 0, 255)'
 		            ],
 	            borderColor: 'rgb(0, 0, 0)',
-	            data: [nrs[1], nrs[2],nrs[3] +nrs[4] +nrs[5] +nrs[6]],
+	            data: lstVal,
 	        }]
 	    },
 
@@ -101,7 +146,11 @@ function generarGraficoEstadisticasPorLinea(nrs){
 	    	responsive: true,
 	        maintainAspectRatio: false,
 	        scales: {
-
+	        	 yAxes: [{
+	                 ticks: {
+	                     beginAtZero:true
+	                 }
+	             }]
 	        }
 		}
 	});
@@ -153,7 +202,6 @@ function generarReporte(nrs){
 			tbl.appendChild(nFila);
 			var nrs =[0,0,0,0,0,0,0];
 			for(i = 0; i < response.length;i++){
-				console.log(response[i].intRedSube);
 				nrs[response[i].intRedSube]++;
 				var nFila = document.createElement("div");
 				
@@ -181,7 +229,6 @@ function generarReporte(nrs){
 				var tbl = document.getElementById("divTblReporte");
 				tbl.appendChild(nFila);
 			}
-			console.log(nrs);
 			generarGraficoEstadisticasPorTransporte(nrs);
 		},
 		error : function(response) {
@@ -208,7 +255,7 @@ function generarReporteLinea(){
 			$("#divReporte").html("Realizando Reportes");
 		},
 		success : function(response) {
-
+			console.log(response);
 			$("#divContEstadisticas").show();
 			$("#divReporte").html("Carga realizada exitosamente");
 
@@ -239,8 +286,7 @@ function generarReporteLinea(){
 			var tbl = document.getElementById("divTblReporte");
 			tbl.appendChild(nFila);
 			var nrs =[0,0,0,0,0,0,0];
-			for(i = 0; i < response.length;i++){
-				console.log(response[i].intRedSube);
+			for(i = 0; i < response.length-2;i++){
 				nrs[response[i].intRedSube]++;
 				var nFila = document.createElement("div");
 				
@@ -273,8 +319,7 @@ function generarReporteLinea(){
 				var tbl = document.getElementById("divTblReporte");
 				tbl.appendChild(nFila);
 			}
-			console.log(nrs);
-			generarGraficoEstadisticasPorTransporte(nrs);
+			generarGraficoEstadisticasPorLinea(response[response.length-2].arrayEST,response[response.length-1].arrayNombres, response[response.length-2].arrayEST.length);
 		},
 		error : function(response) {
 			$("#divReporte").html("Fallo la carga");

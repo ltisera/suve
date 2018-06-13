@@ -101,15 +101,12 @@ function procesaViaje(queOpera){
 				
 			},
 			success : function(response) {
-				console.log("Esta es la response");
-				console.log(response);
 				traerUltimosViajes();
 				$("#divEstadoBoleto").html(response);
 				$("#divEstadoBoleto").show();
 				
 			},
 			error : function(response) {
-				console.log(response);
 				$("#divEstadoBoleto").html("El boleto no se pudo generar, " + response.responseText);
 				$("#divEstadoBoleto").show();
 				
@@ -149,8 +146,6 @@ function cambiaTipoTransporte(){
 }
 function cambiaLinea() {
 	if($("#inpLinea").val()!="Vacio" && $("#inpLinea").val()!=null){
-		console.log("Mirame el vacio");
-		console.log($("#inpLinea").val());
 		traerListaEstaciones();
 		$("#colEstacion").show()	
 	}
