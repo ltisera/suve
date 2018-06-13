@@ -217,17 +217,22 @@ function generarReporteLinea(){
 			var nFila = document.createElement("div");
 			nFila.className = "clsFilaImpar";
 			var cFecha = document.createElement("div");
-			cFecha.className = "clsColFecha";
+			cFecha.className = "clsColFecha2";
 			cFecha.innerHTML = "Fecha";
 			nFila.appendChild(cFecha)
 
 			var cNumTarjeta = document.createElement("div");
-			cNumTarjeta.className = "clsColNumTarjeta";
-			cNumTarjeta.innerHTML = "Numero de Tarjeta";
+			cNumTarjeta.className = "clsColNumTarjeta2";
+			cNumTarjeta.innerHTML = "Num Tarjeta";
 			nFila.appendChild(cNumTarjeta);
+			
+			var cTramo = document.createElement("div");
+			cTramo.className = "clsColTramo";
+			cTramo.innerHTML = "Tramo";
+			nFila.appendChild(cTramo);
 
 			var cMonto = document.createElement("div");
-			cMonto.className = "clsColMonto";
+			cMonto.className = "clsColMonto2";
 			cMonto.innerHTML = "Monto";
 			nFila.appendChild(cMonto);
 
@@ -246,17 +251,22 @@ function generarReporteLinea(){
 				}
 				
 				var cFecha = document.createElement("div");
-				cFecha.className = "clsColFecha";
+				cFecha.className = "clsColFecha2";
 				cFecha.innerHTML = response[i].fechaHora;
 				nFila.appendChild(cFecha)
 
 				var cNumTarjeta = document.createElement("div");
-				cNumTarjeta.className = "clsColNumTarjeta";
+				cNumTarjeta.className = "clsColNumTarjeta2";
 				cNumTarjeta.innerHTML = response[i].numTarjeta;
 				nFila.appendChild(cNumTarjeta);
+				
+				var cTramo = document.createElement("div");
+				cTramo.className = "clsColTramo";
+				cTramo.innerHTML = response[i].tramo;
+				nFila.appendChild(cTramo);
 
 				var cMonto = document.createElement("div");
-				cMonto.className = "clsColMonto";
+				cMonto.className = "clsColMonto2";
 				cMonto.innerHTML = response[i].monto;
 				nFila.appendChild(cMonto);
 

@@ -342,6 +342,28 @@ canvas{
 	width: 25%;
 }
 
+.clsColFecha2{
+	
+	margin:0px;
+	float: left;
+	width: 30%;
+}
+.clsColNumTarjeta2{
+	margin-left:10px;
+	float: left;
+	width: 10%;
+}
+.clsColTramo{
+	margin-left:10px;
+	float: left;
+	width: 35%;
+}
+.clsColMonto2{
+	margin-left:10px;
+	float: left;
+	width: 10%;
+}
+
 /*Datos*/
 
 #divSupDatos{
