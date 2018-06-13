@@ -307,7 +307,7 @@ canvas{
 }
 #divContEstadisticas{
 	position: fixed;
-	margin-left:400px;
+	margin-left:40%;
 	margin-top:50px;
 	float:left;
 	width: 350px !important;
